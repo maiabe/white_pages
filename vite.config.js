@@ -17,6 +17,7 @@ export default defineConfig({
                 compilerOptions: {
 
                     isCustomElement: (tag) => {return tag.endsWith('component')},
+
                 }
             }
         }),
