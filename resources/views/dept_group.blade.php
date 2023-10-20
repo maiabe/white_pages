@@ -27,6 +27,7 @@
         .dataTables_wrapper .dataTables_paginate {
             float: right;
         }
+
         .form-group {
             margin-bottom: 20px; /* You can adjust the value to control the amount of space */
         }
@@ -41,6 +42,11 @@
     <div id="sidebar"></div>
     <br>
     @if(count($data)>0)
+    @if ($errors->any())
+    @foreach ($errors->all() as $error)
+    <h5 class="alert alert-danger">The Department Grouping does not updated successfully</h5>
+    @endforeach
+    @endif
     <table id="table" class="table table-hover">
         <thead>
         <th>Campus Code</th>
@@ -57,10 +63,10 @@
             <td>{{$item->dept_grp_name}}</td>
             <td>
                 <button class="btn btn-primary edit-button"
-                    data-dept-grp="{{ $item->dept_grp }}"
-                    data-dept-grp-name="{{ $item->dept_grp_name }}"
-                    data-campus-code="{{ $item->campus_code }}"
-                    data-toggle="modal" data-target="#editModal">
+                        data-dept-grp="{{ $item->dept_grp }}"
+                        data-dept-grp-name="{{ $item->dept_grp_name }}"
+                        data-campus-code="{{ $item->campus_code }}"
+                        data-toggle="modal" data-target="#editModal">
                     <i class="fa fa-pencil"></i>
                 </button>
             </td>
@@ -78,7 +84,8 @@
         </tbody>
     </table>
     <!-- Delete Modal -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header" style="background-color: #f14a59;">
@@ -109,7 +116,8 @@
     </div>
 
     <!-- Edit Modal -->
-    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <form action="{{ route('dept_group.update', ':deptGrp' ) }}" method="POST">
@@ -117,21 +125,27 @@
                     @method('PUT')
                     <div class="modal-header" style="background-color: #40d8f3;">
                         <h5 class="modal-title" id="editModalLabel">Edit Department Group</h5>
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"
+                                id="edit-x-button">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="edit-dept-grp">Group Number</label>
-                            <input type="text" name="dept_grp" class="form-control" id="edit-dept-grp" placeholder="Department Group">
+                            <input type="text" name="dept_grp" class="form-control" id="edit-dept-grp"
+                                   placeholder="Department Group">
                             @error('dept_grp')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                            <span class="text-danger" id="edit-dept-grp-error">{{$message}}</span>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label for="edit-dept-grp-name">Department Group Name</label>
-                            <input type="text" name="dept_grp_name" class="form-control" id="edit-dept-grp-name" placeholder="Department Group Name">
+                            <input type="text" name="dept_grp_name" class="form-control" id="edit-dept-grp-name"
+                                   placeholder="Department Group Name">
+                            @error('dept_grp_name')
+                            <span class="text-danger" id="edit-dept-grp-name-error">{{$message}}</span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="edit-dept-grp-name">Campus Code</label>
@@ -140,18 +154,19 @@
                                 <option value="{{$item}}">{{$item}}</option>
                                 @endforeach
                             </select>
-                         </div>
+                        </div>
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="edit-close-button">
+                            Close
+                        </button>
                         <button type="submit" class="btn btn-primary">Update</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-
 
 
     @else
@@ -176,39 +191,52 @@
         });
 
         // Function to handle the delete button click
-        $('.delete-button').on('click', function () {
-            var deptGrp = $(this).data('dept-grp');
-            var deptGrpName = $(this).data('dept-grp-name');
-            var campusCode = $(this).data('campus-code');
+        $(".delete-button").on("click", function () {
+            var deptGrp = $(this).data("dept-grp");
+            var deptGrpName = $(this).data("dept-grp-name");
+            var campusCode = $(this).data("campus-code");
 
-            $('#delete-dept-grp').text(deptGrp);
-            $('#delete-dept-grp-name').text(deptGrpName);
-            $('#delete-campus-code').text(campusCode);
-            $('#deleteModal').modal('show');
+            $("#delete-dept-grp").text(deptGrp);
+            $("#delete-dept-grp-name").text(deptGrpName);
+            $("#delete-campus-code").text(campusCode);
+            $("#deleteModal").modal("show");
 
             // Update the form action with the correct URL
             var deleteUrl = "{{ route('dept_group.destroy', ':deptGrp') }}";
-            deleteUrl = deleteUrl.replace(':deptGrp', deptGrp);
-            $('#delete-form').attr('action', deleteUrl);
+            deleteUrl = deleteUrl.replace(":deptGrp", deptGrp);
+            $("#delete-form").attr("action", deleteUrl);
         });
         $(document).ready(function () {
-            $('.edit-button').on('click', function () {
-                var deptGrp = $(this).data('dept-grp');
-                var deptGrpName = $(this).data('dept-grp-name');
-                var campusCode = $(this).data('campus-code');
+            $("#edit-close-button").on("click", function () {
+                // Clear any existing error messages
+                $("#edit-dept-grp-error").text("");
+                $("#edit-dept-grp-name-error").text("");
+            });
 
-                $('#edit-dept-grp').val(deptGrp);
-                $('#edit-dept-grp-name').val(deptGrpName);
-                $('#edit-campus-code').val(campusCode);
-                $('#editModal').modal('show');
+            $("#edit-x-button").on("click", function () {
+                // Clear any existing error messages
+                $("#edit-dept-grp-error").text("");
+                $("#edit-dept-grp-name-error").text("");
+            });
+
+
+            $(".edit-button").on("click", function () {
+                var deptGrp = $(this).data("dept-grp");
+                var deptGrpName = $(this).data("dept-grp-name");
+                var campusCode = $(this).data("campus-code");
+
+                $("#edit-dept-grp").val(deptGrp);
+                $("#edit-dept-grp-name").val(deptGrpName);
+                $("#edit-campus-code").val(campusCode);
+                $("#editModal").modal("show");
 
                 var editUrl = "{{ route('dept_group.update', ':deptGrp') }}";
-                editUrl = editUrl.replace(':deptGrp', deptGrp);
-                $('#editModal form').attr('action', editUrl);
+                editUrl = editUrl.replace(":deptGrp", deptGrp);
+                $("#editModal form").attr("action", editUrl);
             });
         });
 
-});
+    });
 </script>
 </body>
 </html>
