@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="http://parsleyjs.org/dist/parsley.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         .dataTables_wrapper .dataTables_paginate .paginate_button {
@@ -47,6 +48,9 @@
     <h5 class="alert alert-danger">The Department Grouping does not updated successfully</h5>
     @endforeach
     @endif
+    <button type = "button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addDeptGrpModal">
+        Add Department Group
+    </button>
     <table id="table" class="table table-hover">
         <thead>
         <th>Campus Code</th>
@@ -132,9 +136,10 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
+
                             <label for="edit-dept-grp">Group Number</label>
                             <input type="text" name="dept_grp" class="form-control" id="edit-dept-grp"
-                                   placeholder="Department Group">
+                                   required minlength="6" maxlength="6">
                             @error('dept_grp')
                             <span class="text-danger" id="edit-dept-grp-error">{{$message}}</span>
                             @enderror
@@ -142,7 +147,7 @@
                         <div class="form-group">
                             <label for="edit-dept-grp-name">Department Group Name</label>
                             <input type="text" name="dept_grp_name" class="form-control" id="edit-dept-grp-name"
-                                   placeholder="Department Group Name">
+                                required minlength="3" maxlength="60">
                             @error('dept_grp_name')
                             <span class="text-danger" id="edit-dept-grp-name-error">{{$message}}</span>
                             @enderror
@@ -167,8 +172,6 @@
             </div>
         </div>
     </div>
-
-
     @else
     <div class="alert alert-info" role="alert">
         No items to display.
