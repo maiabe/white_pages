@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container">
-    <h1 style="text-align: center" ;>Manage Department Groupings</h1>
+    <h1 style="text-align: center;">Manage Department Groupings</h1>
     <div id="sidebar"></div>
     <br>
     @if(count($data)>0)
@@ -141,7 +141,7 @@
     @endif
 
 </div>
-<script>
+<!-- <script>
     $(document).ready(function () {
         $("#table").DataTable({
             "pagingType": "simple_numbers",
@@ -187,6 +187,6 @@
         });
 
     });
-</script>
+</script> -->
 @endsection
 

@@ -19,15 +19,15 @@
         <header>
             @include('Layout.Partials.navbar')
         </header>
+        <div class="main-content">
+            <aside>
+                @include('Layout.Partials.sidebar')
+            </aside>
 
-        <aside>
-            @include('Layout.Partials.sidebar')
-        </aside>
-
-        <main>
-            @yield('content')
-        </main>
-    
+            <main>
+                @yield('content')
+            </main>
+        </div>
         <footer>
             @include('Layout.Partials.footer')
         </footer>

@@ -13,8 +13,18 @@ export default defineConfig({
                 transformAssetUrls:{
                     base: null,
                     includeAbsolute: false,
+                },
+                compilerOptions: {
+
+                    isCustomElement: (tag) => {return tag.endsWith('component')},
                 }
             }
         }),
     ],
+    resolve: {
+        alias: {
+            '@': '/resources/js',
+            'vue': 'vue/dist/vue.esm-bundler.js'
+        },
+    }
 });

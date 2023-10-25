@@ -91,13 +91,13 @@
             <!-- Grid column -->
 
             <!-- Grid column -->
-            <div class="col-md-5 col-lg-4 ml-lg-0 text-center text-md-end">
+            <!-- <div class="col-md-5 col-lg-4 ml-lg-0 text-center text-md-end"> -->
               <!-- Social Media Links -->
-              <a class="btn btn-outline-light btn-floating m-1 text-white" role="button"><i class="fab fa-facebook-f"></i></a>
+              <!-- <a class="btn btn-outline-light btn-floating m-1 text-white" role="button"><i class="fab fa-facebook-f"></i></a>
               <a class="btn btn-outline-light btn-floating m-1 text-white" role="button"><i class="fab fa-twitter"></i></a>
               <a class="btn btn-outline-light btn-floating m-1 text-white" role="button"><i class="fab fa-google"></i></a>
               <a class="btn btn-outline-light btn-floating m-1 text-white" role="button"><i class="fab fa-instagram"></i></a>
-            </div>
+            </div> -->
             <!-- Grid column -->
           </div>
         </section>
@@ -106,14 +106,3 @@
     </footer>
   </div>
 </template>
-<style>
-{
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: #2c3e50;
-    color: white;
-    text-align: center;
-    padding: 10px 0; /* Adjust padding as needed */
-}
-</style>
