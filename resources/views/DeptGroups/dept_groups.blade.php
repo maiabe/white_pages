@@ -1,43 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <script src="//code.jquery.com/jquery-1.12.3.js"></script>
-    <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="http://parsleyjs.org/dist/parsley.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-        .dataTables_wrapper .dataTables_paginate .paginate_button {
-            padding: 6px 12px;
-            margin-right: 5px;
-            border: 1px solid #007bff;
-            background-color: #fff;
-            color: #007bff;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+@extends('../Layout/layout')
 
-        .dataTables_wrapper .dataTables_paginate .paginate_button.current {
-            background-color: #007bff;
-            color: #fff;
-        }
+@section('content')
 
-        .dataTables_wrapper .dataTables_paginate {
-            float: right;
-        }
-
-        .form-group {
-            margin-bottom: 20px; /* You can adjust the value to control the amount of space */
-        }
-    </style>
-    @vite(['resources/js/app.js', 'resources/css/app.css'])
-</head>
-<body>
-<div id="header"></div>
-<br>
 <div class="container">
     <h1 style="text-align: center" ;>Manage Department Groupings</h1>
     <div id="sidebar"></div>
@@ -128,7 +92,7 @@
          aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form action="{{ route('dept_group.update', ':deptGrp' ) }}" method="POST">
+                <form action="{{ route('dept_groups.update', ':deptGrp' ) }}" method="POST">
                     @csrf
                     @method('PUT')
                     <div class="modal-header" style="background-color: #40d8f3;">
@@ -177,8 +141,6 @@
     @endif
 
 </div>
-<br>
-<div id="footer"></div>
 <script>
     $(document).ready(function () {
         $("#table").DataTable({
@@ -203,7 +165,7 @@
             $("#deleteModal").modal("show");
 
             // Update the form action with the correct URL
-            var deleteUrl = "{{ route('dept_group.destroy', ':deptGrp') }}";
+            var deleteUrl = "{{ route('dept_groups.destroy', ':deptGrp') }}";
             deleteUrl = deleteUrl.replace(":deptGrp", deptGrp);
             $("#delete-form").attr("action", deleteUrl);
         });
@@ -219,12 +181,12 @@
             $("#editModal").modal("show");
 
             // Update the form action with the correct URL
-            var editUrl = "{{ route('dept_group.update', ':deptGrp') }}";
+            var editUrl = "{{ route('dept_groups.update', ':deptGrp') }}";
             editUrl = editUrl.replace(":deptGrp", deptGrp);
             $("#editModal form").attr("action", editUrl);
         });
 
     });
 </script>
-</body>
-</html>
+@endsection
+

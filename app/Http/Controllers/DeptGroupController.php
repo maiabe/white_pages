@@ -13,13 +13,13 @@ class DeptGroupController extends Controller
     {
         $data = DeptGroup::all();
         $campusData = Campus::distinct()->pluck('campus_code');
-        return view('dept_group', ['data' => $data, 'campusData' => $campusData]);
+        return view('DeptGroups.dept_groups', ['data' => $data, 'campusData' => $campusData]);
     }
 
     public function destroy($dept_grp,)
     {
         DeptGroup::where('dept_grp', $dept_grp)->delete();
-        return redirect()->route('dept_group.index');
+        return redirect()->route('DeptGroups.dept_groups.index');
     }
 
     public function update(Request $req, $dept_grp)
@@ -55,7 +55,7 @@ class DeptGroupController extends Controller
             'campus_code' => $validatedData['campus_code']
         ]);
 
-        return redirect()->route('dept_group.index');
+        return redirect()->route('DeptGroups.dept_groups.index');
     }
 
 
