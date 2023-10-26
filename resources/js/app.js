@@ -1,4 +1,4 @@
-import './bootstrap.js';
+//import './bootstrap.js';
 import { createApp } from 'vue';
 import NavbarComponent from './components/NavbarComponent.vue';
 import SidebarComponent from './components/SidebarComponent.vue';
