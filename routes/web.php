@@ -17,3 +17,5 @@ use App\Http\Controllers\DeptGroupController;
 Route::get('/campus',[CampusController::class, 'index']);
 Route::get('/dept_group',[DeptGroupController::class, 'index'])->name('dept_group.index');
 Route::delete('dept_group/{dept_grp}','App\Http\Controllers\DeptGroupController@destroy')->name('dept_group.destroy');
+Route::put('dept_group/{dept_grp}','App\Http\Controllers\DeptGroupController@update')->name('dept_group.update');
+Route::post('dept_group', [DeptGroupController::class, 'store'])->name('dept_group.store');
