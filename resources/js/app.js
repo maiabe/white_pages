@@ -1,3 +1,4 @@
+import './bootstrap.js';
 import { createApp } from 'vue';
 import HeaderComponent from './components/HeaderComponent.vue';
 import SideBar from './components/SideBar.vue';
