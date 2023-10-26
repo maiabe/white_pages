@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string('dept_grp', 6)->primary();
             $table->string('dept_grp_name', 60);
             $table->string('campus_code', 6);
-            $table->foreign('campus_code')->references('campus_code')->on('campus')->onDelete('cascade');
+            $table->foreign('campus_code')->references('campus_code')->on('campus')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

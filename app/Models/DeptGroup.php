@@ -10,4 +10,5 @@ class DeptGroup extends Model
     use HasFactory;
 
     protected $table = 'dept_group';
+    public $timestamps = false;
 }

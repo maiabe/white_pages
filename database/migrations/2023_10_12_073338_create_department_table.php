@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('dept_name',60);
             $table->string('dept_grp', 6);
             $table->timestamps();
-            $table->foreign('dept_grp')->references('dept_grp')->on('dept_group')->onDelete('cascade');
+            $table->foreign('dept_grp')->references('dept_grp')->on('dept_group')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

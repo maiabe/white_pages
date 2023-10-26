@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('email', 90);
             $table->string('title', 100);
             $table->primary(['person_id', 'dept_id']);
-            $table->foreign('person_id')->references('id')->on('person')->onDelete('cascade');
-            $table->foreign('dept_id')->references('id')->on('department')->onDelete('cascade');
+            $table->foreign('person_id')->references('id')->on('person')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('dept_id')->references('id')->on('department')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
