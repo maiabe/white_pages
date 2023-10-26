@@ -84,9 +84,9 @@
                         <font-awesome-icon icon="user-gear" style="color: #ffffff;" />
                     </div>
                     <div class="page-name">
-                        <h5>Admins</h5>
+                        <h6>Admins</h6>
                     </div>
-                </a>                
+                </a>
             </div>
 
         </div>
