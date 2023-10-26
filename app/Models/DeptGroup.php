@@ -10,5 +10,7 @@ class DeptGroup extends Model
     use HasFactory;
 
     protected $table = 'dept_group';
+    protected $fillable = ['campus_code','dept_grp','dept_grp_name'];
     public $timestamps = false;
+
 }
