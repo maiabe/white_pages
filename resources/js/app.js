@@ -5,13 +5,6 @@ import FooterComponent from './components/FooterComponent.vue';
 
 const app = createApp({});
 
-const appSideBar = createApp(SideBar);
-const appFooter = createApp(FooterComponent);
-
-appHeader.mount('#header'); // Mount the HeaderComponent
-appSideBar.mount('#sidebar'); // Mount the SideBar
-appFooter.mount('#footer'); // Mount the FooterComponent
-
 app
     .component('NavbarComponent', NavbarComponent)
     .component('SidebarComponent', SidebarComponent)
