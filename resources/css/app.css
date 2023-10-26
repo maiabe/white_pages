@@ -1,0 +1,23 @@
+.link-container {
+    text-align: center;
+}
+
+.link-container p {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.dotted-links {
+    color: white !important;
+    text-decoration: underline;
+    text-decoration-style: dotted !important;
+}
+
+.non-dotted-links {
+    color: white !important;
+    text-decoration: none !important;
+}
+
+a:hover {
+    color: #F0D695 !important;
+}
