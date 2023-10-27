@@ -1,5 +1,4 @@
 import './bootstrap';
-<<<<<<< HEAD
 import { createApp } from 'vue';
 import NavbarComponent from './components/NavbarComponent.vue';
 import SidebarComponent from './components/SidebarComponent.vue';
@@ -19,5 +18,3 @@ app
     .component('font-awesome-icon', FontAwesomeIcon);
 
 app.mount('#app');
-=======
->>>>>>> upstream/main

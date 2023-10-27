@@ -14,6 +14,7 @@
             <!-- <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button> -->
             <div class="logo-wrapper">
                 <img src="../../../public/images/logo/UHWPMS_LOGO.png" width="50" />
+                <!-- <img src="../../../public/images/logo/UHWPMS_LOGO.png" width="50" /> -->
             </div>
             <div class="title-wrapper">
                 <h3 class="offcanvas-title" id="offcanvasScrollingLabel">PMS</h3>
