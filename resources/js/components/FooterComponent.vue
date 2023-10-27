@@ -1,108 +1,171 @@
 <template>
-    <div>
-      <footer class="text-center text-lg-start text-white" style="background-color: #2c3e50">
-        <!-- Grid container -->
-        <div class="container p-4 pb-0">
-          <!-- Section: Links -->
-          <section class="">
-            <!--Grid row-->
-            <div class="row">
-              <!-- Grid column -->
-              <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-                <h6 class="text-uppercase mb-4 font-weight-bold">
-                  Company name
-                </h6>
-                <p>
-                  Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                </p>
-              </div>
-              <!-- Grid column -->
-  
-              <hr class="w-100 clearfix d-md-none"/>
-  
-              <!-- Grid column -->
-              <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-                <h6 class="text-uppercase mb-4 font-weight-bold">Products</h6>
-                <p>
-                  <a class="text-white">MDBootstrap</a>
-                </p>
-                <p>
-                  <a class="text-white">MDWordPress</a>
-                </p>
-                <p>
-                  <a class="text-white">BrandFlow</a>
-                </p>
-                <p>
-                  <a class="text-white">Bootstrap Angular</a>
-                </p>
-              </div>
-              <!-- Grid column -->
-  
-              <hr class="w-100 clearfix d-md-none"/>
-  
-              <!-- Grid column -->
-              <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
-                <h6 class="text-uppercase mb-4 font-weight-bold">Useful links</h6>
-                <p>
-                  <a class="text-white">Your Account</a>
-                </p>
-                <p>
-                  <a class="text-white">Become an Affiliate</a>
-                </p>
-                <p>
-                  <a class="text-white">Shipping Rates</a>
-                </p>
-                <p>
-                  <a class="text-white">Help</a>
-                </p>
-              </div>
-  
-              <!-- Grid column -->
-              <hr class="w-100 clearfix d-md-none"/>
-  
-              <!-- Grid column -->
-              <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
-                <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
-                <p><i class="fas fa-home mr-3"></i> New York, NY 10012, US</p>
-                <p><i class="fas fa-envelope mr-3"></i> info@gmail.com</p>
-                <p><i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
-                <p><i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
-              </div>
-              <!-- Grid column -->
+  <div>
+    <footer class="text-center text-lg-start text-white" style="background-color: #222222">
+      <!-- Grid container START-->
+      <div class="container p-4 pb-0">
+        <!-- SECTION: Footer -->
+        <section class="">
+          <!--Grid row: Upper Row -->
+          <div class="row">
+            <!-- Grid column -->
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+              <a href="#">
+              <img src="/images/white-seal.png" alt="University of Hawaii System seal and name" style="width: 170px; height: 60px;">
+              </a>
+              <p style="margin: 0;">
+                2444 Dole Street
+              </p>
+              <p style="margin: 0;">
+              Honolulu, HI 96822
+              </p>
             </div>
-            <!--Grid row-->
-          </section>
-          <!-- Section: Links -->
-  
-          <hr class="my-3">
-  
-          <!-- Section: Copyright -->
-          <section class="p-3 pt-0">
-            <div class="row d-flex align-items-center">
-              <!-- Grid column -->
-              <div class="col-md-7 col-lg-8 text-center text-md-start">
-                <!-- Copyright -->
-                <div class="p-3">
-                  © 2020 Copyright:
-                  <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
-                </div>
-                <!-- Copyright -->
-              </div>
-              <!-- Grid column -->
-  
-              <!-- Grid column -->
-              <!-- <div class="col-md-5 col-lg-4 ml-lg-0 text-center text-md-end"> -->
-                <!-- Social Media Links -->
-                <!-- <a class="btn btn-outline-light btn-floating m-1 text-white" role="button"><i class="fab fa-facebook-f"></i></a>
-                <a class="btn btn-outline-light btn-floating m-1 text-white" role="button"><i class="fab fa-twitter"></i></a>
-                <a class="btn btn-outline-light btn-floating m-1 text-white" role="button"><i class="fab fa-google"></i></a>
-                <a class="btn btn-outline-light btn-floating m-1 text-white" role="button"><i class="fab fa-instagram"></i></a>
-              </div> -->
-              <!-- Grid column -->
+            <!-- Grid column -->
+
+                        <hr class="w-100 clearfix d-md-none"/>
+
+            <!-- Grid column -->
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+              <p style="margin: 0;">
+                An
+                <a class="dotted-links" href="#">equal opportunity/ </a>
+                <a class="dotted-links" href="#">affirmative action institution</a>
+              </p>
+              <p style="margin: 0;">
+                Use of this site implies consent with our
+                <a class="dotted-links" href="#"> Usage Policy</a>
+                copyright © 2023
+                <a class="dotted-links" href="#">University of Hawaiʻi</a>
+              </p>
             </div>
-          </section>
-          <!-- Section: Copyright -->
-        </div>
-      </footer>
-    </div>
-  </template>
+            <!-- Grid column -->
+
+                        <hr class="w-100 clearfix d-md-none"/>
+
+            <!-- Grid column -->
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+              <p style="margin: 0;">
+                <a class="non-dotted-links">Calendar</a>
+              </p>
+              <p style="margin: 0;">
+                <a class="non-dotted-links">COVID-19 Updates</a>
+              </p>
+              <p style="margin: 0;">
+                <a class="non-dotted-links">Directory</a>
+              </p>
+              <p style="margin: 0;">
+                <a class="non-dotted-links">Emergency information</a>
+              </p>
+              <p style="margin: 0;">
+                <a class="non-dotted-links">MyUH</a>
+              </p>
+              <p style="margin: 0;">
+                <a class="non-dotted-links">Privacy Statement</a>
+              </p>
+              <p style="margin: 0;">
+                <a class="non-dotted-links">Work at UH</a>
+              </p>
+            </div>
+            <!-- Grid column -->
+
+            <hr class="w-100 clearfix d-md-none"/>
+
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-3 col-x1-2 mx-auto mt-3">
+              <div class="link-container">
+                <p><i class="fas fa-twitter"></i></p>
+                <p><i class="fas fa-twitter"></i></p>
+                <p><i class="fas fa-twitter"></i></p>
+                <p><i class="fas fa-twitter"></i></p>
+                <p><i class="fas fa-twitter"></i></p>
+                <p><i class="fas fa-twitter"></i></p>
+              </div>
+              <div class="column 4">
+                <p class="font-weight-bold">
+                  <a class="dotted-links" href="#">Contact UH</a>
+                </p>
+                <p>
+                If required, information contained on this website can be made available in an alternative format upon request.
+                </p>
+              </div>
+              <p>
+                  <a class="dotted-links" href="#">Get Adobe Acrobat Reeader</a>
+                </p>
+            </div>
+            <!-- Grid column -->
+          </div>
+          <!--Grid row: Upper Row-->
+        </section>
+        <!-- Section: Links -->
+
+        <!-- SECTION: Languages -->
+        <section class="">
+          <div class="row d-flex align-items-center" style="padding-top: 25px;">
+              <!-- Language Forms -->
+              <div class="link-container">
+                <p>
+                  <a class="dotted-links" href="#">English</a>
+                </p>
+                <p>
+                  <a class="dotted-links" href="#">Gagana Samoa</a>
+                </p>
+                <p>
+                  <a class="dotted-links" href="#">Kapasen Chuuk</a>
+                </p>
+                <p>
+                  <a class="dotted-links" href="#">Tiếng Việt</a>
+                </p>
+                <p>
+                  <a class="dotted-links" href="#">ภาษาไทย</a>
+                </p>
+                <p>
+                  <a class="dotted-links" href="#">Ilokano</a>
+                </p>
+                <p>
+                  <a class="dotted-links" href="#">Tagalog</a>
+                </p>
+                <p>
+                  <a class="dotted-links" href="#">Cebuano</a>
+                </p>
+                <p>
+                  <a class="dotted-links" href="#">Kajin Majôl</a>
+                </p>
+                <p>
+                  <a class="dotted-links" href="#">简体中文</a>
+                </p>
+                <p>
+                  <a class="dotted-links" href="#">繁體中文</a>
+                </p>
+                <p>
+                  <a class="dotted-links" href="#">日本語</a>
+                </p>
+                <p>
+                  <a class="dotted-links" href="#">한국어</a>
+                </p>
+                <p>
+                  <a class="dotted-links" href="#">Español</a>
+                </p>
+                <p>
+                  <a class="dotted-links" href="#">ʻŌlelo Hawaiʻi</a>
+                </p>
+              </div>
+          </div>
+        </section>
+        <!-- SECTION: Footer -->
+      </div>
+    </footer>
+  </div>
+</template>
+<style scoped src="../resources/css/app.css">
+{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 10px 0; /* Adjust padding as needed */
+    font-size: small;
+}
+</style>
+<script setup>
+</script>
