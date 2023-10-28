@@ -8,8 +8,8 @@
         @if ($errors->any())
         <h6 class="alert alert-danger mt-4">
             <strong>The Department Grouping was not updated successfully</strong>
-            <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close" style="position: absolute; top:10px; right: 10px; background: none; border: none; padding: 0;">
-                <span aria-hidden="true" style="font-size: 25px; color: #000;">&times;</span>
+            <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close" style="position: absolute; top:10px; right: 10px;">
+                <span aria-hidden="true">&times;</span>
             </button>
             <br>
             @foreach ($errors->all() as $error)
@@ -68,8 +68,8 @@
             <div class="modal-content">
                 <div class="modal-header" style="background-color:#e85757;">
                     <h5 class="modal-title" id="deleteModalLabel">Delete Department Group</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" style="background: none; border: none; padding: 0;">
-                        <span aria-hidden="true" style="font-size: 25px; color: #000;">&times;</span>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
@@ -103,8 +103,8 @@
                     <div class="modal-header" style="background-color: #86C2F1;">
                         <h5 class="modal-title" id="editModalLabel">Edit Department Group</h5>
                         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"
-                                id="edit-x-button" style="background: none; border: none; padding: 0;">
-                            <span aria-hidden="true" style="font-size: 25px; color: #000;">&times;</span>
+                                id="edit-x-button">
+                            <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
@@ -153,8 +153,8 @@
                     <div class="modal-header">
                         <h5 class="modal-title" id="addDeptGrpModalLabel">Add Department Group</h5>
                         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"
-                                id="add-x-button" style="background: none; border: none; padding: 0;">
-                            <span aria-hidden="true" style="font-size: 25px; color: #000;">&times;</span>
+                                id="add-x-button">
+                            <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
