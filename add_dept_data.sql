@@ -1,5 +1,2 @@
-insert into department (dept_name, dept_grp) values
-    ('Editorial, Design, and Production','100300'),
-    ('Book Acquisitions','100300'),
-    ('Journals','100300'),
-    ('Marketing and Sales','100300');
+insert into Department (campus_id, group_no, name, email, phone, location, fax, website) values
+    (1, '100300', 'University of Hawaii Press', 'uhpbooks@hawaii.edu', '808-956-8255','UH Manoa', '1-800-650-7811', 'https://uhpress.hawaii.edu/');

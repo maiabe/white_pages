@@ -1,0 +1,18 @@
+set foreign_key_checks=0;
+drop table if exists campus cascade;
+drop table if exists dept_group cascade;
+drop table if exists appointment cascade;
+drop table if exists department cascade;
+drop table if exists person cascade;
+drop table if exists Campus cascade;
+drop table if exists ContactAppointment cascade;
+drop table if exists Department cascade;
+drop table if exists MemberAppointment cascade;
+drop table if exists PPerson_Role cascade;
+drop table if exists PendingPerson cascade;
+drop table if exists Person cascade;
+drop table if exists Person_Role cascade;
+drop table if exists Role cascade;
+drop table if exists migrations cascade;
+drop table if exists personal_access_tokens cascade;
+set foreign_key_checks=1;
