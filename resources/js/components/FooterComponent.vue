@@ -2,7 +2,7 @@
   <div>
     <footer class="text-center text-lg-start text-white" style="background-color: #222222">
       <!-- Grid container START-->
-      <div class="container p-4 pb-0">
+      <div class="container py-4">
         <!-- SECTION: Footer -->
         <section class="">
           <!--Grid row: Upper Row -->
@@ -12,25 +12,23 @@
               <a href="#">
               <img src="/images/white-seal.png" alt="University of Hawaii System seal and name" style="width: 170px; height: 60px;">
               </a>
-              <p style="margin: 0;">
+              <p class="m-0">
                 2444 Dole Street
               </p>
-              <p style="margin: 0;">
+              <p class="m-0">
               Honolulu, HI 96822
               </p>
             </div>
             <!-- Grid column -->
 
-                        <hr class="w-100 clearfix d-md-none"/>
-
             <!-- Grid column -->
             <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-              <p style="margin: 0;">
+              <p class="m-0">
                 An
                 <a class="dotted-links" href="#">equal opportunity/ </a>
                 <a class="dotted-links" href="#">affirmative action institution</a>
               </p>
-              <p style="margin: 0;">
+              <p sclass="m-0">
                 Use of this site implies consent with our
                 <a class="dotted-links" href="#"> Usage Policy</a>
                 copyright © 2023
@@ -38,8 +36,6 @@
               </p>
             </div>
             <!-- Grid column -->
-
-                        <hr class="w-100 clearfix d-md-none"/>
 
             <!-- Grid column -->
             <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">

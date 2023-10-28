@@ -144,6 +144,34 @@ main {
     transition: width 0.3s, opacity 0.3s;
 }
 
+/**********************************************/
+/*************** Footer Styles ***************/
+/**********************************************/
+
+.link-container {
+    text-align: center;
+}
+
+.link-container p {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.dotted-links {
+    color: white !important;
+    text-decoration: underline;
+    text-decoration-style: dotted m !important;
+}
+
+.non-dotted-links {
+    color: white !important;
+    text-decoration: none !important;
+}
+
+.dotted-links:hover,
+.non-dotted-links:hover {
+    color: #F0D695 !important;
+}
 
 /**********************************************/
 /********** Department Groups Styles **********/
