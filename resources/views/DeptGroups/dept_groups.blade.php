@@ -4,27 +4,25 @@
 @section('content')
 
     <div class="container">
-        <h1>Manage Department Groups</h1>
-
-    <!--    <div class="inline-components-parent">-->
-    <!--        <div class="dataTables_filter">-->
-    <!--            <input type="search" class="form-control" id="table_filter" placeholder="Search">-->
-    <!--        </div>-->
-    <!--    </div>-->
-
+        <h1>Department Groups</h1>
+        @if ($errors->any())
+        <h6 class="alert alert-danger mt-4">
+            <strong>The Department Grouping was not updated successfully</strong>
+            <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close" style="position: absolute; top:10px; right: 10px; background: none; border: none; padding: 0;">
+                <span aria-hidden="true" style="font-size: 25px; color: #000;">&times;</span>
+            </button>
+            <br>
+            @foreach ($errors->all() as $error)
+            &#9888; {{ $error }}<br>
+            @endforeach
+            Please revise and resubmit to update record!
+        </h6>
+        @endif
+        <button id="add-button" type="button" class="add-department-group mt-4" data-bs-toggle="modal" data-bs-target="#addDeptGrpModal">
+            Add Department Group
+        </button>
+        <br/>
     @if(count($data)>0)
-    @if ($errors->any())
-    <h6 class="alert alert-danger">
-        The Department Grouping was not updated successfully<br>
-        @foreach ($errors->all() as $error)
-        &#9888; {{ $error }}<br>
-        @endforeach
-        Please revise and resubmit to update record!
-    </h6>
-    @endif
-    <button id="add-button" type="button" class="add-department-group" data-bs-toggle="modal" data-bs-target="#addDeptGrpModal">
-        Add Department Group
-    </button>
     <table id="table" class="table table-bordered table-hover">
         <thead class="table-header-color align-middle">
         <th>Campus Code</th>
@@ -68,10 +66,10 @@
          aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header" style="background-color: #f14a59;">
+                <div class="modal-header" style="background-color:#e85757;">
                     <h5 class="modal-title" id="deleteModalLabel">Delete Department Group</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" style="background: none; border: none; padding: 0;">
+                        <span aria-hidden="true" style="font-size: 25px; color: #000;">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
@@ -102,11 +100,11 @@
                 <form action="{{ route('dept_groups.update', ':deptGrp' ) }}" method="POST">
                     @csrf
                     @method('PUT')
-                    <div class="modal-header" style="background-color: #40d8f3;">
+                    <div class="modal-header" style="background-color: #86C2F1;">
                         <h5 class="modal-title" id="editModalLabel">Edit Department Group</h5>
                         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"
-                                id="edit-x-button">
-                            <span aria-hidden="true">&times;</span>
+                                id="edit-x-button" style="background: none; border: none; padding: 0;">
+                            <span aria-hidden="true" style="font-size: 25px; color: #000;">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
@@ -114,7 +112,7 @@
 
                             <label for="edit-dept-grp">Group Number</label>
                             <input type="text" name="dept_grp" class="form-control" id="edit-dept-grp"
-                                   required minlength="6" maxlength="6">
+                                   required minlength="6" maxlength="6" pattern="[0-9]{6}" title="exactly 6 digits (0-9)">
                         </div>
                         <div class="form-group">
                             <label for="edit-dept-grp-name">Department Group Name</label>
@@ -141,57 +139,58 @@
             </div>
         </div>
     </div>
-    <!-- Add Modal -->
-    <div class="modal fade" id="addDeptGrpModal" tabindex="-1" aria-labelledby="addDeptGrpModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addDeptGrpModalLabel">Add Department Group</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"
-                            id="add-x-button">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <!-- Form for adding a new Department Group -->
-                    <form action="{{route('dept_groups.store')}}" method="POST" id="addDeptGrpForm">
-                        @csrf
-                        <div class="form-group">
-                            <label for="dept_grp">Group Number</label>
-                            <input type="text" class="form-control" id="dept_grp" name="dept_grp" required minlength="6"
-                                   maxlength="6">
-                        </div>
-                        <div class="form-group">
-                            <label for="dept_grp_name">Department Group Name</label>
-                            <input type="text" class="form-control" id="dept_grp_name" name="dept_grp_name" required
-                                   minlength="3" maxlength="60">
-                        </div>
-                        <div class="form-group">
-                            <label for="campus_code">Campus Code</label>
-                            <select name="campus_code" class="form-control" id="add-campus-code">
-                                @foreach($campusData as $item)
-                                <option value="{{$item}}">{{$item}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                                    id="add-close-button">
-                                Close
-                            </button>
-                            <button type="submit" class="btn btn-primary">Add</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
     @else
-    <div class="alert alert-info" role="alert">
+    <br>
+    <div class="alert alert-info mt-5" role="alert">
         No Department Groups to display.
     </div>
     @endif
+        <!-- Add Modal -->
+        <div class="modal fade" id="addDeptGrpModal" tabindex="-1" aria-labelledby="addDeptGrpModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addDeptGrpModalLabel">Add Department Group</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"
+                                id="add-x-button" style="background: none; border: none; padding: 0;">
+                            <span aria-hidden="true" style="font-size: 25px; color: #000;">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Form for adding a new Department Group -->
+                        <form action="{{route('dept_groups.store')}}" method="POST" id="addDeptGrpForm">
+                            @csrf
+                            <div class="form-group">
+                                <label for="dept_grp">Group Number</label>
+                                <input type="text" class="form-control" id="dept_grp" name="dept_grp" required minlength="6"
+                                       maxlength="6" pattern="[0-9]{6}" title="exactly 6 digits (0-9)">
+                            </div>
+                            <div class="form-group">
+                                <label for="dept_grp_name">Department Group Name</label>
+                                <input type="text" class="form-control" id="dept_grp_name" name="dept_grp_name" required
+                                       minlength="3" maxlength="60">
+                            </div>
+                            <div class="form-group">
+                                <label for="campus_code">Campus Code</label>
+                                <select name="campus_code" class="form-control" id="add-campus-code">
+                                    @foreach($campusData as $item)
+                                    <option value="{{$item}}">{{$item}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                        id="add-close-button">
+                                    Close
+                                </button>
+                                <button type="submit" class="btn btn-primary">Add</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 </div>
 
@@ -210,11 +209,6 @@
                     "previous": "Previous"
                 }
             },
-            // Has table length, table info, and pagination in same row
-            //"dom": "<'row'<'col-sm-12'tr>><'row'<'col-sm-5'l><'col-sm-3'i><'col-sm-4'p>>",
-            // Moves "Show <10> entries" to bottom of table
-            // "dom": "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-4'li><'col-sm-8'p>>",
-            // info: false,
             label: false
         });
         // Function to handle the delete button click
