@@ -80,3 +80,12 @@ table.dataTable {
 .btn-custom {
     width: 60px;
 }
+.close {
+    background: none;
+    border: none;
+    padding: 0;
+}
+.close span {
+    font-size: 25px;
+    color: #000;
+}
