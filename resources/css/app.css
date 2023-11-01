@@ -33,6 +33,21 @@ main {
     overflow: hidden;
 }
 
+footer .container {
+    padding: 2% 2% 6% !important;
+}
+
+/* footer .languages {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    font-size: small;
+} */
+
 /**********************************************/
 /**************** Navbar Styles ***************/
 /**********************************************/
