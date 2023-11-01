@@ -48,19 +48,18 @@ main {
     transform: translateX(-45px) rotate(90deg);
     background-color: #343a40;
     width: 100px;
-    height: 30px;
+    height: 2%;
     position: relative;
     top: 20%;
     right: -100%;
     transition: width 0.3s;
     z-index: 1;
-    border-radius: 10px;
+    border-radius: 10px 10px 0 0;
     box-shadow: 0 -5px 5px rgba(0, 0, 0, 0.2);
 }
 .sidebar-toggle:hover {
     cursor: pointer;
 }
-
 .sidebar-toggle-tab {
     height: 100%;
     text-align: center;
@@ -68,6 +67,10 @@ main {
 .sidebar-toggle .tab {
     color: white;
 }
+.sidebar-toggle .sidebar-toggle-tab .sidebar-toggle-btn.expanded {
+    display: none;
+}
+
 /* sidebar expanded state */
 /* .sidebar-toggle.expanded {
     left: 10%;
@@ -88,11 +91,22 @@ main {
     transform: translateX(0);
     box-shadow: 6px 0 5px rgba(0, 0, 0, 0.2);
     z-index: 0;
+    width: 15vw;
 }
 
 .offcanvas-header {
     height: 10%;
     justify-content: center;
+}
+.logo-wrapper.expanded {
+    width: unset;
+    visibility: visible;
+    transition: width 0.3s;
+}
+.logo-wrapper.expanded {
+    width: 0;
+    visibility: hidden;
+    transition: width 0.3s;
 }
 .title-wrapper {
     width: 0;
@@ -102,10 +116,13 @@ main {
     width: unset;
     visibility: visible;
 }
+.title-wrapper .offcanvas-title {
+    font-size: 2.2rem;
+}
 
-/* .page-links-wrapper {
-    padding: 0 10%;
-} */
+.offcanvas-body {
+    overflow: hidden !important;
+}
 .page-link {
     text-decoration: none;
     color: white;

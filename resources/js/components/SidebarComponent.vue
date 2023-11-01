@@ -5,7 +5,8 @@
         <!-- Sidebar toggle button -->
         <div class="sidebar-toggle" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
             <div id="sidebarToggleBtn" class="sidebar-toggle-tab">
-                <span class="tab">Toggle</span>
+                <font-awesome-icon class="sidebar-toggle-btn up" icon="angles-up" style="color: #ffffff;" />
+                <font-awesome-icon class="sidebar-toggle-btn down expanded" icon="angles-down" style="color: #ffffff;" />
             </div>
         </div>
 
@@ -14,10 +15,9 @@
             <!-- <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button> -->
             <div class="logo-wrapper">
                 <img src="../../../public/images/logo/UHWPMS_LOGO.png" width="50" />
-                <!-- <img src="../../../public/images/logo/UHWPMS_LOGO.png" width="50" /> -->
             </div>
             <div class="title-wrapper">
-                <h3 class="offcanvas-title" id="offcanvasScrollingLabel">PMS</h3>
+                <h3 class="offcanvas-title" id="offcanvasScrollingLabel">WPMS</h3>
             </div>
         </div>
         <div style="display: flex; justify-content: center;">
@@ -46,14 +46,6 @@
                     </div>
                     <div class="page-name">
                         <h6>Department Listings</h6>
-                    </div>
-                </a>
-                <a :href="deptGroupsRoute" class="page-link">
-                    <div class="page-icon">
-                        <font-awesome-icon icon="city" style="color: #ffffff;" />
-                    </div>
-                    <div class="page-name">
-                        <h6>Department Groups</h6>
                     </div>
                 </a>
                 <a :href="deptContactsRoute" class="page-link">
@@ -91,6 +83,12 @@
             </div>
 
         </div>
+
+        <div class="offcanvas-footer">
+            <div style="display: flex; justify-content: center;">
+                <hr width="85%" style="margin: 0;" />
+            </div>
+        </div>
     </div>
 </template>
 
@@ -126,20 +124,31 @@
         },
         mounted() {
             const sidebar = document.querySelector('.sidebar-offcanvas');
-            sidebar.addEventListener('show.bs.offcanvas', (e) => this.toggleSidebarStyle(e));
-            sidebar.addEventListener('hide.bs.offcanvas', (e) => this.toggleSidebarStyle(e));
+            sidebar.addEventListener('show.bs.offcanvas', (e) => this.toggleSidebarContent(e));
+            sidebar.addEventListener('hide.bs.offcanvas', (e) => this.toggleSidebarContent(e));
+            sidebar.addEventListener('shown.bs.offcanvas', (e) => this.toggleSidebarTab(e));
+            sidebar.addEventListener('hidden.bs.offcanvas', (e) => this.toggleSidebarTab(e));
         },
         methods: {
-            toggleSidebarStyle(e) {
+            toggleSidebarContent(e) {
                 const sidebarWrapper = e.target.closest('aside');
+                const logoWrapper = e.target.querySelector('.logo-wrapper');
                 const titleWrapper = e.target.querySelector('.title-wrapper');
                 const pageIcons = e.target.querySelectorAll('.page-icon');
                 const pageNames = e.target.querySelectorAll('.page-name');
                 sidebarWrapper.classList.toggle('expanded');
+                
+                logoWrapper.classList.toggle('expanded');
                 titleWrapper.classList.toggle('expanded');
                 pageIcons.forEach(pi => { pi.classList.toggle('expanded') });
                 pageNames.forEach(pn => { pn.classList.toggle('expanded') });
+            },
+            toggleSidebarTab(e) {
+                const toggleBtnUp = e.target.querySelector('.sidebar-toggle-btn.up');
+                const toggleBtnDown = e.target.querySelector('.sidebar-toggle-btn.down');
+                toggleBtnUp.classList.toggle('expanded');
+                toggleBtnDown.classList.toggle('expanded');
             }
-        }  
+        }     
     };
 </script>
