@@ -9,6 +9,28 @@
     padding: 10px 0;
 } */
 
+.link-container p {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.dotted-links {
+    color: white !important;
+    text-decoration: underline;
+    text-decoration-style: dotted !important;
+}
+
+.non-dotted-links {
+    color: white !important;
+    text-decoration: none !important;
+}
+
+
+
+/**********************************************/
+/**************** Layout Styles ***************/
+/**********************************************/
+
 aside {
     width: 5vw;
     transition: width 0.3s;
@@ -79,21 +101,72 @@ footer .container {
     height: 100%;
     text-align: center;
 }
-
-.link-container p {
-    display: inline-block;
-    margin-right: 10px;
+.sidebar-toggle .tab {
+    color: white;
+}
+.sidebar-toggle .sidebar-toggle-tab .sidebar-toggle-btn.expanded {
+    display: none;
 }
 
-.dotted-links {
-    color: white !important;
-    text-decoration: underline;
-    text-decoration-style: dotted !important;
+/* sidebar expanded state */
+/* .sidebar-toggle.expanded {
+    left: 10%;
+} */
+
+/* sidebar (offcanvas) content */
+.offcanvas-start {
+    background-color: #343a40;
+    color: white;
+    position: absolute;
+}
+.offcanvas {
+    visibility: visible;
+    position: relative;
+    height: 100%;
+}
+.offcanvas.offcanvas-start {
+    transform: translateX(0);
+    box-shadow: 6px 0 5px rgba(0, 0, 0, 0.2);
+    z-index: 0;
+    width: 15vw;
 }
 
-.non-dotted-links {
-    color: white !important;
-    text-decoration: none !important;
+.offcanvas-header {
+    height: 10%;
+    justify-content: center;
+}
+.logo-wrapper.expanded {
+    width: unset;
+    visibility: visible;
+    transition: width 0.3s;
+}
+.logo-wrapper.expanded {
+    width: 0;
+    visibility: hidden;
+    transition: width 0.3s;
+}
+.title-wrapper {
+    width: 0;
+    visibility: hidden;
+}
+.title-wrapper.expanded {
+    width: unset;
+    visibility: visible;
+}
+.title-wrapper .offcanvas-title {
+    font-size: 2.2rem;
+}
+
+.offcanvas-body {
+    overflow: hidden !important;
+}
+.page-link {
+    text-decoration: none;
+    color: white;
+    white-space: nowrap;
+    display: flex;
+    align-items: baseline;
+    margin: 4% 0;
 }
 .page-link:hover {
     color: #265EB3;
