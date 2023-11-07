@@ -94,10 +94,10 @@
         <!-- Section: Links -->
 
         <!-- SECTION: Languages -->
-        <!-- <section class="languages">
-          <div class="row d-flex align-items-center" style="padding-top: 25px;"> -->
+        <section class="languages">
+          <div class="row d-flex align-items-center" style="padding-top: 25px;">
               <!-- Language Forms -->
-              <!-- <div class="link-container">
+              <div class="link-container">
                 <p>
                   <a class="dotted-links" href="#">English</a>
                 </p>
@@ -143,9 +143,9 @@
                 <p>
                   <a class="dotted-links" href="#">ʻŌlelo Hawaiʻi</a>
                 </p>
-              </div> -->
-          <!-- </div>
-        </section> -->
+              </div>
+          </div>
+        </section>
         <!-- SECTION: Footer -->
       </div>
     </footer>
