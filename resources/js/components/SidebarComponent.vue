@@ -48,6 +48,14 @@
                         <h6>Department Listings</h6>
                     </div>
                 </a>
+                <a :href="deptGroupsRoute" class="page-link">
+                    <div class="page-icon">
+                        <font-awesome-icon icon="building-columns" style="color: #ffffff;" />
+                    </div>
+                    <div class="page-name">
+                        <h6>Department Groups</h6>
+                    </div>
+                </a>
                 <a :href="deptContactsRoute" class="page-link">
                     <div class="page-icon">
                         <font-awesome-icon icon="address-card" style="color: #ffffff;" />
@@ -56,28 +64,20 @@
                         <h6>Department Contacts</h6>
                     </div>
                 </a>
-                <div class="page-link">
-                    <div class="page-icon">
-                        <font-awesome-icon icon="circle-check" style="color: #ffffff;" />
-                    </div>
-                    <div class="page-name">
-                        <h6>Make Approvals</h6>
-                    </div>
-                </div>
-                <a :href="announcementsRoute" class="page-link">
-                    <div class="page-icon">
-                        <font-awesome-icon icon="bullhorn" style="color: #ffffff;" />
-                    </div>
-                    <div class="page-name">
-                        <h6>Announcements</h6>
-                    </div>
-                </a>
                 <a :href="adminsRoute" class="page-link">
                     <div class="page-icon">
                         <font-awesome-icon icon="user-gear" style="color: #ffffff;" />
                     </div>
                     <div class="page-name">
                         <h6>Admins</h6>
+                    </div>
+                </a>
+                <a :href="announcementsRoute" class="page-link">
+                    <div class="page-icon">
+                        <font-awesome-icon icon="bullhorn" style="color: #ffffff;" />
+                    </div>
+                    <div class="page-name">
+                        <h6>Announcements</h6>
                     </div>
                 </a>
             </div>
@@ -113,11 +113,11 @@
                 type: String,
                 required: true,
             },
-            announcementsRoute: {
+            adminsRoute: {
                 type: String,
                 required: true,
             },
-            adminsRoute: {
+            announcementsRoute: {
                 type: String,
                 required: true,
             },
