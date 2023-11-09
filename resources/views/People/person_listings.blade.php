@@ -37,10 +37,10 @@
             @foreach($data as $item)
             <tr>
                 <td>{{$item->username}}</td>
-                <td>{{$item->name}}</td>
+                <td>{{$item->name }}</td>
                 <td>{{$item->email}}</td>
                 <td>{{$item->phone}}</td>
-                <td>{{$item->ocation}}</td>
+                <td>{{$item->location}}</td>
                 <td>{{$item->fax}}</td>
                 <td>{{$item->website}}</td>
                 <td>{{$item->publishable  ? 'True' : 'False' }}</td>
@@ -133,41 +133,44 @@
                         <div class="form-group">
                             <label for="edit-username">Username</label>
                             <input type="text" name="username" class="form-control" id="edit-username"
-                                   required minlength="6" maxlength="60">
+                                   required minlength="6" maxlength="60" title="Enter a username (6 to 60 characters)">
                         </div>
                         <div class="form-group">
                             <label for="edit-person-name">Name</label>
-                            <input type="text" name="person-name" class="form-control" id="edit-person-name"
-                                   required minlength="10" maxlength="60">
+                            <input type="text" name="name" class="form-control" id="edit-person-name"
+                                   required minlength="10" maxlength="60" title="Enter a username (6 to 60 characters)">
                         </div>
                         <div class="form-group">
                             <label for="edit-person-email">Email</label>
-                            <input type="text" name="person-email" class="form-control" id="edit-person-email"
-                                   required minlength="60" maxlength="100">
+                            <input type="text" name="email" class="form-control" id="edit-person-email"
+                                   required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Enter a valid email address (e.g., example@hawaii.due)">
                         </div>
                         <div class="form-group">
                             <label for="edit-person-phone">Phone</label>
-                            <input type="text" name="person-phone" class="form-control" id="edit-person-phone"
-                                   required minlength="14" maxlength="14">
+                            <input type="text" name="phone" class="form-control" id="edit-person-phone"
+                                   required pattern="^\d{3}-\d{3}-\d{4}$" title="Enter a phone number in the format xxx-xxx-xxxx (e.g., 123-456-7890)">
                         </div>
                         <div class="form-group">
                             <label for="edit-person-location">Location</label>
-                            <input type="text" name="person-location" class="form-control" id="edit-person-location"
-                                   required minlength="0" maxlength="100">
+                            <input type="text" name="location" class="form-control" id="edit-person-location"
+                                   required minlength="0" maxlength="100"  title="Enter a location (up to 100 characters)">
                         </div>
                         <div class="form-group">
                             <label for="edit-person-fax">Fax</label>
-                            <input type="text" name="person-fax" class="form-control" id="edit-person-fax"
-                                   required minlength="0" maxlength="14">
+                            <input type="text" name="fax" class="form-control" id="edit-person-fax"
+                                   required pattern="^\+?[0-9]+(\s?[-.]?\s?[0-9]+)*$"
+                                   title="Enter a correct fax format, e.g., +1 8083456789">
                         </div>
                         <div class="form-group">
                             <label for="edit-person-website">Website</label>
-                            <input type="text" name="person-website" class="form-control" id="edit-person-website"
-                                   required minlength="0" maxlength="100">
+                            <input type="text" name="website" class="form-control" id="edit-person-website"
+                                   required pattern="/(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z]{2,}(\.[a-zA-Z]{2,})(\.[a-zA-Z]{2,})?\/[a-zA-Z0-9]{2,}|((https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z]{2,}(\.[a-zA-Z]{2,})(\.[a-zA-Z]{2,})?)|(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z0-9]{2,}\.[a-zA-Z0-9]{2,}\.[a-zA-Z0-9]{2,}(\.[a-zA-Z0-9]{2,})?/g;"
+                                   title="Enter a valid website URL (e.g., http://example.com)">
                         </div>
+
                         <div class="form-group">
                             <label for="edit-person-publishable">Publishable</label>
-                            <select name="person-publishable" class="form-control" id="edit-person-publishable">
+                            <select name="publishable" class="form-control" id="edit-person-publishable">
                                 <option value="true">True</option>
                                 <option value="false">False</option>
                             </select>
@@ -226,6 +229,10 @@
         }).prop('selected', true);
 
         $("#editPersonModal").modal("show");
+
+        var editUrl = "{{ route('person_listings.update', ':personUsername') }}";
+        editUrl = editUrl.replace(":personUsername", personUsername);
+        $("#editPersonModal form").attr("action", editUrl);
     });
 
     // Function to handle the delete button click
