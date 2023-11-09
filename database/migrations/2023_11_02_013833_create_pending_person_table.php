@@ -13,14 +13,20 @@ return new class extends Migration
     {
         Schema::create('PendingPerson', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('person_id');
             $table->string('username', 60);
             $table->string('name', 60);
+            $table->string('name_of_record');
+            $table->string('job_title');
             $table->string('email', 100);
+            $table->string('alias_email',100);
             $table->string('phone', 14);
             $table->string('location', 100);
             $table->string('fax', 14);
             $table->string('website', 200);
             $table->boolean('publishable');
+            $table->dateTime('lastUpdatedAt');
+            $table->unsignedBigInteger('lastUpdatedBy');
         });
     }
 
