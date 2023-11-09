@@ -11,7 +11,6 @@ class Person extends Model
 
     protected $table = 'Person';
 
-    /*
     protected $fillable = [
         'username',
         'name',
@@ -27,9 +26,4 @@ class Person extends Model
         'lastApprovedAt',
         'lastApprovedBy'
     ];
-    */
-
-    protected $fillable = ['username', 'name', 'email', 'phone', 'location', 'fax', 'website', 'publishable'];
-    public $timestamps = false;
-
 };
