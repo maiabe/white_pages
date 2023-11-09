@@ -20,9 +20,7 @@ use App\Http\Controllers\AnnouncementController;
 |
 */
 Route::get('/campus',[CampusController::class, 'index']);
-Route::get('/departments','App\Http\Controllers\DepartmentController@index')->name('departments.index');
-
-/*Route::get('/dept_groups',[DeptGroupController::class, 'index'])->name('dept_groups');
+Route::get('/dept_groups',[DeptGroupController::class, 'index'])->name('dept_groups');
 Route::delete('dept_groups/{dept_grp}','App\Http\Controllers\DeptGroupController@destroy')->name('dept_groups.destroy');
 Route::put('dept_groups/{dept_grp}','App\Http\Controllers\DeptGroupController@update')->name('dept_groups.update');
 Route::post('dept_groups', [DeptGroupController::class, 'store'])->name('dept_groups.store');
@@ -36,5 +34,5 @@ Route::post('person_listings', [PersonController::class, 'store'])->name('person
 Route::get('/dept_contacts',[DeptContactController::class, 'index'])->name('dept_contacts');
 Route::get('/department_listings',[DepartmentController::class, 'index'])->name('department_listings');
 Route::get('/announcements',[AnnouncementController::class, 'index'])->name('announcements');
-Route::get('/admins',[AdminController::class, 'index'])->name('admins');*/
+Route::get('/admins',[AdminController::class, 'index'])->name('admins');
 

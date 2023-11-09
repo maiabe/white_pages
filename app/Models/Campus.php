@@ -9,11 +9,6 @@ class Campus extends Model
 {
     use HasFactory;
 
-    protected $table = 'Campus';
-
-    protected $fillable = [
-        'code',
-        'name'
-    ];
+    protected $table = 'campus';
     
-};
+}
