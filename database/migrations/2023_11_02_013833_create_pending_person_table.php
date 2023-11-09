@@ -25,8 +25,8 @@ return new class extends Migration
             $table->string('fax', 14);
             $table->string('website', 200);
             $table->boolean('publishable');
-            $table->dateTime('lastUpdatedAt');
-            $table->unsignedBigInteger('lastUpdatedBy');
+            $table->dateTime('lastApprovedAt');
+            $table->unsignedBigInteger('lastApprovedBy');
         });
     }
 
