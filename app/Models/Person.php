@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Person extends Model
 {
     use HasFactory;
+
+    protected $table = 'Person';
+    protected $fillable = ['username', 'name', 'email', 'phone', 'location', 'fax', 'website', 'publishable'];
+    public $timestamps = false;
+
 }
