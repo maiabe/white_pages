@@ -223,7 +223,6 @@
         $("#edit-person-fax").text(personFax);
         $("#edit-person-website").text(personWebsite);
         $("#edit-person-publishable").text(personPub);
-
         // Rest of the code remains the same
     });
 
@@ -247,6 +246,13 @@
         $("#delete-person-fax").text(personFax);
         $("#delete-person-website").text(personWebsite);
         $("#delete-person-publishable").text(personPub);
+
+        $("#deletePersonModal").modal("show");
+
+
+        var deleteUrl = "{{ route('person_listings.destroy', ':personUsername') }}";
+        deleteUrl = deleteUrl.replace(":personUsername", personUsername);
+        $("#delete-form").attr("action", deleteUrl);
 
         // Rest of the code remains the same
     });
