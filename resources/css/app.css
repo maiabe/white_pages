@@ -9,24 +9,6 @@
     padding: 10px 0;
 } */
 
-.link-container p {
-    display: inline-block;
-    margin-right: 10px;
-}
-
-.dotted-links {
-    color: white !important;
-    text-decoration: underline;
-    text-decoration-style: dotted !important;
-}
-
-.non-dotted-links {
-    color: white !important;
-    text-decoration: none !important;
-}
-
-
-
 /**********************************************/
 /**************** Layout Styles ***************/
 /**********************************************/
@@ -54,21 +36,6 @@ main {
     height: 100%;
     overflow: hidden;
 }
-
-footer .container {
-    padding: 2% 2% 6% !important;
-}
-
-/* footer .languages {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: #2c3e50;
-    color: white;
-    text-align: center;
-    padding: 10px 0;
-    font-size: small;
-} */
 
 /**********************************************/
 /**************** Navbar Styles ***************/
@@ -198,6 +165,10 @@ footer .container {
 /*************** Footer Styles ***************/
 /**********************************************/
 
+footer .container {
+    padding: 1% 2% !important;
+}
+
 .link-container {
     text-align: center;
 }
@@ -210,7 +181,7 @@ footer .container {
 .dotted-links {
     color: white !important;
     text-decoration: underline;
-    text-decoration-style: dotted m !important;
+    text-decoration-style: dotted !important;
 }
 
 .non-dotted-links {

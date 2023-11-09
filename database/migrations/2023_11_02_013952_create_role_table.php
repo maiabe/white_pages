@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('department', function (Blueprint $table) {
+        Schema::create('Role', function (Blueprint $table) {
             $table->id();
-            $table->string('dept_name',60);
-            $table->string('dept_grp', 6);
-            $table->timestamps();
-            $table->foreign('dept_grp')->references('dept_grp')->on('dept_group')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('name', 50);
         });
     }
 
@@ -25,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('department');
+        Schema::dropIfExists('role');
     }
 };

@@ -227,7 +227,7 @@
             $("#delete-form").attr("action", deleteUrl);
         });
 
-        // Function to handle the delete button click
+        // Function to handle the edit button click
         $("#table").on("click", ".edit-button", function () {
             var deptGrp = $(this).data("dept-grp");
             var deptGrpName = $(this).data("dept-grp-name");
