@@ -3,12 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Department;
+use App\Models\Campus;
 
 class DepartmentController extends Controller
 {
-    
     public function index()
     {
-        return view('Departments.department_listings');
+        $tableEntries = Department::all();
+        $columns = ['group_no', 'name', 'email', 'phone', 'location', 'fax', 'website'];
+
+        $campusData = Campus::distinct()->pluck('campus_code');
+        return view('Departments.department_listings', ['columns' => $columns, 'tableEntries' => $tableEntries, 'campusData' => $campusData]);
     }
 }

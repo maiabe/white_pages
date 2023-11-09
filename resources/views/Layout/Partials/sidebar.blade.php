@@ -6,5 +6,6 @@
     :dept-contacts-route="'{{ route('dept_contacts') }}'"
     :admins-route="'{{ route('admins') }}'"
     :announcements-route="'{{ route('announcements') }}'"
+    :profile-route="'{{ route('profile') }}'"
     >
 <sidebar-component/>

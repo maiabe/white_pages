@@ -8,6 +8,7 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AnnouncementController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,3 +37,5 @@ Route::get('/department_listings',[DepartmentController::class, 'index'])->name(
 Route::get('/announcements',[AnnouncementController::class, 'index'])->name('announcements');
 Route::get('/admins',[AdminController::class, 'index'])->name('admins');
 
+
+Route::get('/profile',[ProfileController::class, 'index'])->name('profile');

@@ -127,6 +127,16 @@ main {
 .offcanvas-body {
     overflow: hidden !important;
 }
+
+
+
+/*********** Page Links ***********/
+.page-links-wrapper {
+    display: flex;
+    height: 100%;
+    flex-flow: column;
+    justify-content: space-between;
+}
 .page-link {
     text-decoration: none;
     color: white;
@@ -159,6 +169,10 @@ main {
     width: 90%;
     visibility: visible;
     transition: width 0.3s, opacity 0.3s;
+}
+
+.user-page-links .page-link {
+    margin: 2% 5%;
 }
 
 /**********************************************/
@@ -200,3 +214,40 @@ footer .container {
 .alert-info {
     margin-bottom: 0;
 }
+
+
+
+/**********************************************/
+/*********** Table Component Styles ***********/
+/**********************************************/
+.table-wrapper {
+    padding: 2% 0;
+    display: inline-flex;
+}
+
+.add-button {
+    background-color: #91CDC9;
+    border: none;
+    padding: 5px 30px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 30px;
+    float: right;
+    height: 40px;
+}
+.edit-button {
+    background-color: rgba(134, 194, 241);
+}
+.delete-button {
+    background-color: rgba(203, 93, 93)
+}
+button:hover {
+    opacity: 0.8;
+}
+.fa-icon {
+    color: white;
+}
+
+
