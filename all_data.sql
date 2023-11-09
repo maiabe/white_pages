@@ -1,9 +1,4 @@
 \. add_role_data.sql
 \. add_campus_data.sql
 \. add_dept_data.sql
-\. add_pperson_data.sql
 \. add_person_data.sql
-\. add_pperson_role_data.sql
-\. add_person_role_data.sql
-\. add_member_app_data.sql
-\. add_contact_app_data.sql

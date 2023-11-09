@@ -20,172 +20,171 @@
                 Please revise and resubmit to update person record!
             </h6>
         @endif
-
-        @if(count($data)>0)
-            <table id="table" class="table table-bordered table-hovered">
-                <thead class="table-header-color align-middle">
-                    <th>Username</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Location</th>
-                    <th>Fax</th>
-                    <th>Website</th>
-                    <th>Publishable</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </thead>
-                <tbody>
-                    @foreach($data as $item)
-                    <tr>
-                        <td>{{$item->username}}</td>
-                        <td>{{$item->name}}</td>
-                        <td>{{$item->email}}</td>
-                        <td>{{$item->phone}}</td>
-                        <td>{{$item->ocation}}</td>
-                        <td>{{$item->fax}}</td>
-                        <td>{{$item->website}}</td>
-                        <td>{{$item->publishable  ? 'True' : 'False' }}</td>
-                        <td style="text-align: center;">
-                            <button class="btn edit-button btn-custom"
-                                    style="background-color: #86C2F1;"
-                                    data-username="{{ $item->username }}"
-                                    data-name="{{ $item->name }}"
-                                    data-email="{{ $item->email }}"
-                                    data-phone="{{ $item->phone }}"
-                                    data-location="{{ $item->location }}"
-                                    data-fax="{{ $item->fax }}"
-                                    data-website="{{ $item->website }}"
-                                    data-publishable="{{ $item->publishable  ? 'True' : 'False' }}"
-                                    data-toggle="modal" data-target="#editPersonModal">
-                                <i class="fa fa-pencil"></i>
-                            </button>
-                        </td>
-                        <td style="text-align: center;">
-                            <button class="btn delete-button btn-custom"
-                                    style="background-color: #CB5D5D;"
-                                    data-username="{{ $item->username }}"
-                                    data-name="{{ $item->name }}"
-                                    data-email="{{ $item->email }}"
-                                    data-phone="{{ $item->phone }}"
-                                    data-location="{{ $item->location }}"
-                                    data-fax="{{ $item->fax }}"
-                                    data-website="{{ $item->website }}"
-                                    data-publishable="{{ $item->publishable  ? 'True' : 'False' }}"
-                                    data-toggle="modal" data-target="#deletePersonModal">
-                                <i class="fa fa-trash-o" aria-hidden="true"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-            <!-- Delete Modal -->
-            <div class="modal fade" id="deletePersonModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header" style="background-color:#e85757;">
-                            <h5 class="modal-title" id="deleteModalLabel">Delete Person</h5>
-                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            Deleting this person will completely remove the record from the database
-                            <br><br>
-                            <b>Username</b>: <span id="delete-username"></span><br>
-                            <b>Name</b>: <span id="delete-person-name"></span><br>
-                            <b>Email</b>: <span id="delete-person-email"></span><br>
-                            <b>Phone</b>: <span id="delete-person-phone"></span><br>
-                            <b>Location</b>: <span id="delete-person-location"></span><br>
-                            <b>Fax</b>: <span id="delete-person-fax"></span><br>
-                            <b>Website</b>: <span id="delete-person-website"></span><br>
-                            <b>Publishable</b>: <span id="delete-person-publishable"></span><br>
-                            <br>
-                            Are you sure you want to delete this Person?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <form method="POST" id="delete-form">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                            </form>
-                        </div>
-                    </div>
+    @if(count($data)>0)
+    <table id="table" class="table table-bordered table-hovered">
+        <thead class="table-header-color align-middle">
+            <th>Username</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Location</th>
+            <th>Fax</th>
+            <th>Website</th>
+            <th>Publishable</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </thead>
+        <tbody>
+            @foreach($data as $item)
+            <tr>
+                <td>{{$item->username}}</td>
+                <td>{{$item->name}}</td>
+                <td>{{$item->email}}</td>
+                <td>{{$item->phone}}</td>
+                <td>{{$item->ocation}}</td>
+                <td>{{$item->fax}}</td>
+                <td>{{$item->website}}</td>
+                <td>{{$item->publishable  ? 'True' : 'False' }}</td>
+                <td style="text-align: center;">
+                    <button class="btn edit-button btn-custom"
+                            style="background-color: #86C2F1;"
+                            data-username="{{ $item->username }}"
+                            data-name="{{ $item->name }}"
+                            data-email="{{ $item->email }}"
+                            data-phone="{{ $item->phone }}"
+                            data-location="{{ $item->location }}"
+                            data-fax="{{ $item->fax }}"
+                            data-website="{{ $item->website }}"
+                            data-publishable="{{ $item->publishable  ? 'True' : 'False' }}"
+                            data-toggle="modal" data-target="#editPersonModal">
+                        <i class="fa fa-pencil"></i>
+                    </button>
+                </td>
+                <td style="text-align: center;">
+                    <button class="btn delete-button btn-custom"
+                            style="background-color: #CB5D5D;"
+                            data-username="{{ $item->username }}"
+                            data-name="{{ $item->name }}"
+                            data-email="{{ $item->email }}"
+                            data-phone="{{ $item->phone }}"
+                            data-location="{{ $item->location }}"
+                            data-fax="{{ $item->fax }}"
+                            data-website="{{ $item->website }}"
+                            data-publishable="{{ $item->publishable  ? 'True' : 'False' }}"
+                            data-toggle="modal" data-target="#deletePersonModal">
+                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                    </button>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+    <!-- Delete Modal -->
+    <div class="modal fade" id="deletePersonModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:#e85757;">
+                    <h5 class="modal-title" id="deleteModalLabel">Delete Person</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Deleting this person will completely remove the record from the database
+                    <br><br>
+                    <b>Username</b>: <span id="delete-username"></span><br>
+                    <b>Name</b>: <span id="delete-person-name"></span><br>
+                    <b>Email</b>: <span id="delete-person-email"></span><br>
+                    <b>Phone</b>: <span id="delete-person-phone"></span><br>
+                    <b>Location</b>: <span id="delete-person-location"></span><br>
+                    <b>Fax</b>: <span id="delete-person-fax"></span><br>
+                    <b>Website</b>: <span id="delete-person-website"></span><br>
+                    <b>Publishable</b>: <span id="delete-person-publishable"></span><br>
+                    <br>
+                    Are you sure you want to delete this Person?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <form method="POST" id="delete-form">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
                 </div>
             </div>
-            <!-- Edit Modal -->
-            <div class="modal fade" id="editPersonModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <form action="{{ route('person_listings.update', ':personUsername' ) }}" method="POST">
-                            @csrf
-                            @method('PUT')
-                            <div class="modal-header" style="background-color: #86C2F1;">
-                                <h5 class="modal-title" id="editModalLabel">Edit Person</h5>
-                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"
-                                        id="edit-x-button">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="form-group">
-                                    <label for="edit-username">Username</label>
-                                    <input type="text" name="username" class="form-control" id="edit-username"
-                                        required minlength="6" maxlength="60">
-                                </div>
-                                <div class="form-group">
-                                    <label for="edit-person-name">Name</label>
-                                    <input type="text" name="person-name" class="form-control" id="edit-person-name"
-                                        required minlength="10" maxlength="60">
-                                </div>
-                                <div class="form-group">
-                                    <label for="edit-person-email">Email</label>
-                                    <input type="text" name="person-email" class="form-control" id="edit-person-email"
-                                        required minlength="60" maxlength="100">
-                                </div>
-                                <div class="form-group">
-                                    <label for="edit-person-phone">Phone</label>
-                                    <input type="text" name="person-phone" class="form-control" id="edit-person-phone"
-                                        required minlength="14" maxlength="14">
-                                </div>
-                                <div class="form-group">
-                                    <label for="edit-person-location">Location</label>
-                                    <input type="text" name="person-location" class="form-control" id="edit-person-location"
-                                        required minlength="0" maxlength="100">
-                                </div>
-                                <div class="form-group">
-                                    <label for="edit-person-fax">Fax</label>
-                                    <input type="text" name="person-fax" class="form-control" id="edit-person-fax"
-                                        required minlength="0" maxlength="14">
-                                </div>
-                                <div class="form-group">
-                                    <label for="edit-person-website">Website</label>
-                                    <input type="text" name="person-website" class="form-control" id="edit-person-website"
-                                        required minlength="0" maxlength="100">
-                                </div>
-                                <div class="form-group">
-                                    <label for="edit-person-publishable">Publishable</label>
-                                    <select name="person-publishable" class="form-control" id="edit-person-publishable">
-                                        <option value="true">True</option>
-                                        <option value="false">False</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="edit-close-button">
-                                    Close
-                                </button>
-                                <button type="submit" class="btn btn-primary">Update</button>
-                            </div>
-                        </form>
+        </div>
+    </div>
+    <!-- Edit Modal -->
+    <div class="modal fade" id="editPersonModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form action="{{ route('person_listings.update', ':personUsername' ) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <div class="modal-header" style="background-color: #86C2F1;">
+                        <h5 class="modal-title" id="editModalLabel">Edit Person</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"
+                                id="edit-x-button">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="edit-username">Username</label>
+                            <input type="text" name="username" class="form-control" id="edit-username"
+                                   required minlength="6" maxlength="60">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-person-name">Name</label>
+                            <input type="text" name="person-name" class="form-control" id="edit-person-name"
+                                   required minlength="10" maxlength="60">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-person-email">Email</label>
+                            <input type="text" name="person-email" class="form-control" id="edit-person-email"
+                                   required minlength="60" maxlength="100">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-person-phone">Phone</label>
+                            <input type="text" name="person-phone" class="form-control" id="edit-person-phone"
+                                   required minlength="14" maxlength="14">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-person-location">Location</label>
+                            <input type="text" name="person-location" class="form-control" id="edit-person-location"
+                                   required minlength="0" maxlength="100">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-person-fax">Fax</label>
+                            <input type="text" name="person-fax" class="form-control" id="edit-person-fax"
+                                   required minlength="0" maxlength="14">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-person-website">Website</label>
+                            <input type="text" name="person-website" class="form-control" id="edit-person-website"
+                                   required minlength="0" maxlength="100">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-person-publishable">Publishable</label>
+                            <select name="person-publishable" class="form-control" id="edit-person-publishable">
+                                <option value="true">True</option>
+                                <option value="false">False</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="edit-close-button">
+                            Close
+                        </button>
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+                </form>
             </div>
-        @endif
+        </div>
+    </div>
+    @endif
     </div>
 
     <script>
@@ -227,8 +226,8 @@
                     return $(this).text() === personPub;
                 }).prop('selected', true);
 
-                $("#editPersonModal").modal("show");
-            });
+        $("#editPersonModal").modal("show");
+    });
 
             // Function to handle the delete button click
             $("#table").on("click", ".delete-button", function () {
