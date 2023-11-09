@@ -43,7 +43,7 @@
                 <td>{{$item->ocation}}</td>
                 <td>{{$item->fax}}</td>
                 <td>{{$item->website}}</td>
-                <td>{{$item->publishable}}</td>
+                <td>{{$item->publishable  ? 'True' : 'False' }}</td>
                 <td style="text-align: center;">
                     <button class="btn edit-button btn-custom"
                             style="background-color: #86C2F1;"
@@ -51,11 +51,11 @@
                             data-name="{{ $item->name }}"
                             data-email="{{ $item->email }}"
                             data-phone="{{ $item->phone }}"
-                            data-location="{{ $item->ocation }}"
+                            data-location="{{ $item->location }}"
                             data-fax="{{ $item->fax }}"
                             data-website="{{ $item->website }}"
-                            data-publishable="{{ $item->publishable }}"
-                            data-toggle="modal" data-target="#editModal">
+                            data-publishable="{{ $item->publishable  ? 'True' : 'False' }}"
+                            data-toggle="modal" data-target="#editPersonModal">
                         <i class="fa fa-pencil"></i>
                     </button>
                 </td>
@@ -66,10 +66,10 @@
                             data-name="{{ $item->name }}"
                             data-email="{{ $item->email }}"
                             data-phone="{{ $item->phone }}"
-                            data-location="{{ $item->ocation }}"
+                            data-location="{{ $item->location }}"
                             data-fax="{{ $item->fax }}"
                             data-website="{{ $item->website }}"
-                            data-publishable="{{ $item->publishable }}"
+                            data-publishable="{{ $item->publishable  ? 'True' : 'False' }}"
                             data-toggle="modal" data-target="#deletePersonModal">
                         <i class="fa fa-trash-o" aria-hidden="true"></i>
                     </button>
@@ -115,7 +115,7 @@
         </div>
     </div>
     <!-- Edit Modal -->
-    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+    <div class="modal fade" id="editPersonModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -214,16 +214,18 @@
         var personWebsite = $(this).data("website");
         var personPub = $(this).data("publishable");
 
-        // Update the element by correct ID
-        $("#edit-username").text(personUsername);
-        $("#edit-person-name").text(personName);
-        $("#edit-person-email").text(personEmail);
-        $("#edit-person-phone").text(personPhone);
-        $("#edit-person-location").text(personLocation);
-        $("#edit-person-fax").text(personFax);
-        $("#edit-person-website").text(personWebsite);
-        $("#edit-person-publishable").text(personPub);
-        // Rest of the code remains the same
+        $("#edit-username").val(personUsername);
+        $("#edit-person-name").val(personName);
+        $("#edit-person-email").val(personEmail);
+        $("#edit-person-phone").val(personPhone);
+        $("#edit-person-location").val(personLocation);
+        $("#edit-person-fax").val(personFax);
+        $("#edit-person-website").val(personWebsite);
+        $("#edit-person-publishable option").filter(function() {
+            return $(this).text() === personPub;
+        }).prop('selected', true);
+
+        $("#editPersonModal").modal("show");
     });
 
     // Function to handle the delete button click
@@ -237,7 +239,6 @@
         var personWebsite = $(this).data("website");
         var personPub = $(this).data("publishable");
 
-        // Update the element by correct ID
         $("#delete-username").text(personUsername);
         $("#delete-person-name").text(personName);
         $("#delete-person-email").text(personEmail);
