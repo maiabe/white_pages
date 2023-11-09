@@ -1,6 +1,4 @@
 insert into Role (name) values
-    ("Member"),
-    ("Primary"),
-    ("Secondary"),
+    ("Contact"),
     ("Admin"),
-    ("HelpDesk");
+    ("Member");

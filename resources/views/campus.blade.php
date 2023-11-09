@@ -4,7 +4,7 @@
     <body>
         <div>
             @foreach ($data as $item)
-            <li>{{$item['name']}}</li>
+            <li>{{$item}}</li>
             @endforeach
         </div>
     </body>
