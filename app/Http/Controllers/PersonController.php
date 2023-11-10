@@ -2,18 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use http\Message;
 use Illuminate\Http\Request;
 use App\Models\Person;
 
 class PersonController extends Controller
 {
-    
+
     public function index()
     {
         $data = Person::all();
-        $username = Person::distinct()->pluck('username');
-        return view('People.person_listings', ['data' => $data, 'username' => $username]);
+        return view('People.person_listings', ['data' => $data, ]);
     }
 
     public function destroy($username,)
@@ -71,8 +69,6 @@ class PersonController extends Controller
             ],
             'publishable' => [
                 'required',
-                'string',
-                'max:1',
             ],
         ], $messages);
 
@@ -85,7 +81,8 @@ class PersonController extends Controller
             'location' => $validatedData['location'],
             'fax' => $validatedData['fax'],
             'website' => $validatedData['website'],
-            'publishable' => $validatedData['publishable'],
+            'publishable' => $validatedData['publishable'] === 'true' ? 1 : 0,
+
         ]);
 
         // return to person_listings view

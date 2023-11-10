@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Department;
 use App\Models\Campus;
+use DB;
 
 class DepartmentController extends Controller
 {
