@@ -220,10 +220,7 @@ footer .container {
 /**********************************************/
 /*********** Table Component Styles ***********/
 /**********************************************/
-.table-wrapper {
-    padding: 2% 0;
-    display: inline-flex;
-}
+
 
 .add-button {
     background-color: #91CDC9;
@@ -250,4 +247,16 @@ button:hover {
     color: white;
 }
 
+
+
+/**********************************************/
+/*********** Custom Bootstrap Styles **********/
+/**********************************************/
+.row {
+    align-items: baseline;
+}
+.container {
+    padding-left: 0;
+    padding-right: 0;
+}
 

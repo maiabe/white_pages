@@ -20,10 +20,12 @@
         @endif -->
 
 
+        <div class="add-button-wrapper">
+            <button id="add-button" type="button" class="add-button mt-4" data-bs-toggle="modal" data-bs-target="#addDeptModal">
+                Add Department
+            </button>
+        </div>
         
-        <button id="add-button" type="button" class="add-button mt-4" data-bs-toggle="modal" data-bs-target="#addDeptModal">
-            Add Department
-        </button>
         <div class="table-wrapper">
             <table-component
                 :table-id="'department-table'"
@@ -164,8 +166,7 @@
         @endif -->
 
         <!-- Add Modal -->
-        <div class="modal fade" id="addDeptModal" tabindex="-1" aria-labelledby="addDeptGrpModalLabel"
-            aria-hidden="true">
+        <div class="modal fade" id="addDeptModal" tabindex="-1" aria-labelledby="addDeptGrpModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">

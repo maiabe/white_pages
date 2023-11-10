@@ -1,12 +1,14 @@
 <template>
-    <table ref="table" :id="tableId" class="table table-bordered table-hover">
+    <table ref="table" :id="tableId" class="table table-bordered table-hover dataTable table-responsive table-fixed w-auto">
         
         <thead class="table-header-color align-middle">
-            <th v-for="column in Object.keys(tableEntries[0])" >
-                {{ column }}
-            </th>
-            <th>Edit</th>
-            <th>Delete</th>
+            <tr>
+                <th v-for="column in Object.keys(tableEntries[0])" >
+                    {{ column }}
+                </th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
         </thead>
         <tbody>
             <tr v-for="entry in tableEntries"  class="align-middle">
@@ -24,13 +26,14 @@
                     </button>
                 </td>
             </tr>
-        
         </tbody>
-
     </table>
+
 </template>
 
 <script>
+    import DataTable from 'datatables.net-dt';
+    import 'datatables.net-dt/css/jquery.dataTables.css';
 
     export default {
         props: {
@@ -46,30 +49,7 @@
             }
         },
         mounted() {
-            // Dynamically load jQuery and DataTables from CDNs
-            this.loadScript('//code.jquery.com/jquery-1.12.3.js', () => {
-                this.loadScript('//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js', () => {
-                    this.loadScript('https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js', () => {
-                        this.initializeDataTable();
-                    });
-                });
-            });
-            /* this.$nextTick(() => {
-                $(this.$refs.table).DataTable({
-                    "pagingType": "simple_numbers",
-                    "language": {
-                        "emptyTable": "The Person Listings table is empty",
-                        "lengthMenu": "Display _MENU_ persons",
-                        "loadingRecords": "Loading...",
-                        "processing": "Processing...",
-                        "zeroRecords": "No search results found",
-                        "paginate": {
-                            "next": "Next",
-                            "previous": "Previous"
-                        }
-                    }
-                });
-            }); */
+            this.initializeDataTable();
         },
         methods: {
             loadScript(src, callback) {
@@ -82,25 +62,21 @@
             initializeDataTable() {
                 const table = this.$refs.table;
                 if (table) {
-                    console.log(table);
-                    // DataTables is now loaded, you can initialize it here if needed
-                    this.$nextTick(() => {
-                        $(table).DataTable({
-                            "pagingType": "simple_numbers",
-                            "language": {
-                                "emptyTable": "The Person Listings table is empty",
-                                "lengthMenu": "Display _MENU_ persons",
-                                "loadingRecords": "Loading...",
-                                "processing": "Processing...",
-                                "zeroRecords": "No search results found",
-                                "paginate": {
-                                    "next": "Next",
-                                    "previous": "Previous"
-                                }
-                            }
-                        });
+                    new DataTable(this.$refs.table, {
+                        autoWidth: true,
+                        "pagingType": "simple_numbers",
+                        "language": {
+                            "emptyTable": "The Department Listings table is empty",
+                            "lengthMenu": "Display _MENU_ entries",
+                            "loadingRecords": "Loading...",
+                            "processing": "Processing...",
+                            "zeroRecords": "No search results found",
+                            "paginate": {
+                                "next": "Next",
+                                "previous": "Previous"
+                            },
+                        }
                     });
-
                 }
             }
         }

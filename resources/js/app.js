@@ -1,5 +1,8 @@
 import './bootstrap';
 import { createApp } from 'vue';
+
+import jQuery from 'jquery';
+
 import NavbarComponent from './components/NavbarComponent.vue';
 import SidebarComponent from './components/SidebarComponent.vue';
 import FooterComponent from './components/FooterComponent.vue';
