@@ -14,7 +14,7 @@ class DepartmentController extends Controller
         $tableEntries = Department::all();
         $columns = ['group_no', 'name', 'email', 'phone', 'location', 'fax', 'website'];
 
-        $campusData = Campus::distinct()->pluck('campus_code');
+        $campusData = Campus::distinct()->pluck('code');
         return view('Departments.department_listings', ['columns' => $columns, 'tableEntries' => $tableEntries, 'campusData' => $campusData]);
     }
 }

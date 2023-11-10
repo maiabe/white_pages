@@ -21,9 +21,17 @@
         <button id="add-button" type="button" class="add-department-group mt-4" data-bs-toggle="modal" data-bs-target="#addDeptGrpModal">
             Add Department Group
         </button>
+        
         <br/>
-    @if(count($data)>0)
-    <table id="table" class="table table-bordered table-hover">
+        @if(count($data)>0)
+
+            <div class="table-wrapper">
+                <table-component
+                    :table-id="'dept-groups-table'"
+                    :table-entries="{{ json_encode($data) }}"
+                ></table-component>
+            </div>
+    <!-- <table id="table" class="table table-bordered table-hover">
         <thead class="table-header-color align-middle">
         <th>Campus Code</th>
         <th>Group Number</th>
@@ -60,7 +68,7 @@
         </tr>
         @endforeach
         </tbody>
-    </table>
+    </table> -->
     <!-- Delete Modal -->
     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
          aria-hidden="true">

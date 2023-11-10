@@ -21,7 +21,15 @@
             </h6>
         @endif
     @if(count($data)>0)
-    <table id="table" class="table table-bordered table-hovered">
+
+
+        <div class="table-wrapper">
+            <table-component
+                :table-id="'person-listings-table'"
+                :table-entries="{{ json_encode($data) }}"
+            ></table-component>
+        </div>
+    <!-- <table id="table" class="table table-bordered table-hovered">
         <thead class="table-header-color align-middle">
             <th>Username</th>
             <th>Name</th>
@@ -78,7 +86,7 @@
             </tr>
             @endforeach
         </tbody>
-    </table>
+    </table> -->
     <!-- Delete Modal -->
     <div class="modal fade" id="deletePersonModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
          aria-hidden="true">

@@ -12,7 +12,7 @@ class DeptGroupController extends Controller
     public function index()
     {
         $data = DeptGroup::all();
-        $campusData = Campus::distinct()->pluck('campus_code');
+        $campusData = Campus::distinct()->pluck('code');
         return view('DeptGroups.dept_groups', ['data' => $data, 'campusData' => $campusData]);
     }
 
