@@ -41,11 +41,26 @@ class PersonController extends Controller
                 'string',
                 'max:60',
             ],
+            'name_of_record' => [
+                'required',
+                'string',
+                'max:255',
+            ],
+            'job_title' => [
+                'required',
+                'string',
+                'max:255',
+            ],
             'email' => [
                 'required',
                 'string',
                 'max:100',
                 'unique:Person,email,' . $person->email . ',email'
+            ],
+            'alias_email' => [
+                // 'required',
+                'string',
+                'max:100',
             ],
             'phone' => [
                 'required',
@@ -53,17 +68,17 @@ class PersonController extends Controller
                 'max:14',
             ],
             'location' => [
-                'required',
+                // 'required',
                 'string',
                 'max:100',
             ],
             'fax' => [
-                'required',
+                // 'required',
                 'string',
                 'max:14',
             ],
             'website' => [
-                'required',
+                // 'required',
                 'string',
                 'max:200',
             ],
@@ -76,13 +91,16 @@ class PersonController extends Controller
         Person::where('username', $username)->update([
             'username' => $validatedData['username'],
             'name' => $validatedData['name'],
+            'name_of_record' => $validatedData['name_of_record'],
+            'job_title' => $validatedData['job_title'],
             'email' => $validatedData['email'],
+            'alias_email' => $validatedData['alias_email'],
             'phone' => $validatedData['phone'],
             'location' => $validatedData['location'],
             'fax' => $validatedData['fax'],
             'website' => $validatedData['website'],
             'publishable' => $validatedData['publishable'] === 'true' ? 1 : 0,
-
+            // When Roles are implemented, add in lastApprovedAt and lastApprovedBy 
         ]);
 
         // return to person_listings view
