@@ -5,7 +5,13 @@
     <div class="container-fluid">
         <div>
             <h1>Person Listings</h1>
+
+            <button id="add-button" type="button" class="add-button mt-4" data-bs-toggle="modal" data-bs-target="#addPersonModal">
+                Add New Person
+            </button>
         </div>
+
+        <br/>
         @if ($errors->any())
         <h6 class="alert alert-danger mt-4">
             <strong>The Person was not updated successfully</strong>
@@ -19,91 +25,154 @@
             Please revise and resubmit to update person record!
         </h6>
         @endif
-        <button id="add-button" type="button" class="add-button mt-4" data-bs-toggle="modal" data-bs-target="#addPersonModal">
-            Add New Person
-        </button>
-        <br/>
-    <div class="col-md-12">
-    @if(count($data)>0)
-    <table id="table" class="table table-size table-bordered table-responsive">
-        <thead class="table-header-color align-middle">
-            <th>Username</th>
-            <th>Name</th>
-            <th>Name of Record</th>
-            <th>Job Title</th>
-            <th>Email</th>
-            <th>Alias Email</th>
-            <th>Phone</th>
-            <th>Location</th>
-            <th>Fax</th>
-            <th>Website</th>
-            <th>Publishable</th>
-            <th>Last Approved</th>
-            <th>Approved By</th>
-            <th>Edit</th>
-            <th>Delete</th>
-        </thead>
-        <tbody>
-            @foreach($data as $item)
-            <tr class="custom-row">
-                <td>{{$item->username}}</td>
-                <td>{{$item->name}}</td>
-                <td>{{$item->name_of_record}}</td>
-                <td>{{$item->job_title}}</td>
-                <td>{{$item->email}}</td>
-                <td>{{$item->alias_email}}</td>
-                <td>{{$item->phone}}</td>
-                <td>{{$item->location}}</td>
-                <td>{{$item->fax}}</td>
-                <td>{{$item->website}}</td>
-                <td>{{$item->publishable  ? 'True' : 'False' }}</td>
-                <td>{{$item->lastApprovedAt}}</td>
-                <td>{{$item->lastApprovedBy}}</td>
-                <td style="text-align: center;">
-                    <button class="btn edit-button btn-custom"
-                            style="background-color: #86C2F1;"
-                            data-username="{{ $item->username }}"
-                            data-name="{{ $item->name }}"
-                            data-name-of-record="{{ $item->name_of_record }}"
-                            data-job-title="{{ $item->job_title }}"
-                            data-email="{{ $item->email }}"
-                            data-alias-email="{{ $item->alias_email }}"
-                            data-phone="{{ $item->phone }}"
-                            data-location="{{ $item->location }}"
-                            data-fax="{{ $item->fax }}"
-                            data-website="{{ $item->website }}"
-                            data-publishable="{{ $item->publishable  ? 'True' : 'False' }}"
-                            data-last-approved-at="{{ $item->lastApprovedAt }}"
-                            data-last-approved-by="{{ $item->lastApprovedBy }}"
-                            data-toggle="modal" data-target="#editPersonModal">
-                        <i class="fa fa-pencil"></i>
-                    </button>
-                </td>
-                <td style="text-align: center;">
-                    <button class="btn delete-button btn-custom"
-                            style="background-color: #CB5D5D;"
-                            data-username="{{ $item->username }}"
-                            data-name="{{ $item->name }}"
-                            data-name-of-record="{{ $item->name_of_record }}"
-                            data-job-title="{{ $item->job_title }}"
-                            data-email="{{ $item->email }}"
-                            data-alias-email="{{ $item->alias_email }}"
-                            data-phone="{{ $item->phone }}"
-                            data-location="{{ $item->location }}"
-                            data-fax="{{ $item->fax }}"
-                            data-website="{{ $item->website }}"
-                            data-publishable="{{ $item->publishable  ? 'True' : 'False' }}"
-                            data-last-approved-at="{{ $item->lastApprovedAt }}"
-                            data-last-approved-by="{{ $item->lastApprovedBy }}"
-                            data-toggle="modal" data-target="#deletePersonModal">
-                        <i class="fa fa-trash-o" aria-hidden="true"></i>
-                    </button>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-</div>
+        <div class="col-md-12">
+            <ul class="nav nav-tabs" id="personListingsTabs">
+                <li class="nav-item">
+                    <a class="nav-link active" id="persons" data-toggle="tab" href="#persons"> Persons</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pending-persons" data-toggle="tab" href="#pending-persons"> Pending Persons</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Tab Content -->
+        <div class="tab-content">
+            <!-- Person Listings -->
+            <div class="tab-pane show active" id="persons">
+                <div class="col-md-12">
+                    @if(count($personData) > 0)
+                    <table id="person-listings-table" class="table table-size table-bordered table-responsive">
+                        <thead class="table-header-color align-middle">
+                            <th>Username</th>
+                            <th>Name</th>
+                            <th>Name of Record</th>
+                            <th>Job Title</th>
+                            <th>Email</th>
+                            <th>Alias Email</th>
+                            <th>Phone</th>
+                            <th>Location</th>
+                            <th>Fax</th>
+                            <th>Website</th>
+                            <th>Publishable</th>
+                            <th>Last Approved</th>
+                            <th>Approved By</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </thead>
+                        <tbody>
+                            @foreach($personData as $item)
+                            <tr class="custom-row">
+                                <td>{{$item->username}}</td>
+                                <td>{{$item->name}}</td>
+                                <td>{{$item->name_of_record}}</td>
+                                <td>{{$item->job_title}}</td>
+                                <td>{{$item->email}}</td>
+                                <td>{{$item->alias_email}}</td>
+                                <td>{{$item->phone}}</td>
+                                <td>{{$item->location}}</td>
+                                <td>{{$item->fax}}</td>
+                                <td>{{$item->website}}</td>
+                                <td>{{$item->publishable  ? 'True' : 'False' }}</td>
+                                <td>{{$item->lastApprovedAt}}</td>
+                                <td>{{$item->lastApprovedBy}}</td>
+                                <td style="text-align: center;">
+                                    <button class="btn edit-button btn-custom"
+                                            style="background-color: #86C2F1;"
+                                            data-username="{{ $item->username }}"
+                                            data-name="{{ $item->name }}"
+                                            data-name-of-record="{{ $item->name_of_record }}"
+                                            data-job-title="{{ $item->job_title }}"
+                                            data-email="{{ $item->email }}"
+                                            data-alias-email="{{ $item->alias_email }}"
+                                            data-phone="{{ $item->phone }}"
+                                            data-location="{{ $item->location }}"
+                                            data-fax="{{ $item->fax }}"
+                                            data-website="{{ $item->website }}"
+                                            data-publishable="{{ $item->publishable  ? 'True' : 'False' }}"
+                                            data-last-approved-at="{{ $item->lastApprovedAt }}"
+                                            data-last-approved-by="{{ $item->lastApprovedBy }}"
+                                            data-toggle="modal" data-target="#editPersonModal">
+                                        <i class="fa fa-pencil"></i>
+                                    </button>
+                                </td>
+                                <td style="text-align: center;">
+                                    <button class="btn delete-button btn-custom"
+                                            style="background-color: #CB5D5D;"
+                                            data-username="{{ $item->username }}"
+                                            data-name="{{ $item->name }}"
+                                            data-name-of-record="{{ $item->name_of_record }}"
+                                            data-job-title="{{ $item->job_title }}"
+                                            data-email="{{ $item->email }}"
+                                            data-alias-email="{{ $item->alias_email }}"
+                                            data-phone="{{ $item->phone }}"
+                                            data-location="{{ $item->location }}"
+                                            data-fax="{{ $item->fax }}"
+                                            data-website="{{ $item->website }}"
+                                            data-publishable="{{ $item->publishable  ? 'True' : 'False' }}"
+                                            data-last-approved-at="{{ $item->lastApprovedAt }}"
+                                            data-last-approved-by="{{ $item->lastApprovedBy }}"
+                                            data-toggle="modal" data-target="#deletePersonModal">
+                                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    @else
+                        <p>No data available for person listings</p>
+                    @endif
+                </div>
+            </div>
+            <!-- Pending Person Listings -->
+            <div class="tab-pane fade" id="pending-persons">
+                <div class="col-md-12">
+                    @if(count($pendingPersonData) > 0)
+                    <table id="pending-persons-table" class="table table-size table-bordered table-responsive">
+                        <thead class="table-header-color align-middle">
+                            <th>Username</th>
+                            <th>Name</th>
+                            <th>Name of Record</th>
+                            <th>Job Title</th>
+                            <th>Email</th>
+                            <th>Alias Email</th>
+                            <th>Phone</th>
+                            <th>Location</th>
+                            <th>Fax</th>
+                            <th>Website</th>
+                            <th>Publishable</th>
+                            <th>Last Approved</th>
+                            <th>Approved By</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </thead>
+                        <tbody>
+                            @foreach($pendingPersonData as $item)
+                            <tr class="custom-row">
+                                <td>{{$item->username}}</td>
+                                <td>{{$item->name}}</td>
+                                <td>{{$item->name_of_record}}</td>
+                                <td>{{$item->job_title}}</td>
+                                <td>{{$item->email}}</td>
+                                <td>{{$item->alias_email}}</td>
+                                <td>{{$item->phone}}</td>
+                                <td>{{$item->location}}</td>
+                                <td>{{$item->fax}}</td>
+                                <td>{{$item->website}}</td>
+                                <td>{{$item->publishable  ? 'True' : 'False' }}</td>
+                                <td>{{$item->lastApprovedAt}}</td>
+                                <td>{{$item->lastApprovedBy}}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    @else
+                        <p>No data available for pending persons</p>
+                    @endif
+                </div>
+            </div>
+        </div>
     <!-- Delete Modal -->
     <div class="modal fade" id="deletePersonModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
          aria-hidden="true">
@@ -231,7 +300,6 @@
             </div>
         </div>
     </div>
-    @endif
     <!-- Add Modal -->
     <div class="modal fade" id="addPersonModal" tabindex="-1" aria-labelledby="addPersonModalLabel"
              aria-hidden="true">
@@ -320,98 +388,125 @@
     </div>
 
 <script>
+    $('#persons').click(function() {
+        $('li.active').removeClass('active');
+        $('this').addClass('active');
+    });
+
+    $('#pending-persons').click(function() {
+        $('li.active').removeClass('active');
+        $('this').addClass('active');
+    });
+
     $(document).ready(function () {
-    $("#table").DataTable({
-        "pagingType": "simple_numbers",
-        "language": {
-            "emptyTable": "The Person Listings table is empty",
-            "lengthMenu": "Display _MENU_ persons",
-            "loadingRecords": "Loading...",
-            "processing": "Processing...",
-            "zeroRecords": "No search results found",
-            "paginate": {
-                "next": "Next",
-                "previous": "Previous"
+        $("#person-listings-table").DataTable({
+            "pagingType": "simple_numbers",
+            "language": {
+                "emptyTable": "The Person Listings table is empty",
+                "lengthMenu": "Display _MENU_ persons",
+                "loadingRecords": "Loading...",
+                "processing": "Processing...",
+                "zeroRecords": "No search results found",
+                "paginate": {
+                    "next": "Next",
+                    "previous": "Previous"
+                }
             }
-        }
-    });
-
-    // Function to handle the edit button click
-    $("#table").on("click", ".edit-button", function () {
-        var personUsername = $(this).data("username");
-        var personName = $(this).data("name");
-        var personNameOfRecord = $(this).data("nameOfRecord");
-        var personJobTitle = $(this).data("jobTitle");
-        var personEmail = $(this).data("email");
-        var personAliasEmail = $(this).data("aliasEmail");
-        var personPhone = $(this).data("phone");
-        var personLocation = $(this).data("location");
-        var personFax = $(this).data("fax");
-        var personWebsite = $(this).data("website");
-        var personPub = $(this).data("publishable");
-
-        $("#edit-username").val(personUsername);
-        $("#edit-person-name").val(personName);
-        $("#edit-person-name-of-record").val(personNameOfRecord);
-        $("#edit-person-job-title").val(personJobTitle);
-        $("#edit-person-email").val(personEmail);
-        $("#edit-person-alias-email").val(personAliasEmail);
-        $("#edit-person-phone").val(personPhone);
-        $("#edit-person-location").val(personLocation);
-        $("#edit-person-fax").val(personFax);
-        $("#edit-person-website").val(personWebsite);
-        $("#edit-person-publishable option").filter(function() {
-            return $(this).text() === personPub;
-        }).prop('selected', true);
-
-        $("#editPersonModal").modal("show");
-
-        var editUrl = "{{ route('person_listings.update', ':personUsername') }}";
-        editUrl = editUrl.replace(":personUsername", personUsername);
-        $("#editPersonModal form").attr("action", editUrl);
-    });
-
-    // Function to handle the delete button click
-    $("#table").on("click", ".delete-button", function () {
-        var personUsername = $(this).data("username");
-        var personName = $(this).data("name");
-        var personNameOfRecord = $(this).data("nameOfRecord");
-        var personJobTitle = $(this).data("jobTitle");
-        var personEmail = $(this).data("email");
-        var personAliasEmail = $(this).data("aliasEmail");
-        var personPhone = $(this).data("phone");
-        var personLocation = $(this).data("location");
-        var personFax = $(this).data("fax");
-        var personWebsite = $(this).data("website");
-        var personPub = $(this).data("publishable");
-        var personLastApprovedAt = $(this).data("lastApprovedAt");
-        var personLastApprovedBy = $(this).data("lastApprovedBy");
-
-        $("#delete-username").text(personUsername);
-        $("#delete-person-name").text(personName);
-        $("#delete-person-name-of-record").text(personNameOfRecord);
-        $("#delete-person-job-title").text(personJobTitle);
-        $("#delete-person-email").text(personEmail);
-        $("#delete-person-alias-email").text(personAliasEmail);
-        $("#delete-person-phone").text(personPhone);
-        $("#delete-person-location").text(personLocation);
-        $("#delete-person-fax").text(personFax);
-        $("#delete-person-website").text(personWebsite);
-        $("#delete-person-publishable").text(personPub);
-        $("#delete-person-last-approved-at").text(personLastApprovedAt);
-        $("#delete-person-last-approved-by").text(personLastApprovedBy);
-
-        $("#deletePersonModal").modal("show");
-
-        var deleteUrl = "{{ route('person_listings.destroy', ':personUsername') }}";
-        deleteUrl = deleteUrl.replace(":personUsername", personUsername);
-        $("#delete-form").attr("action", deleteUrl);
-    });
-
-    // Function to handle the add button click
-    $("#add-button").on("click", function () {
-            $("#addPersonModal").modal("show");
         });
-});
+
+        // Function to handle the edit button click
+        $("#person-listings-table").on("click", ".edit-button", function () {
+            var personUsername = $(this).data("username");
+            var personName = $(this).data("name");
+            var personNameOfRecord = $(this).data("nameOfRecord");
+            var personJobTitle = $(this).data("jobTitle");
+            var personEmail = $(this).data("email");
+            var personAliasEmail = $(this).data("aliasEmail");
+            var personPhone = $(this).data("phone");
+            var personLocation = $(this).data("location");
+            var personFax = $(this).data("fax");
+            var personWebsite = $(this).data("website");
+            var personPub = $(this).data("publishable");
+
+            $("#edit-username").val(personUsername);
+            $("#edit-person-name").val(personName);
+            $("#edit-person-name-of-record").val(personNameOfRecord);
+            $("#edit-person-job-title").val(personJobTitle);
+            $("#edit-person-email").val(personEmail);
+            $("#edit-person-alias-email").val(personAliasEmail);
+            $("#edit-person-phone").val(personPhone);
+            $("#edit-person-location").val(personLocation);
+            $("#edit-person-fax").val(personFax);
+            $("#edit-person-website").val(personWebsite);
+            $("#edit-person-publishable option").filter(function() {
+                return $(this).text() === personPub;
+            }).prop('selected', true);
+
+            $("#editPersonModal").modal("show");
+
+            var editUrl = "{{ route('person_listings.update', ':personUsername') }}";
+            editUrl = editUrl.replace(":personUsername", personUsername);
+            $("#editPersonModal form").attr("action", editUrl);
+        });
+
+        // Function to handle the delete button click
+        $("#person-listings-table").on("click", ".delete-button", function () {
+            var personUsername = $(this).data("username");
+            var personName = $(this).data("name");
+            var personNameOfRecord = $(this).data("nameOfRecord");
+            var personJobTitle = $(this).data("jobTitle");
+            var personEmail = $(this).data("email");
+            var personAliasEmail = $(this).data("aliasEmail");
+            var personPhone = $(this).data("phone");
+            var personLocation = $(this).data("location");
+            var personFax = $(this).data("fax");
+            var personWebsite = $(this).data("website");
+            var personPub = $(this).data("publishable");
+            var personLastApprovedAt = $(this).data("lastApprovedAt");
+            var personLastApprovedBy = $(this).data("lastApprovedBy");
+
+            $("#delete-username").text(personUsername);
+            $("#delete-person-name").text(personName);
+            $("#delete-person-name-of-record").text(personNameOfRecord);
+            $("#delete-person-job-title").text(personJobTitle);
+            $("#delete-person-email").text(personEmail);
+            $("#delete-person-alias-email").text(personAliasEmail);
+            $("#delete-person-phone").text(personPhone);
+            $("#delete-person-location").text(personLocation);
+            $("#delete-person-fax").text(personFax);
+            $("#delete-person-website").text(personWebsite);
+            $("#delete-person-publishable").text(personPub);
+            $("#delete-person-last-approved-at").text(personLastApprovedAt);
+            $("#delete-person-last-approved-by").text(personLastApprovedBy);
+
+            $("#deletePersonModal").modal("show");
+
+            var deleteUrl = "{{ route('person_listings.destroy', ':personUsername') }}";
+            deleteUrl = deleteUrl.replace(":personUsername", personUsername);
+            $("#delete-form").attr("action", deleteUrl);
+        });
+
+        // Function to handle the add button click
+        $("#add-button").on("click", function () {
+                $("#addPersonModal").modal("show");
+            });
+    });
+
+    $(document).ready(function () {
+        $("#pending-persons-table").DataTable({
+            "pagingType": "simple_numbers",
+            "language": {
+                "emptyTable": "The Person Listings table is empty",
+                "lengthMenu": "Display _MENU_ persons",
+                "loadingRecords": "Loading...",
+                "processing": "Processing...",
+                "zeroRecords": "No search results found",
+                "paginate": {
+                    "next": "Next",
+                    "previous": "Previous"
+                }
+            }
+        });
+    });
 </script>
 @endsection

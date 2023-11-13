@@ -4,14 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Person;
+use App\Models\PendingPerson;
 
 class PersonController extends Controller
 {
 
     public function index()
     {
-        $data = Person::all();
-        return view('People.person_listings', ['data' => $data, ]);
+        $personData = Person::all();
+        $pendingPersonData = PendingPerson::all();
+
+        return view('People.person_listings', compact('personData', 'pendingPersonData'));
     }
 
     public function destroy($username,)

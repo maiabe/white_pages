@@ -1,58 +1,5 @@
-.paginate_button {
-    border: 1px solid lightgray;
-    padding: 6px 12px;
-    margin-right: 5px;
-    cursor: pointer;
-}
 
-.paginate_button.disabled {
-    background-color: lightgray;
-    border-radius: 5px;
-}
 
-.paginate_button a {
-    color: black;
-    text-decoration: none;
-}
-
-.paginate_button.active {
-    border: 1px solid lightgray;
-    border-radius: 5px;
-    background-color: #91CDC9;
-}
-
-.paginate_button.disable {
-    color: gray;
-}
-
-.dataTables_wrapper .dataTables_paginate {
-    float: right !important;
-}
-
-.dataTables_filter input {
-    border: 1px solid #AFAEAE;
-    border-radius: 30px;
-    padding: 20px;
-    width: 280px;
-    height: 50px;
-}
-
-.title-background {
-    background-color: #91CDC9;
-    padding-left: 70px;
-    padding-top: 30px;
-    padding-bottom: 30px;
-}
-
-.inline-components-parent {
-    display: flex;
-    padding-top: 20px;
-    justify-content: space-between;
-}
-
-.btn-custom {
-    width: 60px;
-}
 .close {
     background: none;
     border: none;
