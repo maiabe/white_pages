@@ -13,6 +13,9 @@ class DeptGroupController extends Controller
     {
         $data = DeptGroup::all();
         $campusData = Campus::distinct()->pluck('code');
+
+        
+
         return view('DeptGroups.dept_groups', ['data' => $data, 'campusData' => $campusData]);
     }
 

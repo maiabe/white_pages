@@ -25,6 +25,7 @@
 
         <div class="table-wrapper">
             <table-component
+                :table-name="'Person Listing'"
                 :table-id="'person-listings-table'"
                 :table-entries="{{ json_encode($data) }}"
             ></table-component>
@@ -195,7 +196,7 @@
     @endif
     </div>
 
-    <script>
+    <!-- <script>
         $(document).ready(function () {
             $("#table").DataTable({
                 "pagingType": "simple_numbers",
@@ -267,5 +268,5 @@
                 // Rest of the code remains the same
             });
         });
-    </script>
+    </script> -->
 @endsection

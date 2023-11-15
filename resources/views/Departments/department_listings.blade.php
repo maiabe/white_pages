@@ -28,6 +28,7 @@
         
         <div class="table-wrapper">
             <table-component
+                :table-name="'Department Listing'"
                 :table-id="'dept-listings-table'"
                 :table-entries="{{ json_encode($tableEntries) }}"
             ></table-component>

@@ -19,11 +19,21 @@
                     <button class="btn edit-button btn-custom">
                         <font-awesome-icon class="fa-icon" icon="pencil"></font-awesome-icon>
                     </button>
+                    <ModalComponent 
+                        :modalId="'editModal'" 
+                        :modalLabel="'editModalLabel'"
+                        :modalTitle="editTitle" 
+                    />
                 </td>
                 <td>
                     <button class="btn delete-button btn-custom">
                         <font-awesome-icon class="fa-icon" icon="trash"></font-awesome-icon>
                     </button>
+                    <ModalComponent 
+                        :modalId="'deleteModal'" 
+                        :modalLabel="'deleteModalLabel'"
+                        :modalTitle="deleteTitle"
+                     />
                 </td>
             </tr>
         </tbody>
@@ -34,9 +44,31 @@
 <script>
     import DataTable from 'datatables.net-dt';
     import 'datatables.net-dt/css/jquery.dataTables.css';
+    import ModalComponent from './ModalComponent.vue';
 
     export default {
+        name: 'TableComponent',
+        components: {
+            ModalComponent
+        },
+        /* data() {
+            return {
+                editModalId: "editModal"
+            }
+        }, */
+        computed: {
+            editTitle() {
+                return `Edit ${this.tableName}`;
+            },
+            deleteTitle() {
+                return `Delete ${this.tableName}`;
+            }
+        },
         props: {
+            tableName: {
+                type: String,
+                required: true,
+            },
             tableId: {
                 type: String,
                 required: true,
@@ -50,6 +82,17 @@
         },
         mounted() {
             this.initializeDataTable();
+
+            const editButtons = document.querySelectorAll('.edit-button');
+            editButtons.forEach(editBtn => {
+                editBtn.addEventListener('click', (e) => this.editEntry(e));
+            });
+
+            const deleteButtons = document.querySelectorAll('.delete-button');
+            deleteButtons.forEach(deleteBtn => {
+                deleteBtn.addEventListener('click', (e) => this.deleteEntry(e));
+            });
+
         },
         methods: {
             loadScript(src, callback) {
@@ -78,6 +121,14 @@
                         }
                     });
                 }
+            },
+            editEntry(e) {
+                const editModal = e.target.closest('td').querySelector('#editModal');
+                $(editModal).modal("show");
+            },
+            deleteEntry(e) {
+                const deleteModal = e.target.closest('td').querySelector('#deleteModal');
+                $(deleteModal).modal("show");
             }
         }
     }
