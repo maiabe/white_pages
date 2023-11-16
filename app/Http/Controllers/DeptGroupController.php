@@ -11,10 +11,21 @@ class DeptGroupController extends Controller
 {
     public function index()
     {
-        $data = DeptGroup::all();
+        $data = DeptGroup::select('campus_code', 'dept_grp', 'dept_grp_name')
+        ->get()
+        ->map(function($item) {
+            return (object) [
+                'campus_code' => ['value' => $item->campus_code, 'type' => 'select'],
+                'group_number' => ['value' => $item->dept_grp, 'type' => 'text'],
+                'group_name' => ['value' => $item->dept_grp_name, 'type' => 'text'],
+            ];
+        });
+        
         $campusData = Campus::distinct()->pluck('code');
 
-        
+        /* echo '<pre>';
+            print_r($data);
+        echo '</pre>'; */
 
         return view('DeptGroups.dept_groups', ['data' => $data, 'campusData' => $campusData]);
     }

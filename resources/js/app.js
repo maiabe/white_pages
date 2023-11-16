@@ -7,6 +7,7 @@ import NavbarComponent from './components/NavbarComponent.vue';
 import SidebarComponent from './components/SidebarComponent.vue';
 import FooterComponent from './components/FooterComponent.vue';
 import TableComponent from './components/TableComponent.vue';
+import ModalComponent from './components/ModalComponent.vue';
 //-- Import Font Awesome
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -20,6 +21,7 @@ app
     .component('SidebarComponent', SidebarComponent)
     .component('FooterComponent', FooterComponent)
     .component('TableComponent', TableComponent)
+    .component('ModalComponent', ModalComponent)
     .component('font-awesome-icon', FontAwesomeIcon);
 
 app.mount('#app');

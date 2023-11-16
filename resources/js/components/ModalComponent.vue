@@ -11,7 +11,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-
+                    {{ entry }}
                     <!-- <form action="{{ route('dept_groups.update', ':deptGrp' ) }}" method="POST">
                         @csrf
                         @method('PUT')
@@ -40,7 +40,7 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="close-button">
                         Close
                     </button>
-                    <button type="submit" class="btn btn-primary">Confirm</button>
+                    <button type="submit" class="btn btn-primary">{{ modalBtn }}</button>
                 </div>
             </div>
         </div>
@@ -51,6 +51,6 @@
 <script>
     export default {
         name: 'ModalComponent',
-        props: ['modalId', 'modalLabel', 'modalTitle']
+        props: ['modalId', 'modalLabel', 'modalTitle', 'modalBtn', 'entry']
     }
 </script>

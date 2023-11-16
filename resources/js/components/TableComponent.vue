@@ -12,8 +12,8 @@
         </thead>
         <tbody>
             <tr v-for="entry in tableEntries"  class="align-middle">
-                <td v-for="value in Object.values(entry)">
-                    {{ value }}
+                <td v-for="item in Object.values(entry)">
+                    {{ item ? item.value : '' }}
                 </td>
                 <td>
                     <button class="btn edit-button btn-custom">
@@ -22,7 +22,9 @@
                     <ModalComponent 
                         :modalId="'editModal'" 
                         :modalLabel="'editModalLabel'"
-                        :modalTitle="editTitle" 
+                        :modalTitle="editTitle"
+                        :modalBtn="'Confirm'"
+                        :entry="entry"
                     />
                 </td>
                 <td>
@@ -33,6 +35,8 @@
                         :modalId="'deleteModal'" 
                         :modalLabel="'deleteModalLabel'"
                         :modalTitle="deleteTitle"
+                        :modalBtn="'Confirm'"
+                        :entry="entry"
                      />
                 </td>
             </tr>
@@ -124,6 +128,7 @@
             },
             editEntry(e) {
                 const editModal = e.target.closest('td').querySelector('#editModal');
+                console.log(editModal);
                 $(editModal).modal("show");
             },
             deleteEntry(e) {
