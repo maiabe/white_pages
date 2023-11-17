@@ -21,13 +21,15 @@ class DeptGroupController extends Controller
             ];
         });
         
+        $oldData = DeptGroup::all();
+
         $campusData = Campus::distinct()->pluck('code');
 
         /* echo '<pre>';
             print_r($data);
         echo '</pre>'; */
 
-        return view('DeptGroups.dept_groups', ['data' => $data, 'campusData' => $campusData]);
+        return view('DeptGroups.dept_groups', ['old' => $oldData,'data' => $data, 'campusData' => $campusData]);
     }
 
     public function destroy($dept_grp,)

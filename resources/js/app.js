@@ -1,7 +1,6 @@
 import './bootstrap';
 import { createApp } from 'vue';
 
-import jQuery from 'jquery';
 
 import NavbarComponent from './components/NavbarComponent.vue';
 import SidebarComponent from './components/SidebarComponent.vue';
@@ -21,7 +20,7 @@ app
     .component('SidebarComponent', SidebarComponent)
     .component('FooterComponent', FooterComponent)
     .component('TableComponent', TableComponent)
-    .component('ModalComponent', ModalComponent)
+    //.component('ModalComponent', ModalComponent)
     .component('font-awesome-icon', FontAwesomeIcon);
 
 app.mount('#app');

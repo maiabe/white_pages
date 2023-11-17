@@ -1,6 +1,6 @@
 <template>
     <table ref="table" :id="tableId" class="table table-bordered table-hover dataTable table-responsive table-fixed w-auto">
-        
+        {{ tableEntries }}
         <thead class="table-header-color align-middle">
             <tr>
                 <th v-for="column in Object.keys(tableEntries[0])" >
@@ -46,10 +46,15 @@
 </template>
 
 <script>
+    import JQuery from 'jquery';
     import DataTable from 'datatables.net-dt';
     import 'datatables.net-dt/css/jquery.dataTables.css';
     import ModalComponent from './ModalComponent.vue';
 
+/*     import DataTable from 'datatables.net-dt';
+    import 'datatables.net-dt/css/jquery.dataTables.css';
+    import ModalComponent from './ModalComponent.vue';
+ */
     export default {
         name: 'TableComponent',
         components: {
