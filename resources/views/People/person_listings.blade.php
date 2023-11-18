@@ -688,9 +688,10 @@
             $("#pendingMoreInfoModal").modal("show");
         });
 
-        // Function to handle the delete button click
+        // Function to handle the approve button click
         $("#pending-persons-table").on("click", ".approve-button", function () {
-            var personId = $(this).data("id");
+            var pendingId = $(this).data("id");
+            var personId = $(this).data("person_id");
             var personUsername = $(this).data("username");
             var personName = $(this).data("name");
             var personNameOfRecord = $(this).data("nameOfRecord");
@@ -704,6 +705,15 @@
             var personPub = $(this).data("publishable");
             var personLastApprovedAt = $(this).data("lastApprovedAt");
             var personLastApprovedBy = $(this).data("lastApprovedBy");
+
+            var personExists = personId != null;
+
+            if (personExists) {
+                $("#approveModalLabel").text("Update Person");
+            }
+            else {
+                $("#approveModalLabel").text("Approve Person");
+            }
 
             $("#approve-username").text(personUsername);
             $("#approve-name").text(personName);
@@ -721,8 +731,8 @@
 
             $("#approvePersonModal").modal("show");
 
-            var approveUrl = "{{ route('person_listings.approve', ':personId') }}";
-            approveUrl = approveUrl.replace(":personId", personId);
+            var approveUrl = "{{ route('person_listings.approve', ':pendingId') }}";
+            approveUrl = approveUrl.replace(":pendingId", pendingId);
             $("#approve-form").attr("action", approveUrl);
         });
     });
