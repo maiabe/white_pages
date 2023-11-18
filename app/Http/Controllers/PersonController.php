@@ -14,12 +14,11 @@ class PersonController extends Controller
         $personData = Person::all();
         $pendingPersonData = PendingPerson::all();
 
-        return view('People.person_listings', compact('personData', 'pendingPersonData'));
+        return view('People.person_listings',['personData'=> $personData, 'pendingPersonData'=>$pendingPersonData]);
     }
-
     public function destroy($username,)
     {
-       Person::where('username', $username)->delete();
+        Person::where('username', $username)->delete();
         return redirect()->route('person_listings');
     }
 
@@ -103,7 +102,7 @@ class PersonController extends Controller
             'fax' => $validatedData['fax'],
             'website' => $validatedData['website'],
             'publishable' => $validatedData['publishable'] === 'true' ? 1 : 0,
-            // When Roles are implemented, add in lastApprovedAt and lastApprovedBy 
+            // When Roles are implemented, add in lastApprovedAt and lastApprovedBy
         ]);
 
         // return to person_listings view
