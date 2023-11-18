@@ -23,6 +23,7 @@ class PersonController extends Controller
         return redirect()->route('person_listings');
     }
 
+    // Updates an existing Person entry and sends to Pending Person Table for approval
     public function update(Request $req, $username)
     {
         $person = Person::where('username', $username)->first();
@@ -102,17 +103,15 @@ class PersonController extends Controller
             'location' => $validatedData['location'],
             'fax' => $validatedData['fax'],
             'website' => $validatedData['website'],
-            'publishable' => $validatedData['publishable'] === 'true' ? 1 : 0,
+            'publishable' => $validatedData['publishable'] == 'true' ? 1 : 0,
             // When Roles are implemented, add in lastApprovedAt and lastApprovedBy
         ]);
 
-        // return to person_listings view
         return redirect()->route('person_listings');
     }
 
+    // For Pending Person, Adding a new person should send this entry into Pending Person Table to be approved
     public function store(Request $req) {
-        $person = Person::where('username', $username)->first();
-
         $messages = [
             'username.unique' => 'The username: ' . $req->username . 'is already in use. Cannot create another person with the same username',
         ];
@@ -121,8 +120,7 @@ class PersonController extends Controller
             'username' => [
                 'required',
                 'string',
-                'size: 2',
-                'unique:Person,username'
+                'unique:Person,username,'
             ],
             'name' => [
                 'required',
@@ -143,7 +141,7 @@ class PersonController extends Controller
                 'required',
                 'string',
                 'max:100',
-                'unique:Person,email,' . $person->email . ',email'
+                'unique:Person,email,',
             ],
             'alias_email' => [
                 // 'required',
@@ -186,9 +184,59 @@ class PersonController extends Controller
             'location' => $validatedData['location'],
             'fax' => $validatedData['fax'],
             'website' => $validatedData['website'],
-            'publishable' => $validatedData['publishable'] === 'true' ? 1 : 0,
+            'publishable' => $validatedData['publishable'] == 'true' ? 1 : 0,
         ]);
         
         return redirect() ->route('person_listings');
+        // Adds a new entry to pending person table
+    }
+
+    // In Pending Person Table, this button is clicked inside the Approve Modal when the Pending Person entry is approved
+    public function approve(Request $id)
+    {
+        $pendingPerson = PendingPerson::findOrFail($id);
+
+        // Does person already exist in Person table
+        $existingPerson = Person::find($pendingPerson->person_id);
+
+        // if person_id exists already
+        if ($existingPerson) {
+            $existingPerson->update([
+            'username' => $pendingPerson['username'],
+            'name' => $pendingPerson['name'],
+            'name_of_record' => $pendingPerson['name_of_record'],
+            'job_title' => $pendingPerson['job_title'],
+            'email' => $pendingPerson['email'],
+            'alias_email' => $pendingPerson['alias_email'],
+            'phone' => $pendingPerson['phone'],
+            'location' => $pendingPerson['location'],
+            'fax' => $pendingPerson['fax'],
+            'website' => $pendingPerson['website'],
+            'publishable' => $pendingPerson['publishable'] === 'true' ? 1 : 0,
+            'lastApprovedAt' => now(),
+            // When Roles are implemented, add in lastApprovedBy
+            ]);
+        } else {
+            // Create a new person entry
+            $newPerson = Person::create([
+                'username' => $pendingPerson['username'],
+                'name' => $pendingPerson['name'],
+                'name_of_record' => $pendingPerson['name_of_record'],
+                'job_title' => $pendingPerson['job_title'],
+                'email' => $pendingPerson['email'],
+                'alias_email' => $pendingPerson['alias_email'],
+                'phone' => $pendingPerson['phone'],
+                'location' => $pendingPerson['location'],
+                'fax' => $pendingPerson['fax'],
+                'website' => $pendingPerson['website'],
+                'publishable' => $pendingPerson['publishable'] === 'true' ? 1 : 0,
+                'lastApprovedAt' => now(),
+                // When Roles are implemented, add in lastApprovedBy
+            ]);
+        }
+
+        $pendingPerson->delete();
+
+        return redirect()->route('person_listings');
     }
 }

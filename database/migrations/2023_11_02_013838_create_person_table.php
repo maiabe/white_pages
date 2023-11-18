@@ -16,16 +16,16 @@ return new class extends Migration
             $table->string('username', 60);
             $table->string('name', 60);
             $table->string('name_of_record');
-            $table->string('job_title');
+            $table->string('job_title')->nullable();
             $table->string('email', 100);
-            $table->string('alias_email',100);
-            $table->string('phone', 14);
+            $table->string('alias_email',100)->nullable();
+            $table->string('phone', 14)->nullable();
             $table->string('location', 100);
-            $table->string('fax', 14);
-            $table->string('website', 200);
+            $table->string('fax', 14)->nullable();
+            $table->string('website', 200)->nullable();
             $table->boolean('publishable');
-            $table->dateTime('lastApprovedAt');
-            $table->unsignedBigInteger('lastApprovedBy');
+            $table->dateTime('lastApprovedAt')->nullable();;
+            $table->unsignedBigInteger('lastApprovedBy')->nullable();;
         });
     }
 

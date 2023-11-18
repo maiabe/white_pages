@@ -27,7 +27,10 @@ class Person extends Model
         'lastApprovedBy'
     ];
 
-    // protected $fillable = ['username', 'name', 'email', 'phone', 'location', 'fax', 'website', 'publishable'];
     public $timestamps = false;
 
+    public function pendingPerson()
+    {
+        return $this->hasOne(PendingPerson::class, 'person_id');
+    }
 };
