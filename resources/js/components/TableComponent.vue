@@ -1,6 +1,5 @@
 <template>
     <table ref="table" :id="tableId" class="table table-bordered table-hover dataTable table-responsive table-fixed w-auto">
-        {{ tableEntries }}
         <thead class="table-header-color align-middle">
             <tr>
                 <th v-for="column in Object.keys(tableEntries[0])" >
@@ -25,6 +24,8 @@
                         :modalTitle="editTitle"
                         :modalBtn="'Confirm'"
                         :entry="entry"
+                        :actionRoute="`${routeName}.update`"
+                        :modalContent="FormComponent"
                     />
                 </td>
                 <td>
@@ -37,6 +38,7 @@
                         :modalTitle="deleteTitle"
                         :modalBtn="'Confirm'"
                         :entry="entry"
+                        :actionRoute="`${routeName}.destroy`"
                      />
                 </td>
             </tr>
@@ -50,6 +52,7 @@
     import DataTable from 'datatables.net-dt';
     import 'datatables.net-dt/css/jquery.dataTables.css';
     import ModalComponent from './ModalComponent.vue';
+    import FormComponent from './FormComponent.vue';
 
 /*     import DataTable from 'datatables.net-dt';
     import 'datatables.net-dt/css/jquery.dataTables.css';
@@ -60,11 +63,11 @@
         components: {
             ModalComponent
         },
-        /* data() {
+        data() {
             return {
-                editModalId: "editModal"
+                FormComponent: FormComponent
             }
-        }, */
+        },
         computed: {
             editTitle() {
                 return `Edit ${this.tableName}`;
@@ -87,6 +90,9 @@
             },
             tableEntries: {  
                 type: Array
+            },
+            routeName: {
+                type: String,
             }
         },
         mounted() {

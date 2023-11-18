@@ -36,14 +36,14 @@
                             <h6>Person Listings</h6>
                         </div>
                     </a>
-                    <a :href="departmentListingsRoute" class="page-link">
+                    <!-- <a :href="departmentListingsRoute" class="page-link">
                         <div class="page-icon">
                             <font-awesome-icon icon="building" style="color: #ffffff;" />
                         </div>
                         <div class="page-name">
                             <h6>Department Listings</h6>
                         </div>
-                    </a>
+                    </a> -->
                     <a :href="deptGroupsRoute" class="page-link">
                         <div class="page-icon">
                             <font-awesome-icon icon="building-columns" style="color: #ffffff;" />

@@ -15,9 +15,9 @@ class DeptGroupController extends Controller
         ->get()
         ->map(function($item) {
             return (object) [
-                'campus_code' => ['value' => $item->campus_code, 'type' => 'select'],
-                'group_number' => ['value' => $item->dept_grp, 'type' => 'text'],
-                'group_name' => ['value' => $item->dept_grp_name, 'type' => 'text'],
+                'campus_code' => ['key' => 'Campus Code', 'value' => $item->campus_code, 'type' => 'select'],
+                'group_number' => ['key' => 'Group Number', 'value' => $item->dept_grp, 'type' => 'text'],
+                'group_name' => ['key' => 'Group Name', 'value' => $item->dept_grp_name, 'type' => 'text'],
             ];
         });
         

@@ -24,13 +24,14 @@
         </button>
 
         <br/>
-        @if(count($old)>0)
+        @if(count($data)>0)
             
             <div class="table-wrapper">
                 <table-component
                     :table-name="'Department Group'"
                     :table-id="'dept-groups-table'"
-                    :table-entries="{{ $old }}"
+                    :table-entries="{{ $data }}"
+                    :routeName="'dept_groups'"
                 ></table-component>
             </div>
 
