@@ -133,36 +133,36 @@
                         <thead class="table-header-color align-middle">
                             <th>Username</th>
                             <th>Name</th>
-                            <th>Name of Record</th>
-                            <th>Job Title</th>
+                            <!-- <th>Name of Record</th> -->
+                            <!-- <th>Job Title</th> -->
                             <th>Email</th>
-                            <th>Alias Email</th>
+                            <!-- <th>Alias Email</th> -->
                             <th>Phone</th>
                             <th>Location</th>
                             <th>Fax</th>
                             <th>Website</th>
                             <th>Publishable</th>
-                            <th>Last Approved</th>
-                            <th>Approved By</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
+                            <!-- <th>Last Approved</th> -->
+                            <!-- <th>Approved By</th> -->
+                            <!-- <th>Edit</th> -->
+                            <!-- <th>Delete</th> -->
                         </thead>
                         <tbody>
                             @foreach($pendingPersonData as $item)
                             <tr class="custom-row">
                                 <td>{{$item->username}}</td>
                                 <td>{{$item->name}}</td>
-                                <td>{{$item->name_of_record}}</td>
-                                <td>{{$item->job_title}}</td>
+                                <!-- <td>{{$item->name_of_record}}</td> -->
+                                <!-- <td>{{$item->job_title}}</td> -->
                                 <td>{{$item->email}}</td>
-                                <td>{{$item->alias_email}}</td>
+                                <!-- <td>{{$item->alias_email}}</td> -->
                                 <td>{{$item->phone}}</td>
                                 <td>{{$item->location}}</td>
                                 <td>{{$item->fax}}</td>
                                 <td>{{$item->website}}</td>
                                 <td>{{$item->publishable  ? 'True' : 'False' }}</td>
-                                <td>{{$item->lastApprovedAt}}</td>
-                                <td>{{$item->lastApprovedBy}}</td>
+                                <!-- <td>{{$item->lastApprovedAt}}</td> -->
+                                <!-- <td>{{$item->lastApprovedBy}}</td> -->
                             </tr>
                             @endforeach
                         </tbody>
