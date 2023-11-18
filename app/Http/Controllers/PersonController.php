@@ -192,33 +192,17 @@ class PersonController extends Controller
     }
 
     // In Pending Person Table, this button is clicked inside the Approve Modal when the Pending Person entry is approved
-    public function approve(Request $id)
+    public function approve($username)
     {
-        $pendingPerson = PendingPerson::findOrFail($id);
-
+        $pendingPerson = PendingPerson::where('username', $username)->first();
         // Does person already exist in Person table
-        $existingPerson = Person::find($pendingPerson->person_id);
 
-        // if person_id exists already
-        if ($existingPerson) {
-            $existingPerson->update([
-            'username' => $pendingPerson['username'],
-            'name' => $pendingPerson['name'],
-            'name_of_record' => $pendingPerson['name_of_record'],
-            'job_title' => $pendingPerson['job_title'],
-            'email' => $pendingPerson['email'],
-            'alias_email' => $pendingPerson['alias_email'],
-            'phone' => $pendingPerson['phone'],
-            'location' => $pendingPerson['location'],
-            'fax' => $pendingPerson['fax'],
-            'website' => $pendingPerson['website'],
-            'publishable' => $pendingPerson['publishable'] === 'true' ? 1 : 0,
-            'lastApprovedAt' => now(),
-            // When Roles are implemented, add in lastApprovedBy
-            ]);
-        } else {
-            // Create a new person entry
-            $newPerson = Person::create([
+        if ($pendingPerson) {
+            $existingPerson = Person::where('id', $pendingPerson->person_id);
+
+                // if person_id exists already
+            if ($existingPerson) {
+                $existingPerson->update([
                 'username' => $pendingPerson['username'],
                 'name' => $pendingPerson['name'],
                 'name_of_record' => $pendingPerson['name_of_record'],
@@ -232,10 +216,46 @@ class PersonController extends Controller
                 'publishable' => $pendingPerson['publishable'] === 'true' ? 1 : 0,
                 'lastApprovedAt' => now(),
                 // When Roles are implemented, add in lastApprovedBy
-            ]);
-        }
+                ]);
+            } else {
+                // Create a new person entry
+                // $newPerson = Person::create([
+                //     'username' => $pendingPerson['username'],
+                //     'name' => $pendingPerson['name'],
+                //     'name_of_record' => $pendingPerson['name_of_record'],
+                //     'job_title' => $pendingPerson['job_title'],
+                //     'email' => $pendingPerson['email'],
+                //     'alias_email' => $pendingPerson['alias_email'],
+                //     'phone' => $pendingPerson['phone'],
+                //     'location' => $pendingPerson['location'],
+                //     'fax' => $pendingPerson['fax'],
+                //     'website' => $pendingPerson['website'],
+                //     'publishable' => $pendingPerson['publishable'] === 'true' ? 1 : 0,
+                //     'lastApprovedAt' => now(),
+                //     // When Roles are implemented, add in lastApprovedBy
+                // ]);
 
-        $pendingPerson->delete();
+                $newPerson = Person::create([
+                    'username' => $pendingPerson->username,
+                    'name' => $pendingPerson->name,
+                    'name_of_record' => $pendingPerson->name_of_record,
+                    'job_title' => $pendingPerson->job_title,
+                    'email' => $pendingPerson->email,
+                    'alias_email' => $pendingPerson->alias_email,
+                    'phone' => $pendingPerson->phone,
+                    'location' => $pendingPerson->location,
+                    'fax' => $pendingPerson->fax,
+                    'website' => $pendingPerson->website,
+                    'publishable' => $pendingPerson->publishable === 'true' ? 1 : 0,
+                    'lastApprovedAt' => now(),
+                    // When Roles are implemented, add in lastApprovedBy
+                ]);
+
+                dd($newPerson);
+            }
+
+            $pendingPerson->delete();
+        }
 
         return redirect()->route('person_listings');
     }

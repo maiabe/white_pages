@@ -31,7 +31,7 @@ class PendingPerson extends Model
 
     public function person()
     {
-        $this->belongsTo(Person::class, 'person_id');
+        return $this->belongsTo(Person::class, 'person_id');
     }
 
 };

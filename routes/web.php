@@ -30,7 +30,7 @@ Route::post('dept_groups', [DeptGroupController::class, 'store'])->name('dept_gr
 Route::get('/person_listings',[PersonController::class, 'index'])->name('person_listings');
 Route::delete('person_listings/{username}', 'App\Http\Controllers\PersonController@destroy')->name('person_listings.destroy');
 Route::put('person_listings/{username}', 'App\Http\Controllers\PersonController@update')->name('person_listings.update');
-Route::patch('person_listings/{id}' , 'App\Http\Controllers\PersonController@approve')->name('person_listings.approve');
+Route::patch('person_listings/{username}' , 'App\Http\Controllers\PersonController@approve')->name('person_listings.approve');
 Route::post('person_listings', [PersonController::class, 'store'])->name('person_listings.store');
 
 //Route::get('/dept_groups',[DeptGroupController::class, 'index'])->name('dept_groups');
