@@ -3,10 +3,12 @@
 
 @section('content')
     <div class="container-fluid">
-        <div>
-            <h1>Person Listings/Pending Person Listings</h1>
+        <div class="person-header">
+            <h1>Person Listings</h1>
+            <button id="custom-add-btn" type="button" data-bs-toggle="modal" data-bs-target="#addPersonModal">
+                Add New Person
+            </button>
         </div>
-
         <br/>
         @if ($errors->any())
         <h6 class="alert alert-danger mt-4">
@@ -22,9 +24,9 @@
         </h6>
         @endif
         <nav>
-            <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                <button class="nav-link active" id="nav-person-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Person</button>
-                <button class="nav-link" id="nav-pperson-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Pending Person</button>
+            <div class="nav nav-pills nav-tabs" id="nav-tab" role="tablist">
+                <button class="nav-link active" id="nav-person-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Persons</button>
+                <button class="nav-link" id="nav-pperson-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Pending Persons</button>
             </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
@@ -117,28 +119,38 @@
             <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
                 <table id="pending-persons-table" class="table table-size table-bordered table-responsive mt-5">
                     <thead class="table-header-color align-middle">
-                    <th>Username</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Location</th>
-                    <th>Fax</th>
-                    <th>Website</th>
-                    <th>Publishable</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                        <th>Username</th>
+                        <th>Name</th>
+                        <th>Name of Record</th>
+                        <th>Job Title</th>
+                        <th>Email</th>
+                        <th>Alias Email</th>
+                        <th>Phone</th>
+                        <th>Location</th>
+                        <th>Fax</th>
+                        <th>Website</th>
+                        <th>Publishable</th>
+                        <th>Last Approved</th>
+                        <th>Approved By</th>
+                        <th>Approve</th>
                     </thead>
                     <tbody>
                     {{-- @foreach($pendingPersonData as $item) --}}
                     <tr class="custom-row">
-                        <td>{{$item->username}}</td>
+                    <td>{{$item->username}}</td>
                         <td>{{$item->name}}</td>
+                        <td>{{$item->name_of_record}}</td>
+                        <td>{{$item->job_title}}</td>
                         <td>{{$item->email}}</td>
+                        <td>{{$item->alias_email}}</td>
                         <td>{{$item->phone}}</td>
                         <td>{{$item->location}}</td>
                         <td>{{$item->fax}}</td>
                         <td>{{$item->website}}</td>
-                        <td>{{$item->publishable}}</td>
+                        <td>{{$item->publishable  ? 'True' : 'False' }}</td>
+                        <td>{{$item->lastApprovedAt}}</td>
+                        <td>{{$item->lastApprovedBy}}</td>
+
                     </tr>
                     {{-- @endforeach --}}
                 </table>
