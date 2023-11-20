@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
-    @vite(['resources/js/app.js', 'resources/css/app.css', 'resources/css/dept_groups.css'])
+    @vite(['resources/js/app.js', 'resources/css/app.css', 'resources/css/dataTableCustom.css'])
 </head>
 <body>
     <div id="app">

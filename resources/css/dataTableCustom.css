@@ -1,0 +1,119 @@
+.paginate_button {
+    border: 1px solid lightgray !important;
+    padding: 6px 12px !important;
+    margin-right: 5px !important;
+    cursor: pointer !important;
+}
+
+.paginate_button.disabled {
+    background-color: lightgray !important;
+    border-radius: 5px !important;
+}
+
+.paginate_button a {
+    color: black !important;
+    text-decoration: none !important;
+}
+
+.paginate_button.active {
+    border: 1px solid lightgray !important;
+    border-radius: 5px !important;
+    background-color: #91CDC9 !important;
+}
+
+.paginate_button.disable {
+    color: gray !important;
+}
+
+/******************* Add Button *******************/
+.add-button-wrapper {
+    display: flex;
+    justify-content: end;
+}
+
+
+/******************* Data Table *******************/
+.table-wrapper {
+    padding: 2% 0;
+}
+
+table.dataTable {
+    display: inline-table;
+    table-layout: fixed;
+    width: 100% !important;
+    border: 1px solid lightgray !important;
+    margin-top: 20px !important;
+    margin-bottom: 10px !important;
+}
+
+.table th {
+    background-color: #535353 !important;
+    color: white !important;
+    height: 33px !important;
+    text-align: center !important;
+}
+
+/* table.dataTable tbody tr td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+} */
+
+.dataTables_wrapper .dataTables_paginate {
+    float: right !important;
+}
+/*
+.dataTables_filter input {
+    border: 1px solid #AFAEAE !important;
+    border-radius: 30px !important;
+    padding: 20px !important;
+    width: 280px !important;
+} */
+
+
+.dataTables_wrapper .dataTables.filter {
+    width: 100% !important;
+}
+.dataTables_wrapper .dataTables_filter input {
+    border-radius: 20px !important;
+    padding: 6px 10px !important;
+}
+
+.title-background {
+    background-color: #91CDC9 !important;
+    padding-left: 70px !important;
+    padding-top: 30px !important;
+    padding-bottom: 30px !important;
+}
+
+.inline-components-parent {
+    display: flex !important;
+    padding-top: 20px !important;
+    justify-content: space-between !important;
+}
+
+.add-department-group {
+    background-color: #91CDC9 !important;
+    border: none !important;
+    padding: 5px 30px !important;
+    text-align: center !important;
+    text-decoration: none !important;
+    font-size: 16px !important;
+    cursor: pointer !important;
+    border-radius: 30px !important;
+    float: right !important;
+    height: 50px !important;
+}
+
+.btn-custom {
+    width: 60px !important;
+}
+.close {
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+}
+.close span {
+    font-size: 25px !important;
+    color: #000 !important;
+}

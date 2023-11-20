@@ -1,4 +1,4 @@
-insert into campus(campus_code, campus_name) values
+insert into Campus (code, name) values
     ('uhm', 'UH Manoa'),
     ('uhsys', 'UH System'),
     ('lcc', 'Leeward Community College'),

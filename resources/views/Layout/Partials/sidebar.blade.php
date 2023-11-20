@@ -4,7 +4,8 @@
     :department-listings-route="'{{ route('department_listings') }}'"
     :dept-groups-route="'{{ route('dept_groups') }}'"
     :dept-contacts-route="'{{ route('dept_contacts') }}'"
-    :announcements-route="'{{ route('announcements') }}'"
     :admins-route="'{{ route('admins') }}'"
+    :announcements-route="'{{ route('announcements') }}'"
+    :profile-route="'{{ route('profile') }}'"
     >
 <sidebar-component/>
