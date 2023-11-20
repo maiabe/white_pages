@@ -5,29 +5,26 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Person extends Model
+class PendingPerson extends Model
 {
     use HasFactory;
 
-    protected $table = 'Person';
+    protected $table = 'PendingPerson';
 
     protected $fillable = [
         'username',
         'name',
-        'name_of_record',
-        'job_title',
+//        'name_of_record',
+//        'job_title',
         'email',
-        'alias_email',
+//        'alias_email',
         'phone',
         'location',
         'fax',
         'website',
-        'publishable',
-        'lastApprovedAt',
-        'lastApprovedBy'
+        'publishable'
     ];
 
-    // protected $fillable = ['username', 'name', 'email', 'phone', 'location', 'fax', 'website', 'publishable'];
     public $timestamps = false;
 
 };

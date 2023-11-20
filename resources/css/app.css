@@ -9,6 +9,19 @@
     padding: 10px 0;
 } */
 
+.add-button {
+    background-color: #91CDC9;
+    border: none;
+    padding: 5px 30px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 30px;
+    float: right;
+    height: 50px;
+}
+
 /**********************************************/
 /**************** Layout Styles ***************/
 /**********************************************/
@@ -26,7 +39,7 @@ main {
     min-height: 1000px;
     flex-grow: 1;
     overflow: auto;
-    padding: 3%;
+    padding: 4%;
 }
 
 .main-content {
@@ -207,6 +220,92 @@ footer .container {
 .non-dotted-links:hover {
     color: #F0D695 !important;
 }
+
+/**********************************************/
+/**************** Table Styles ***************/
+/**********************************************/
+
+/*
+
+.table-size {
+    min-height: 500px;
+    overflow: auto;
+}
+
+*/
+
+table.dataTable {
+    border-collapse: collapse !important;
+    border: 1px solid lightgray;
+    margin-top: 20px !important;
+    margin-bottom: 20px !important;
+}
+
+.table th {
+    background-color: #535353 !important;
+    color: white;
+    height: 33px !important;
+    text-align: center;
+}
+
+.paginate_button {
+    border: 1px solid lightgray;
+    padding: 6px 12px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.paginate_button.disabled {
+    background-color: lightgray;
+    border-radius: 5px;
+}
+
+.paginate_button a {
+    color: black;
+    text-decoration: none;
+}
+
+.paginate_button.active {
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    background-color: #91CDC9;
+}
+
+.paginate_button.disable {
+    color: gray;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+    float: right !important;
+}
+
+.dataTables_length {
+    margin-top: 30px;
+}
+
+.dataTables_filter {
+    margin-top: 20px;
+}
+
+.dataTables_filter input {
+    border: 1px solid #AFAEAE;
+    border-radius: 30px;
+    padding: 20px;
+    width: 280px;
+    height: 50px;
+}
+
+.title-background {
+    background-color: #91CDC9;
+    padding-left: 70px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.btn-custom {
+    width: 60px;
+}
+
 
 /**********************************************/
 /********** Department Groups Styles **********/
