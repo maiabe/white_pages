@@ -15,9 +15,7 @@
         "@fortawesome/fontawesome-svg-core": "^6.4.2",
         "@fortawesome/free-solid-svg-icons": "^6.4.2",
         "@fortawesome/vue-fontawesome": "^3.0.3",
-        "datatables.net-dt": "^1.13.7",
         "esbuild": "^0.19.5",
-        "jquery": "^3.7.1",
         "vue": "^3.3.7",
         "vue-loader": "^17.3.0"
     }

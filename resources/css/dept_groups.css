@@ -1,4 +1,4 @@
-/* .paginate_button {
+.paginate_button {
     border: 1px solid lightgray;
     padding: 6px 12px;
     margin-right: 5px;
@@ -79,8 +79,7 @@ table.dataTable {
 
 .btn-custom {
     width: 60px;
-} */
-
+}
 .close {
     background: none;
     border: none;

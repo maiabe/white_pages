@@ -2,13 +2,13 @@
   <div>
     <footer class="text-center text-lg-start text-white" style="background-color: #222222">
       <!-- Grid container START-->
-      <div class="container">
+      <div class="container py-4">
         <!-- SECTION: Footer -->
         <section class="">
           <!--Grid row: Upper Row -->
           <div class="row">
             <!-- Grid column -->
-            <div class="col-md-2 col-lg-2 col-xl-2">
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
               <a href="#">
               <img src="/images/white-seal.png" alt="University of Hawaii System seal and name" style="width: 170px; height: 60px;">
               </a>
@@ -151,3 +151,15 @@
     </footer>
   </div>
 </template>
+<!-- <style scoped src="../resources/css/app.css">
+{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 10px 0; /* Adjust padding as needed */
+    font-size: small;
+}
+</style> -->
