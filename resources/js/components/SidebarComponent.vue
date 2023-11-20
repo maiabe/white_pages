@@ -27,68 +27,98 @@
         <!-- Sidebar Body -->
         <div class="offcanvas-body">
             <div class="page-links-wrapper">
-                <!-- <ul>
-                    <li v-for="(route, name) in routes" :key="name" >
-                        <a :href="route"> {{ name }}</a>
-                    </li>
-                </ul> -->
-                <a :href="personListingsRoute" class="page-link">
-                    <div class="page-icon">
-                        <font-awesome-icon icon="user" style="color: #ffffff;" />
-                    </div>
-                    <div class="page-name">
-                        <h6>Person Listings</h6>
-                    </div>
-                </a>
-                <a :href="departmentListingsRoute" class="page-link">
-                    <div class="page-icon">
-                        <font-awesome-icon icon="building" style="color: #ffffff;" />
-                    </div>
-                    <div class="page-name">
-                        <h6>Department Listings</h6>
-                    </div>
-                </a>
-                <a :href="deptContactsRoute" class="page-link">
-                    <div class="page-icon">
-                        <font-awesome-icon icon="address-card" style="color: #ffffff;" />
-                    </div>
-                    <div class="page-name">
-                        <h6>Department Contacts</h6>
-                    </div>
-                </a>
-                <div class="page-link">
-                    <div class="page-icon">
-                        <font-awesome-icon icon="circle-check" style="color: #ffffff;" />
-                    </div>
-                    <div class="page-name">
-                        <h6>Make Approvals</h6>
-                    </div>
+                <div class="main-page-links">
+                    <a :href="personListingsRoute" class="page-link">
+                        <div class="page-icon">
+                            <font-awesome-icon icon="user" style="color: #ffffff;" />
+                        </div>
+                        <div class="page-name">
+                            <h6>Person Listings</h6>
+                        </div>
+                    </a>
+                    <!-- <a :href="departmentListingsRoute" class="page-link">
+                        <div class="page-icon">
+                            <font-awesome-icon icon="building" style="color: #ffffff;" />
+                        </div>
+                        <div class="page-name">
+                            <h6>Department Listings</h6>
+                        </div>
+                    </a> -->
+                    <a :href="deptGroupsRoute" class="page-link">
+                        <div class="page-icon">
+                            <font-awesome-icon icon="building-columns" style="color: #ffffff;" />
+                        </div>
+                        <div class="page-name">
+                            <h6>Department Groups</h6>
+                        </div>
+                    </a>
+                    <a :href="deptContactsRoute" class="page-link">
+                        <div class="page-icon">
+                            <font-awesome-icon icon="address-book" style="color: #ffffff;" />
+                        </div>
+                        <div class="page-name">
+                            <h6>Department Contacts</h6>
+                        </div>
+                    </a>
+                    <a :href="adminsRoute" class="page-link">
+                        <div class="page-icon">
+                            <font-awesome-icon icon="user-gear" style="color: #ffffff;" />
+                        </div>
+                        <div class="page-name">
+                            <h6>Admins</h6>
+                        </div>
+                    </a>
+                    <a :href="announcementsRoute" class="page-link">
+                        <div class="page-icon">
+                            <font-awesome-icon icon="bullhorn" style="color: #ffffff;" />
+                        </div>
+                        <div class="page-name">
+                            <h6>Announcements</h6>
+                        </div>
+                    </a>
                 </div>
-                <a :href="announcementsRoute" class="page-link">
-                    <div class="page-icon">
-                        <font-awesome-icon icon="bullhorn" style="color: #ffffff;" />
+                
+                <div class="user-page-links">
+                    <div style="display: flex; justify-content: center; margin-bottom: 15%;">
+                        <hr width="85%" style="margin: 0;" />
                     </div>
-                    <div class="page-name">
-                        <h6>Announcements</h6>
-                    </div>
-                </a>
-                <a :href="adminsRoute" class="page-link">
-                    <div class="page-icon">
-                        <font-awesome-icon icon="user-gear" style="color: #ffffff;" />
-                    </div>
-                    <div class="page-name">
-                        <h6>Admins</h6>
-                    </div>
-                </a>
+                    <a :href="profileRoute" class="page-link">
+                        <div class="page-icon">
+                            <font-awesome-icon icon="circle-user" style="color: #ffffff;" />
+                        </div>
+                        <div class="page-name">
+                            <h6>Profile</h6>
+                        </div>
+                    </a>
+                    <a :href="profileRoute" class="page-link">
+                        <div class="page-icon">
+                            <font-awesome-icon icon="circle-question" style="color: #ffffff;" />
+                        </div>
+                        <div class="page-name">
+                            <h6>Help</h6>
+                        </div>
+                    </a>
+                    <a :href="profileRoute" class="page-link">
+                        <div class="page-icon">
+                            <font-awesome-icon icon="gear" style="color: #ffffff;" />
+                        </div>
+                        <div class="page-name">
+                            <h6>Settings</h6>
+                        </div>
+                    </a>
+                    <a :href="profileRoute" class="page-link">
+                        <div class="page-icon">
+                            <font-awesome-icon icon="right-from-bracket" style="color: #ffffff;" />
+                        </div>
+                        <div class="page-name">
+                            <h6>Logout</h6>
+                        </div>
+                    </a>
+                </div>
             </div>
 
         </div>
 
-        <div class="offcanvas-footer">
-            <div style="display: flex; justify-content: center;">
-                <hr width="85%" style="margin: 0;" />
-            </div>
-        </div>
     </div>
 </template>
 
@@ -113,11 +143,15 @@
                 type: String,
                 required: true,
             },
+            adminsRoute: {
+                type: String,
+                required: true,
+            },
             announcementsRoute: {
                 type: String,
                 required: true,
             },
-            adminsRoute: {
+            profileRoute: {
                 type: String,
                 required: true,
             },

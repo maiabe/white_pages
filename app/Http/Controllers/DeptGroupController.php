@@ -11,9 +11,25 @@ class DeptGroupController extends Controller
 {
     public function index()
     {
-        $data = DeptGroup::all();
-        $campusData = Campus::distinct()->pluck('campus_code');
-        return view('DeptGroups.dept_groups', ['data' => $data, 'campusData' => $campusData]);
+        $data = DeptGroup::select('campus_code', 'dept_grp', 'dept_grp_name')
+        ->get()
+        ->map(function($item) {
+            return (object) [
+                'campus_code' => ['key' => 'Campus Code', 'value' => $item->campus_code, 'type' => 'select'],
+                'group_number' => ['key' => 'Group Number', 'value' => $item->dept_grp, 'type' => 'text'],
+                'group_name' => ['key' => 'Group Name', 'value' => $item->dept_grp_name, 'type' => 'text'],
+            ];
+        });
+        
+        $oldData = DeptGroup::all();
+
+        $campusData = Campus::distinct()->pluck('code');
+
+        /* echo '<pre>';
+            print_r($data);
+        echo '</pre>'; */
+
+        return view('DeptGroups.dept_groups', ['old' => $oldData,'data' => $data, 'campusData' => $campusData]);
     }
 
     public function destroy($dept_grp,)
