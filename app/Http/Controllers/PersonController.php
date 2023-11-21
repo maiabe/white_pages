@@ -46,7 +46,7 @@ class PersonController extends Controller
                 'max:60',
             ],
             'name_of_record' => [
-                'required',
+                // 'required',
                 'string',
                 'max:255',
             ],
@@ -67,7 +67,7 @@ class PersonController extends Controller
                 'max:100',
             ],
             'phone' => [
-                // 'required',
+                'required',
                 'string',
                 'max:14',
             ],
@@ -99,14 +99,14 @@ class PersonController extends Controller
             'person_id' => $person->id,
             'username' => $validatedData['username'],
             'name' => $validatedData['name'],
-            'name_of_record' => $validatedData['name_of_record'],
-            'job_title' => $validatedData['job_title'],
+            'name_of_record' => $validatedData['name_of_record']??null,
+            'job_title' => $validatedData['job_title']??null,
             'email' => $validatedData['email'],
-            'alias_email' => $validatedData['alias_email'],
+            'alias_email' => $validatedData['alias_email']??null,
             'phone' => $validatedData['phone'],
-            'location' => $validatedData['location'],
-            'fax' => $validatedData['fax'],
-            'website' => $validatedData['website'],
+            'location' => $validatedData['location']??null,
+            'fax' => $validatedData['fax']??null,
+            'website' => $validatedData['website']??null,
             'publishable' => $validatedData['publishable'] == 'true' ? 1 : 0,
         ]);
 
@@ -152,7 +152,7 @@ class PersonController extends Controller
                 'max:100',
             ],
             'phone' => [
-                // 'required',
+                'required',
                 'string',
                 'max:14',
             ],
@@ -179,14 +179,14 @@ class PersonController extends Controller
         PendingPerson::create([
             'username' => $validatedData['username'],
             'name' => $validatedData['name'],
-            'name_of_record' => $validatedData['name_of_record'],
-            'job_title' => $validatedData['job_title'],
+            'name_of_record' => $validatedData['name_of_record']??null,
+            'job_title' => $validatedData['job_title']??null,
             'email' => $validatedData['email'],
-            'alias_email' => $validatedData['alias_email'],
+            'alias_email' => $validatedData['alias_email']??null,
             'phone' => $validatedData['phone'],
-            'location' => $validatedData['location'],
-            'fax' => $validatedData['fax'],
-            'website' => $validatedData['website'],
+            'location' => $validatedData['location']??null,
+            'fax' => $validatedData['fax']??null,
+            'website' => $validatedData['website']??null,
             'publishable' => $validatedData['publishable'] == 'true' ? 1 : 0,
         ]);
         
@@ -208,18 +208,18 @@ class PersonController extends Controller
                 $existingPerson->update([
                 'username' => $pendingPerson['username'],
                 'name' => $pendingPerson['name'],
-                'name_of_record' => $pendingPerson['name_of_record'],
-                'job_title' => $pendingPerson['job_title'],
+                'name_of_record' => $pendingPerson['name_of_record']??null,
+                'job_title' => $pendingPerson['job_title']??null,
                 'email' => $pendingPerson['email'],
-                'alias_email' => $pendingPerson['alias_email'],
+                'alias_email' => $pendingPerson['alias_email']??null,
                 'phone' => $pendingPerson['phone'],
-                'location' => $pendingPerson['location'],
-                'fax' => $pendingPerson['fax'],
-                'website' => $pendingPerson['website'],
+                'location' => $pendingPerson['location']??null,
+                'fax' => $pendingPerson['fax']??null,
+                'website' => $pendingPerson['website']??null,
                 'publishable' => $pendingPerson['publishable'] === 'true' ? 1 : 0,
                 'lastApprovedAt' => now(),
                 'pending' => false,
-                // When Roles are implemented, add in lastApprovedBy
+                // When Roles are implemented, add in lastApprovedBy for currently logged in user
                 ]);
             } else {
                 // Create a new person entry
@@ -236,7 +236,7 @@ class PersonController extends Controller
                     'website' => $pendingPerson->website,
                     'publishable' => $pendingPerson->publishable === 'true' ? 1 : 0,
                     'lastApprovedAt' => now(),
-                    // When Roles are implemented, add in lastApprovedBy
+                    // When Roles are implemented, add in lastApprovedBy for currently logged in user
                 ]);
             }
 

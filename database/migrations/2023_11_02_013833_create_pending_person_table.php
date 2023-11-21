@@ -16,17 +16,17 @@ return new class extends Migration
             $table->unsignedBigInteger('person_id')->nullable();
             $table->string('username', 60);
             $table->string('name', 60);
-            $table->string('name_of_record');
-            $table->string('job_title')->nullable();
+            $table->string('name_of_record')->default('');
+            $table->string('job_title')->default('');
             $table->string('email', 100);
-            $table->string('alias_email',100)->nullable();
-            $table->string('phone', 14)->nullable();
-            $table->string('location', 100);
-            $table->string('fax', 14)->nullable();
-            $table->string('website', 200)->nullable();
+            $table->string('alias_email',100)->default('');
+            $table->string('phone', 14);
+            $table->string('location', 100)->default('');
+            $table->string('fax', 14)->default('');
+            $table->string('website', 200)->default('');
             $table->boolean('publishable');
-            $table->dateTime('lastApprovedAt')->nullable();;
-            $table->unsignedBigInteger('lastApprovedBy')->nullable();;
+            $table->dateTime('lastApprovedAt')->nullable();
+            $table->unsignedBigInteger('lastApprovedBy')->default(0);
         });
     }
 

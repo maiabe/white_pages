@@ -32,7 +32,7 @@
             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
                 @if(count($personData) > 0)
                 <table id="person-listings-table" class="table table-size table-bordered mt-5">
-                    <thead class="table-header-color align-middle">
+                    <thead class="align-middle">
                     <tr>
                         <th>Username</th>
                         <th>Name</th>
@@ -50,87 +50,161 @@
                     </thead>
                     <tbody>
                     @foreach($personData as $item)
-                    <tr class="{{ $item->pending ? 'pending-row' : '' }}">
-                        <td>{{$item->username}}</td>
-                        <td>{{$item->name}}</td>
-                        <td>{{$item->job_title}}</td>
-                        <td>{{$item->email}}</td>
-                        <td>{{$item->phone}}</td>
-                        <td>{{$item->location}}</td>
-                        <td>{{$item->publishable  ? 'True' : 'False' }}</td>
-                        <td>{{$item->lastApprovedAt}}</td>
-                        <td>{{$item->lastApprovedBy}}</td>
-                        <td style="text-align: center;">
-                            <button class="btn more-info-button btn-custom"
-                                    style="background-color: #91CDC9;"
-                                    data-username="{{ $item->username }}"
-                                    data-name="{{ $item->name }}"
-                                    data-name-of-record="{{ $item->name_of_record }}"
-                                    data-job-title="{{ $item->job_title }}"
-                                    data-email="{{ $item->email }}"
-                                    data-alias-email="{{ $item->alias_email }}"
-                                    data-phone="{{ $item->phone }}"
-                                    data-location="{{ $item->location }}"
-                                    data-fax="{{ $item->fax }}"
-                                    data-website="{{ $item->website }}"
-                                    data-publishable="{{ $item->publishable  ? 'True' : 'False' }}"
-                                    data-last-approved-at="{{ $item->lastApprovedAt }}"
-                                    data-last-approved-by="{{ $item->lastApprovedBy }}"
-                                    data-toggle="modal" data-target="#moreInfoModal">
-                                <i class="fa fa-solid fa-user" aria-hidden="true"></i>
-                            </button>
-                        </td>
-                        <td style="text-align: center;">
-                            <button class="btn edit-button btn-custom"
-                                    style="background-color: #86C2F1;"
-                                    data-username="{{ $item->username }}"
-                                    data-name="{{ $item->name }}"
-                                    data-name-of-record="{{ $item->name_of_record }}"
-                                    data-job-title="{{ $item->job_title }}"
-                                    data-email="{{ $item->email }}"
-                                    data-alias-email="{{ $item->alias_email }}"
-                                    data-phone="{{ $item->phone }}"
-                                    data-location="{{ $item->location }}"
-                                    data-fax="{{ $item->fax }}"
-                                    data-website="{{ $item->website }}"
-                                    data-publishable="{{ $item->publishable  ? 'True' : 'False' }}"
-                                    data-last-approved-at="{{ $item->lastApprovedAt }}"
-                                    data-last-approved-by="{{ $item->lastApprovedBy }}"
-                                    data-toggle="modal" data-target="#editPersonModal">
-                                <i class="fa fa-pencil"></i>
-                            </button>
-                        </td>
-                        <td style="text-align: center;">
-                            <button class="btn delete-button btn-custom"
-                                    style="background-color: #CB5D5D;"
-                                    data-username="{{ $item->username }}"
-                                    data-name="{{ $item->name }}"
-                                    data-name-of-record="{{ $item->name_of_record }}"
-                                    data-job-title="{{ $item->job_title }}"
-                                    data-email="{{ $item->email }}"
-                                    data-alias-email="{{ $item->alias_email }}"
-                                    data-phone="{{ $item->phone }}"
-                                    data-location="{{ $item->location }}"
-                                    data-fax="{{ $item->fax }}"
-                                    data-website="{{ $item->website }}"
-                                    data-publishable="{{ $item->publishable  ? 'True' : 'False' }}"
-                                    data-last-approved-at="{{ $item->lastApprovedAt }}"
-                                    data-last-approved-by="{{ $item->lastApprovedBy }}"
-                                    data-toggle="modal" data-target="#deletePersonModal">
-                                <i class="fa fa-trash-o" aria-hidden="true"></i>
-                            </button>
-                        </td>
-                    </tr>
+                        @if ($item->pending)
+                             <tr>
+                                <td class="pending-row">{{$item->username}}</td>
+                                <td class="pending-row">{{$item->name}}</td>
+                                <td class="pending-row">{{$item->job_title}}</td>
+                                <td class="pending-row">{{$item->email}}</td>
+                                <td class="pending-row"> {{$item->phone}}</td>
+                                <td class="pending-row">{{$item->location}}</td>
+                                <td class="pending-row">{{$item->publishable  ? 'True' : 'False' }}</td>
+                                <td class="pending-row">{{$item->lastApprovedAt}}</td>
+                                <td class="pending-row">{{$item->lastApprovedBy}}</td>
+                                <td class="pending-row" style="text-align: center;">
+                                    <button class="btn more-info-button btn-custom"
+                                            style="background-color: #91CDC9;"
+                                            data-username="{{ $item->username }}"
+                                            data-name="{{ $item->name }}"
+                                            data-name-of-record="{{ $item->name_of_record }}"
+                                            data-job-title="{{ $item->job_title }}"
+                                            data-email="{{ $item->email }}"
+                                            data-alias-email="{{ $item->alias_email }}"
+                                            data-phone="{{ $item->phone }}"
+                                            data-location="{{ $item->location }}"
+                                            data-fax="{{ $item->fax }}"
+                                            data-website="{{ $item->website }}"
+                                            data-publishable="{{ $item->publishable  ? 'True' : 'False' }}"
+                                            data-last-approved-at="{{ $item->lastApprovedAt }}"
+                                            data-last-approved-by="{{ $item->lastApprovedBy }}"
+                                            data-toggle="modal" data-target="#moreInfoModal">
+                                        <i class="fa fa-solid fa-user" aria-hidden="true"></i>
+                                    </button>
+                                </td>
+                                <td class="pending-row" style="text-align: center;">
+                                    <button class="btn edit-button btn-custom"
+                                            style="background-color: #86C2F1;"
+                                            data-username="{{ $item->username }}"
+                                            data-name="{{ $item->name }}"
+                                            data-name-of-record="{{ $item->name_of_record }}"
+                                            data-job-title="{{ $item->job_title }}"
+                                            data-email="{{ $item->email }}"
+                                            data-alias-email="{{ $item->alias_email }}"
+                                            data-phone="{{ $item->phone }}"
+                                            data-location="{{ $item->location }}"
+                                            data-fax="{{ $item->fax }}"
+                                            data-website="{{ $item->website }}"
+                                            data-publishable="{{ $item->publishable  ? 'True' : 'False' }}"
+                                            data-last-approved-at="{{ $item->lastApprovedAt }}"
+                                            data-last-approved-by="{{ $item->lastApprovedBy }}"
+                                            data-toggle="modal" data-target="#editPersonModal">
+                                        <i class="fa fa-pencil"></i>
+                                    </button>
+                                </td>
+                                <td class="pending-row" style="text-align: center;">
+                                    <button class="btn delete-button btn-custom"
+                                            style="background-color: #CB5D5D;"
+                                            data-username="{{ $item->username }}"
+                                            data-name="{{ $item->name }}"
+                                            data-name-of-record="{{ $item->name_of_record }}"
+                                            data-job-title="{{ $item->job_title }}"
+                                            data-email="{{ $item->email }}"
+                                            data-alias-email="{{ $item->alias_email }}"
+                                            data-phone="{{ $item->phone }}"
+                                            data-location="{{ $item->location }}"
+                                            data-fax="{{ $item->fax }}"
+                                            data-website="{{ $item->website }}"
+                                            data-publishable="{{ $item->publishable  ? 'True' : 'False' }}"
+                                            data-last-approved-at="{{ $item->lastApprovedAt }}"
+                                            data-last-approved-by="{{ $item->lastApprovedBy }}"
+                                            data-toggle="modal" data-target="#deletePersonModal">
+                                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        @else
+                            <tr>
+                                <td class="">{{$item->username}}</td>
+                                <td>{{$item->name}}</td>
+                                <td>{{$item->job_title}}</td>
+                                <td>{{$item->email}}</td>
+                                <td>{{$item->phone}}</td>
+                                <td>{{$item->location}}</td>
+                                <td>{{$item->publishable  ? 'True' : 'False' }}</td>
+                                <td>{{$item->lastApprovedAt}}</td>
+                                <td>{{$item->lastApprovedBy}}</td>
+                                <td style="text-align: center;">
+                                    <button class="btn more-info-button btn-custom"
+                                            style="background-color: #91CDC9;"
+                                            data-username="{{ $item->username }}"
+                                            data-name="{{ $item->name }}"
+                                            data-name-of-record="{{ $item->name_of_record }}"
+                                            data-job-title="{{ $item->job_title }}"
+                                            data-email="{{ $item->email }}"
+                                            data-alias-email="{{ $item->alias_email }}"
+                                            data-phone="{{ $item->phone }}"
+                                            data-location="{{ $item->location }}"
+                                            data-fax="{{ $item->fax }}"
+                                            data-website="{{ $item->website }}"
+                                            data-publishable="{{ $item->publishable  ? 'True' : 'False' }}"
+                                            data-last-approved-at="{{ $item->lastApprovedAt }}"
+                                            data-last-approved-by="{{ $item->lastApprovedBy }}"
+                                            data-toggle="modal" data-target="#moreInfoModal">
+                                        <i class="fa fa-solid fa-user" aria-hidden="true"></i>
+                                    </button>
+                                </td>
+                                <td style="text-align: center;">
+                                    <button class="btn edit-button btn-custom"
+                                            style="background-color: #86C2F1;"
+                                            data-username="{{ $item->username }}"
+                                            data-name="{{ $item->name }}"
+                                            data-name-of-record="{{ $item->name_of_record }}"
+                                            data-job-title="{{ $item->job_title }}"
+                                            data-email="{{ $item->email }}"
+                                            data-alias-email="{{ $item->alias_email }}"
+                                            data-phone="{{ $item->phone }}"
+                                            data-location="{{ $item->location }}"
+                                            data-fax="{{ $item->fax }}"
+                                            data-website="{{ $item->website }}"
+                                            data-publishable="{{ $item->publishable  ? 'True' : 'False' }}"
+                                            data-last-approved-at="{{ $item->lastApprovedAt }}"
+                                            data-last-approved-by="{{ $item->lastApprovedBy }}"
+                                            data-toggle="modal" data-target="#editPersonModal">
+                                        <i class="fa fa-pencil"></i>
+                                    </button>
+                                </td>
+                                <td style="text-align: center;">
+                                    <button class="btn delete-button btn-custom"
+                                            style="background-color: #CB5D5D;"
+                                            data-username="{{ $item->username }}"
+                                            data-name="{{ $item->name }}"
+                                            data-name-of-record="{{ $item->name_of_record }}"
+                                            data-job-title="{{ $item->job_title }}"
+                                            data-email="{{ $item->email }}"
+                                            data-alias-email="{{ $item->alias_email }}"
+                                            data-phone="{{ $item->phone }}"
+                                            data-location="{{ $item->location }}"
+                                            data-fax="{{ $item->fax }}"
+                                            data-website="{{ $item->website }}"
+                                            data-publishable="{{ $item->publishable  ? 'True' : 'False' }}"
+                                            data-last-approved-at="{{ $item->lastApprovedAt }}"
+                                            data-last-approved-by="{{ $item->lastApprovedBy }}"
+                                            data-toggle="modal" data-target="#deletePersonModal">
+                                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        @endif
                     @endforeach
                     </tbody>
                 </table>
                 @else
-                <p>No data available for person listings</p>
+                <p>No Persons listed at this time</p>
                 @endif
             </div>
             <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
-                <table id="pending-persons-table" class="table table-size table-bordered table-responsive mt-5">
-                    <thead class="table-header-color align-middle">
+                <table id="pending-persons-table" class="table table-size table-bordered mt-5">
+                    <thead class="align-middle">
                         <th>Username</th>
                         <th>Name</th>
                         <th>Job Title</th>
@@ -145,64 +219,64 @@
                     </thead>
                     <tbody>
                     @foreach($pendingPersonData as $item)
-                    <tr>
-                        <td>{{$item->username}}</td>
-                        <td>{{$item->name}}</td>
-                        <td>{{$item->job_title}}</td>
-                        <td>{{$item->email}}</td>
-                        <td>{{$item->phone}}</td>
-                        <td>{{$item->location}}</td>
-                        <td>{{$item->publishable  ? 'True' : 'False' }}</td>
-                        <td>{{$item->lastApprovedAt}}</td>
-                        <td>{{$item->lastApprovedBy}}</td>
-                        <td style="text-align: center;">
-                            <button class="btn pending-info-button btn-custom"
-                                    style="background-color: #91CDC9;"
-                                    data-username="{{ $item->username }}"
-                                    data-name="{{ $item->name }}"
-                                    data-name-of-record="{{ $item->name_of_record }}"
-                                    data-job-title="{{ $item->job_title }}"
-                                    data-email="{{ $item->email }}"
-                                    data-alias-email="{{ $item->alias_email }}"
-                                    data-phone="{{ $item->phone }}"
-                                    data-location="{{ $item->location }}"
-                                    data-fax="{{ $item->fax }}"
-                                    data-website="{{ $item->website }}"
-                                    data-publishable="{{ $item->publishable  ? 'True' : 'False' }}"
-                                    data-last-approved-at="{{ $item->lastApprovedAt }}"
-                                    data-last-approved-by="{{ $item->lastApprovedBy }}"
-                                    data-toggle="modal" data-target="#pendingMoreInfoModal">
-                                <i class="fa fa-solid fa-user" aria-hidden="true"></i>
-                            </button>
-                        </td>
-                        <td style="text-align: center;">
-                            <button class="btn approve-button btn-custom"
-                                    style="background-color: #86C2F1;"
-                                    data-person-id="{{ $item->person_id }}"
-                                    data-username="{{ $item->username }}"
-                                    data-name="{{ $item->name }}"
-                                    data-name-of-record="{{ $item->name_of_record }}"
-                                    data-job-title="{{ $item->job_title }}"
-                                    data-email="{{ $item->email }}"
-                                    data-alias-email="{{ $item->alias_email }}"
-                                    data-phone="{{ $item->phone }}"
-                                    data-location="{{ $item->location }}"
-                                    data-fax="{{ $item->fax }}"
-                                    data-website="{{ $item->website }}"
-                                    data-publishable="{{ $item->publishable  ? 'True' : 'False' }}"
-                                    data-last-approved-at="{{ $item->lastApprovedAt }}"
-                                    data-last-approved-by="{{ $item->lastApprovedBy }}"
-                                    data-toggle="modal" data-target="#approvePersonModal">
-                                <i class="fa fa-pencil"></i>
-                            </button>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>{{$item->username}}</td>
+                            <td>{{$item->name}}</td>
+                            <td>{{$item->job_title}}</td>
+                            <td>{{$item->email}}</td>
+                            <td>{{$item->phone}}</td>
+                            <td>{{$item->location}}</td>
+                            <td>{{$item->publishable  ? 'True' : 'False' }}</td>
+                            <td>{{$item->lastApprovedAt}}</td>
+                            <td>{{$item->lastApprovedBy}}</td>
+                            <td style="text-align: center;">
+                                <button class="btn pending-info-button btn-custom"
+                                        style="background-color: #91CDC9;"
+                                        data-username="{{ $item->username }}"
+                                        data-name="{{ $item->name }}"
+                                        data-name-of-record="{{ $item->name_of_record }}"
+                                        data-job-title="{{ $item->job_title }}"
+                                        data-email="{{ $item->email }}"
+                                        data-alias-email="{{ $item->alias_email }}"
+                                        data-phone="{{ $item->phone }}"
+                                        data-location="{{ $item->location }}"
+                                        data-fax="{{ $item->fax }}"
+                                        data-website="{{ $item->website }}"
+                                        data-publishable="{{ $item->publishable  ? 'True' : 'False' }}"
+                                        data-last-approved-at="{{ $item->lastApprovedAt }}"
+                                        data-last-approved-by="{{ $item->lastApprovedBy }}"
+                                        data-toggle="modal" data-target="#pendingMoreInfoModal">
+                                    <i class="fa fa-solid fa-user" aria-hidden="true"></i>
+                                </button>
+                            </td>
+                            <td style="text-align: center;">
+                                <button class="btn approve-button btn-custom"
+                                        style="background-color: #86C2F1;"
+                                        data-person-id="{{ $item->person_id }}"
+                                        data-username="{{ $item->username }}"
+                                        data-name="{{ $item->name }}"
+                                        data-name-of-record="{{ $item->name_of_record }}"
+                                        data-job-title="{{ $item->job_title }}"
+                                        data-email="{{ $item->email }}"
+                                        data-alias-email="{{ $item->alias_email }}"
+                                        data-phone="{{ $item->phone }}"
+                                        data-location="{{ $item->location }}"
+                                        data-fax="{{ $item->fax }}"
+                                        data-website="{{ $item->website }}"
+                                        data-publishable="{{ $item->publishable  ? 'True' : 'False' }}"
+                                        data-last-approved-at="{{ $item->lastApprovedAt }}"
+                                        data-last-approved-by="{{ $item->lastApprovedBy }}"
+                                        data-toggle="modal" data-target="#approvePersonModal">
+                                    <i class="fa fa-pencil"></i>
+                                </button>
+                            </td>
+                        </tr>
                     @endforeach
                 </table>
             </div>
         </div>
     </div>
-<!-- More Info Modal -->
+<!-- More Info Persons Modal -->
 <div class="modal fade" id="moreInfoModal" tabindex="-1" role="dialog" aria-labelledby="moreInfoModalLabel"
      aria-hidden="true">
     <div class="modal-dialog">
@@ -230,7 +304,7 @@
         </div>
     </div>
 </div>
-<!-- More Info Modal -->
+<!-- More Info Pending Persons Modal -->
 <div class="modal fade" id="pendingMoreInfoModal" tabindex="-1" role="dialog" aria-labelledby="pendingMoreInfoModalLabel"
      aria-hidden="true">
     <div class="modal-dialog">
@@ -327,12 +401,12 @@
                     <div class="form-group">
                         <label for="edit-person-name-of-record">Name of Record</label>
                         <input type="text" name="name_of_record" class="form-control" id="edit-person-name-of-record"
-                               maxlength="255" title="Enter a name of record (10 to 255 characters)">
+                               required maxlength="255" title="Enter a name of record (10 to 255 characters)">
                     </div>
                     <div class="form-group">
                         <label for="edit-person-job-title">Job Title</label>
                         <input type="text" name="job_title" class="form-control" id="edit-person-job-title"
-                               required minlength="10" maxlength="60" title="Enter a job title (10 to 60 characters)">
+                                required minlength="10" maxlength="60" title="Enter a job title (10 to 60 characters)">
                     </div>
                     <div class="form-group">
                         <label for="edit-person-email">Email</label>
@@ -342,7 +416,7 @@
                     <div class="form-group">
                         <label for="edit-person-alias-email">Alias Email</label>
                         <input type="text" name="alias_email" class="form-control" id="edit-person-alias-email"
-                               required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" maxlength="100" title="Enter a alias email (10 to 100 characters)">
+                                required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" maxlength="100" title="Enter a alias email (10 to 100 characters)">
                     </div>
                     <div class="form-group">
                         <label for="edit-person-phone">Phone</label>
@@ -352,18 +426,18 @@
                     <div class="form-group">
                         <label for="edit-person-location">Location</label>
                         <input type="text" name="location" class="form-control" id="edit-person-location"
-                               required minlength="0" maxlength="100"  title="Enter a location (up to 100 characters)">
+                                required minlength="0" maxlength="100"  title="Enter a location (up to 100 characters)">
                     </div>
                     <div class="form-group">
                         <label for="edit-person-fax">Fax</label>
                         <input type="text" name="fax" class="form-control" id="edit-person-fax"
-                               required pattern="^\+?[0-9]+(\s?[-.]?\s?[0-9]+)*$"
+                                required pattern="^\+?[0-9]+(\s?[-.]?\s?[0-9]+)*$"
                                title="Enter a correct fax format, e.g., +1 8083456789">
                     </div>
                     <div class="form-group">
                         <label for="edit-person-website">Website</label>
                         <input type="text" name="website" class="form-control" id="edit-person-website"
-                               required pattern="/(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z]{2,}(\.[a-zA-Z]{2,})(\.[a-zA-Z]{2,})?\/[a-zA-Z0-9]{2,}|((https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z]{2,}(\.[a-zA-Z]{2,})(\.[a-zA-Z]{2,})?)|(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z0-9]{2,}\.[a-zA-Z0-9]{2,}\.[a-zA-Z0-9]{2,}(\.[a-zA-Z0-9]{2,})?/g;"
+                                required pattern="/(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z]{2,}(\.[a-zA-Z]{2,})(\.[a-zA-Z]{2,})?\/[a-zA-Z0-9]{2,}|((https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z]{2,}(\.[a-zA-Z]{2,})(\.[a-zA-Z]{2,})?)|(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z0-9]{2,}\.[a-zA-Z0-9]{2,}\.[a-zA-Z0-9]{2,}(\.[a-zA-Z0-9]{2,})?/g;"
                                title="Enter a valid website URL (e.g., http://example.com)">
                     </div>
 
@@ -414,7 +488,7 @@
                     <div class="form-group">
                         <label for="add-name-of-record">Name of Record</label>
                         <input type="text" class="form-control" id="name_of_record" name="name_of_record"
-                               required minlength="1" maxlength="60" title="Enter a name (10 to 60 characters)">
+                               minlength="1" maxlength="60" title="Enter a name (10 to 60 characters)">
                     </div>
                     <div class="form-group">
                         <label for="add-job-title">Job Title</label>
@@ -444,7 +518,7 @@
                     <div class="form-group">
                         <label for="add-fax">Fax</label>
                         <input type="text" class="form-control" id="fax" name="fax"
-                               required pattern="^\+?[0-9]+(\s?[-.]?\s?[0-9]+)*$" title="Enter a correct fax format, e.g., +1 8083456789">
+                               pattern="^\+?[0-9]+(\s?[-.]?\s?[0-9]+)*$" title="Enter a correct fax format, e.g., +1 8083456789">
                     </div>
                     <div class="form-group">
                         <label for="add-website">Website</label>
@@ -640,7 +714,7 @@
         $("#pending-persons-table").DataTable({
             "pagingType": "simple_numbers",
             "language": {
-                "emptyTable": "The Person Listings table is empty",
+                "emptyTable": "There are no Pending Persons at this time",
                 "lengthMenu": "Display _MENU_ persons",
                 "loadingRecords": "Loading...",
                 "processing": "Processing...",
