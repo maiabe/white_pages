@@ -558,7 +558,6 @@
             <div class="modal-body">
                 Approving this person will update or add them into the Person database
                 <br><br>
-                    <b>Person ID</b>: <span id="approve-person-id"></span><br>
                     <b>Username</b>: <span id="approve-username"></span><br>
                     <b>Name</b>: <span id="approve-name"></span><br>
                     <b>Name of Record</b>: <span id="approve-name-of-record"></span><br>
@@ -733,9 +732,6 @@
 
         // Function to handle the more information button click
         $("#pending-persons-table").on("click", ".pending-info-button", function () {
-            var originalPerson = {
-                username: $("")
-            }
 
             var personUsername = $(this).data("username");
             var personName = $(this).data("name");
