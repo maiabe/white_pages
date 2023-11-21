@@ -40,6 +40,10 @@
     background-color: #91CDC9;
 }
 
+.pending-row {
+    background-color: #FFFBC8 !important;
+}
+
 /**********************************************/
 /**************** Layout Styles ***************/
 /**********************************************/
@@ -296,7 +300,6 @@ table.dataTable {
 .btn-custom {
     width: 60px;
 }
-
 
 /**********************************************/
 /********** Department Groups Styles **********/

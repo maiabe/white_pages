@@ -24,7 +24,8 @@ class Person extends Model
         'website',
         'publishable',
         'lastApprovedAt',
-        'lastApprovedBy'
+        'lastApprovedBy',
+        'pending',
     ];
 
     public $timestamps = false;

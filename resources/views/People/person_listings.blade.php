@@ -50,7 +50,7 @@
                     </thead>
                     <tbody>
                     @foreach($personData as $item)
-                    <tr class="custom-row">
+                    <tr class="{{ $item->pending ? 'pending-row' : '' }}">
                         <td>{{$item->username}}</td>
                         <td>{{$item->name}}</td>
                         <td>{{$item->job_title}}</td>
@@ -145,7 +145,7 @@
                     </thead>
                     <tbody>
                     @foreach($pendingPersonData as $item)
-                    <tr class="custom-row">
+                    <tr>
                         <td>{{$item->username}}</td>
                         <td>{{$item->name}}</td>
                         <td>{{$item->job_title}}</td>

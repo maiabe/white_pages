@@ -26,6 +26,7 @@ return new class extends Migration
             $table->boolean('publishable');
             $table->dateTime('lastApprovedAt')->nullable();;
             $table->unsignedBigInteger('lastApprovedBy')->nullable();;
+            $table->boolean('pending')->default(false);
         });
     }
 

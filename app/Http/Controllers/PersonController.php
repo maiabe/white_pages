@@ -91,6 +91,10 @@ class PersonController extends Controller
             ],
         ], $messages);
 
+        $person->update([
+            'pending' => true,
+        ]);
+
         PendingPerson::create([
             'person_id' => $person->id,
             'username' => $validatedData['username'],
@@ -214,6 +218,7 @@ class PersonController extends Controller
                 'website' => $pendingPerson['website'],
                 'publishable' => $pendingPerson['publishable'] === 'true' ? 1 : 0,
                 'lastApprovedAt' => now(),
+                'pending' => false,
                 // When Roles are implemented, add in lastApprovedBy
                 ]);
             } else {
