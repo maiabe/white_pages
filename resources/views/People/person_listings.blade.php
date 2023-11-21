@@ -178,6 +178,7 @@
                         <td style="text-align: center;">
                             <button class="btn approve-button btn-custom"
                                     style="background-color: #86C2F1;"
+                                    data-person-id="{{ $item->person_id }}"
                                     data-username="{{ $item->username }}"
                                     data-name="{{ $item->name }}"
                                     data-name-of-record="{{ $item->name_of_record }}"
@@ -241,18 +242,18 @@
                 </button>
             </div>
             <div class="modal-body">
-                <b>Username</b>: <span id="info-username"></span><br>
-                <b>Name</b>: <span id="info-person-name"></span><br>
-                <b>Name of Record</b>: <span id="info-person-name-of-record"></span><br>
-                <b>Job Title</b>: <span id="info-person-job-title"></span><br>
-                <b>Email</b>: <span id="info-person-email"></span><br>
-                <b>Phone</b>: <span id="info-person-phone"></span><br>
-                <b>Location</b>: <span id="info-person-location"></span><br>
-                <b>Fax</b>: <span id="info-person-fax"></span><br>
-                <b>Website</b>: <span id="info-person-website"></span><br>
-                <b>Publishable</b>: <span id="info-person-publishable"></span><br>
-                <b>Last Approved</b>: <span id="info-person-last-approved-at"></span><br>
-                <b>Approved By</b>: <span id="info-person-last-approved-by"></span><br>
+                <b>Username</b>: <span id="pending-info-username"></span><br>
+                <b>Name</b>: <span id="pending-info-person-name"></span><br>
+                <b>Name of Record</b>: <span id="pending-info-person-name-of-record"></span><br>
+                <b>Job Title</b>: <span id="pending-info-person-job-title"></span><br>
+                <b>Email</b>: <span id="pending-info-person-email"></span><br>
+                <b>Phone</b>: <span id="pending-info-person-phone"></span><br>
+                <b>Location</b>: <span id="pending-info-person-location"></span><br>
+                <b>Fax</b>: <span id="pending-info-person-fax"></span><br>
+                <b>Website</b>: <span id="pending-info-person-website"></span><br>
+                <b>Publishable</b>: <span id="pending-info-person-publishable"></span><br>
+                <b>Last Approved</b>: <span id="pending-info-person-last-approved-at"></span><br>
+                <b>Approved By</b>: <span id="pending-info-person-last-approved-by"></span><br>
             </div>
         </div>
     </div>
@@ -304,7 +305,7 @@
         <div class="modal-content">
             <form action="{{ route('person_listings.update', ':personUsername' ) }}" method="POST">
                 @csrf
-                @method('PUT')
+                @method('POST')
                 <div class="modal-header" style="background-color: #86C2F1;">
                     <h5 class="modal-title" id="editModalLabel">Edit Person</h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"
@@ -483,18 +484,19 @@
             <div class="modal-body">
                 Approving this person will update or add them into the Person database
                 <br><br>
-                <b>Username</b>: <span id="approve-username"></span><br>
-                <b>Name</b>: <span id="approve-name"></span><br>
-                <b>Name of Record</b>: <span id="approve-name-of-record"></span><br>
-                <b>Job Title</b>: <span id="approve-person-job-title"></span><br>
-                <b>Email</b>: <span id="approve-email"></span><br>
-                <b>Phone</b>: <span id="approve-phone"></span><br>
-                <b>Location</b>: <span id="approve-location"></span><br>
-                <b>Fax</b>: <span id="approve-fax"></span><br>
-                <b>Website</b>: <span id="approve-website"></span><br>
-                <b>Publishable</b>: <span id="approve-publishable"></span><br>
-                <b>Last Approved</b>: <span id="approve-last-approved-at"></span><br>
-                <b>Approved By</b>: <span id="approve-last-approved-by"></span><br>
+                    <b>Person ID</b>: <span id="approve-person-id"></span><br>
+                    <b>Username</b>: <span id="approve-username"></span><br>
+                    <b>Name</b>: <span id="approve-name"></span><br>
+                    <b>Name of Record</b>: <span id="approve-name-of-record"></span><br>
+                    <b>Job Title</b>: <span id="approve-person-job-title"></span><br>
+                    <b>Email</b>: <span id="approve-email"></span><br>
+                    <b>Phone</b>: <span id="approve-phone"></span><br>
+                    <b>Location</b>: <span id="approve-location"></span><br>
+                    <b>Fax</b>: <span id="approve-fax"></span><br>
+                    <b>Website</b>: <span id="approve-website"></span><br>
+                    <b>Publishable</b>: <span id="approve-publishable"></span><br>
+                    <b>Last Approved</b>: <span id="approve-last-approved-at"></span><br>
+                    <b>Approved By</b>: <span id="approve-last-approved-by"></span><br>
                 <br>
                 Are you sure you want to approve this person?
             </div>
@@ -657,6 +659,10 @@
 
         // Function to handle the more information button click
         $("#pending-persons-table").on("click", ".pending-info-button", function () {
+            var originalPerson = {
+                username: $("")
+            }
+
             var personUsername = $(this).data("username");
             var personName = $(this).data("name");
             var personNameOfRecord = $(this).data("nameOfRecord");
@@ -671,26 +677,25 @@
             var personLastApprovedAt = $(this).data("lastApprovedAt");
             var personLastApprovedBy = $(this).data("lastApprovedBy");
 
-            $("#info-username").text(personUsername);
-            $("#info-person-name").text(personName);
-            $("#info-person-name-of-record").text(personNameOfRecord);
-            $("#info-person-job-title").text(personJobTitle);
-            $("#info-person-email").text(personEmail);
-            $("#info-person-alias-email").text(personAliasEmail);
-            $("#info-person-phone").text(personPhone);
-            $("#info-person-location").text(personLocation);
-            $("#info-person-fax").text(personFax);
-            $("#info-person-website").text(personWebsite);
-            $("#info-person-publishable").text(personPub);
-            $("#info-person-last-approved-at").text(personLastApprovedAt);
-            $("#info-person-last-approved-by").text(personLastApprovedBy);
+            $("#pending-info-username").text(personUsername);
+            $("#pending-info-person-name").text(personName);
+            $("#pending-info-person-name-of-record").text(personNameOfRecord);
+            $("#pending-info-person-job-title").text(personJobTitle);
+            $("#pending-info-person-email").text(personEmail);
+            $("#pending-info-person-alias-email").text(personAliasEmail);
+            $("#pending-info-person-phone").text(personPhone);
+            $("#pending-info-person-location").text(personLocation);
+            $("#pending-info-person-fax").text(personFax);
+            $("#pending-info-person-website").text(personWebsite);
+            $("#pending-info-person-publishable").text(personPub);
+            $("#pending-info-person-last-approved-at").text(personLastApprovedAt);
+            $("#pending-info-person-last-approved-by").text(personLastApprovedBy);
 
             $("#pendingMoreInfoModal").modal("show");
         });
 
         // Function to handle the approve button click
         $("#pending-persons-table").on("click", ".approve-button", function () {
-            var personId = $(this).data("personId");
             var personUsername = $(this).data("username");
             var personName = $(this).data("name");
             var personNameOfRecord = $(this).data("nameOfRecord");
@@ -722,7 +727,6 @@
             $("#approvePersonModal").modal("show");
 
             var approveUrl = "{{ route('person_listings.approve', ':personUsername') }}";
-            // var approveUrl = "{{ route('person_listings.approve', ['username' =>': personUsername']) }}";
             approveUrl = approveUrl.replace(":personUsername", personUsername);
             $("#approve-form").attr("action", approveUrl);
         });

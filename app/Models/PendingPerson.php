@@ -12,6 +12,7 @@ class PendingPerson extends Model
     protected $table = 'PendingPerson';
 
     protected $fillable = [
+        'person_id',
         'username',
         'name',
         'name_of_record',

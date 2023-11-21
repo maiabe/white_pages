@@ -91,8 +91,8 @@ class PersonController extends Controller
             ],
         ], $messages);
 
-        // Attempt to update the record
-        Person::where('username', $username)->update([
+        PendingPerson::create([
+            'person_id' => $person->id,
             'username' => $validatedData['username'],
             'name' => $validatedData['name'],
             'name_of_record' => $validatedData['name_of_record'],
@@ -104,7 +104,6 @@ class PersonController extends Controller
             'fax' => $validatedData['fax'],
             'website' => $validatedData['website'],
             'publishable' => $validatedData['publishable'] == 'true' ? 1 : 0,
-            // When Roles are implemented, add in lastApprovedAt and lastApprovedBy
         ]);
 
         return redirect()->route('person_listings');
@@ -198,7 +197,7 @@ class PersonController extends Controller
         // Does person already exist in Person table
 
         if ($pendingPerson) {
-            $existingPerson = Person::where('id', $pendingPerson->person_id);
+            $existingPerson = Person::find($pendingPerson->person_id);
 
                 // if person_id exists already
             if ($existingPerson) {
@@ -219,22 +218,6 @@ class PersonController extends Controller
                 ]);
             } else {
                 // Create a new person entry
-                // $newPerson = Person::create([
-                //     'username' => $pendingPerson['username'],
-                //     'name' => $pendingPerson['name'],
-                //     'name_of_record' => $pendingPerson['name_of_record'],
-                //     'job_title' => $pendingPerson['job_title'],
-                //     'email' => $pendingPerson['email'],
-                //     'alias_email' => $pendingPerson['alias_email'],
-                //     'phone' => $pendingPerson['phone'],
-                //     'location' => $pendingPerson['location'],
-                //     'fax' => $pendingPerson['fax'],
-                //     'website' => $pendingPerson['website'],
-                //     'publishable' => $pendingPerson['publishable'] === 'true' ? 1 : 0,
-                //     'lastApprovedAt' => now(),
-                //     // When Roles are implemented, add in lastApprovedBy
-                // ]);
-
                 $newPerson = Person::create([
                     'username' => $pendingPerson->username,
                     'name' => $pendingPerson->name,
@@ -250,8 +233,6 @@ class PersonController extends Controller
                     'lastApprovedAt' => now(),
                     // When Roles are implemented, add in lastApprovedBy
                 ]);
-
-                dd($newPerson);
             }
 
             $pendingPerson->delete();

@@ -255,37 +255,15 @@ table.dataTable {
     border-radius: 5px;
 }
 
-/* table.dataTable .paginate_button a {
+.paginate_button a {
     color: black !important;
-    text-decoration: none;
-} */
-
-.dataTables_wrapper .paginate_button a {
-    color: black;
-    text-decoration: none;
+    text-decoration: none !important;
 }
 
-/* .paginate_button.active {
+.paginate_button.active {
     border: 1px solid lightgray;
     border-radius: 5px;
     background-color: #91CDC9;
-} */
-
-.dataTables_wrapper .paginate_button.active a {
-    color: white;
-    background-color: #91CDC9;
-    border: 1px solid lightgray;
-    border-radius: 5px;
-}
-
-/* .paginate_button.disable {
-    color: gray;
-} */
-
-.dataTables_wrapper .paginate_button.disabled a {
-    background-color: gray;
-    border-radius: 5px;
-    cursor: not-allowed;
 }
 
 .dataTables_wrapper .dataTables_paginate {
