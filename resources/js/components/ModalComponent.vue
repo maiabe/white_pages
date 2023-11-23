@@ -1,22 +1,27 @@
 <template>
-    <div class="modal fade" :id="modalId" tabindex="-1" role="dialog" :aria-labelledby="modalLabel"
+    <div class="modal fade" :id="`${modalType}-modal`" tabindex="-1" role="dialog" :aria-labelledby="`modalLabel`"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" :id="modalLabel">{{ modalTitle }}</h5>
+                    <h5 class="modal-title" :id="`modalLabel`">{{ modalTitle }}</h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"
                             id="x-button">
                         <span aria-hidden="true">&times;</span>
                     </button>
+                    <slot name="header"></slot>
                 </div>
                 <div class="modal-body">
-                    
-                    <!-- Add conditionals for modal content -->
 
+                    <!-- Add conditionals for modal content -->
                     <component
                         :is="modalContent"
+                        v-if="entry !== undefined"
                         :entry="entry"
+                        :actionRoute="actionRoute"
+                    />
+                    <component v-else 
+                        :is="modalContent"
                         :actionRoute="actionRoute"
                     />
 
@@ -25,7 +30,7 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="close-button">
                         Close
                     </button>
-                    <button type="submit" class="btn btn-primary">{{ modalBtn }}</button>
+                    <button type="submit" class="btn btn-primary">Confirm</button>
                 </div>
             </div>
         </div>
@@ -34,13 +39,25 @@
 </template>
 
 <script>
-    import FormComponent from './FormComponent.vue';
-
     export default {
         name: 'ModalComponent',
-        props: ['modalId', 'modalLabel', 'modalTitle', 'modalBtn', 'entry', 'actionRoute', 'modalContent'],
-        components: {
-            FormComponent,
+        props: {
+            modalType: {
+                type: String
+            },
+            modalTitle: {
+                type: String
+            },
+            entry: {
+                type: Object,
+                required: false
+            },
+            actionRoute: {
+                type: String
+            },
+            modalContent: {
+                type: String
+            }
         },
     }
 </script>

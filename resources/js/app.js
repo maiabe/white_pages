@@ -1,12 +1,15 @@
 import './bootstrap';
 import { createApp } from 'vue';
 
-
 import NavbarComponent from './components/NavbarComponent.vue';
 import SidebarComponent from './components/SidebarComponent.vue';
 import FooterComponent from './components/FooterComponent.vue';
 import TableComponent from './components/TableComponent.vue';
 import ModalComponent from './components/ModalComponent.vue';
+import FormComponent from './components/FormComponent.vue';
+import AddComponent from './components/ModalContent/AddComponent.vue';
+import EditComponent from './components/ModalContent/EditComponent.vue';
+import DeleteComponent from './components/ModalContent/DeleteComponent.vue';
 //-- Import Font Awesome
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -20,7 +23,13 @@ app
     .component('SidebarComponent', SidebarComponent)
     .component('FooterComponent', FooterComponent)
     .component('TableComponent', TableComponent)
-    //.component('ModalComponent', ModalComponent)
+    .component('ModalComponent', ModalComponent)
+    .component('FormComponent', FormComponent)
+    .component('AddComponent', AddComponent)
+    .component('EditComponent', EditComponent)
+    .component('DeleteComponent', DeleteComponent)
     .component('font-awesome-icon', FontAwesomeIcon);
 
 app.mount('#app');
+
+//vue.component('edit-component', EditComponent);

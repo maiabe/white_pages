@@ -19,13 +19,25 @@
             </h6>
         @endif -->
         
-        <button id="deptgrp-add-button" type="button" class="add-department-group mt-4" data-bs-toggle="modal" data-bs-target="#addDeptGrpModal">
+        <button id="deptgrp-add-button" type="button" class="add-button mt-4" data-bs-toggle="modal" data-bs-target="#deptgrp-add-modal">
             Add Department Group
         </button>
+        <modal-component
+            :modal-type="'deptgrp-add'"
+            :modal-title="'Add Department Group'"
+            :modal-content="'AddComponent'"
+            :action-route="'dept_groups.store'"
+        >
+            <add-component
+                :action-route="'dept_groups.store'"
+            />
+            
+        </modal-component>
+
 
         <br/>
         @if(count($data)>0)
-            
+
             <div class="table-wrapper">
                 <table-component
                     :table-name="'Department Group'"

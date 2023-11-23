@@ -11,25 +11,37 @@ class DeptGroupController extends Controller
 {
     public function index()
     {
-        $data = DeptGroup::select('campus_code', 'dept_grp', 'dept_grp_name')
-        ->get()
-        ->map(function($item) {
-            return (object) [
-                'campus_code' => ['key' => 'Campus Code', 'value' => $item->campus_code, 'type' => 'select'],
-                'group_number' => ['key' => 'Group Number', 'value' => $item->dept_grp, 'type' => 'text'],
-                'group_name' => ['key' => 'Group Name', 'value' => $item->dept_grp_name, 'type' => 'text'],
-            ];
-        });
-        
-        $oldData = DeptGroup::all();
-
         $campusData = Campus::distinct()->pluck('code');
 
+        $data = DeptGroup::select('campus_code', 'dept_grp', 'dept_grp_name')
+        ->get()
+        ->map(function($item) use ($campusData) {
+
+            return (object) [
+                'campus_code' => ['displayName' => 'Campus Code', 
+                                    'name' => 'campus-code', 
+                                    'value' => $item->campus_code,
+                                    'type' => 'select',
+                                    'options' => $campusData,
+                                ],
+                'group_number' => ['displayName' => 'Group Number', 
+                                    'name' => 'group-number', 
+                                    'value' => $item->dept_grp, 
+                                    'type' => 'text'
+                                ],
+                'group_name' => ['displayName' => 'Group Name', 
+                                    'name' => 'group-name', 
+                                    'value' => $item->dept_grp_name, 
+                                    'type' => 'text'
+                                ],
+            ];
+        });
+
         /* echo '<pre>';
-            print_r($data);
+            print_r($campusData);
         echo '</pre>'; */
 
-        return view('DeptGroups.dept_groups', ['old' => $oldData,'data' => $data, 'campusData' => $campusData]);
+        return view('DeptGroups.dept_groups', ['data' => $data, 'campusData' => $campusData]);
     }
 
     public function destroy($dept_grp,)
