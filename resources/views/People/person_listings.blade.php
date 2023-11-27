@@ -36,7 +36,6 @@
                     <tr>
                         <th>Username</th>
                         <th>Name</th>
-                        <th>Job Title</th>
                         <th>Email</th>
                         <th>Phone</th>
                         <th>Location</th>
@@ -54,7 +53,6 @@
                              <tr>
                                 <td class="pending-row">{{$item->username}}</td>
                                 <td class="pending-row">{{$item->name}}</td>
-                                <td class="pending-row">{{$item->job_title}}</td>
                                 <td class="pending-row">{{$item->email}}</td>
                                 <td class="pending-row"> {{$item->phone}}</td>
                                 <td class="pending-row">{{$item->location}}</td>
@@ -126,7 +124,6 @@
                             <tr>
                                 <td class="">{{$item->username}}</td>
                                 <td>{{$item->name}}</td>
-                                <td>{{$item->job_title}}</td>
                                 <td>{{$item->email}}</td>
                                 <td>{{$item->phone}}</td>
                                 <td>{{$item->location}}</td>
@@ -207,7 +204,6 @@
                     <thead class="align-middle">
                         <th>Username</th>
                         <th>Name</th>
-                        <th>Job Title</th>
                         <th>Email</th>
                         <th>Phone</th>
                         <th>Location</th>
@@ -222,7 +218,6 @@
                         <tr>
                             <td>{{$item->username}}</td>
                             <td>{{$item->name}}</td>
-                            <td>{{$item->job_title}}</td>
                             <td>{{$item->email}}</td>
                             <td>{{$item->phone}}</td>
                             <td>{{$item->location}}</td>
@@ -391,32 +386,32 @@
                     <div class="form-group">
                         <label for="edit-username">Username</label>
                         <input type="text" name="username" class="form-control" id="edit-username"
-                               required minlength="6" maxlength="60" title="Enter a username (6 to 60 characters)">
+                               required minlength="2" maxlength="60" title="Enter a username (2 to 60 characters)">
                     </div>
                     <div class="form-group">
                         <label for="edit-person-name">Name</label>
                         <input type="text" name="name" class="form-control" id="edit-person-name"
-                               required minlength="2" maxlength="60" title="Enter a name (10 to 60 characters)">
+                               required minlength="2" maxlength="255" title="Enter a name (2 to 255 characters)">
                     </div>
                     <div class="form-group">
                         <label for="edit-person-name-of-record">Name of Record</label>
                         <input type="text" name="name_of_record" class="form-control" id="edit-person-name-of-record"
-                               required maxlength="255" title="Enter a name of record (10 to 255 characters)">
+                               required minlength="2" maxlength="255" title="Enter a name of record (2 to 255 characters)">
                     </div>
                     <div class="form-group">
                         <label for="edit-person-job-title">Job Title</label>
                         <input type="text" name="job_title" class="form-control" id="edit-person-job-title"
-                                required minlength="10" maxlength="60" title="Enter a job title (10 to 60 characters)">
+                                minlength="2" maxlength="255" title="Enter a job title (2 to 255 characters)">
                     </div>
                     <div class="form-group">
                         <label for="edit-person-email">Email</label>
                         <input type="text" name="email" class="form-control" id="edit-person-email"
-                               required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Enter a valid email address (e.g., example@hawaii.due)">
+                               required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Enter a valid email address (e.g., example@hawaii.edu)">
                     </div>
                     <div class="form-group">
                         <label for="edit-person-alias-email">Alias Email</label>
                         <input type="text" name="alias_email" class="form-control" id="edit-person-alias-email"
-                                required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" maxlength="100" title="Enter a alias email (10 to 100 characters)">
+                                pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" maxlength="100" title="Enter a valid alias email (10 to 100 characters)">
                     </div>
                     <div class="form-group">
                         <label for="edit-person-phone">Phone</label>
@@ -426,19 +421,18 @@
                     <div class="form-group">
                         <label for="edit-person-location">Location</label>
                         <input type="text" name="location" class="form-control" id="edit-person-location"
-                                required minlength="0" maxlength="100"  title="Enter a location (up to 100 characters)">
+                                required minlength="2" maxlength="100"  title="Enter a location (up to 100 characters)">
                     </div>
                     <div class="form-group">
                         <label for="edit-person-fax">Fax</label>
                         <input type="text" name="fax" class="form-control" id="edit-person-fax"
-                                required pattern="^\+?[0-9]+(\s?[-.]?\s?[0-9]+)*$"
-                               title="Enter a correct fax format, e.g., +1 8083456789">
+                                pattern="^\+?[0-9]+(\s?[-.]?\s?[0-9]+)*$" title="Enter a valid fax number, e.g., +1 808-123-4567">
                     </div>
                     <div class="form-group">
                         <label for="edit-person-website">Website</label>
                         <input type="text" name="website" class="form-control" id="edit-person-website"
-                                required pattern="/(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z]{2,}(\.[a-zA-Z]{2,})(\.[a-zA-Z]{2,})?\/[a-zA-Z0-9]{2,}|((https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z]{2,}(\.[a-zA-Z]{2,})(\.[a-zA-Z]{2,})?)|(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z0-9]{2,}\.[a-zA-Z0-9]{2,}\.[a-zA-Z0-9]{2,}(\.[a-zA-Z0-9]{2,})?/g;"
-                               title="Enter a valid website URL (e.g., http://example.com)">
+                                pattern="/(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z]{2,}(\.[a-zA-Z]{2,})(\.[a-zA-Z]{2,})?\/[a-zA-Z0-9]{2,}|((https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z]{2,}(\.[a-zA-Z]{2,})(\.[a-zA-Z]{2,})?)|(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z0-9]{2,}\.[a-zA-Z0-9]{2,}\.[a-zA-Z0-9]{2,}(\.[a-zA-Z0-9]{2,})?/g;"
+                                maxlength="200" title="Enter a valid website URL (e.g., http://hawaii.edu)">
                     </div>
 
                     <div class="form-group">
@@ -478,32 +472,32 @@
                     <div class="form-group">
                         <label for="add-username">Username</label>
                         <input type="text" class="form-control" id="username" name="username"
-                               required minlength="1" maxlength="60" title="Enter a username (6 to 60 characters)">
+                               required minlength="2" maxlength="60" title="Enter a username (2 to 60 characters)">
                     </div>
                     <div class="form-group">
                         <label for="add-name">Name</label>
                         <input type="text" class="form-control" id="name" name="name"
-                               required minlength="1" maxlength="60" title="Enter a name (10 to 60 characters)">
+                               required minlength="2" maxlength="255" title="Enter a name (2 to 255 characters)">
                     </div>
                     <div class="form-group">
                         <label for="add-name-of-record">Name of Record</label>
                         <input type="text" class="form-control" id="name_of_record" name="name_of_record"
-                               minlength="1" maxlength="60" title="Enter a name (10 to 60 characters)">
+                               required minlength="2" maxlength="255" title="Enter a name (2 to 255 characters)">
                     </div>
                     <div class="form-group">
                         <label for="add-job-title">Job Title</label>
                         <input type="text" class="form-control" id="job_title" name="job_title"
-                               maxlength="60" title="Enter a name (10 to 60 characters)">
+                                minlength="2" maxlength="255" title="Enter a name (2 to 255 characters)">
                     </div>
                     <div class="form-group">
                         <label for="add-email">Email</label>
                         <input type="text" class="form-control" id="email" name="email"
-                               required minlength="1" maxlength="60" title="Enter a name (10 to 60 characters)">
+                                required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Enter a valid email address (e.g., example@hawaii.edu)">
                     </div>
                     <div class="form-group">
                         <label for="add-alias-email">Alias Email</label>
                         <input type="text" class="form-control" id="alias_email" name="alias_email"
-                               maxlength="60" title="Enter a name (10 to 60 characters)">
+                                pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" maxlength="100" title="Enter a valid alias email (10 to 100 characters)">
                     </div>
                     <div class="form-group">
                         <label for="add-phone">Phone</label>
@@ -513,17 +507,18 @@
                     <div class="form-group">
                         <label for="add-location">Location</label>
                         <input type="text" class="form-control" id="location" name="location"
-                               maxlength="60" title="Enter a name (10 to 60 characters)">
+                               required minlength="2" maxlength="100" title="Enter a name (2 to 100 characters)">
                     </div>
                     <div class="form-group">
                         <label for="add-fax">Fax</label>
                         <input type="text" class="form-control" id="fax" name="fax"
-                               pattern="^\+?[0-9]+(\s?[-.]?\s?[0-9]+)*$" title="Enter a correct fax format, e.g., +1 8083456789">
+                               pattern="^\+?[0-9]+(\s?[-.]?\s?[0-9]+)*$" title="Enter a valid fax number, e.g., +1 808-123-4567">
                     </div>
                     <div class="form-group">
                         <label for="add-website">Website</label>
                         <input type="text" class="form-control" id="website" name="website"
-                               maxlength="60" title="Enter a name (10 to 60 characters)">
+                                pattern="/(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z]{2,}(\.[a-zA-Z]{2,})(\.[a-zA-Z]{2,})?\/[a-zA-Z0-9]{2,}|((https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z]{2,}(\.[a-zA-Z]{2,})(\.[a-zA-Z]{2,})?)|(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z0-9]{2,}\.[a-zA-Z0-9]{2,}\.[a-zA-Z0-9]{2,}(\.[a-zA-Z0-9]{2,})?/g;"
+                                maxlength="200" title="Enter a valid website URL (e.g., http://hawaii.edu)">
                     </div>
                     <div class="form-group">
                         <label for="add-publishable">Publishable</label>

@@ -46,12 +46,12 @@ class PersonController extends Controller
                 'max:60',
             ],
             'name_of_record' => [
-                // 'required',
+                'required',
                 'string',
                 'max:255',
             ],
             'job_title' => [
-                // 'required',
+                'nullable',
                 'string',
                 'max:255',
             ],
@@ -62,7 +62,7 @@ class PersonController extends Controller
                 'unique:Person,email,' . $person->email . ',email'
             ],
             'alias_email' => [
-                // 'required',
+                'nullable',
                 'string',
                 'max:100',
             ],
@@ -72,17 +72,17 @@ class PersonController extends Controller
                 'max:14',
             ],
             'location' => [
-                // 'required',
+                'nullable',
                 'string',
                 'max:100',
             ],
             'fax' => [
-                // 'required',
+                'nullable',
                 'string',
                 'max:14',
             ],
             'website' => [
-                // 'required',
+                'nullable',
                 'string',
                 'max:200',
             ],
@@ -136,7 +136,7 @@ class PersonController extends Controller
                 'max:255',
             ],
             'job_title' => [
-                // 'required',
+                'nullable',
                 'string',
                 'max:255',
             ],
@@ -147,7 +147,7 @@ class PersonController extends Controller
                 'unique:Person,email,',
             ],
             'alias_email' => [
-                // 'required',
+                'nullable',
                 'string',
                 'max:100',
             ],
@@ -157,17 +157,17 @@ class PersonController extends Controller
                 'max:14',
             ],
             'location' => [
-                // 'required',
+                'nullable',
                 'string',
                 'max:100',
             ],
             'fax' => [
-                // 'required',
+                'nullable',
                 'string',
                 'max:14',
             ],
             'website' => [
-                // 'required',
+                'nullable',
                 'string',
                 'max:200',
             ],
