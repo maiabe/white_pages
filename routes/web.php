@@ -41,3 +41,7 @@ Route::get('/admins',[AdminController::class, 'index'])->name('admins');
 
 
 Route::get('/profile',[ProfileController::class, 'index'])->name('profile');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
