@@ -1,10 +1,11 @@
 <template>
-    <div class="modal fade" :id="`${modalType}-modal`" tabindex="-1" role="dialog" :aria-labelledby="`modalLabel`"
-         aria-hidden="true">
+    <div class="modal fade" :id="modalId" tabindex="-1" role="dialog" :aria-labelledby="`modalLabel`" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" :id="`modalLabel`">{{ modalTitle }}</h5>
+                    <h5 class="modal-title" :id="`modalLabel`">
+                        {{ modalTitle }}
+                    </h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"
                             id="x-button">
                         <span aria-hidden="true">&times;</span>
@@ -12,16 +13,16 @@
                     <slot name="header"></slot>
                 </div>
                 <div class="modal-body">
-
                     <!-- Add conditionals for modal content -->
                     <component
-                        :is="modalContent"
+                        :is="this.resolveComponentName"
                         v-if="entry !== undefined"
                         :entry="entry"
                         :actionRoute="actionRoute"
+                        :submitButtonId="`${modalId}-submit`"
                     />
-                    <component v-else 
-                        :is="modalContent"
+                    <component v-else
+                        :is="this.resolveComponentName"
                         :actionRoute="actionRoute"
                     />
 
@@ -30,7 +31,7 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="close-button">
                         Close
                     </button>
-                    <button type="submit" class="btn btn-primary">Confirm</button>
+                    <button type="submit" ref="submitButton" :id="`${modalId}-submit`" class="btn btn-primary">Confirm</button>
                 </div>
             </div>
         </div>
@@ -39,11 +40,27 @@
 </template>
 
 <script>
+    import EditComponent from './ModalContent/EditComponent.vue';
+
     export default {
         name: 'ModalComponent',
+        components: {
+            EditComponent
+        },
+        computed: {
+            resolveComponentName() {
+                const componentMap = {
+                    'EditComponent': EditComponent
+                }
+                return componentMap[this.modalContent] || DefaultComponent;
+            }
+        },
         props: {
-            modalType: {
-                type: String
+            modalId: {
+                type: String,
+            },
+            index: {
+                type: Number
             },
             modalTitle: {
                 type: String

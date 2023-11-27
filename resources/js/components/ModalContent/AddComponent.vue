@@ -3,6 +3,7 @@
     <!-- Create form -->
     <FormComponent
         :actionRoute="actionRoute"
+        :submitButtonId="submitButtonId"
     />
 
 </template>
@@ -14,6 +15,9 @@
         name: 'AddComponent',
         props: {
             actionRoute: {
+                type: String
+            },
+            submitButtonId: {
                 type: String
             }
         },

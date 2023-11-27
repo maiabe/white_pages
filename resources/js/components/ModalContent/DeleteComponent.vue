@@ -19,6 +19,9 @@
             },
             actionRoute: {
                 type: String
+            },
+            submitButtonId: {
+                type: String
             }
         }
     }

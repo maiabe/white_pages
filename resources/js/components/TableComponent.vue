@@ -14,43 +14,43 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-for="entry in tableEntries"  class="align-middle">
+            <tr v-for="(entry, index) in tableEntries"  class="align-middle">
                 <td v-for="item in Object.values(entry)">
                     {{ item ? item.value : '' }}
                 </td>
                 <td>
-                    <button :id="`${tableId}-edit-button`" class="btn btn-custom edit-button" data-bs-toggle="modal" :data-bs-target="`#${tableId}-edit-modal`">
+                    <button :id="`${tableId}-edit-button-${index}`" class="btn btn-custom edit-button" data-bs-toggle="modal" :data-bs-target="`#${tableId}-edit-modal-${index}`">
                         <font-awesome-icon class="fa-icon" icon="pencil"></font-awesome-icon>
                     </button>
                     <ModalComponent
+                        :index="index"
                         :modalType="`${tableId}-edit`"
                         :modalTitle="editTitle"
                         :modalContent="EditComponent"
                         :entry="entry"
-                        :actionRoute="`${routeName}.update`"
                     >
                         <EditComponent
                             :entry="entry"
-                            :actionRoute="`${routeName}.update`"
+                            :actionRoute="editRouteAction"
                         />
                     </ModalComponent>
                 </td>
                 <td>
-                    <button :id="`${tableId}-delete-button`" class="btn btn-custom delete-button" data-bs-toggle="modal" :data-bs-target="`#${tableId}-delete-modal`">
+                    <button :id="`${tableId}-delete-button-${index}`" class="btn btn-custom delete-button" data-bs-toggle="modal" :data-bs-target="`#${tableId}-delete-modal-${index}`">
                         <font-awesome-icon class="fa-icon" icon="trash"></font-awesome-icon>
                     </button>
-                    <ModalComponent
+                    <!-- <ModalComponent
+                        :index="index"
                         :modalType="`${tableId}-delete`"
                         :modalTitle="deleteTitle"
                         :modalContent="DeleteComponent"
                         :entry="entry"
-                        :actionRoute="`${routeName}.destroy`"
                     >
                         <DeleteComponent
                             :entry="entry"
-                            :actionRoute="`${routeName}.destroy`"
+                            :actionRoute="deleteRouteAction"
                         />
-                    </ModalComponent>
+                    </ModalComponent> -->
 
                 </td>
             </tr>
@@ -108,11 +108,16 @@
             },
             routeName: {
                 type: String,
+            },
+            editRouteAction: {
+                type: String
+            },
+            deleteRouteAction: {
+                type: String
             }
         },
         mounted() {
             this.initializeDataTable();
-
             /* const editButtons = document.querySelectorAll('.edit-button');
             editButtons.forEach(editBtn => {
                 editBtn.addEventListener('click', (e) => this.editEntry(e));

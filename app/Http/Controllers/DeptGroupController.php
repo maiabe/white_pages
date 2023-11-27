@@ -6,11 +6,13 @@ use http\Message;
 use Illuminate\Http\Request;
 use App\Models\DeptGroup;
 use App\Models\Campus;
+use Illuminate\Support\Facades\Schema;
 
 class DeptGroupController extends Controller
 {
     public function index()
     {
+        $columnNames = ['Campus Code', 'Group Number', 'Name'];
         $campusData = Campus::distinct()->pluck('code');
 
         $data = DeptGroup::select('campus_code', 'dept_grp', 'dept_grp_name')
@@ -41,7 +43,7 @@ class DeptGroupController extends Controller
             print_r($campusData);
         echo '</pre>'; */
 
-        return view('DeptGroups.dept_groups', ['data' => $data, 'campusData' => $campusData]);
+        return view('DeptGroups.dept_groups', ['columnNames' => $columnNames,'data' => $data, 'campusData' => $campusData]);
     }
 
     public function destroy($dept_grp,)
@@ -50,38 +52,46 @@ class DeptGroupController extends Controller
         return redirect()->route('dept_groups');
     }
 
-    public function update(Request $req, $dept_grp)
+    public function update(Request $req)
     {
-        $deptGroup = DeptGroup::where('dept_grp', $dept_grp)->first();
+        echo 'inside deptgrp update controller';
+        $result = $req->all();
 
-        $messages = [
-            'dept_grp.unique' => 'The department group: ' . $req->dept_grp . ' is already in use. Fail to update for the department group: ' . $deptGroup->dept_grp . ".",
-            'dept_grp_name.unique' => 'The department group name:' . $req->dept_grp_name . 'is already in use. Fail to update for the department group name: ' . $deptGroup->dept_grp_name . ".",
-        ];
+        $formData = $req->json()->get('formData');
+        dd($formData); // formData object present in the config attribute
 
-        // Define validation rules
-        $validatedData = $req->validate([
-            'dept_grp' => [
-                'required',
-                'string',
-                'size:6',
-                'unique:dept_group,dept_grp,' . $dept_grp . ',dept_grp'
-            ],
-            'dept_grp_name' => [
-                'required',
-                'string',
-                'max:60',
-                'unique:dept_group,dept_grp_name,' . $deptGroup->dept_grp_name . ',dept_grp_name'
-            ],
-            'campus_code' => 'required',
-        ], $messages);
+        //-- TODO: need to do below using the $formData json object above
 
-        // Attempt to update the record
-        DeptGroup::where('dept_grp', $dept_grp)->update([
-            'dept_grp' => $validatedData['dept_grp'],
-            'dept_grp_name' => $validatedData['dept_grp_name'],
-            'campus_code' => $validatedData['campus_code']
-        ]);
+        // $deptGroup = DeptGroup::where('dept_grp', $dept_grp)->first();
+
+        // $messages = [
+        //     'dept_grp.unique' => 'The department group: ' . $req->dept_grp . ' is already in use. Fail to update for the department group: ' . $deptGroup->dept_grp . ".",
+        //     'dept_grp_name.unique' => 'The department group name:' . $req->dept_grp_name . 'is already in use. Fail to update for the department group name: ' . $deptGroup->dept_grp_name . ".",
+        // ];
+
+        // // Define validation rules
+        // $validatedData = $req->validate([
+        //     'dept_grp' => [
+        //         'required',
+        //         'string',
+        //         'size:6',
+        //         'unique:dept_group,dept_grp,' . $dept_grp . ',dept_grp'
+        //     ],
+        //     'dept_grp_name' => [
+        //         'required',
+        //         'string',
+        //         'max:60',
+        //         'unique:dept_group,dept_grp_name,' . $deptGroup->dept_grp_name . ',dept_grp_name'
+        //     ],
+        //     'campus_code' => 'required',
+        // ], $messages);
+
+        // // Attempt to update the record
+        // DeptGroup::where('dept_grp', $dept_grp)->update([
+        //     'dept_grp' => $validatedData['dept_grp'],
+        //     'dept_grp_name' => $validatedData['dept_grp_name'],
+        //     'campus_code' => $validatedData['campus_code']
+        // ]);
 
         return redirect()->route('dept_groups');
     }

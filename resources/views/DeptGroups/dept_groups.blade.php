@@ -19,10 +19,11 @@
             </h6>
         @endif -->
         
-        <button id="deptgrp-add-button" type="button" class="add-button mt-4" data-bs-toggle="modal" data-bs-target="#deptgrp-add-modal">
+        <!-- <button id="deptgrp-add-button-0" type="button" class="add-button mt-4" data-bs-toggle="modal" data-bs-target="#deptgrp-add-modal-0">
             Add Department Group
         </button>
         <modal-component
+            :index="0"
             :modal-type="'deptgrp-add'"
             :modal-title="'Add Department Group'"
             :modal-content="'AddComponent'"
@@ -32,19 +33,16 @@
                 :action-route="'dept_groups.store'"
             />
             
-        </modal-component>
+        </modal-component> -->
 
 
         <br/>
         @if(count($data)>0)
 
             <div class="table-wrapper">
-                <table-component
-                    :table-name="'Department Group'"
-                    :table-id="'dept-groups-table'"
-                    :table-entries="{{ $data }}"
-                    :routeName="'dept_groups'"
-                ></table-component>
+                
+                @include("/DeptGroups/Partials/table", ['columns' => $columnNames, 'data' => $data])
+
             </div>
 
         @else
