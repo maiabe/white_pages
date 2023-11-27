@@ -25,7 +25,9 @@
         <nav>
             <div class="nav nav-pills nav-tabs" id="nav-tab" role="tablist">
                 <button class="nav-link active" id="nav-person-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Persons</button>
-                <button class="nav-link" id="nav-pperson-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Pending Persons</button>
+                <button class="nav-link" id="nav-pperson-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">
+                    Pending Persons <span id="pending-count" class="pending-count badge bg-secondary" style="border-radius: 50%; background-color: #535353;">{{ count($pendingPersonData) }}</span>
+                </button>
             </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
@@ -597,6 +599,8 @@
                 }
             }
         });
+
+
 
         // Function to handle the more information button click
         $("#person-listings-table").on("click", ".more-info-button", function () {
