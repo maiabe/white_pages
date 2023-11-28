@@ -15,7 +15,12 @@ class PersonController extends Controller
     public function index()
     {
         $personData = Person::all();
-        // $personData->load('campus');
+
+        $departmentName = Person::whereHas('departments', function($query) {
+            $query->where('dept_id', 'name');
+        })->get();
+        // $personData = Person::with('departments')->get();
+
         // $personData->load('department');
         $pendingPersonData = PendingPerson::all();
         

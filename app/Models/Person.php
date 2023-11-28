@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Department;
 
 class Person extends Model
 {
@@ -30,10 +31,10 @@ class Person extends Model
 
     public $timestamps = false;
 
-    // public function campus()
-    // {
-    //     return $this->belongsTo(Campus::class, 'campus_id');
-    // }
+    public function departments()
+    {
+        return $this->belongsToMany(Person::class, 'person_department')->withPivot('dept_id');
+    }
 
     // public function department()
     // {

@@ -40,6 +40,7 @@
                         <th>Name</th>
                         <th>Email</th>
                         <th>Phone</th>
+                        <th>Departments</th>
                         <th>Location</th>
                         <th>Publishable</th>
                         <th>Last Approved</th>
@@ -57,6 +58,7 @@
                                 <td class="pending-row">{{$item->name}}</td>
                                 <td class="pending-row">{{$item->email}}</td>
                                 <td class="pending-row"> {{$item->phone}}</td>
+                                <td class="pending-row"> {{$item->departments}}</td>
                                 <td class="pending-row">{{$item->location}}</td>
                                 <td class="pending-row">{{$item->publishable  ? 'True' : 'False' }}</td>
                                 <td class="pending-row">{{$item->lastApprovedAt}}</td>
@@ -128,6 +130,7 @@
                                 <td>{{$item->name}}</td>
                                 <td>{{$item->email}}</td>
                                 <td>{{$item->phone}}</td>
+                                <td>{{$item->departments}}</td>
                                 <td>{{$item->location}}</td>
                                 <td>{{$item->publishable  ? 'True' : 'False' }}</td>
                                 <td>{{$item->lastApprovedAt}}</td>
@@ -596,8 +599,6 @@
                 }
             }
         });
-
-
 
         // Function to handle the more information button click
         $("#person-listings-table").on("click", ".more-info-button", function () {
