@@ -290,6 +290,7 @@
                 <b>Name of Record</b>: <span id="info-person-name-of-record"></span><br>
                 <b>Job Title</b>: <span id="info-person-job-title"></span><br>
                 <b>Email</b>: <span id="info-person-email"></span><br>
+                <b>Alias Email</b>: <span id="info-person-alias-email"></span><br>
                 <b>Phone</b>: <span id="info-person-phone"></span><br>
                 <b>Location</b>: <span id="info-person-location"></span><br>
                 <b>Fax</b>: <span id="info-person-fax"></span><br>
@@ -318,6 +319,7 @@
                 <b>Name of Record</b>: <span id="pending-info-person-name-of-record"></span><br>
                 <b>Job Title</b>: <span id="pending-info-person-job-title"></span><br>
                 <b>Email</b>: <span id="pending-info-person-email"></span><br>
+                <b>Alias Email</b>: <span id="pending-info-person-alias-email"></span><br>
                 <b>Phone</b>: <span id="pending-info-person-phone"></span><br>
                 <b>Location</b>: <span id="pending-info-person-location"></span><br>
                 <b>Fax</b>: <span id="pending-info-person-fax"></span><br>
@@ -560,6 +562,7 @@
                     <b>Name of Record</b>: <span id="approve-name-of-record"></span><br>
                     <b>Job Title</b>: <span id="approve-person-job-title"></span><br>
                     <b>Email</b>: <span id="approve-email"></span><br>
+                    <b>Alias Email</b>: <span id="approve-alias-email"></span><br>
                     <b>Phone</b>: <span id="approve-phone"></span><br>
                     <b>Location</b>: <span id="approve-location"></span><br>
                     <b>Fax</b>: <span id="approve-fax"></span><br>

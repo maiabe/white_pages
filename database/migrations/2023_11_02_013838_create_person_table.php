@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('job_title')->nullable(true);
             $table->string('email', 100);
             $table->string('alias_email',100)->nullable(true);
-            $table->string('phone', 14);
-            $table->string('location', 100);
+            $table->string('phone', 14)->nullable(true);
+            $table->string('location', 100)->nullable(true);
             $table->string('fax', 14)->nullable()->nullable(true);
             $table->string('website', 200)->nullable(true);
             $table->boolean('publishable')->default(false);
