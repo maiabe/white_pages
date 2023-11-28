@@ -544,7 +544,7 @@
     </div>
 </div>
 <!-- Approve Modal -->
-<div class="modal fade" id="approvePersonModal" tabindex="-1" role="dialog" aria-labelledby="approveModalLabel"
+<!-- <div class="modal fade" id="approvePersonModal" tabindex="-1" role="dialog" aria-labelledby="approveModalLabel"
      aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -581,6 +581,93 @@
                     <button type="submit" class="btn btn-danger">Approve</button>
                 </form>
             </div>
+        </div>
+    </div>
+</div> -->
+<!-- Approve Modal with Editing -->
+<div class="modal fade" id="approvePersonModal" tabindex="-1" role="dialog" aria-labelledby="approveModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form action="{{ route('person_listings.approve', ':personUsername' ) }}" method="POST">
+                @csrf
+                @method('POST')
+                <div class="modal-header" style="background-color: #86C2F1;">
+                    <h5 class="modal-title" id="approveModalLabel">Approve Pending Person</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"
+                            id="approve-x-button">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="approve-username">Username</label>
+                        <input type="text" name="username" class="form-control" id="approve-username"
+                               required minlength="2" maxlength="60" title="Enter a username (2 to 60 characters)">
+                    </div>
+                    <div class="form-group">
+                        <label for="approve-name">Name</label>
+                        <input type="text" name="name" class="form-control" id="approve-name"
+                               required minlength="2" maxlength="255" title="Enter a name (2 to 255 characters)">
+                    </div>
+                    <div class="form-group">
+                        <label for="approve-name-of-record">Name of Record</label>
+                        <input type="text" name="name_of_record" class="form-control" id="approve-name-of-record"
+                               required minlength="2" maxlength="255" title="Enter a name of record (2 to 255 characters)">
+                    </div>
+                    <div class="form-group">
+                        <label for="approve-job-title">Job Title</label>
+                        <input type="text" name="job_title" class="form-control" id="approve-job-title"
+                                minlength="2" maxlength="255" title="Enter a job title (2 to 255 characters)">
+                    </div>
+                    <div class="form-group">
+                        <label for="approve-email">Email</label>
+                        <input type="text" name="email" class="form-control" id="approve-email"
+                               required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Enter a valid email address (e.g., example@hawaii.edu)">
+                    </div>
+                    <div class="form-group">
+                        <label for="approve-alias-email">Alias Email</label>
+                        <input type="text" name="alias_email" class="form-control" id="approve-alias-email"
+                                pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" maxlength="100" title="Enter a valid alias email (10 to 100 characters)">
+                    </div>
+                    <div class="form-group">
+                        <label for="approve-phone">Phone</label>
+                        <input type="text" name="phone" class="form-control" id="approve-phone"
+                               required pattern="^\d{3}-\d{3}-\d{4}$" title="Enter a phone number in the format xxx-xxx-xxxx (e.g., 123-456-7890)">
+                    </div>
+                    <div class="form-group">
+                        <label for="approve-location">Location</label>
+                        <input type="text" name="location" class="form-control" id="approve-location"
+                                required minlength="2" maxlength="100"  title="Enter a location (up to 100 characters)">
+                    </div>
+                    <div class="form-group">
+                        <label for="approve-fax">Fax</label>
+                        <input type="text" name="fax" class="form-control" id="approve-fax"
+                                pattern="^\+?[0-9]+(\s?[-.]?\s?[0-9]+)*$" title="Enter a valid fax number, e.g., +1 808-123-4567">
+                    </div>
+                    <div class="form-group">
+                        <label for="approve-website">Website</label>
+                        <input type="text" name="website" class="form-control" id="approve-website"
+                                pattern="/(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z]{2,}(\.[a-zA-Z]{2,})(\.[a-zA-Z]{2,})?\/[a-zA-Z0-9]{2,}|((https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z]{2,}(\.[a-zA-Z]{2,})(\.[a-zA-Z]{2,})?)|(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z0-9]{2,}\.[a-zA-Z0-9]{2,}\.[a-zA-Z0-9]{2,}(\.[a-zA-Z0-9]{2,})?/g;"
+                                maxlength="200" title="Enter a valid website URL (e.g., http://hawaii.edu)">
+                    </div>
+                    <div class="form-group">
+                        <label for="approve-publishable">Publishable</label>
+                        <select name="publishable" class="form-control" id="approve-publishable">
+                            <option value="true">True</option>
+                            <option value="false">False</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <form method="POST" id="approve-form">
+                        @csrf
+                        @method('PATCH')
+                        <button type="submit" class="btn btn-danger">Approve</button>
+                    </form>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -779,22 +866,20 @@
             var personFax = $(this).data("fax");
             var personWebsite = $(this).data("website");
             var personPub = $(this).data("publishable");
-            var personLastApprovedAt = $(this).data("lastApprovedAt");
-            var personLastApprovedBy = $(this).data("lastApprovedBy");
 
-            $("#approve-username").text(personUsername);
-            $("#approve-name").text(personName);
-            $("#approve-name-of-record").text(personNameOfRecord);
-            $("#approve-job-title").text(personJobTitle);
-            $("#approve-email").text(personEmail);
-            $("#approve-alias-email").text(personAliasEmail);
-            $("#approve-phone").text(personPhone);
-            $("#approve-location").text(personLocation);
-            $("#approve-fax").text(personFax);
-            $("#approve-website").text(personWebsite);
-            $("#approve-publishable").text(personPub);
-            $("#approve-last-approved-at").text(personLastApprovedAt);
-            $("#approve-last-approved-by").text(personLastApprovedBy);
+            $("#approve-username").val(personUsername);
+            $("#approve-name").val(personName);
+            $("#approve-name-of-record").val(personNameOfRecord);
+            $("#approve-job-title").val(personJobTitle);
+            $("#approve-email").val(personEmail);
+            $("#approve-alias-email").val(personAliasEmail);
+            $("#approve-phone").val(personPhone);
+            $("#approve-location").val(personLocation);
+            $("#approve-fax").val(personFax);
+            $("#approve-website").val(personWebsite);
+            $("#approve-publishable option").filter(function() {
+                return $(this).text() === personPub;
+            }).prop('selected', true);
 
             $("#approvePersonModal").modal("show");
 

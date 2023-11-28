@@ -206,10 +206,73 @@ class PersonController extends Controller
     }
 
     // In Pending Person Table, this button is clicked inside the Approve Modal when the Pending Person entry is approved
-    public function approve($username)
+    public function approve(Request $req, $username)
     {
         $pendingPerson = PendingPerson::where('username', $username)->first();
         // Does person already exist in Person table
+
+        $messages = [
+            'username.unique' => 'The username: ' . $pendingPerson->username . ' is already in use. Fail to update for the username: ' . $pendingPerson->username . ".",
+        ];
+
+        // Define validation rules
+        $validatedData = $req->validate([
+            'username' => [
+                'required',
+                'string',
+                'max:60',
+                'unique:Person,username,' . $username . ',username',
+            ],
+            'name' => [
+                'required',
+                'string',
+                'max:60',
+            ],
+            'name_of_record' => [
+                'required',
+                'string',
+                'max:255',
+            ],
+            'job_title' => [
+                'nullable',
+                'string',
+                'max:255',
+            ],
+            'email' => [
+                'required',
+                'string',
+                'max:100',
+                'unique:Person,email,' . $pendingPerson->email . ',email'
+            ],
+            'alias_email' => [
+                'nullable',
+                'string',
+                'max:100',
+            ],
+            'phone' => [
+                'required',
+                'string',
+                'max:14',
+            ],
+            'location' => [
+                'nullable',
+                'string',
+                'max:100',
+            ],
+            'fax' => [
+                'nullable',
+                'string',
+                'max:14',
+            ],
+            'website' => [
+                'nullable',
+                'string',
+                'max:200',
+            ],
+            'publishable' => [
+                'required',
+            ],
+        ], $messages);
 
         if ($pendingPerson) {
             $existingPerson = Person::find($pendingPerson->person_id);
@@ -217,17 +280,17 @@ class PersonController extends Controller
                 // if person_id exists already
             if ($existingPerson) {
                 $existingPerson->update([
-                'username' => $pendingPerson['username'],
-                'name' => $pendingPerson['name'],
-                'name_of_record' => $pendingPerson['name_of_record']??null,
-                'job_title' => $pendingPerson['job_title']??null,
-                'email' => $pendingPerson['email'],
-                'alias_email' => $pendingPerson['alias_email']??null,
-                'phone' => $pendingPerson['phone'],
-                'location' => $pendingPerson['location']??null,
-                'fax' => $pendingPerson['fax']??null,
-                'website' => $pendingPerson['website']??null,
-                'publishable' => $pendingPerson['publishable'] === 'true' ? 1 : 0,
+                'username' => $validatedData['username'],
+                'name' => $validatedData['name'],
+                'name_of_record' => $validatedData['name_of_record']??null,
+                'job_title' => $validatedData['job_title']??null,
+                'email' => $validatedData['email'],
+                'alias_email' => $validatedData['alias_email']??null,
+                'phone' => $validatedData['phone'],
+                'location' => $validatedData['location']??null,
+                'fax' => $validatedData['fax']??null,
+                'website' => $validatedData['website']??null,
+                'publishable' => $validatedData['publishable'] == 'true' ? 1 : 0,
                 'lastApprovedAt' => now(),
                 'pending' => false,
                 // When Roles are implemented, add in lastApprovedBy for currently logged in user
@@ -235,17 +298,17 @@ class PersonController extends Controller
             } else {
                 // Create a new person entry
                 $newPerson = Person::create([
-                    'username' => $pendingPerson->username,
-                    'name' => $pendingPerson->name,
-                    'name_of_record' => $pendingPerson->name_of_record,
-                    'job_title' => $pendingPerson->job_title,
-                    'email' => $pendingPerson->email,
-                    'alias_email' => $pendingPerson->alias_email,
-                    'phone' => $pendingPerson->phone,
-                    'location' => $pendingPerson->location,
-                    'fax' => $pendingPerson->fax,
-                    'website' => $pendingPerson->website,
-                    'publishable' => $pendingPerson->publishable === 'true' ? 1 : 0,
+                    'username' => $validatedData['username'],
+                    'name' => $validatedData['name'],
+                    'name_of_record' => $validatedData['name_of_record']??null,
+                    'job_title' => $validatedData['job_title']??null,
+                    'email' => $validatedData['email'],
+                    'alias_email' => $validatedData['alias_email']??null,
+                    'phone' => $validatedData['phone'],
+                    'location' => $validatedData['location']??null,
+                    'fax' => $validatedData['fax']??null,
+                    'website' => $validatedData['website']??null,
+                    'publishable' => $validatedData['publishable'] == 'true' ? 1 : 0,
                     'lastApprovedAt' => now(),
                     // When Roles are implemented, add in lastApprovedBy for currently logged in user
                 ]);
