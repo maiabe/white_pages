@@ -44,4 +44,9 @@ Route::get('/profile',[ProfileController::class, 'index'])->name('profile');
 
 Auth::routes();
 
+Route::post('/logout', function () {
+    Auth::logout();
+    return redirect('/login');
+})->name('logout');
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
