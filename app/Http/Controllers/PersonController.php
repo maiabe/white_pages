@@ -209,7 +209,10 @@ class PersonController extends Controller
     public function approve(Request $req, $username)
     {
         $pendingPerson = PendingPerson::where('username', $username)->first();
-        // Does person already exist in Person table
+
+        if (!$pendingPerson) {
+            return redirect()->route('person_listings')->with('error', 'Pending Person could not be found');
+        }
 
         $messages = [
             'username.unique' => 'The username: ' . $pendingPerson->username . ' is already in use. Fail to update for the username: ' . $pendingPerson->username . ".",
@@ -250,7 +253,6 @@ class PersonController extends Controller
                 'max:100',
             ],
             'phone' => [
-                'required',
                 'string',
                 'max:14',
             ],
@@ -274,12 +276,30 @@ class PersonController extends Controller
             ],
         ], $messages);
 
-        if ($pendingPerson) {
-            $existingPerson = Person::find($pendingPerson->person_id);
+        // Does person already exist in Person table
+        $existingPerson = Person::find($pendingPerson->person_id);
 
-                // if person_id exists already
-            if ($existingPerson) {
-                $existingPerson->update([
+            // if person_id exists already
+        if ($existingPerson) {
+            $existingPerson->update([
+            'username' => $validatedData['username'],
+            'name' => $validatedData['name'],
+            'name_of_record' => $validatedData['name_of_record']??null,
+            'job_title' => $validatedData['job_title']??null,
+            'email' => $validatedData['email'],
+            'alias_email' => $validatedData['alias_email']??null,
+            'phone' => $validatedData['phone'],
+            'location' => $validatedData['location']??null,
+            'fax' => $validatedData['fax']??null,
+            'website' => $validatedData['website']??null,
+            'publishable' => $validatedData['publishable'] == 'true' ? 1 : 0,
+            'lastApprovedAt' => now(),
+            'pending' => false,
+            // When Roles are implemented, add in lastApprovedBy for currently logged in user
+            ]);
+        } else {
+            // Create a new person entry
+            $newPerson = Person::create([
                 'username' => $validatedData['username'],
                 'name' => $validatedData['name'],
                 'name_of_record' => $validatedData['name_of_record']??null,
@@ -292,30 +312,11 @@ class PersonController extends Controller
                 'website' => $validatedData['website']??null,
                 'publishable' => $validatedData['publishable'] == 'true' ? 1 : 0,
                 'lastApprovedAt' => now(),
-                'pending' => false,
                 // When Roles are implemented, add in lastApprovedBy for currently logged in user
-                ]);
-            } else {
-                // Create a new person entry
-                $newPerson = Person::create([
-                    'username' => $validatedData['username'],
-                    'name' => $validatedData['name'],
-                    'name_of_record' => $validatedData['name_of_record']??null,
-                    'job_title' => $validatedData['job_title']??null,
-                    'email' => $validatedData['email'],
-                    'alias_email' => $validatedData['alias_email']??null,
-                    'phone' => $validatedData['phone'],
-                    'location' => $validatedData['location']??null,
-                    'fax' => $validatedData['fax']??null,
-                    'website' => $validatedData['website']??null,
-                    'publishable' => $validatedData['publishable'] == 'true' ? 1 : 0,
-                    'lastApprovedAt' => now(),
-                    // When Roles are implemented, add in lastApprovedBy for currently logged in user
-                ]);
-            }
-
-            $pendingPerson->delete();
+            ]);
         }
+
+        $pendingPerson->delete();
 
         return redirect()->route('person_listings');
     }

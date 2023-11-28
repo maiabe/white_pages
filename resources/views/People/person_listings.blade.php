@@ -212,7 +212,6 @@
                         <th>Publishable</th>
                         <th>Last Approved</th>
                         <th>Approved By</th>
-                        <th>More Info</th>
                         <th>Approve</th>
                     </thead>
                     <tbody>
@@ -226,26 +225,6 @@
                             <td>{{$item->publishable  ? 'True' : 'False' }}</td>
                             <td>{{$item->lastApprovedAt}}</td>
                             <td>{{$item->lastApprovedBy}}</td>
-                            <td style="text-align: center;">
-                                <button class="btn pending-info-button btn-custom"
-                                        style="background-color: #91CDC9;"
-                                        data-username="{{ $item->username }}"
-                                        data-name="{{ $item->name }}"
-                                        data-name-of-record="{{ $item->name_of_record }}"
-                                        data-job-title="{{ $item->job_title }}"
-                                        data-email="{{ $item->email }}"
-                                        data-alias-email="{{ $item->alias_email }}"
-                                        data-phone="{{ $item->phone }}"
-                                        data-location="{{ $item->location }}"
-                                        data-fax="{{ $item->fax }}"
-                                        data-website="{{ $item->website }}"
-                                        data-publishable="{{ $item->publishable  ? 'True' : 'False' }}"
-                                        data-last-approved-at="{{ $item->lastApprovedAt }}"
-                                        data-last-approved-by="{{ $item->lastApprovedBy }}"
-                                        data-toggle="modal" data-target="#pendingMoreInfoModal">
-                                    <i class="fa fa-solid fa-user" aria-hidden="true"></i>
-                                </button>
-                            </td>
                             <td style="text-align: center;">
                                 <button class="btn approve-button btn-custom"
                                         style="background-color: #86C2F1;"
@@ -261,8 +240,6 @@
                                         data-fax="{{ $item->fax }}"
                                         data-website="{{ $item->website }}"
                                         data-publishable="{{ $item->publishable  ? 'True' : 'False' }}"
-                                        data-last-approved-at="{{ $item->lastApprovedAt }}"
-                                        data-last-approved-by="{{ $item->lastApprovedBy }}"
                                         data-toggle="modal" data-target="#approvePersonModal">
                                     <i class="fa fa-pencil"></i>
                                 </button>
@@ -298,35 +275,6 @@
                 <b>Publishable</b>: <span id="info-person-publishable"></span><br>
                 <b>Last Approved</b>: <span id="info-person-last-approved-at"></span><br>
                 <b>Approved By</b>: <span id="info-person-last-approved-by"></span><br>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- More Info Pending Persons Modal -->
-<div class="modal fade" id="pendingMoreInfoModal" tabindex="-1" role="dialog" aria-labelledby="pendingMoreInfoModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header" style="background-color:white;">
-                <h5 class="modal-title" id="pendingMoreInfoModalLabel">More Information</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <b>Username</b>: <span id="pending-info-username"></span><br>
-                <b>Name</b>: <span id="pending-info-person-name"></span><br>
-                <b>Name of Record</b>: <span id="pending-info-person-name-of-record"></span><br>
-                <b>Job Title</b>: <span id="pending-info-person-job-title"></span><br>
-                <b>Email</b>: <span id="pending-info-person-email"></span><br>
-                <b>Alias Email</b>: <span id="pending-info-person-alias-email"></span><br>
-                <b>Phone</b>: <span id="pending-info-person-phone"></span><br>
-                <b>Location</b>: <span id="pending-info-person-location"></span><br>
-                <b>Fax</b>: <span id="pending-info-person-fax"></span><br>
-                <b>Website</b>: <span id="pending-info-person-website"></span><br>
-                <b>Publishable</b>: <span id="pending-info-person-publishable"></span><br>
-                <b>Last Approved</b>: <span id="pending-info-person-last-approved-at"></span><br>
-                <b>Approved By</b>: <span id="pending-info-person-last-approved-by"></span><br>
             </div>
         </div>
     </div>
@@ -543,47 +491,6 @@
         </div>
     </div>
 </div>
-<!-- Approve Modal -->
-<!-- <div class="modal fade" id="approvePersonModal" tabindex="-1" role="dialog" aria-labelledby="approveModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header" style="background-color: white;">
-                <h5 class="modal-title" id="approveModalLabel">Approve Person</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Approving this person will update or add them into the Person database
-                <br><br>
-                    <b>Username</b>: <span id="approve-username"></span><br>
-                    <b>Name</b>: <span id="approve-name"></span><br>
-                    <b>Name of Record</b>: <span id="approve-name-of-record"></span><br>
-                    <b>Job Title</b>: <span id="approve-person-job-title"></span><br>
-                    <b>Email</b>: <span id="approve-email"></span><br>
-                    <b>Alias Email</b>: <span id="approve-alias-email"></span><br>
-                    <b>Phone</b>: <span id="approve-phone"></span><br>
-                    <b>Location</b>: <span id="approve-location"></span><br>
-                    <b>Fax</b>: <span id="approve-fax"></span><br>
-                    <b>Website</b>: <span id="approve-website"></span><br>
-                    <b>Publishable</b>: <span id="approve-publishable"></span><br>
-                    <b>Last Approved</b>: <span id="approve-last-approved-at"></span><br>
-                    <b>Approved By</b>: <span id="approve-last-approved-by"></span><br>
-                <br>
-                Are you sure you want to approve this person?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <form method="POST" id="approve-form">
-                    @csrf
-                    @method('PATCH')
-                    <button type="submit" class="btn btn-danger">Approve</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div> -->
 <!-- Approve Modal with Editing -->
 <div class="modal fade" id="approvePersonModal" tabindex="-1" role="dialog" aria-labelledby="approveModalLabel"
      aria-hidden="true">
@@ -591,7 +498,7 @@
         <div class="modal-content">
             <form action="{{ route('person_listings.approve', ':personUsername' ) }}" method="POST">
                 @csrf
-                @method('POST')
+                @method('PATCH')
                 <div class="modal-header" style="background-color: #86C2F1;">
                     <h5 class="modal-title" id="approveModalLabel">Approve Pending Person</h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"
@@ -660,12 +567,12 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <form method="POST" id="approve-form">
-                        @csrf
-                        @method('PATCH')
-                        <button type="submit" class="btn btn-danger">Approve</button>
-                    </form>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="approve-close-button">
+                        Cancel
+                    </button>
+                        <!-- @csrf
+                        @method('PATCH') -->
+                    <button type="submit" class="btn btn-danger">Approve</button>
                 </div>
             </form>
         </div>
@@ -819,40 +726,6 @@
             $("#addPersonModal").modal("show");
         });
 
-        // Function to handle the more information button click
-        $("#pending-persons-table").on("click", ".pending-info-button", function () {
-
-            var personUsername = $(this).data("username");
-            var personName = $(this).data("name");
-            var personNameOfRecord = $(this).data("nameOfRecord");
-            var personJobTitle = $(this).data("jobTitle");
-            var personEmail = $(this).data("email");
-            var personAliasEmail = $(this).data("aliasEmail");
-            var personPhone = $(this).data("phone");
-            var personLocation = $(this).data("location");
-            var personFax = $(this).data("fax");
-            var personWebsite = $(this).data("website");
-            var personPub = $(this).data("publishable");
-            var personLastApprovedAt = $(this).data("lastApprovedAt");
-            var personLastApprovedBy = $(this).data("lastApprovedBy");
-
-            $("#pending-info-username").text(personUsername);
-            $("#pending-info-person-name").text(personName);
-            $("#pending-info-person-name-of-record").text(personNameOfRecord);
-            $("#pending-info-person-job-title").text(personJobTitle);
-            $("#pending-info-person-email").text(personEmail);
-            $("#pending-info-person-alias-email").text(personAliasEmail);
-            $("#pending-info-person-phone").text(personPhone);
-            $("#pending-info-person-location").text(personLocation);
-            $("#pending-info-person-fax").text(personFax);
-            $("#pending-info-person-website").text(personWebsite);
-            $("#pending-info-person-publishable").text(personPub);
-            $("#pending-info-person-last-approved-at").text(personLastApprovedAt);
-            $("#pending-info-person-last-approved-by").text(personLastApprovedBy);
-
-            $("#pendingMoreInfoModal").modal("show");
-        });
-
         // Function to handle the approve button click
         $("#pending-persons-table").on("click", ".approve-button", function () {
             var personUsername = $(this).data("username");
@@ -885,7 +758,7 @@
 
             var approveUrl = "{{ route('person_listings.approve', ':personUsername') }}";
             approveUrl = approveUrl.replace(":personUsername", personUsername);
-            $("#approve-form").attr("action", approveUrl);
+            $("#approvePersonModal form").attr("action", approveUrl);
         });
     });
 </script>
