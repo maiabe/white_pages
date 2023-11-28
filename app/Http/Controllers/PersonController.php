@@ -34,6 +34,25 @@ class PersonController extends Controller
         return redirect()->route('person_listings');
     }
 
+    public function reject($username,)
+    {
+        $pendingPerson = PendingPerson::where('username', $username)->first();
+
+        // Does person already exist in Person table
+        $existingPerson = Person::find($pendingPerson->person_id);
+
+        if ($existingPerson)
+        {
+            $existingPerson->update([
+                'pending' => false,
+            ]);
+        }
+
+        $pendingPerson->delete();
+
+        return redirect()->route('person_listings');
+    }
+
     // Updates an existing Person entry and sends to Pending Person Table for approval
     public function update(Request $req, $username)
     {

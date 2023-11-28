@@ -29,14 +29,13 @@ Route::post('dept_groups', [DeptGroupController::class, 'store'])->name('dept_gr
 
 Route::get('/person_listings',[PersonController::class, 'index'])->name('person_listings');
 Route::delete('person_listings/{username}', 'App\Http\Controllers\PersonController@destroy')->name('person_listings.destroy');
-// Route::put('person_listings/{username}', 'App\Http\Controllers\PersonController@update')->name('person_listings.update');
 Route::post('person_listings/{username}', 'App\Http\Controllers\PersonController@update')->name('person_listings.update');
 Route::patch('person_listings/{username}' , 'App\Http\Controllers\PersonController@approve')->name('person_listings.approve');
 Route::post('person_listings', [PersonController::class, 'store'])->name('person_listings.store');
+Route::delete('person_listings/{username}', 'App\Http\Controllers\PersonController@reject')->name('person_listings.reject');
 
 //Route::get('/dept_groups',[DeptGroupController::class, 'index'])->name('dept_groups');
 Route::get('/dept_contacts',[DeptContactController::class, 'index'])->name('dept_contacts');
 Route::get('/department_listings',[DepartmentController::class, 'index'])->name('department_listings');
 Route::get('/announcements',[AnnouncementController::class, 'index'])->name('announcements');
 Route::get('/admins',[AdminController::class, 'index'])->name('admins');
-

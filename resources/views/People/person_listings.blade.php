@@ -570,12 +570,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="approve-close-button">
-                        Cancel
-                    </button>
-                        <!-- @csrf
-                        @method('PATCH') -->
-                    <button type="submit" class="btn btn-danger">Approve</button>
+                    <button type="submit" class="btn btn-danger" id="reject-button">Reject</button>
+                    <button type="submit" class="btn btn-danger" id="approve-button">Approve</button>
                 </div>
             </form>
         </div>
@@ -760,6 +756,15 @@
             var approveUrl = "{{ route('person_listings.approve', ':personUsername') }}";
             approveUrl = approveUrl.replace(":personUsername", personUsername);
             $("#approvePersonModal form").attr("action", approveUrl);
+        });
+
+        // Handle reject button click
+        $("#pending-persons-table").on("click", ".reject-button", function () {
+            var rejectUrl = "{{ route('person_listings.reject', ':personUsername') }}";
+            rejectUrl = rejectUrl.replace(":personUsername", $("#approve-username").val());
+            $("#approvePersonModal form").attr("action", rejectUrl);
+
+            $("reject-approve-form").submit();
         });
     });
 </script>
