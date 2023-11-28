@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('Person', function (Blueprint $table) {
             $table->id();
+            // $table->unsignedBigInteger('campus_id')->nullable();
+            // $table->unsignedBigInteger('dept_id')->nullable();
             $table->string('username', 60);
             $table->string('name', 60);
             $table->string('name_of_record');
@@ -28,6 +30,9 @@ return new class extends Migration
             $table->unsignedBigInteger('lastApprovedBy')->default(0);
             $table->boolean('pending')->default(false);
         });
+
+        // $table->foreign('campus_id')->references('id')->on('Campus');
+        // $table->foreign('dept_id')->references('id')->on('Department');
     }
 
     /**

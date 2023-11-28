@@ -21,4 +21,9 @@ class Department extends Model
         'fax',
         'website'
     ];
+
+    public function personData()
+    {
+        return $this->hasMany(Person::class, 'dept_id');
+    }
 }

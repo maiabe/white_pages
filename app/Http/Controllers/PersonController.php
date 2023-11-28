@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Models\Person;
 use App\Models\PendingPerson;
+use App\Models\Campus;
+use App\Models\Department;
 
 class PersonController extends Controller
 {
@@ -12,7 +15,10 @@ class PersonController extends Controller
     public function index()
     {
         $personData = Person::all();
+        // $personData->load('campus');
+        // $personData->load('department');
         $pendingPersonData = PendingPerson::all();
+        
 
         return view('People.person_listings',['personData'=> $personData, 'pendingPersonData'=>$pendingPersonData]);
     }
@@ -30,7 +36,12 @@ class PersonController extends Controller
 
         $messages = [
             'username.unique' => 'The username: ' . $req->username . ' is already in use. Fail to update for the username: ' . $person->username . ".",
+            'pending' => 'The person ' . $req->username . ' is already pending for changes. Please review the pending changes.',
         ];
+
+        if ($person->pending) {
+            return redirect()->back()->withErrors(['pending' => $messages['pending']]);
+        }
 
         // Define validation rules
         $validatedData = $req->validate([
@@ -38,7 +49,7 @@ class PersonController extends Controller
                 'required',
                 'string',
                 'max:60',
-                'unique:Person,username,' . $username . ',username'
+                'unique:Person,username,' . $username . ',username',
             ],
             'name' => [
                 'required',

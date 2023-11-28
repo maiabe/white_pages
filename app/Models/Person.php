@@ -30,6 +30,16 @@ class Person extends Model
 
     public $timestamps = false;
 
+    // public function campus()
+    // {
+    //     return $this->belongsTo(Campus::class, 'campus_id');
+    // }
+
+    // public function department()
+    // {
+    //     return $this->belongsTo(Department::class, 'dept_id');
+    // }
+
     public function pendingPerson()
     {
         return $this->hasOne(PendingPerson::class, 'person_id');
