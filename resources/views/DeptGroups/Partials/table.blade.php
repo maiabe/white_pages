@@ -29,7 +29,7 @@
                         :modal-title="'Edit Department Group'"
                         :modal-content="'EditComponent'"
                         :entry="{{ json_encode($item) }}"
-                        :action-route="'{{ route('dept_groups.update', ['dept_grp' => 'dynamicDeptGrp']) }}'"
+                        :action-route="'{{ route('dept_groups.update') }}'"
                     >
                         <edit-component />
                     </modal-component>

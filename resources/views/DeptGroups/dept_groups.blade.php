@@ -41,7 +41,13 @@
 
             <div class="table-wrapper">
                 
-                @include("/DeptGroups/Partials/table", ['columns' => $columnNames, 'data' => $data])
+                <table-component 
+                    :table-name="'Department Group'"
+                    :table-id="'deptgrps-table'"
+                    :table-entries="{{ $data }}"
+                    :edit-action-route="'{{ route('dept_groups.update') }}'"
+                    :delete-action-route="'{{ route('dept_groups.destroy') }}'"
+                />
 
             </div>
 

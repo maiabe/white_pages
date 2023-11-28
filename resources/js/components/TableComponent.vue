@@ -1,7 +1,3 @@
-<!-- <script setup>
-    import EditComponent from './ModalContent/EditComponent.vue';
-</script> -->
-
 <template>
     <table ref="table" :id="tableId" class="table table-bordered table-hover dataTable table-responsive table-fixed w-auto">
         <thead class="table-header-color align-middle">
@@ -23,15 +19,17 @@
                         <font-awesome-icon class="fa-icon" icon="pencil"></font-awesome-icon>
                     </button>
                     <ModalComponent
+                        :modalId="`${tableId}-edit-modal-${index}`"
                         :index="index"
                         :modalType="`${tableId}-edit`"
                         :modalTitle="editTitle"
                         :modalContent="EditComponent"
                         :entry="entry"
+                        :actionRoute="editActionRoute"
                     >
                         <EditComponent
                             :entry="entry"
-                            :actionRoute="editRouteAction"
+                            :actionRoute="editActionRoute"
                         />
                     </ModalComponent>
                 </td>
@@ -106,13 +104,10 @@
             tableEntries: {  
                 type: Array
             },
-            routeName: {
-                type: String,
-            },
-            editRouteAction: {
+            editActionRoute: {
                 type: String
             },
-            deleteRouteAction: {
+            deleteActionRoute: {
                 type: String
             }
         },

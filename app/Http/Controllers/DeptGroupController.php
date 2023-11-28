@@ -23,18 +23,21 @@ class DeptGroupController extends Controller
                 'campus_code' => ['displayName' => 'Campus Code', 
                                     'name' => 'campus-code', 
                                     'value' => $item->campus_code,
-                                    'type' => 'select',
+                                    'type' => gettype($item->campus_code),
+                                    'inputType' => 'select',
                                     'options' => $campusData,
                                 ],
                 'group_number' => ['displayName' => 'Group Number', 
                                     'name' => 'group-number', 
-                                    'value' => $item->dept_grp, 
-                                    'type' => 'text'
+                                    'value' => $item->dept_grp,
+                                    'type' => gettype($item->dept_grp),
+                                    'inputType' => 'text'
                                 ],
                 'group_name' => ['displayName' => 'Group Name', 
                                     'name' => 'group-name', 
-                                    'value' => $item->dept_grp_name, 
-                                    'type' => 'text'
+                                    'value' => $item->dept_grp_name,
+                                    'type' => gettype($item->dept_grp_name),
+                                    'inputType' => 'text'
                                 ],
             ];
         });
@@ -54,44 +57,44 @@ class DeptGroupController extends Controller
 
     public function update(Request $req)
     {
-        echo 'inside deptgrp update controller';
         $result = $req->all();
 
-        $formData = $req->json()->get('formData');
-        dd($formData); // formData object present in the config attribute
+        $json_data = $req->json()->get('formData');
+        $formData = json_decode($json_data, true);
+        
+        $dept_grp = $formData['group-number'];
+        echo $dept_grp;
 
-        //-- TODO: need to do below using the $formData json object above
+        $deptGroup = DeptGroup::where('dept_grp', $dept_grp)->first();
 
-        // $deptGroup = DeptGroup::where('dept_grp', $dept_grp)->first();
+        $messages = [
+            'dept_grp.unique' => 'The department group: ' . $req->dept_grp . ' is already in use. Fail to update for the department group: ' . $deptGroup->dept_grp . ".",
+            'dept_grp_name.unique' => 'The department group name:' . $req->dept_grp_name . 'is already in use. Fail to update for the department group name: ' . $deptGroup->dept_grp_name . ".",
+        ];
 
-        // $messages = [
-        //     'dept_grp.unique' => 'The department group: ' . $req->dept_grp . ' is already in use. Fail to update for the department group: ' . $deptGroup->dept_grp . ".",
-        //     'dept_grp_name.unique' => 'The department group name:' . $req->dept_grp_name . 'is already in use. Fail to update for the department group name: ' . $deptGroup->dept_grp_name . ".",
-        // ];
-
-        // // Define validation rules
-        // $validatedData = $req->validate([
-        //     'dept_grp' => [
-        //         'required',
-        //         'string',
-        //         'size:6',
-        //         'unique:dept_group,dept_grp,' . $dept_grp . ',dept_grp'
-        //     ],
-        //     'dept_grp_name' => [
-        //         'required',
-        //         'string',
-        //         'max:60',
-        //         'unique:dept_group,dept_grp_name,' . $deptGroup->dept_grp_name . ',dept_grp_name'
-        //     ],
-        //     'campus_code' => 'required',
-        // ], $messages);
+        // Define validation rules
+        $validatedData = $req->validate([
+            'dept_grp' => [
+                'required',
+                'string',
+                'size:6',
+                'unique:dept_group,dept_grp,' . $dept_grp . ',dept_grp'
+            ],
+            'dept_grp_name' => [
+                'required',
+                'string',
+                'max:60',
+                'unique:dept_group,dept_grp_name,' . $deptGroup->dept_grp_name . ',dept_grp_name'
+            ],
+            'campus_code' => 'required',
+        ], $messages);
 
         // // Attempt to update the record
-        // DeptGroup::where('dept_grp', $dept_grp)->update([
-        //     'dept_grp' => $validatedData['dept_grp'],
-        //     'dept_grp_name' => $validatedData['dept_grp_name'],
-        //     'campus_code' => $validatedData['campus_code']
-        // ]);
+        DeptGroup::where('dept_grp', $dept_grp)->update([
+            'dept_grp' => $validatedData['dept_grp'],
+            'dept_grp_name' => $validatedData['dept_grp_name'],
+            'campus_code' => $validatedData['campus_code']
+        ]);
 
         return redirect()->route('dept_groups');
     }
