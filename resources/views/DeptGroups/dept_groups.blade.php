@@ -38,7 +38,6 @@
 
         <br/>
         @if(count($data)>0)
-
             <div class="table-wrapper">
                 
                 <table-component 

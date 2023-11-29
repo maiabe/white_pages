@@ -1,7 +1,7 @@
 
 <template>
-    <form method="POST">
-        <!-- Axios library automatically handles CSRF for any form submissions -->
+    <form method="POST" :action="actionRoute">
+        <input type="hidden" name="_token" :value="csrfToken" />
         <div v-for="field in entry" class="form-group">
             <label :for="field.name">{{ field.displayName }}</label>
             <input v-if="field.inputType=='text'"
@@ -21,7 +21,8 @@
     </form>
 </template>
 
-<script>
+<script>    
+
     export default {
         props: {
             entry: {
@@ -31,6 +32,9 @@
             actionRoute: {
                 type: String,
                 /* required: true, */
+            },
+            csrf: {
+                type: String,
             },
             submitButtonId: {
                 type: String,
@@ -52,7 +56,14 @@
                 model: this.entry,
             };
         }, */
+        data() {
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+            return {
+                csrfToken
+            }
+        },
         mounted() {
+            
             const button = document.getElementById(this.submitButtonId); 
             button.addEventListener('click', this.submitForm);
         },
@@ -62,7 +73,6 @@
                 console.log(e.target);
 
                 const form = e.target.closest('.modal-content').querySelector('form');
-                console.log(form);
                 
                 const formInputs = form.querySelectorAll('.form-control');
                 console.log(formInputs);
@@ -75,22 +85,24 @@
                 console.log(this.entry);
                 const formData = {};
                 for(const field in this.entry) {
-                    const fieldName = this.entry[field].name;
-                    formData[fieldName] = this.entry[field].value;
+                    formData[field] = this.entry[field].value;
                 }
-
                 console.log(formData);
 
-                axios.post(this.actionRoute, formData)
-                .then(response => {
-                    console.log(response.data);
-                })
-                .catch(error => {
-                    console.log(
-                        'axios error'
-                    );
-                    console.log(error); 
-                });
+                // axios.post(this.actionRoute, formData)
+                // .then(response => {
+                //     console.log(response.data);
+                //     window.location.href = response.data.redirectUrl;
+                // })
+                // .catch(error => {
+                //     console.log(
+                //         'axios error'
+                //     );
+                //     console.log(error); 
+                // });
+                
+                
+                form.submit();
             },
         }
     }

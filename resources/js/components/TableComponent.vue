@@ -112,6 +112,7 @@
             }
         },
         mounted() {
+            console.log(this.editActionRoute);
             this.initializeDataTable();
             /* const editButtons = document.querySelectorAll('.edit-button');
             editButtons.forEach(editBtn => {

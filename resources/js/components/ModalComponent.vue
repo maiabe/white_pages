@@ -15,6 +15,7 @@
                 <div class="modal-body">
                     <!-- Add conditionals for modal content -->
                     <component
+                        ref="dynamicComponent"
                         :is="this.resolveComponentName"
                         v-if="entry !== undefined"
                         :entry="entry"
@@ -31,7 +32,7 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="close-button">
                         Close
                     </button>
-                    <button type="submit" ref="submitButton" :id="`${modalId}-submit`" class="btn btn-primary">Confirm</button>
+                    <button type="submit" ref="submitButton" :id="`${modalId}-submit`" class="btn btn-primary" @click="submitForm">Confirm</button>
                 </div>
             </div>
         </div>
@@ -76,5 +77,12 @@
                 type: String
             }
         },
+        methods: {
+            submitForm() {
+                console.log('submit button clicked');
+
+
+            }
+        }
     }
 </script>
