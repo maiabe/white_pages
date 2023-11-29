@@ -1,12 +1,12 @@
 <template>
-    <table ref="table" :id="tableId" class="table table-bordered table-hover dataTable table-responsive table-fixed w-auto">
+    <table ref="table" :id="tableId" class="table table-bordered table-hover dataTable table-responsive table-fixed w-auto text-center">
         <thead class="table-header-color align-middle">
             <tr>
                 <th v-for="column in Object.keys(tableEntries[0])" >
                     {{ column }}
                 </th>
-                <th>Edit</th>
-                <th>Delete</th>
+                <th style="width: 55px">Edit</th>
+                <th style="width: 55px">Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -14,7 +14,7 @@
                 <td v-for="item in Object.values(entry)">
                     {{ item ? item.value : '' }}
                 </td>
-                <td>
+                <td style="width: 55px">
                     <button :id="`${tableId}-edit-button-${index}`" class="btn btn-custom edit-button" data-bs-toggle="modal" :data-bs-target="`#${tableId}-edit-modal-${index}`">
                         <font-awesome-icon class="fa-icon" icon="pencil"></font-awesome-icon>
                     </button>
@@ -33,7 +33,7 @@
                         />
                     </ModalComponent>
                 </td>
-                <td>
+                <td style="width: 55px">
                     <button :id="`${tableId}-delete-button-${index}`" class="btn btn-custom delete-button" data-bs-toggle="modal" :data-bs-target="`#${tableId}-delete-modal-${index}`">
                         <font-awesome-icon class="fa-icon" icon="trash"></font-awesome-icon>
                     </button>
@@ -126,41 +126,29 @@
 
         },
         methods: {
-            loadScript(src, callback) {
-                const script = document.createElement('script');
-                script.type = 'text/javascript';
-                script.src = src;
-                script.onload = callback;
-                document.head.appendChild(script);
-            },
             initializeDataTable() {
                 const table = this.$refs.table;
                 if (table) {
                     new DataTable(this.$refs.table, {
                         autoWidth: true,
-                        "pagingType": "simple_numbers",
-                        "language": {
-                            "emptyTable": "The Department Listings table is empty",
-                            "lengthMenu": "Display _MENU_ entries",
-                            "loadingRecords": "Loading...",
-                            "processing": "Processing...",
-                            "zeroRecords": "No search results found",
-                            "paginate": {
+                        dom: '<"filter-wrapper"lf><"table-wrapper"t><"paging-wrapper"ip>',
+                        pagingType: "simple_numbers",
+                        language: {
+                            emptyTable: "The Department Listings table is empty",
+                            lengthMenu: "Display _MENU_ entries",
+                            loadingRecords: "Loading...",
+                            processing: "Processing...",
+                            zeroRecords: "No search results found",
+                            paginate: {
                                 "next": "Next",
                                 "previous": "Previous"
                             },
+                            search: "",
+                            searchPlaceholder: "Search Records"
                         }
                     });
                 }
             },
-            /* editEntry(e) {
-                const editModal = e.target.closest('td').querySelector('#edit-modal');
-                $(editModal).modal("show");
-            },
-            deleteEntry(e) {
-                const deleteModal = e.target.closest('td').querySelector('#delete-modal');
-                $(deleteModal).modal("show");
-            } */
         }
     }
 

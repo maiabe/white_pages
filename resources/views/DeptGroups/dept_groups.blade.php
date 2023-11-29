@@ -38,7 +38,7 @@
 
         <br/>
         @if(count($data)>0)
-            <div class="table-wrapper">
+            <div class="main-wrapper">
                 
                 <table-component 
                     :table-name="'Department Group'"
