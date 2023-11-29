@@ -1,11 +1,21 @@
 
 /************************* Modal Style *************************/
+.modal-content {
+    text-align: start;
+}
+
 .modal-body {
     padding: 5%;
 }
 
 
 /************************* Form Style *************************/
+.form-group {
+    margin-bottom: 20px;
+}
+.form-group label {
+    margin-bottom: 5px;
+}
 .form-control {
     margin-bottom: 3%;
 }

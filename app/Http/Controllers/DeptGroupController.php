@@ -9,39 +9,77 @@ use App\Models\Department;
 use App\Models\Campus;
 use Illuminate\Validation\ValidationException;
 
+
 class DeptGroupController extends Controller
 {
     public function index()
     {
+        // $columnNames = ['Campus Code', 'Group Number', 'Name'];
+        // $campusData = Campus::distinct()->pluck('code');
+
+        // $data = DeptGroup::select('campus_code', 'dept_grp', 'dept_grp_name')
+        // ->get()
+        // ->map(function($item) use ($campusData) {
+
+        //     return (object) [
+        //         'campus_code' => ['displayName' => 'Campus Code', 
+        //                             'name' => 'campus-code', 
+        //                             'value' => $item->campus_code,
+        //                             'type' => gettype($item->campus_code),
+        //                             'inputType' => 'select',
+        //                             'options' => $campusData,
+        //                         ],
+        //         'group_number' => ['displayName' => 'Group Number', 
+        //                             'name' => 'group-number', 
+        //                             'value' => $item->dept_grp,
+        //                             'type' => gettype($item->dept_grp),
+        //                             'inputType' => 'text'
+        //                         ],
+        //         'group_name' => ['displayName' => 'Group Name', 
+        //                             'name' => 'group-name', 
+        //                             'value' => $item->dept_grp_name,
+        //                             'type' => gettype($item->dept_grp_name),
+        //                             'inputType' => 'text'
+        //                         ],
+        //     ];
+        // });
+
         $columnNames = ['Campus Code', 'Group Number', 'Name'];
         $campusData = Campus::distinct()->pluck('code');
-
-        $data = DeptGroup::select('campus_code', 'dept_grp', 'dept_grp_name')
+        
+        $data = Department::select('id', 'campus_id', 'group_no', 'name')
         ->get()
         ->map(function($item) use ($campusData) {
-
+            $campus = Campus::where('id', $item->campus_id)->first();
             return (object) [
-                'campus_code' => ['displayName' => 'Campus Code', 
+                'dept_id' => ['columnName' => '', 
+                                    'name' => 'dept-id', 
+                                    'value' => $item->id,
+                                    'type' => gettype($campus->code),
+                                    'inputType' => 'hidden',
+                                ],
+                'campus_code' => ['columnName' => 'Campus Code', 
                                     'name' => 'campus-code', 
-                                    'value' => $item->campus_code,
-                                    'type' => gettype($item->campus_code),
+                                    'value' => $campus->code,
+                                    'type' => gettype($campus->code),
                                     'inputType' => 'select',
                                     'options' => $campusData,
                                 ],
-                'group_number' => ['displayName' => 'Group Number', 
+                'group_number' => ['columnName' => 'Group Number', 
                                     'name' => 'group-number', 
-                                    'value' => $item->dept_grp,
-                                    'type' => gettype($item->dept_grp),
+                                    'value' => $item->group_no,
+                                    'type' => gettype($item->group_no),
                                     'inputType' => 'text'
                                 ],
-                'group_name' => ['displayName' => 'Group Name', 
-                                    'name' => 'group-name', 
-                                    'value' => $item->dept_grp_name,
-                                    'type' => gettype($item->dept_grp_name),
+                'dept_name' => ['columnName' => 'Department Name', 
+                                    'name' => 'dept-name', 
+                                    'value' => $item->name,
+                                    'type' => gettype($item->name),
                                     'inputType' => 'text'
                                 ],
             ];
         });
+
 
         return view('DeptGroups.dept_groups', ['columnNames' => $columnNames,'data' => $data, 'campusData' => $campusData]);
     }
@@ -55,17 +93,18 @@ class DeptGroupController extends Controller
     public function update(Request $req)
     {
         try {
+            $dept_id = (int) $req['dept-id'];
             $grp_num = $req['group-number'];
-            $grp_name = $req['group-name'];
+            $dept_name = $req['dept-name'];
             $campus_code = $req['campus-code'];
     
-            $dept_group = DeptGroup::where('dept_grp', $grp_num)->first();
-    
-            // echo $req;
-    
+            $campus = Campus::where('code', $campus_code)->first();
+            $req['campus-id'] = $campus->id;
+            // dd($req);
+
             $messages = [
-                'dept_grp.unique' => 'The department group: ' . $grp_num . ' is already in use. Fail to update for the department group: ' . $grp_num . ".",
-                'dept_grp_name.unique' => 'The department group name:' . $grp_name . 'is already in use. Fail to update for the department group name: ' . $grp_name. ".",
+                'group_no.unique' => 'The department group: ' . $grp_num . ' is already in use. Fail to update for the department group: ' . $grp_num . ".",
+                'name.unique' => 'The department name:' . $dept_name . 'is already in use. Fail to update for the department name: ' . $dept_name. ".",
             ];
     
             // Define validation rules
@@ -74,28 +113,35 @@ class DeptGroupController extends Controller
                     'required',
                     'string',
                     'size:6',
-                    'unique:dept_group,dept_grp,' . $grp_num . ',dept_grp'
+                    'unique:Department,group_no,'.$grp_num.',group_no'
                 ],
-                'group-name' => [
+                'dept-name' => [
                     'required',
                     'string',
                     'max:60',
-                    'unique:dept_group,dept_grp_name,' . $grp_name . ',dept_grp_name'
+                    'unique:Department,name,'.$dept_name.',name'
                 ],
-                'campus-code' => 'required',
+                'campus-id' => [
+                    'required',
+                    'integer',
+                ],
             ], $messages);
-    
-    
+
+            // DB::enableQueryLog();
+     
             // Attempt to update the record
-            DeptGroup::where('dept_grp', $grp_num)->update([
-                'dept_grp' => $validatedData['group-number'],
-                'dept_grp_name' => $validatedData['group-name'],
-                'campus_code' => $validatedData['campus-code']
+            Department::where('id', $dept_id)->update([
+                'group_no' => $validatedData['group-number'],
+                'name' => $validatedData['dept-name'],
+                'campus_id' => $validatedData['campus-id']
             ]);
+            // dd(DB::getQueryLog());
 
             return redirect()->route('dept_groups');
 
         } catch (ValidationException $e) {
+            $errors = $e->validator->getMessageBag()->toArray();
+            dd($errors); // Output or log the validation errors
             return back()-> withErrors($e->errors())->withInput();
         }
         

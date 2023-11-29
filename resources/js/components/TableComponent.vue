@@ -1,26 +1,26 @@
 <template>
-    <table ref="table" :id="tableId" class="table table-bordered table-hover dataTable table-responsive table-fixed w-auto text-center">
+    <table ref="table" :id="tableId" class="table table-bordered table-hover dataTable table-responsive table-fixed w-auto">
         <thead class="table-header-color align-middle">
             <tr>
-                <th v-for="column in Object.keys(tableEntries[0])" >
-                    {{ column }}
+                <th v-for="column, index in displayColumns(tableEntries[0])" :key="index">
+                    {{ column.columnName }}
                 </th>
                 <th style="width: 55px">Edit</th>
                 <th style="width: 55px">Delete</th>
             </tr>
         </thead>
         <tbody>
-            <tr v-for="(entry, index) in tableEntries"  class="align-middle">
-                <td v-for="item in Object.values(entry)">
+            <tr v-for="(entry, i) in tableEntries"  class="align-middle" :key="i">
+                <td v-for="(item, j) in displayValues(entry)" :key="j">
                     {{ item ? item.value : '' }}
                 </td>
                 <td style="width: 55px">
-                    <button :id="`${tableId}-edit-button-${index}`" class="btn btn-custom edit-button" data-bs-toggle="modal" :data-bs-target="`#${tableId}-edit-modal-${index}`">
+                    <button :id="`${tableId}-edit-button-${i}`" class="btn btn-custom edit-button" data-bs-toggle="modal" :data-bs-target="`#${tableId}-edit-modal-${i}`">
                         <font-awesome-icon class="fa-icon" icon="pencil"></font-awesome-icon>
                     </button>
                     <ModalComponent
-                        :modalId="`${tableId}-edit-modal-${index}`"
-                        :index="index"
+                        :modalId="`${tableId}-edit-modal-${i}`"
+                        :index="i"
                         :modalType="`${tableId}-edit`"
                         :modalTitle="editTitle"
                         :modalContent="EditComponent"
@@ -34,7 +34,7 @@
                     </ModalComponent>
                 </td>
                 <td style="width: 55px">
-                    <button :id="`${tableId}-delete-button-${index}`" class="btn btn-custom delete-button" data-bs-toggle="modal" :data-bs-target="`#${tableId}-delete-modal-${index}`">
+                    <button :id="`${tableId}-delete-button-${i}`" class="btn btn-custom delete-button" data-bs-toggle="modal" :data-bs-target="`#${tableId}-delete-modal-${i}`">
                         <font-awesome-icon class="fa-icon" icon="trash"></font-awesome-icon>
                     </button>
                     <!-- <ModalComponent
@@ -58,18 +58,12 @@
 </template>
 
 <script>
-    import JQuery from 'jquery';
     import DataTable from 'datatables.net-dt';
     import 'datatables.net-dt/css/jquery.dataTables.css';
     import ModalComponent from './ModalComponent.vue';
     import EditComponent from './ModalContent/EditComponent.vue';
     import DeleteComponent from './ModalContent/DeleteComponent.vue';
 
-    /*     
-    import DataTable from 'datatables.net-dt';
-    import 'datatables.net-dt/css/jquery.dataTables.css';
-    import ModalComponent from './ModalComponent.vue';
- */
     export default {
         name: 'TableComponent',
         components: {
@@ -78,7 +72,7 @@
         data() {
             return {
                 EditComponent: 'EditComponent',
-                DeleteComponent: 'DeleteComponent'
+                DeleteComponent: 'DeleteComponent',
             }
         },
         computed: {
@@ -112,7 +106,6 @@
             }
         },
         mounted() {
-            console.log(this.editActionRoute);
             this.initializeDataTable();
             /* const editButtons = document.querySelectorAll('.edit-button');
             editButtons.forEach(editBtn => {
@@ -149,6 +142,26 @@
                     });
                 }
             },
+            displayColumns(tableColumns) {
+                const keys = Object.keys(tableColumns);
+                const columns = [];
+                keys.forEach(column => {
+                    if (tableColumns[column].inputType !== 'hidden') {
+                        columns.push(tableColumns[column]);
+                    }
+                });
+                return columns;
+            },
+            displayValues(entry) {
+                const keys = Object.keys(entry);
+                const values = [];
+                keys.forEach(value => {
+                    if (entry[value].inputType !== 'hidden') {
+                        values.push(entry[value]);
+                    }
+                });
+                return values;
+            }
         }
     }
 

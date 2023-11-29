@@ -20,4 +20,5 @@ class Department extends Model
         'fax',
         'website'
     ];
+    public $timestamps = false;
 }
