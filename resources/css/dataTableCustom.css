@@ -129,11 +129,18 @@ table.dataTable {
     text-align: center !important;
 } */
 
+table.dataTable {
+    width: 100% !important;
+}
+
 /* table.dataTable tbody tr td {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 } */
+
+
+
 
 .dataTables_wrapper .dataTables_paginate {
     float: right !important;

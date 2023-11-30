@@ -131,10 +131,10 @@
                 type: String,
                 required: true,
             },
-            departmentListingsRoute: {
-                type: String,
-                required: true,
-            },
+            // departmentListingsRoute: {
+            //     type: String,
+            //     required: true,
+            // },
             deptGroupsRoute: {
                 type: String,
                 required: true,

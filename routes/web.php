@@ -26,7 +26,7 @@ Route::get('/departments','App\Http\Controllers\DepartmentController@index')->na
 Route::get('/dept_groups',[DeptGroupController::class, 'index'])->name('dept_groups');
 Route::post('dept_groups/delete','App\Http\Controllers\DeptGroupController@destroy')->name('dept_groups.destroy');
 Route::post('dept_groups/update','App\Http\Controllers\DeptGroupController@update')->name('dept_groups.update');
-Route::post('dept_groups', [DeptGroupController::class, 'store'])->name('dept_groups.store');
+Route::post('dept_groups/add', [DeptGroupController::class, 'store'])->name('dept_groups.store');
 
 Route::get('/person_listings',[PersonController::class, 'index'])->name('person_listings');
 Route::delete('person_listings/{username}', 'App\Http\Controllers\PersonController@destroy')->name('person_listings.destroy');
@@ -35,11 +35,15 @@ Route::post('person_listings/{username}', 'App\Http\Controllers\PersonController
 Route::patch('person_listings/{username}' , 'App\Http\Controllers\PersonController@approve')->name('person_listings.approve');
 Route::post('person_listings', [PersonController::class, 'store'])->name('person_listings.store');
 
-//Route::get('/dept_groups',[DeptGroupController::class, 'index'])->name('dept_groups');
 Route::get('/dept_contacts',[DeptContactController::class, 'index'])->name('dept_contacts');
-Route::get('/department_listings',[DepartmentController::class, 'index'])->name('department_listings');
+Route::post('dept_contacts/delete','App\Http\Controllers\DeptContactController@destroy')->name('dept_contacts.destroy');
+Route::post('dept_contacts/update','App\Http\Controllers\DeptContactController@update')->name('dept_contacts.update');
+Route::post('dept_contacts/add', [DeptContactController::class, 'store'])->name('dept_contacts.store');
+
 Route::get('/announcements',[AnnouncementController::class, 'index'])->name('announcements');
 Route::get('/admins',[AdminController::class, 'index'])->name('admins');
 
-
 Route::get('/profile',[ProfileController::class, 'index'])->name('profile');
+
+// Route::get('/department_listings',[DepartmentController::class, 'index'])->name('department_listings'); // Not in use anymore
+

@@ -1,12 +1,12 @@
 <template>
-    <table ref="table" :id="tableId" class="table table-bordered table-hover dataTable table-responsive table-fixed w-auto">
+    <table ref="table" :id="tableId" class="table table-bordered table-hover dataTable" >
         <thead class="table-header-color align-middle">
             <tr>
                 <th v-for="column, index in displayColumns(tableEntries[0])" :key="index">
                     {{ column.columnName }}
                 </th>
-                <th style="width: 5%">&nbsp;Edit&nbsp;</th>
-                <th style="width: 5%">Delete</th>
+                <th v-if="this.editActionRoute" style="width: 5%">&nbsp;Edit&nbsp;</th>
+                <th v-if="this.editActionRoute" style="width: 5%">Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -14,7 +14,7 @@
                 <td v-for="(item, j) in displayValues(entry)" :key="j">
                     {{ item ? item.value : '' }}
                 </td>
-                <td style="width: 5%">
+                <td v-if="this.editActionRoute" style="width: 5%">
                     <button :id="`${tableId}-edit-button-${i}`" class="btn btn-custom edit-button" data-bs-toggle="modal" :data-bs-target="`#${tableId}-edit-modal-${i}`">
                         <font-awesome-icon class="fa-icon" icon="pencil"></font-awesome-icon>
                     </button>
@@ -33,7 +33,7 @@
                         />
                     </ModalComponent>
                 </td>
-                <td style="width: 5%">
+                <td v-if="this.deleteActionRoute" style="width: 5%">
                     <button :id="`${tableId}-delete-button-${i}`" class="btn btn-custom delete-button" data-bs-toggle="modal" :data-bs-target="`#${tableId}-delete-modal-${i}`">
                         <font-awesome-icon class="fa-icon" icon="trash"></font-awesome-icon>
                     </button>
@@ -139,8 +139,13 @@
                                 "previous": "Previous"
                             },
                             search: "",
-                            searchPlaceholder: "Search Records"
-                        }
+                            searchPlaceholder: "Search Records",
+                        },
+                        fixedColumns: {
+                                left: 0,
+                                right: 2
+                            },
+                        // scrollX: true,
                     });
                 }
             },

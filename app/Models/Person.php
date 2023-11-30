@@ -1,9 +1,12 @@
 <?php
 
 namespace App\Models;
+use App\Models\Role;
+
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+
 
 class Person extends Model
 {
@@ -34,4 +37,9 @@ class Person extends Model
     {
         return $this->hasOne(PendingPerson::class, 'person_id');
     }
+
+    public function roles() {
+        return $this-> belongsToMany(Role::class, 'Person_Role')->withPivot('role_id');
+    }
+
 };

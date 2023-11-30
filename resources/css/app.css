@@ -61,7 +61,7 @@ main {
     min-height: 1000px;
     flex-grow: 1;
     overflow: auto;
-    padding: 4%;
+    /* padding: 4%; */
 }
 
 .main-content {
@@ -71,6 +71,22 @@ main {
     height: 100%;
     overflow: hidden;
 }
+
+.main-title-container {
+    background-color: #61D0C975;
+    box-shadow: 1px 1px 8px rgba(21, 21, 21, 0.15);
+    padding: 2%;
+
+}
+.main-title-wrapper {
+    padding: 2%;
+
+}
+
+.main-container {
+    padding: 4% 6%;
+}
+
 
 /**********************************************/
 /**************** Navbar Styles ***************/
@@ -257,24 +273,24 @@ footer .container {
 /*********** Table Component Styles ***********/
 /**********************************************/
 .add-button-wrapper {
-    padding: 2% 0;
+    margin: 0 0 2% 0;
     display: flex;
     justify-content: end;
 }
 
 .add-button {
     background-color: #91CDC9;
-    border: none;
     padding: 8px 30px;
     text-align: center;
     text-decoration: none;
     font-size: 16px;
     cursor: pointer;
     border-radius: 30px;
-    float: right;
     height: 50px;
     box-shadow: 1px 1px 5px rgba(21, 21, 21, 0.5);
-    border: 1px outset #85F2EC9E;
+    border: 1px outset;
+    border-color: white;
+    margin-top: 0 !important;
 }
 .edit-button {
     background-color: rgba(134, 194, 241);
