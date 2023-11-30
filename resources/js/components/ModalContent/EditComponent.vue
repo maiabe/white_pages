@@ -3,10 +3,8 @@
     <FormComponent
         :entry="entry"
         :actionRoute="actionRoute"
-        :submitButtonId="submitButtonId" 
-        
+        :submitButtonId="submitButtonId"
     />
-
 </template>
 
 <script>
@@ -27,10 +25,6 @@
         },
         components: {
             FormComponent
-        },
-        mounted() {
-            /* const button = document.getElementById(this.submitButtonId);
-            button.addEventListener('click', this.submitFormTest); */
-        },
+        }
     }
 </script>

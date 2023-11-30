@@ -5,8 +5,8 @@
                 <th v-for="column, index in displayColumns(tableEntries[0])" :key="index">
                     {{ column.columnName }}
                 </th>
-                <th style="width: 55px">Edit</th>
-                <th style="width: 55px">Delete</th>
+                <th style="width: 5%">&nbsp;Edit&nbsp;</th>
+                <th style="width: 5%">Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -14,7 +14,7 @@
                 <td v-for="(item, j) in displayValues(entry)" :key="j">
                     {{ item ? item.value : '' }}
                 </td>
-                <td style="width: 55px">
+                <td style="width: 5%">
                     <button :id="`${tableId}-edit-button-${i}`" class="btn btn-custom edit-button" data-bs-toggle="modal" :data-bs-target="`#${tableId}-edit-modal-${i}`">
                         <font-awesome-icon class="fa-icon" icon="pencil"></font-awesome-icon>
                     </button>
@@ -33,23 +33,25 @@
                         />
                     </ModalComponent>
                 </td>
-                <td style="width: 55px">
+                <td style="width: 5%">
                     <button :id="`${tableId}-delete-button-${i}`" class="btn btn-custom delete-button" data-bs-toggle="modal" :data-bs-target="`#${tableId}-delete-modal-${i}`">
                         <font-awesome-icon class="fa-icon" icon="trash"></font-awesome-icon>
                     </button>
-                    <!-- <ModalComponent
-                        :index="index"
+                    <ModalComponent
+                        :modalId="`${tableId}-delete-modal-${i}`"
+                        :index="i"
                         :modalType="`${tableId}-delete`"
                         :modalTitle="deleteTitle"
                         :modalContent="DeleteComponent"
                         :entry="entry"
+                        :actionRoute="deleteActionRoute"
                     >
                         <DeleteComponent
+                            :datasetType="tableName"
                             :entry="entry"
-                            :actionRoute="deleteRouteAction"
+                            :actionRoute="deleteActionRoute"
                         />
-                    </ModalComponent> -->
-
+                    </ModalComponent>
                 </td>
             </tr>
         </tbody>

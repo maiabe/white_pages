@@ -25,14 +25,6 @@
     color: gray !important;
 }
 
-/******************* Add Button *******************/
-.add-button-wrapper {
-    display: flex;
-    justify-content: end;
-}
-
-
-
 /**********************************************/
 /**************** Table Styles ***************/
 /**********************************************/
@@ -118,9 +110,6 @@ table th {
     padding-bottom: 30px;
 }
 
-.btn-custom {
-    width: 60px;
-}
 
 
 /* 
@@ -191,9 +180,13 @@ table.dataTable {
     float: right !important;
     height: 50px !important;
 }
-
+/* 
 .btn-custom {
     width: 60% !important;
+} */
+
+.btn-custom {
+    width: 50px;
 }
 .close {
     background: none !important;

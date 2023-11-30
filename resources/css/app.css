@@ -256,25 +256,36 @@ footer .container {
 /**********************************************/
 /*********** Table Component Styles ***********/
 /**********************************************/
-
+.add-button-wrapper {
+    padding: 2% 0;
+    display: flex;
+    justify-content: end;
+}
 
 .add-button {
     background-color: #91CDC9;
     border: none;
-    padding: 5px 30px;
+    padding: 8px 30px;
     text-align: center;
     text-decoration: none;
     font-size: 16px;
     cursor: pointer;
     border-radius: 30px;
     float: right;
-    height: 40px;
+    height: 50px;
+    box-shadow: 1px 1px 5px rgba(21, 21, 21, 0.5);
+    border: 1px outset #85F2EC9E;
 }
 .edit-button {
     background-color: rgba(134, 194, 241);
 }
 .delete-button {
-    background-color: rgba(203, 93, 93)
+    background-color: rgba(203, 93, 93);
+    border-color: rgb(203, 93, 93);
+}
+.delete-button:hover {
+    background-color: rgb(209, 2, 2);
+    border-color: rgb(209, 2, 2);
 }
 button:hover {
     opacity: 0.8;

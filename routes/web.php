@@ -24,7 +24,7 @@ Route::get('/campus',[CampusController::class, 'index']);
 Route::get('/departments','App\Http\Controllers\DepartmentController@index')->name('departments.index');
 
 Route::get('/dept_groups',[DeptGroupController::class, 'index'])->name('dept_groups');
-Route::delete('dept_groups/delete','App\Http\Controllers\DeptGroupController@destroy')->name('dept_groups.destroy');
+Route::post('dept_groups/delete','App\Http\Controllers\DeptGroupController@destroy')->name('dept_groups.destroy');
 Route::post('dept_groups/update','App\Http\Controllers\DeptGroupController@update')->name('dept_groups.update');
 Route::post('dept_groups', [DeptGroupController::class, 'store'])->name('dept_groups.store');
 

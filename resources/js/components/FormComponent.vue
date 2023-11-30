@@ -4,7 +4,7 @@
         <input type="hidden" name="_token" :value="csrfToken" />
         <div v-for="field in entry" class="form-group" >
             <label v-if="field.inputType!=='hidden'" :for="field.name">{{ field.columnName }}</label>
-            <input v-if="field.inputType=='text' || field.inputType=='hidden'"
+            <input v-if="field.inputType!=='select'"
                     :v-model="entry[field.key]"
                     :name="field.name"
                     :type="field.inputType"
@@ -63,45 +63,13 @@
             }
         },
         mounted() {
-            
             const button = document.getElementById(this.submitButtonId); 
             button.addEventListener('click', this.submitForm);
         },
         methods: {
             submitForm(e) {
                 e.preventDefault();
-                console.log(e.target);
-
                 const form = e.target.closest('.modal-content').querySelector('form');
-                
-                // const formInputs = form.querySelectorAll('.form-control');
-                // console.log(formInputs);
-                // const formObject = {};
-                // formInputs.forEach(input => {
-                //     formObject[input.name] = input.value;
-                // });
-                // console.log(formObject);
-
-                // console.log(this.entry);
-                // const formData = {};
-                // for(const field in this.entry) {
-                //     formData[field] = this.entry[field].value;
-                // }
-                // console.log(formData);
-
-                // axios.post(this.actionRoute, formData)
-                // .then(response => {
-                //     console.log(response.data);
-                //     window.location.href = response.data.redirectUrl;
-                // })
-                // .catch(error => {
-                //     console.log(
-                //         'axios error'
-                //     );
-                //     console.log(error); 
-                // });
-                
-                
                 form.submit();
             },
         }

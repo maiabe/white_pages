@@ -15,7 +15,6 @@
                 <div class="modal-body">
                     <!-- Add conditionals for modal content -->
                     <component
-                        ref="dynamicComponent"
                         :is="this.resolveComponentName"
                         v-if="entry !== undefined"
                         :entry="entry"
@@ -25,6 +24,7 @@
                     <component v-else
                         :is="this.resolveComponentName"
                         :actionRoute="actionRoute"
+                        :submitButtonId="`${modalId}-submit`"
                     />
 
                 </div>
@@ -32,7 +32,7 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="close-button">
                         Close
                     </button>
-                    <button type="submit" ref="submitButton" :id="`${modalId}-submit`" class="btn btn-primary" @click="submitForm">Confirm</button>
+                    <button type="submit" ref="submitButton" :id="`${modalId}-submit`" class="btn btn-primary">Confirm</button>
                 </div>
             </div>
         </div>
@@ -41,17 +41,23 @@
 </template>
 
 <script>
+    import AddComponent from './ModalContent/AddComponent.vue';
     import EditComponent from './ModalContent/EditComponent.vue';
+    import DeleteComponent from './ModalContent/DeleteComponent.vue';
 
     export default {
         name: 'ModalComponent',
         components: {
-            EditComponent
+            AddComponent,
+            EditComponent,
+            DeleteComponent
         },
         computed: {
             resolveComponentName() {
                 const componentMap = {
-                    'EditComponent': EditComponent
+                    'AddComponent': AddComponent,
+                    'EditComponent': EditComponent,
+                    'DeleteComponent': DeleteComponent
                 }
                 return componentMap[this.modalContent] || DefaultComponent;
             }
@@ -77,12 +83,5 @@
                 type: String
             }
         },
-        methods: {
-            submitForm() {
-                console.log('submit button clicked');
-
-
-            }
-        }
     }
 </script>
