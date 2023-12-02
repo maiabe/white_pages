@@ -57,7 +57,7 @@
 
         <td>
 
-            <a class="btn btn-primary" href="{{ route('roles.edit',$role->id) }}">Edit</a>
+            <a class="btn btn-primary me-1" href="{{ route('roles.edit',$role->id) }}">Edit</a>
 
             {!! Form::open(['method' => 'DELETE','route' => ['roles.destroy', $role->id],'style'=>'display:inline']) !!}
 
