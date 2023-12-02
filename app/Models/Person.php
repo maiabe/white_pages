@@ -7,7 +7,6 @@ use App\Models\Department;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Department;
 
 
 class Person extends Model

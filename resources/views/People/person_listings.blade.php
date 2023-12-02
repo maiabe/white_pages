@@ -702,7 +702,6 @@
 
             $("#deletePersonModal").modal("show");
 
-            var deleteUrl = "{{ route('person_listings.destroy', ':personUsername') }}";
             deleteUrl = deleteUrl.replace(":personUsername", personUsername);
             $("#delete-form").attr("action", deleteUrl);
         });

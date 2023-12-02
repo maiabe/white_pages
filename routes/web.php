@@ -29,7 +29,7 @@ Route::post('dept_groups/update','App\Http\Controllers\DeptGroupController@updat
 Route::post('dept_groups/add', [DeptGroupController::class, 'store'])->name('dept_groups.store');
 
 Route::get('/person_listings',[PersonController::class, 'index'])->name('person_listings');
-Route::delete('person_listings/{username}', 'App\Http\Controllers\PersonController@destroy')->name('person_listings.destroy');
+// Route::delete('person_listings/{username}', 'App\Http\Controllers\PersonController@destroy')->name('person_listings.destroy');
 Route::post('person_listings/{username}', 'App\Http\Controllers\PersonController@update')->name('person_listings.update');
 Route::patch('person_listings/{username}' , 'App\Http\Controllers\PersonController@approve')->name('person_listings.approve');
 Route::post('person_listings', [PersonController::class, 'store'])->name('person_listings.store');
@@ -42,3 +42,5 @@ Route::post('dept_contacts/add', [DeptContactController::class, 'store'])->name(
 
 Route::get('/announcements',[AnnouncementController::class, 'index'])->name('announcements');
 Route::get('/admins',[AdminController::class, 'index'])->name('admins');
+Route::get('/profile',[ProfileController::class, 'index'])->name('profile');
+

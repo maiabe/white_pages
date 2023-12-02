@@ -60,7 +60,7 @@ class PersonController extends Controller
         return view('People.person_listings',['personData'=> $personData, 'pendingPersonData'=>$pendingPersonData]);
     }
 
-    public function destroy($username,)
+    public function destroy($username)
     {
         Person::where('username', $username)->delete();
         return redirect()->route('person_listings');
