@@ -109,16 +109,21 @@
         },
         mounted() {
             this.initializeDataTable();
-            /* const editButtons = document.querySelectorAll('.edit-button');
-            editButtons.forEach(editBtn => {
-                editBtn.addEventListener('click', (e) => this.editEntry(e));
+            // make columns including 'Names' nowrap
+            const table = this.$refs.table;
+            // find index of column that includes 'Name' in a title
+            const tableHeaders = table.querySelectorAll('thead th');
+            tableHeaders.forEach((th, i) => {
+                const headerName = th.textContent;
+                if (headerName.includes('Name')) {
+                    th.style.whiteSpace = 'nowrap';
+
+                    table.querySelectorAll('tbody tr').forEach(tr => {
+                        const td = tr.querySelectorAll('td')[i];
+                        td.style.whiteSpace = 'nowrap';
+                    });
+                }
             });
-
-            const deleteButtons = document.querySelectorAll('.delete-button');
-            deleteButtons.forEach(deleteBtn => {
-                deleteBtn.addEventListener('click', (e) => this.deleteEntry(e));
-            }); */
-
         },
         methods: {
             initializeDataTable() {
@@ -141,11 +146,12 @@
                             search: "",
                             searchPlaceholder: "Search Records",
                         },
-                        fixedColumns: {
-                                left: 0,
-                                right: 2
-                            },
                         // scrollX: true,
+                        // fixedColumns: {
+                        //         leftColumns: 0,
+                        //         rightColumns: 2
+                        //     },
+                        
                     });
                 }
             },

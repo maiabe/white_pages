@@ -32,7 +32,6 @@
                 return obj[key];
             });
             
-            console.log(fields);
             return { fields }
         },
         components: {

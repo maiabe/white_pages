@@ -17,10 +17,14 @@
     margin-bottom: 5px;
 }
 .form-control {
-    margin-bottom: 3%;
+    margin-bottom: 1%;
+}
+.validation-msg {
+    color: red;
+    margin-left: 2%;
 }
 
-
+  
 
 /************************* Delete Modal Style *************************/
 .delete-message-fields {

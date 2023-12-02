@@ -32,7 +32,7 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="close-button">
                         Close
                     </button>
-                    <button type="submit" ref="submitButton" :id="`${modalId}-submit`" class="btn btn-primary">Confirm</button>
+                    <button type="submit" ref="submitButton" :id="`${modalId}-submit`" class="btn btn-primary submit-button">Confirm</button>
                 </div>
             </div>
         </div>

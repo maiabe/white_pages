@@ -14,6 +14,38 @@ class PersonController extends Controller
         $personData = Person::all();
         $pendingPersonData = PendingPerson::all();
 
+        $data = $personData->map(function($person) {
+            $department = $person->departments->first();
+            return (object) [
+                'person_id' => ['columnName' => 'id', 
+                                    'name' => 'person-id', 
+                                    'value' => $person['id'],
+                                    'type' => gettype($person['id']),
+                                    'inputType' => 'hidden',
+                                ],
+                'username' => ['columnName' => 'Username', 
+                                    'name' => 'username', 
+                                    'value' => $person['username'],
+                                    'type' => gettype($person['username']),
+                                    'inputType' => 'text',
+                                ],
+                'name' => ['columnName' => 'Name', 
+                                    'name' => 'name', 
+                                    'value' => $person['name'],
+                                    'type' => gettype($person['name']),
+                                    'inputType' => 'text'
+                                ],
+                'department_name' => ['columnName' => 'Department Name', 
+                                    'name' => 'dept_name', 
+                                    'value' => $department->name,
+                                    'type' => gettype($department->name),
+                                    'inputType' => 'text'
+                                ],
+            ];
+        });
+
+        dd($data);
+
         return view('People.person_listings',['personData'=> $personData, 'pendingPersonData'=>$pendingPersonData]);
     }
 

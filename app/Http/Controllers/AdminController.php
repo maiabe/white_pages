@@ -10,6 +10,7 @@ class AdminController extends Controller
 {
     public function index()
     {
+
         // Get Person records with Admin roles
         $admins = Person::whereHas('roles', function($query) {
             $query->where('name', 'Admin');

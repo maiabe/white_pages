@@ -187,6 +187,7 @@ class DeptGroupController extends Controller
             ], $messages);
 
             // DB::enableQueryLog();
+            // dd($validatedData);
      
             // Attempt to update the record
             Department::where('id', $dept_id)->update([
@@ -207,8 +208,9 @@ class DeptGroupController extends Controller
 
         } catch (ValidationException $e) {
             $errors = $e->validator->getMessageBag()->toArray();
-            dd($errors); // Output or log the validation errors
-            return back()-> withErrors($e->errors())->withInput();
+            //dd($errors); // Output or log the validation errors
+            // return back()-> withErrors($e->errors())->withInput();
+            return response()->json(['errors' => $errors], 422);
         }
         
     }
@@ -295,8 +297,10 @@ class DeptGroupController extends Controller
 
         } catch (ValidationException $e) {
             $errors = $e->validator->getMessageBag()->toArray();
-            dd($errors); // Output or log the validation errors
-            return back()-> withErrors($e->errors())->withInput();
+            // dd($errors); // Output or log the validation errors
+            // return back()-> withErrors($e->errors())->withInput();
+            return response()->json(['errors' => $errors], 422);
+
         }
 
         // $messages =[

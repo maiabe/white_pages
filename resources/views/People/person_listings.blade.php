@@ -2,10 +2,16 @@
 @extends('../Layout/layout')
 
 @section('content')
-    <div class="container-fluid">
-        <div class="person-header">
+
+    <div class="main-title-container">
+        <div class="main-title-wrapper">
             <h1>Person Listings</h1>
-            <button id="custom-add-btn" type="button" data-bs-toggle="modal" data-bs-target="#addPersonModal">
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="add-button-wrapper">
+            <button id="custom-add-btn" class="add-button" type="button" data-bs-toggle="modal" data-bs-target="#addPersonModal">
                 Add New Person
             </button>
         </div>
