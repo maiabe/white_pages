@@ -13,21 +13,26 @@ return new class extends Migration
     {
         Schema::create('Person', function (Blueprint $table) {
             $table->id();
+            // $table->unsignedBigInteger('campus_id')->nullable();
+            // $table->unsignedBigInteger('dept_id')->nullable();
             $table->string('username', 60);
             $table->string('name', 60);
             $table->string('name_of_record');
-            $table->string('job_title')->nullable();
+            $table->string('job_title')->nullable(true);
             $table->string('email', 100);
-            $table->string('alias_email',100)->nullable();
-            $table->string('phone', 14)->nullable();
-            $table->string('location', 100);
-            $table->string('fax', 14)->nullable();
-            $table->string('website', 200)->nullable();
-            $table->boolean('publishable');
-            $table->dateTime('lastApprovedAt')->nullable();;
-            $table->unsignedBigInteger('lastApprovedBy')->nullable();;
+            $table->string('alias_email',100)->nullable(true);
+            $table->string('phone', 14)->nullable(true);
+            $table->string('location', 100)->nullable(true);
+            $table->string('fax', 14)->nullable()->nullable(true);
+            $table->string('website', 200)->nullable(true);
+            $table->boolean('publishable')->default(false);
+            $table->dateTime('lastApprovedAt')->nullable(true);
+            $table->unsignedBigInteger('lastApprovedBy')->default(0);
             $table->boolean('pending')->default(false);
         });
+
+        // $table->foreign('campus_id')->references('id')->on('Campus');
+        // $table->foreign('dept_id')->references('id')->on('Department');
     }
 
     /**
@@ -35,6 +40,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('person');
+        Schema::dropIfExists('Person');
     }
 };

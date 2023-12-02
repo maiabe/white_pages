@@ -17,16 +17,16 @@ return new class extends Migration
             $table->string('username', 60);
             $table->string('name', 60);
             $table->string('name_of_record');
-            $table->string('job_title')->nullable();
+            $table->string('job_title')->nullable(true);
             $table->string('email', 100);
-            $table->string('alias_email',100)->nullable();
-            $table->string('phone', 14)->nullable();
-            $table->string('location', 100);
-            $table->string('fax', 14)->nullable();
-            $table->string('website', 200)->nullable();
-            $table->boolean('publishable');
-            $table->dateTime('lastApprovedAt')->nullable();;
-            $table->unsignedBigInteger('lastApprovedBy')->nullable();;
+            $table->string('alias_email',100)->nullable(true);
+            $table->string('phone', 14)->nullable(true);
+            $table->string('location', 100)->nullable(true);
+            $table->string('fax', 14)->nullable(true);
+            $table->string('website', 200)->nullable(true);
+            $table->boolean('publishable')->default(false);
+            $table->dateTime('lastApprovedAt')->nullable();
+            $table->unsignedBigInteger('lastApprovedBy')->default(0);
         });
     }
 
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pending_person');
+        Schema::dropIfExists('PendingPerson');
     }
 };
