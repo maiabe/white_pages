@@ -150,7 +150,6 @@
         },
         mounted() {
             const sidebar = document.querySelector('.sidebar-offcanvas');
-            console.log(sidebar);
             const sidebarToggleBtn = document.getElementById('sidebarToggleBtn');
             console.log(sidebarToggleBtn);
             sidebarToggleBtn.addEventListener('click', (e) => {
@@ -183,9 +182,10 @@
                 });
             },
             toggleSidebarTab(e) {
-                console.log(e);
-                const toggleBtnUp = e.target.querySelector('.sidebar-toggle-btn.up');
-                const toggleBtnDown = e.target.querySelector('.sidebar-toggle-btn.down');
+                const btnWrapper = e.target.closest('.sidebar-toggle');
+                const toggleBtnUp = btnWrapper.querySelector('.sidebar-toggle-btn.up');
+                const toggleBtnDown = btnWrapper.querySelector('.sidebar-toggle-btn.down');
+
                 toggleBtnUp.classList.toggle('expanded');
                 toggleBtnDown.classList.toggle('expanded');
                 // console.log(toggleBtnDown);
