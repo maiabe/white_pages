@@ -49,6 +49,11 @@ Route::get('/profile',[ProfileController::class, 'index'])->name('profile');
 
 Auth::routes();
 
+
+Route::get('/', function () {
+    return redirect('/login');
+});
+
 Route::post('/logout', function () {
     Auth::logout();
     return redirect('/login');
