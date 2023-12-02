@@ -10,6 +10,11 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\ProfileController;
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProductController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -43,4 +48,3 @@ Route::post('dept_contacts/add', [DeptContactController::class, 'store'])->name(
 Route::get('/announcements',[AnnouncementController::class, 'index'])->name('announcements');
 Route::get('/admins',[AdminController::class, 'index'])->name('admins');
 Route::get('/profile',[ProfileController::class, 'index'])->name('profile');
-
