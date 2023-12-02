@@ -36,14 +36,6 @@
                             <h6>Person Listings</h6>
                         </div>
                     </a>
-                    <!-- <a :href="departmentListingsRoute" class="page-link">
-                        <div class="page-icon">
-                            <font-awesome-icon icon="building" style="color: #ffffff;" />
-                        </div>
-                        <div class="page-name">
-                            <h6>Department Listings</h6>
-                        </div>
-                    </a> -->
                     <a :href="deptGroupsRoute" class="page-link">
                         <div class="page-icon">
                             <font-awesome-icon icon="building-columns" style="color: #ffffff;" />
@@ -158,30 +150,45 @@
         },
         mounted() {
             const sidebar = document.querySelector('.sidebar-offcanvas');
-            sidebar.addEventListener('show.bs.offcanvas', (e) => this.toggleSidebarContent(e));
-            sidebar.addEventListener('hide.bs.offcanvas', (e) => this.toggleSidebarContent(e));
-            sidebar.addEventListener('shown.bs.offcanvas', (e) => this.toggleSidebarTab(e));
-            sidebar.addEventListener('hidden.bs.offcanvas', (e) => this.toggleSidebarTab(e));
+            console.log(sidebar);
+            const sidebarToggleBtn = document.getElementById('sidebarToggleBtn');
+            console.log(sidebarToggleBtn);
+            sidebarToggleBtn.addEventListener('click', (e) => {
+                this.toggleSidebarContent(e);
+                this.toggleSidebarTab(e);
+            });
+            // sidebar.addEventListener('show.bs.offcanvas', (e) => this.toggleSidebarContent(e));
+            // sidebar.addEventListener('hide.bs.offcanvas', (e) => this.toggleSidebarContent(e));
+            //sidebar.addEventListener('shown.bs.offcanvas', (e) => this.toggleSidebarTab(e));
+            // sidebar.addEventListener('hidden.bs.offcanvas', (e) => this.toggleSidebarTab(e));
         },
         methods: {
             toggleSidebarContent(e) {
+                console.log(e);
                 const sidebarWrapper = e.target.closest('aside');
-                const logoWrapper = e.target.querySelector('.logo-wrapper');
-                const titleWrapper = e.target.querySelector('.title-wrapper');
-                const pageIcons = e.target.querySelectorAll('.page-icon');
-                const pageNames = e.target.querySelectorAll('.page-name');
+                const logoWrapper = sidebarWrapper.querySelector('.logo-wrapper');
+                const titleWrapper = sidebarWrapper.querySelector('.title-wrapper');
+                const pageIcons = sidebarWrapper.querySelectorAll('.page-icon');
+                const pageNames = sidebarWrapper.querySelectorAll('.page-name');
                 sidebarWrapper.classList.toggle('expanded');
                 
                 logoWrapper.classList.toggle('expanded');
                 titleWrapper.classList.toggle('expanded');
-                pageIcons.forEach(pi => { pi.classList.toggle('expanded') });
-                pageNames.forEach(pn => { pn.classList.toggle('expanded') });
+                pageIcons.forEach(pi => { 
+                    pi.classList.toggle('expanded') 
+                });
+                pageNames.forEach(pn => { 
+                    pn.classList.toggle('expanded') 
+                    // console.log(pn);
+                });
             },
             toggleSidebarTab(e) {
+                console.log(e);
                 const toggleBtnUp = e.target.querySelector('.sidebar-toggle-btn.up');
                 const toggleBtnDown = e.target.querySelector('.sidebar-toggle-btn.down');
                 toggleBtnUp.classList.toggle('expanded');
                 toggleBtnDown.classList.toggle('expanded');
+                // console.log(toggleBtnDown);
             }
         }     
     };
