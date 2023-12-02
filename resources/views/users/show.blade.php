@@ -22,7 +22,7 @@
     </div>
 
 </div>
-
+@role('Admin')
 
 <div class="row">
 
@@ -60,7 +60,7 @@
 
             @foreach($user->getRoleNames() as $v)
 
-            <label class="badge badge-success">{{ $v }}</label>
+            <label class="">{{ $v }}</label>
 
             @endforeach
 
@@ -71,5 +71,6 @@
     </div>
 
 </div>
-
+@else
+@endrole
 @endsection
