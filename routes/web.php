@@ -25,14 +25,14 @@ use App\Http\Controllers\ProductController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Auth::routes();
+// Auth::routes();
 
 
-Route::get('/', function () {
-    return redirect('/login');
-});
+// Route::get('/', function () {
+//     return redirect('/login');
+// });
 
-Route::group(['middleware' => ['auth']], function() {
+// Route::group(['middleware' => ['auth']], function() {
     Route::post('/logout', function () {
         Auth::logout();
         return redirect('/login');
@@ -44,8 +44,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/departments','App\Http\Controllers\DepartmentController@index')->name('departments.index');
 
     Route::get('/dept_groups',[DeptGroupController::class, 'index'])->name('dept_groups');
-    Route::delete('dept_groups/{dept_grp}','App\Http\Controllers\DeptGroupController@destroy')->name('dept_groups.destroy');
-    Route::put('dept_groups/{dept_grp}','App\Http\Controllers\DeptGroupController@update')->name('dept_groups.update');
+    Route::delete('dept_groups/delete','App\Http\Controllers\DeptGroupController@destroy')->name('dept_groups.destroy');
+    Route::put('dept_groups/update','App\Http\Controllers\DeptGroupController@update')->name('dept_groups.update');
     Route::post('dept_groups', [DeptGroupController::class, 'store'])->name('dept_groups.store');
 
     Route::get('/person_listings',[PersonController::class, 'index'])->name('person_listings');
@@ -64,4 +64,4 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
-});
+// });

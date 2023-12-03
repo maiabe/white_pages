@@ -13,11 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('password_resets', function (Blueprint $table) {
-            $table->string('email')->index();
-            $table->string('token');
-            $table->timestamp('created_at')->nullable();
-        });
+        // Check if the table exists before attempting to create it
+        if (!Schema::hasTable('password_resets')) {
+            Schema::create('password_resets', function (Blueprint $table) {
+                $table->string('email')->index();
+                $table->string('token');
+                $table->timestamp('created_at')->nullable();
+            });
+        }
+        // Schema::create('password_resets', function (Blueprint $table) {
+        //     $table->string('email')->index();
+        //     $table->string('token');
+        //     $table->timestamp('created_at')->nullable();
+        // });
     }
 
     /**
