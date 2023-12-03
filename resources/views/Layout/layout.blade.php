@@ -84,12 +84,11 @@
                         @endif
 
                         @else
-                        @role('Admin')
+
                         <li><a class="nav-link" href="{{ route('users.index') }}">Manage Users</a></li>
 
                         <li><a class="nav-link" href="{{ route('roles.index') }}">Manage Role</a></li>
-                        @else
-                        @endrole
+
 
                         <li class="nav-item dropdown">
 
