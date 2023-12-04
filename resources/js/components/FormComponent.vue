@@ -10,7 +10,13 @@
                     :type="field.inputType"
                     :value="field.value"
                     class="form-control"
+                    :required="field.required ? field.required : false"
+                    :pattern="field.pattern"
+                    :title="field.title"
+                    :maxlength="field.maxlength"
+                    :minlength="field.minlength"
             />
+
             <select v-if="field.inputType=='select'"
                     :v-model="entry[field.key]"
                     class="form-select"

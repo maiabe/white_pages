@@ -51,6 +51,16 @@ class DeptGroupController extends Controller
         ->get()
         ->map(function($item) use ($campusData) {
             $campus = Campus::where('id', $item->campus_id)->first();
+
+            // Construct Client validation
+            $groupNumInputVal = [
+                'required' => true,
+                'messsage' => 'must be exactly 6 characters',
+                'minlength' => 6,
+                'maxlength' => 6,
+            ];
+
+            // Return View objects
             return (object) [
                 'dept_id' => ['columnName' => 'id', 
                                     'name' => 'dept-id', 
@@ -69,13 +79,21 @@ class DeptGroupController extends Controller
                                     'name' => 'group-number', 
                                     'value' => $item->group_no,
                                     'type' => gettype($item->group_no),
-                                    'inputType' => 'text'
+                                    'inputType' => 'text',
+                                    'required' => True,
+                                    'title' => 'must be exactly 6 characters.',
+                                    'minlength' => 6,
+                                    'maxlength' => 6
                                 ],
                 'dept_name' => ['columnName' => 'Department Name', 
                                     'name' => 'dept-name', 
                                     'value' => $item->name,
                                     'type' => gettype($item->name),
-                                    'inputType' => 'text'
+                                    'inputType' => 'text',
+                                    'required' => False,
+                                    'title' => 'Enter a name (2 to 255 characters)',
+                                    'minlength' => 2,
+                                    'maxlength' => 255,
                                 ],
                 'email' => ['columnName' => 'Email', 
                                     'name' => 'email', 
