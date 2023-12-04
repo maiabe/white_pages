@@ -32,6 +32,7 @@ class CreateAdminAndRolesSeeder extends Seeder
 
     {
 
+        // Need to insert into Person table instead and assign roles to Person
         $user = User::create([
 
             'name' => 'Tardik Savani',
@@ -48,8 +49,6 @@ class CreateAdminAndRolesSeeder extends Seeder
         Role::create(['name'=> 'Secondary']);
         $role = Role::create(['name' => 'Admin']);
         Role::create(['name'=>'HelpDesk']);
-
-
 
 
 

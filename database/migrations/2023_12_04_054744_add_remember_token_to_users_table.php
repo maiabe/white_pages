@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('Campus', function (Blueprint $table) {
-            $table->id();
-            $table->string('code', 6);
-            $table->string('name', 40);
+        Schema::table('User', function (Blueprint $table) {
+            $table->rememberToken();
         });
     }
 
@@ -23,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('Campus');
+        Schema::table('User', function (Blueprint $table) {
+            //
+        });
     }
 };

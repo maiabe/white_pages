@@ -27,10 +27,10 @@ export default defineConfig({
                     // reference assets in the public directory as expected.
                     includeAbsolute: false,
                 },
-                compilerOptions: {
+                /* compilerOptions: {
 
                     isCustomElement: (tag) => {return tag.endsWith('component')},
-                }
+                } */
             }
         }),
     ],
