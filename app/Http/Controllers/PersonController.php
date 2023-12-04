@@ -16,9 +16,12 @@ class PersonController extends Controller
     {
         $personData = Person::all();
 
-        $departmentName = Person::whereHas('departments', function($query) {
-            $query->where('dept_id', 'name');
-        })->get();
+        // $departmentName = Person::whereHas('departments', function($query) {
+        //     $query->where('dept_id', 1);
+        // })->get();
+
+        // dd($departmentName);
+
         // $personData = Person::with('departments')->get();
 
         // $personData->load('department');
@@ -46,12 +49,12 @@ class PersonController extends Controller
                                     'type' => gettype($person['name']),
                                     'inputType' => 'text'
                                 ],
-                'department_name' => ['columnName' => 'Department Name', 
-                                    'name' => 'dept_name', 
-                                    'value' => $department->name,
-                                    'type' => gettype($department->name),
-                                    'inputType' => 'text'
-                                ],
+                // 'department_name' => ['columnName' => 'Department Name', 
+                //                     'name' => 'dept_name', 
+                //                     'value' => $department->name,
+                //                     'type' => gettype($department->name),
+                //                     'inputType' => 'text'
+                //                 ],
             ];
         });
 

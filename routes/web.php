@@ -52,6 +52,9 @@ use App\Http\Controllers\ProductController;
     Route::delete('person_listings/{username}', 'App\Http\Controllers\PersonController@destroy')->name('person_listings.destroy');
     Route::put('person_listings/{username}', 'App\Http\Controllers\PersonController@update')->name('person_listings.update');
     Route::post('person_listings', [PersonController::class, 'store'])->name('person_listings.store');
+    Route::patch('person_listings/{username}' , 'App\Http\Controllers\PersonController@approve')->name('person_listings.approve');
+    Route::delete('person_listings/{username}', 'App\Http\Controllers\PersonController@reject')->name('person_listings.reject');
+
 
     //Route::get('/dept_groups',[DeptGroupController::class, 'index'])->name('dept_groups');
     Route::get('/dept_contacts',[DeptContactController::class, 'index'])->name('dept_contacts');
@@ -64,4 +67,9 @@ use App\Http\Controllers\ProductController;
 
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
-// });
+
+//});
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

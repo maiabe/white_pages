@@ -16,7 +16,7 @@
             &#9888; {{ $error }}<br>
             @endforeach
             Please revise and resubmit to update record!
-        </h6>  
+        </h6>
         @endif -->
 
 
@@ -25,7 +25,7 @@
                 Add Department
             </button>
         </div>
-        
+
         <div class="table-wrapper">
             <table-component
                 :table-name="'Department Listing'"
@@ -35,7 +35,7 @@
         </div>
 
 
-        
+
         <br/>
         <!-- @foreach($columns as $column)
             <span>{{$column}}</span>
@@ -79,9 +79,9 @@
                     @endforeach
                 </tbody>
             </table> -->
-        
+
             <!-- Delete Modal -->
-            <!-- <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+            <!-- <div class="modal fade" id="deleteModal" tabindex="-1" ="dialog" aria-labelledby="deleteModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">

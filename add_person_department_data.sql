@@ -1,4 +1,4 @@
-insert into person_department (person_id,dept_id) values
+insert into Person_Department (person_id,dept_id) values
     (1,1),
     (2,2),
     (3,2),

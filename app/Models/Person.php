@@ -45,7 +45,7 @@ class Person extends Model
 
 
     public function departments() {
-        return $this-> belongsToMany(Department::class, 'person_department', 'person_id', 'dept_id')->withPivot('dept_id');
+        return $this-> belongsToMany(Department::class, 'Person_Department', 'person_id', 'dept_id')->withPivot('dept_id');
     }
 
 };
