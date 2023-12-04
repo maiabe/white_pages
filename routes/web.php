@@ -64,6 +64,7 @@ use App\Http\Controllers\ProductController;
 
 
     Route::get('/profile',[ProfileController::class, 'index'])->name('profile');
+    Route::post('/save-announcement', [AnnouncementController::class, 'saveAnnouncement'])->name('save-announcement');
 
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
