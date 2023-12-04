@@ -70,9 +70,9 @@ class AdminController extends Controller
 
         return view('Admins.admins', ['data'=> $data]);
     }
-
-
-
-
-
 }
+
+
+
+
+
