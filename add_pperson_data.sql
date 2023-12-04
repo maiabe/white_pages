@@ -1,2 +1,2 @@
-insert into PendingPerson (username,name,email,phone,location,fax,website,publishable) values 
-    ('masakoi','Masako K Ikeda', 'masakoi@hawaii.edu','808-956-8696', 'UHP','','',true);
+insert into PendingPerson (username,name,name_of_record,job_title, email, alias_email, phone,location,fax,website,publishable,lastApprovedAt,lastApprovedBy) values 
+    ('masakoi','Masako Ikeda', 'Masako K Ikeda', 'Exec Editor','masakoi@hawaii.edu','','808-956-8696','UHP','','',true,'2023-11-08',0);

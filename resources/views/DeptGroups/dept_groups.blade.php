@@ -3,11 +3,17 @@
 
 @section('content')
 
-    <div class="container">
-        <h1>Department Groups</h1>
-        <!-- @if ($errors->any())
+    <div class="main-title-container">
+        <div class="main-title-wrapper">
+            <h1>Manage Department Groups</h1>
+        </div>
+    </div>
+
+    <div class="main-container">
+        
+        @if ($errors->any())
             <h6 class="alert alert-danger mt-4">
-                <strong>The Department Grouping was not updated successfully</strong>
+                <strong>Department Group change failed</strong>
                 <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close" style="position: absolute; top:10px; right: 10px;">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -17,22 +23,39 @@
                 @endforeach
                 Please revise and resubmit to update record!
             </h6>
-        @endif -->
+        @endif
         
-        <button id="deptgrp-add-button" type="button" class="add-department-group mt-4" data-bs-toggle="modal" data-bs-target="#addDeptGrpModal">
-            Add Department Group
-        </button>
+        <div class="add-button-wrapper">
+            <button id="deptgrp-add-button-0" type="button" class="add-button mt-4" data-bs-toggle="modal" data-bs-target="#deptgrp-add-modal-0">
+                Add Department Group
+            </button>
+            <modal-component
+                :modal-id="'deptgrp-add-modal-0'"
+                :index="0"
+                :modal-type="'deptgrp-add'"
+                :modal-title="'Add Department Group'"
+                :modal-content="'AddComponent'"
+                :entry="{{ $data }}"
+                :action-route="'{{ route('dept_groups.store') }}'"
+            >
+                <add-component
+                    :action-route="'{{ route('dept_groups.store') }}'"
+                />
+                
+            </modal-component>
+        </div>
 
-        <br/>
         @if(count($data)>0)
-            
-            <div class="table-wrapper">
+            <div class="main-wrapper">
+                
                 <table-component
                     :table-name="'Department Group'"
-                    :table-id="'dept-groups-table'"
+                    :table-id="'deptgrps-table'"
                     :table-entries="{{ $data }}"
-                    :routeName="'dept_groups'"
-                ></table-component>
+                    :edit-action-route="'{{ route('dept_groups.update') }}'"
+                    :delete-action-route="'{{ route('dept_groups.destroy') }}'"
+                />
+
             </div>
 
         @else

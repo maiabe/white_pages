@@ -1,45 +1,57 @@
 <template>
-    <table ref="table" :id="tableId" class="table table-bordered table-hover dataTable table-responsive table-fixed w-auto">
+    <table ref="table" :id="tableId" class="table table-bordered table-hover dataTable" >
         <thead class="table-header-color align-middle">
             <tr>
-                <th v-for="column in Object.keys(tableEntries[0])" >
-                    {{ column }}
+                <th v-for="column, index in displayColumns(tableEntries[0])" :key="index">
+                    {{ column.columnName }}
                 </th>
-                <th>Edit</th>
-                <th>Delete</th>
+                <th v-if="this.editActionRoute" style="width: 5%">&nbsp;Edit&nbsp;</th>
+                <th v-if="this.editActionRoute" style="width: 5%">Delete</th>
             </tr>
         </thead>
         <tbody>
-            <tr v-for="entry in tableEntries"  class="align-middle">
-                <td v-for="item in Object.values(entry)">
+            <tr v-for="(entry, i) in tableEntries"  class="align-middle" :key="i">
+                <td v-for="(item, j) in displayValues(entry)" :key="j">
                     {{ item ? item.value : '' }}
                 </td>
-                <td>
-                    <button class="btn edit-button btn-custom">
+                <td v-if="this.editActionRoute" style="width: 5%">
+                    <button :id="`${tableId}-edit-button-${i}`" class="btn btn-custom edit-button" data-bs-toggle="modal" :data-bs-target="`#${tableId}-edit-modal-${i}`">
                         <font-awesome-icon class="fa-icon" icon="pencil"></font-awesome-icon>
                     </button>
-                    <ModalComponent 
-                        :modalId="'editModal'" 
-                        :modalLabel="'editModalLabel'"
+                    <ModalComponent
+                        :modalId="`${tableId}-edit-modal-${i}`"
+                        :index="i"
+                        :modalType="`${tableId}-edit`"
                         :modalTitle="editTitle"
-                        :modalBtn="'Confirm'"
+                        :modalContent="EditComponent"
                         :entry="entry"
-                        :actionRoute="`${routeName}.update`"
-                        :modalContent="FormComponent"
-                    />
+                        :actionRoute="editActionRoute"
+                    >
+                        <EditComponent
+                            :entry="entry"
+                            :actionRoute="editActionRoute"
+                        />
+                    </ModalComponent>
                 </td>
-                <td>
-                    <button class="btn delete-button btn-custom">
+                <td v-if="this.deleteActionRoute" style="width: 5%">
+                    <button :id="`${tableId}-delete-button-${i}`" class="btn btn-custom delete-button" data-bs-toggle="modal" :data-bs-target="`#${tableId}-delete-modal-${i}`">
                         <font-awesome-icon class="fa-icon" icon="trash"></font-awesome-icon>
                     </button>
-                    <ModalComponent 
-                        :modalId="'deleteModal'" 
-                        :modalLabel="'deleteModalLabel'"
+                    <ModalComponent
+                        :modalId="`${tableId}-delete-modal-${i}`"
+                        :index="i"
+                        :modalType="`${tableId}-delete`"
                         :modalTitle="deleteTitle"
-                        :modalBtn="'Confirm'"
+                        :modalContent="DeleteComponent"
                         :entry="entry"
-                        :actionRoute="`${routeName}.destroy`"
-                     />
+                        :actionRoute="deleteActionRoute"
+                    >
+                        <DeleteComponent
+                            :datasetType="tableName"
+                            :entry="entry"
+                            :actionRoute="deleteActionRoute"
+                        />
+                    </ModalComponent>
                 </td>
             </tr>
         </tbody>
@@ -48,24 +60,21 @@
 </template>
 
 <script>
-    import JQuery from 'jquery';
     import DataTable from 'datatables.net-dt';
     import 'datatables.net-dt/css/jquery.dataTables.css';
     import ModalComponent from './ModalComponent.vue';
-    import FormComponent from './FormComponent.vue';
+    import EditComponent from './ModalContent/EditComponent.vue';
+    import DeleteComponent from './ModalContent/DeleteComponent.vue';
 
-/*     import DataTable from 'datatables.net-dt';
-    import 'datatables.net-dt/css/jquery.dataTables.css';
-    import ModalComponent from './ModalComponent.vue';
- */
     export default {
         name: 'TableComponent',
         components: {
-            ModalComponent
+            ModalComponent,
         },
         data() {
             return {
-                FormComponent: FormComponent
+                EditComponent: 'EditComponent',
+                DeleteComponent: 'DeleteComponent',
             }
         },
         computed: {
@@ -91,60 +100,80 @@
             tableEntries: {  
                 type: Array
             },
-            routeName: {
-                type: String,
+            editActionRoute: {
+                type: String
+            },
+            deleteActionRoute: {
+                type: String
             }
         },
         mounted() {
             this.initializeDataTable();
+            // make columns including 'Names' nowrap
+            const table = this.$refs.table;
+            // find index of column that includes 'Name' in a title
+            const tableHeaders = table.querySelectorAll('thead th');
+            tableHeaders.forEach((th, i) => {
+                const headerName = th.textContent;
+                if (headerName.includes('Name')) {
+                    th.style.whiteSpace = 'nowrap';
 
-            const editButtons = document.querySelectorAll('.edit-button');
-            editButtons.forEach(editBtn => {
-                editBtn.addEventListener('click', (e) => this.editEntry(e));
+                    table.querySelectorAll('tbody tr').forEach(tr => {
+                        const td = tr.querySelectorAll('td')[i];
+                        td.style.whiteSpace = 'nowrap';
+                    });
+                }
             });
-
-            const deleteButtons = document.querySelectorAll('.delete-button');
-            deleteButtons.forEach(deleteBtn => {
-                deleteBtn.addEventListener('click', (e) => this.deleteEntry(e));
-            });
-
         },
         methods: {
-            loadScript(src, callback) {
-                const script = document.createElement('script');
-                script.type = 'text/javascript';
-                script.src = src;
-                script.onload = callback;
-                document.head.appendChild(script);
-            },
             initializeDataTable() {
                 const table = this.$refs.table;
                 if (table) {
                     new DataTable(this.$refs.table, {
                         autoWidth: true,
-                        "pagingType": "simple_numbers",
-                        "language": {
-                            "emptyTable": "The Department Listings table is empty",
-                            "lengthMenu": "Display _MENU_ entries",
-                            "loadingRecords": "Loading...",
-                            "processing": "Processing...",
-                            "zeroRecords": "No search results found",
-                            "paginate": {
+                        dom: '<"filter-wrapper"lf><"table-wrapper"t><"paging-wrapper"ip>',
+                        pagingType: "simple_numbers",
+                        language: {
+                            emptyTable: "The Department Listings table is empty",
+                            lengthMenu: "Display _MENU_ entries",
+                            loadingRecords: "Loading...",
+                            processing: "Processing...",
+                            zeroRecords: "No search results found",
+                            paginate: {
                                 "next": "Next",
                                 "previous": "Previous"
                             },
-                        }
+                            search: "",
+                            searchPlaceholder: "Search Records",
+                        },
+                        // scrollX: true,
+                        // fixedColumns: {
+                        //         leftColumns: 0,
+                        //         rightColumns: 2
+                        //     },
+                        
                     });
                 }
             },
-            editEntry(e) {
-                const editModal = e.target.closest('td').querySelector('#editModal');
-                console.log(editModal);
-                $(editModal).modal("show");
+            displayColumns(tableColumns) {
+                const keys = Object.keys(tableColumns);
+                const columns = [];
+                keys.forEach(column => {
+                    if (tableColumns[column].inputType !== 'hidden') {
+                        columns.push(tableColumns[column]);
+                    }
+                });
+                return columns;
             },
-            deleteEntry(e) {
-                const deleteModal = e.target.closest('td').querySelector('#deleteModal');
-                $(deleteModal).modal("show");
+            displayValues(entry) {
+                const keys = Object.keys(entry);
+                const values = [];
+                keys.forEach(value => {
+                    if (entry[value].inputType !== 'hidden') {
+                        values.push(entry[value]);
+                    }
+                });
+                return values;
             }
         }
     }

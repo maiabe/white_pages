@@ -9,7 +9,18 @@
     padding: 10px 0;
 } */
 
-.add-button {
+/**********************************************/
+/********* Person Listings Styles *************/
+/**********************************************/
+
+.person-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+#custom-add-btn {
     background-color: #91CDC9;
     border: none;
     padding: 5px 30px;
@@ -20,6 +31,18 @@
     border-radius: 30px;
     float: right;
     height: 50px;
+}
+
+.nav-pills .nav-link {
+    color: black !important;
+}
+
+.nav-pills .nav-link.active {
+    background-color: #91CDC9;
+}
+
+.pending-row {
+    background-color: #FFFBC8 !important;
 }
 
 /**********************************************/
@@ -39,7 +62,7 @@ main {
     min-height: 1000px;
     flex-grow: 1;
     overflow: auto;
-    padding: 4%;
+    /* padding: 4%; */
 }
 
 .main-content {
@@ -49,6 +72,22 @@ main {
     height: 100%;
     overflow: hidden;
 }
+
+.main-title-container {
+    background-color: #61D0C975;
+    box-shadow: 1px 1px 8px rgba(21, 21, 21, 0.15);
+    padding: 2%;
+
+}
+.main-title-wrapper {
+    padding: 2%;
+
+}
+
+.main-container {
+    padding: 2% 6%;
+}
+
 
 /**********************************************/
 /**************** Navbar Styles ***************/
@@ -221,91 +260,6 @@ footer .container {
     color: #F0D695 !important;
 }
 
-/**********************************************/
-/**************** Table Styles ***************/
-/**********************************************/
-
-/*
-
-.table-size {
-    min-height: 500px;
-    overflow: auto;
-}
-
-*/
-
-table.dataTable {
-    border-collapse: collapse !important;
-    border: 1px solid lightgray;
-    margin-top: 20px !important;
-    margin-bottom: 20px !important;
-}
-
-.table th {
-    background-color: #535353 !important;
-    color: white;
-    height: 33px !important;
-    text-align: center;
-}
-
-.paginate_button {
-    border: 1px solid lightgray;
-    padding: 6px 12px;
-    margin-right: 5px;
-    cursor: pointer;
-}
-
-.paginate_button.disabled {
-    background-color: lightgray;
-    border-radius: 5px;
-}
-
-.paginate_button a {
-    color: black;
-    text-decoration: none;
-}
-
-.paginate_button.active {
-    border: 1px solid lightgray;
-    border-radius: 5px;
-    background-color: #91CDC9;
-}
-
-.paginate_button.disable {
-    color: gray;
-}
-
-.dataTables_wrapper .dataTables_paginate {
-    float: right !important;
-}
-
-.dataTables_length {
-    margin-top: 30px;
-}
-
-.dataTables_filter {
-    margin-top: 20px;
-}
-
-.dataTables_filter input {
-    border: 1px solid #AFAEAE;
-    border-radius: 30px;
-    padding: 20px;
-    width: 280px;
-    height: 50px;
-}
-
-.title-background {
-    background-color: #91CDC9;
-    padding-left: 70px;
-    padding-top: 30px;
-    padding-bottom: 30px;
-}
-
-.btn-custom {
-    width: 60px;
-}
-
 
 /**********************************************/
 /********** Department Groups Styles **********/
@@ -319,29 +273,97 @@ table.dataTable {
 /**********************************************/
 /*********** Table Component Styles ***********/
 /**********************************************/
-
+.add-button-wrapper {
+    margin: 0 0 2% 0;
+    display: flex;
+    justify-content: end;
+}
 
 .add-button {
-    background-color: #91CDC9;
-    border: none;
-    padding: 5px 30px;
+    /* background-color: #91CDC9; */
+
+    background-color: rgb(114, 176, 29);
+    /* background-color: #64c106; */
+    color: white;
+    text-shadow: 2px 2px 5px rgba(21, 21, 21, 0.3);
+    padding: 8px 30px;
     text-align: center;
     text-decoration: none;
     font-size: 16px;
     cursor: pointer;
     border-radius: 30px;
-    float: right;
-    height: 40px;
+    height: 50px;
+    box-shadow: 1px 1px 5px rgba(21, 21, 21, 0.5);
+    border: 1px outset;
+    border-color: white;
+    margin-top: 0 !important;
 }
+.add-button:hover {
+    background-color: rgb(90, 153, 1);
+    border-color: rgb(90, 153, 1);
+}
+.add-button-wrapper .modal-header {
+    background-color: #57ac00;
+    color: white;
+    text-shadow: 2px 2px 5px rgba(21, 21, 21, 0.5);
+}
+.add-button-wrapper .modal-footer .submit-button {
+
+    background-color: #57ac00;
+    color: white;
+    text-shadow: 2px 2px 5px rgba(21, 21, 21, 0.5);
+}
+
+.edit-button + .modal .modal-header {
+    background-color: rgb(80, 161, 223);
+    color: white;
+    text-shadow: 2px 2px 5px rgba(21, 21, 21, 0.5);
+}
+.edit-button + .modal .modal-footer .submit-button {
+    background-color: rgb(80, 161, 223);
+    color: white;
+    text-shadow: 2px 2px 5px rgba(21, 21, 21, 0.5);
+}
+.delete-button + .modal .modal-header {
+    background-color: rgb(185, 62, 62);
+    color: white;
+    text-shadow: 2px 2px 5px rgba(21, 21, 21, 0.5);
+}
+.delete-button + .modal .modal-footer .submit-button {
+    background-color: rgb(185, 62, 62);
+    color: white;
+    text-shadow: 2px 2px 5px rgba(21, 21, 21, 0.5);
+}
+
+
+
 .edit-button {
     background-color: rgba(134, 194, 241);
 }
+.edit-button:hover {
+    background-color: rgb(51, 135, 199);
+    border-color: rgb(51, 135, 199);
+}
 .delete-button {
-    background-color: rgba(203, 93, 93)
+    background-color: rgba(203, 93, 93);
+    border-color: rgb(203, 93, 93);
+}
+.delete-button:hover {
+    background-color: rgb(209, 2, 2);
+    border-color: rgb(209, 2, 2);
 }
 button:hover {
     opacity: 0.8;
 }
+
+
+.button {
+    transition: transform 0.05s;
+}
+.button:active {
+    transform: translateY(1.5px);
+}
+
 .fa-icon {
     color: white;
 }

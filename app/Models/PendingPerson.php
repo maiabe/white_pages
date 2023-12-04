@@ -12,19 +12,27 @@ class PendingPerson extends Model
     protected $table = 'PendingPerson';
 
     protected $fillable = [
+        'person_id',
         'username',
         'name',
-//        'name_of_record',
-//        'job_title',
+        'name_of_record',
+        'job_title',
         'email',
-//        'alias_email',
+        'alias_email',
         'phone',
         'location',
         'fax',
         'website',
-        'publishable'
+        'publishable',
+        'lastApprovedAt',
+        'lastApprovedBy'
     ];
 
     public $timestamps = false;
+
+    public function person()
+    {
+        return $this->belongsTo(Person::class, 'person_id');
+    }
 
 };

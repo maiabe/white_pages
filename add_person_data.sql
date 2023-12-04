@@ -1,10 +1,32 @@
 insert into Person (username,name,name_of_record,job_title, email, alias_email, phone,location,fax,website,publishable,lastApprovedAt,lastApprovedBy) values 
     ('masakoi','Masako K Ikeda', 'Masako K Ikeda', 'Exec Editor','masakoi@hawaii.edu','','808-956-8696','UHP','','',true,'2023-11-08',0),
-    ('suthers','Daniel D Suthers','Daniel D Suthers','Professor','suthers@hawaii.edu','daniel.suthers@hawaii.edu','808-856-3890','UH Manoa','','',true,'2023-11-08',0),
-    ('psadow','Peter Joseph Sadowski','Peter J Sadowski','Assistant Professor','psadow@hawaii.edu','peter.sadowski@hawaii.edu','808-956-2023','UH Manoa','','',true,'2023-11-08',0);
-
-
-insert into person_department (person_id,dept_id) values
-    (1,1),
-    (2,2),
-    (3,2);
+    ('suthers','Daniel D Suthers','Daniel D Suthers','Professor','suthers@hawaii.edu','daniel.suthers@hawaii.edu','808-856-3890','POST 309B','808-956-3548','',true,'2023-11-08',0),
+    ('psadow','Peter Joseph Sadowski','Peter J Sadowski','Assistant Professor','psadow@hawaii.edu','peter.sadowski@hawaii.edu','808-956-2023','POST 306C','808-956-3548','',true,'2023-11-08',0),
+    ('rbadawi', 'Ramy Badawi', 'Ramy A Badawi', 'Asst Clin Prof', 'rbadawi@hawaii.edu', '', '808-376-5340', "Queens Med Ctr", '', '', true, '2023-11-27', 0),
+    ('fairlamb', 'John Fairlamb', 'John R Fairlamb', 'Astronomical Survey Postdoc Fellow', 'fairlamb@hawaii.edu', 'fairlamb@ifa.hawaii.edu', '808-956-6909', 'IFA B-134', '', '', true, '2023-11-27', 0),
+    ('johnhu', 'John Hu', 'John Hu', 'Plant Pathologist', 'johnhu@hawaii.edu', '', '808-956-7281', 'StJohn 310C', '', '', true, '2023-11-27', 0),
+    ('melzer', 'Michael John Melzer', 'Michael J Melzer', 'Asst Rschr', 'melzer@hawaii.edu', '', '808-956-2830', 'StJohn 310', '808-956-2832', '', true, '2023-11-27', 0),
+    ('cosierj', 'Johnette Cosier', 'Johnette K Cosier', 'Janitor Supervisor', 'cosierj@hawaii.edu', '', '808-235-7406', 'Alakai 110', '', '', true, '2023-11-27', 0),
+    ('csbers', 'Clifford Bersamira', 'Clifford Bersamira', 'Asst Prof', 'csbers@hawaii.edu', 'clifford.bersamira@hawaii.edu', '808-956-6245', 'Gart  205C', '', '', true, '2023-11-27', 0),
+    ('sammons', 'Todd Sammons', 'Todd H Sammons', 'Assoc Prof', 'sammons@hawaii.edu', '', '808-956-3040', 'Kuy 326', '808-956-7619', '', true, '2023-11-27', 0),
+    ('kyungim', 'Kyungim Baek', 'Kyungim Baek', 'Assoc Prof', 'kyungim@hawaii.edu', '', '808-956-8560', 'POST 303F', '808-956-3548', '', true, '2023-11-30', 0),
+    ('mahdi', 'Mahdi Belcaid', 'Mahdi Belcaid', 'Asst Prof', 'mahdi@hawaii.edu', '', '808-956-6049', 'POST 306B', '808-956-3548', '', true, '2023-11-30', 0),
+    ('esb', 'Edoardo S Biagioni', 'Edoardo Biagioni', 'Assoc Prof', 'esb@hawaii.edu', '', '808-956-3891', 'POST 305F', '808-956-3548', '', true, '2023-11-30', 0),
+    ('binsted', 'Kimberly A Binsted', 'Kimberly A Binsted', 'Prof', 'binsted@hawaii.edu', '', '808-956-6107', 'POST 303D', '808-956-3548', '', true, '2023-11-30', 0),
+    ('henric', 'Henri Casanova', 'Henri A Casanova', 'Prof', 'henric@hawaii.edu', 'henri.casanova@hawaii.edu', '808-956-2649', 'POST 310C', '808-956-3448', '', true, '2023-11-30', 0),
+    ('chin', 'David N Chin', 'David N Chin', 'Emer Prof', 'chin@hawaii.edu', '', '808-956-9564', 'POST 303G', '808-956-3458', '', true, '2023-11-30', 0),
+    ('crosby', 'Martha E Crosby', 'Martha E Crosby', 'Prof', 'crosby@hawaii.edu', '', '808-956-3493', 'POST 305D', '808-956-3548', '', true, '2023-11-30', 0),
+    ('itoga', 'Stephen Y Itoga', 'Stephen Y Itoga', 'Prof Emer', 'itoga@hawaii.edu', 'stephen.itoga@hawaii.edu', '808-956-9564', 'POST 303G', '808-956-3548', '', true, '2023-11-30', 0),
+    ('johnson', 'Philip M Johnson', 'Philip N Johnson', 'Prof', 'johnson@hawaii.edu', '', '808-956-3489', 'POST 314E', '808-956-3548', '', true, '2023-11-30', 0),
+    ('kennydq', "Kenny Ka'aiakamanu-Quibillan", 'Kenny D Kaaiakamanu-Quibilan', 'Academic Advisor', 'kennydq@hawaii.edu', '', '808-956-5428', 'POST 303A', '808-956-3548', '', true, '2023-11-30', 0),
+    ('leighj', 'Jason Leigh', 'Jason Leigh', 'Prof', 'leighj@hawaii.edu', '', '808-956-9164', 'Kell 102A', '808-956-3548', '', true, '2023-11-30', 0),
+    ('depengli', 'Depeng Li', 'Depeng Li', 'Asst Prof', 'depengli@hawaii.edu', '', '808-956-3973', 'POST 314D', '808-956-3548', '', true, '2023-11-30', 0),
+    ('cmmore', 'Carleton Moore', 'Carleton A Moore', 'Asst Prof', 'cmmore@hawaii.edu', '', '808-956-6920', 'POST 314F', '808-956-3548', '', true, '2023-11-30', 0),
+    ('ogawam', 'Michael-Brian Ogawa', 'Michael-Brian C Ogawa', 'Spec', 'ogawam@hawaii.edu', '', '808-956-5069', 'POST 314B', '808-956-3548', '', true, '2023-11-30', 0),
+    ('dusko', 'Dusko Pavlovic', 'Dusko Pavlovic', 'Prof', 'dusko@hawaii.edu', 'dusko.pavlovic@hawaii.edu', '808-956-9639', 'POST 311B', '808-956-3548', '', true, '2023-11-30', 0),
+    ('peruma', 'Anthony Peruma', 'Anthony S A Peruma', 'Asst Prof', 'peruma@hawaii.edu', '', '808-956-6493', 'POST 310B', '808-956-3548', '', true, '2023-11-30', 0),
+    ('fish8', 'Fish Arabia', 'Fish T Arabia', 'Warehouse', 'fish8@hawaii.edu', '', '808-956-3357', 'UHP', '', '', true, '2023-11-30', 0),
+    ('emma6', 'Emma Ching', 'Emma S Ching', 'Acquisitions Editor', 'emma6@hawaii.edu', '', '808-956-6426', 'UHP', '', '', true, '2023-11-30', 0),
+    ('nkaneshi', 'Norman Kaneshiro', 'Norman Kaneshiro', 'Journals Subscriptions Mgr', 'nkaneshi@hawaii.edu', '', '808-956-8833', 'UHP', '', '', true, '2023-11-30', 0),
+    ('colbyh', 'Colby Haggerty', 'Colby C Haggerty', 'Assistant Researcher', 'colbyh@hawaii.edu', '', '808-956-6333', 'IFA B-109', '', '', true, '2023-11-30', 0),
+    ('emoss', 'Evelyn Moss', 'Evelyn Moss', 'Hum Resrc Spec', 'emoss@hawaii.edu', 'emoss@ifa.hawaii.edu', '808-956-8338', 'IFA-B126', '', '', true, '2023-11-30', 0);
