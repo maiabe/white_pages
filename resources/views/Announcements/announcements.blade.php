@@ -16,8 +16,10 @@
 
                 <div class="mb-3">
                     <label for="announcementMessage" class="form-label">Message:</label>
-                    <input type="text" class="form-control" id="announcementMessage" name="announcementMessage" maxlength="200" required>
+                    <textarea class="form-control" id="announcementMessage" name="announcementMessage" rows="4" maxlength="200" required></textarea>
+                    <small class="text-muted">Maximum 200 characters</small>
                 </div>
+
 
                 <div class="mb-3">
                     <label for="beginDate" class="form-label">Begin Date:</label>
