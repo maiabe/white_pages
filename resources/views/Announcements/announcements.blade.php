@@ -37,11 +37,11 @@
     </div>
 
     <hr>
+    @if($announcement)
     <p class="text-center">
         Below is the information for the announcement.<b> It will be visible starting from the "Start Date" and will be hidden after the "End Date.</b>"
     </p>
     <div class="row justify-content-center">
-        @if($announcement)
         <div class="card mb-2">
             <div class="card-header h2 text-center">Announcement</div>
             <div class="card-body">
@@ -55,11 +55,11 @@
                 Posted on {{ $announcement->created_at->format('Y-m-d H:i:s') }}
             </div>
         </div>
-        @endif
     </div>
     <p class="text-center mt-4">
         To modify the information, edit it with new details and click the "Set Announcement" blue button.
     </p>
+    @endif
 </div>
 
 @endsection
