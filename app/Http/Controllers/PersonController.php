@@ -58,7 +58,7 @@ class PersonController extends Controller
             ];
         });
 
-        // dd($data);
+        //dd($personData);
 
         return view('People.person_listings',['personData'=> $personData, 'pendingPersonData'=>$pendingPersonData]);
     }

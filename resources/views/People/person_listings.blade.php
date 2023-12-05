@@ -156,7 +156,7 @@
                                 <td class="pending-row">{{$item->name}}</td>
                                 <td class="pending-row">{{$item->email}}</td>
                                 <td class="pending-row"> {{$item->phone}}</td>
-                                <td class="pending-row"> {{$item->departments}}</td>
+                                <td class="pending-row"> {{$item->departments[0]["name"]}}</td>
                                 <td class="pending-row">{{$item->location}}</td>
                                 <td class="pending-row">{{$item->publishable  ? 'True' : 'False' }}</td>
                                 <td class="pending-row">{{$item->lastApprovedAt}}</td>
@@ -228,7 +228,7 @@
                                 <td>{{$item->name}}</td>
                                 <td>{{$item->email}}</td>
                                 <td>{{$item->phone}}</td>
-                                <td>{{$item->departments}}</td>
+                                <td>{{$item->departments[0]["name"]}}</td>
                                 <td>{{$item->location}}</td>
                                 <td>{{$item->publishable  ? 'True' : 'False' }}</td>
                                 <td>{{$item->lastApprovedAt}}</td>
