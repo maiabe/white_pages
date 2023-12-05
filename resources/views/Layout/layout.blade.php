@@ -31,7 +31,7 @@
 
                 <a class="navbar-brand" href="{{ url('/') }}">
 
-                    UH White Page
+                    <img src="/images/logo/UH_LOGO.png" alt="UH White Page" class="navbar-logo" style="height: 50%; width: 33%">
 
                 </a>
 
@@ -87,9 +87,9 @@
 
                         @else
 
-                        <li><a class="nav-link" href="{{ route('users.index') }}">Manage Users</a></li>
+                        <li><a class="nav-link" href="{{ route('users.index') }}">Users</a></li>
 
-                        <li><a class="nav-link" href="{{ route('roles.index') }}">Manage Role</a></li>
+                        <li><a class="nav-link" href="{{ route('roles.index') }}">Role</a></li>
 
 
                         <li class="nav-item dropdown">
