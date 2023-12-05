@@ -2,7 +2,7 @@
 
 
 @section('content')
-
+<div class="mt-lg-5 m-lg-5">
 <div class="row">
 
     <div class="col-lg-12 margin-tb">
@@ -121,5 +121,5 @@
 {!! Form::close() !!}
 
 
-
+</div>
 @endsection
