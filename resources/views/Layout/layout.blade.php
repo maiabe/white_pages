@@ -86,11 +86,12 @@
                         @endif
 
                         @else
-
+                        @role('admin')
                         <li><a class="nav-link" href="{{ route('users.index') }}">Users</a></li>
 
                         <li><a class="nav-link" href="{{ route('roles.index') }}">Roles</a></li>
-
+                        @else
+                        @endrole
 
                         <li class="nav-item dropdown">
 
