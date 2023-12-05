@@ -89,7 +89,7 @@
 
                         <li><a class="nav-link" href="{{ route('users.index') }}">Users</a></li>
 
-                        <li><a class="nav-link" href="{{ route('roles.index') }}">Role</a></li>
+                        <li><a class="nav-link" href="{{ route('roles.index') }}">Roles</a></li>
 
 
                         <li class="nav-item dropdown">

@@ -10,7 +10,7 @@
                 $isBetweenDates = $now->greaterThanOrEqualTo($announcement->begin_date) && $now->lessThanOrEqualTo($announcement->end_date);
                 @endphp
                 @if($isBetweenDates)
-                    <div class="alert alert-warning" role="alert">
+                    <div class="alert alert-warning mt-3" role="alert">
                         <strong>Announcement</strong>
                         <br>
                         {{ $announcement->message }}

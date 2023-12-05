@@ -7,15 +7,15 @@
 
     <div class="col-lg-12 margin-tb">
 
-        <div class="pull-left">
-
-            <h2>Role Management</h2>
-
+        <div class="main-title-container mb-3">
+            <div class="main-title-wrapper">
+                <h1>Roles</h1>
+            </div>
         </div>
 
         <div class="pull-right">
 
-            <a class="btn btn-success" href="{{ route('roles.create') }}"> Create New Role</a>
+            <a class="btn btn-success mb-2" href="{{ route('roles.create') }}"> Create New Role</a>
 
         </div>
 

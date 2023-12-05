@@ -7,6 +7,7 @@
             <h1>Announcements</h1>
         </div>
     </div>
+
     <div class="main-container">
 
     </div>
