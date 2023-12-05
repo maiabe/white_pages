@@ -13,15 +13,13 @@
 
     <link rel="stylesheet"
         href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">
-        
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
- 
+
     @vite(['resources/js/app.js', 'resources/css/app.css', 'resources/css/dataTableCustom.css', 'resources/css/modalContent.css'])
 </head>
 <body>
@@ -33,7 +31,7 @@
 
                 <a class="navbar-brand" href="{{ url('/') }}">
 
-                    UH White Page
+                    <img src="/images/logo/UH_LOGO.png" alt="UH White Page" class="navbar-logo" style="height: 50%; width: 33%">
 
                 </a>
 
@@ -89,9 +87,9 @@
 
                         @else
 
-                        <li><a class="nav-link" href="{{ route('users.index') }}">Manage Users</a></li>
+                        <li><a class="nav-link" href="{{ route('users.index') }}">Users</a></li>
 
-                        <li><a class="nav-link" href="{{ route('roles.index') }}">Manage Role</a></li>
+                        <li><a class="nav-link" href="{{ route('roles.index') }}">Roles</a></li>
 
 
                         <li class="nav-item dropdown">
@@ -105,25 +103,17 @@
 
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-
                                 <a class="dropdown-item" href="{{ route('logout') }}"
-
-                                   onclick="event.preventDefault();
-
-                                                     document.getElementById('logout-form').submit();">
-
+                                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
-
+                                    <script>
+                                        console.log("clicked");
+                                    </script>
                                 </a>
 
-
-
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-
                                     @csrf
-
                                 </form>
-
                             </div>
 
                         </li>
@@ -139,9 +129,12 @@
         </nav>
     </header>
     <div class="main-content">
+        @guest
+        @else
         <aside>
             @include('Layout.Partials.sidebar')
         </aside>
+        @endguest
         <main>
             @yield('content')
         </main>

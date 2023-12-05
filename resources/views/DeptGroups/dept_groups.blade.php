@@ -5,12 +5,12 @@
 
     <div class="main-title-container">
         <div class="main-title-wrapper">
-            <h1>Manage Department Groups</h1>
+            <h1>Department Groups</h1>
         </div>
     </div>
 
     <div class="main-container">
-        
+
         @if ($errors->any())
             <h6 class="alert alert-danger mt-4">
                 <strong>Department Group change failed</strong>
@@ -24,7 +24,7 @@
                 Please revise and resubmit to update record!
             </h6>
         @endif
-        
+
         <div class="add-button-wrapper">
             <button id="deptgrp-add-button-0" type="button" class="add-button mt-4" data-bs-toggle="modal" data-bs-target="#deptgrp-add-modal-0">
                 Add Department Group
@@ -41,13 +41,13 @@
                 <add-component
                     :action-route="'{{ route('dept_groups.store') }}'"
                 />
-                
+
             </modal-component>
         </div>
 
         @if(count($data)>0)
             <div class="main-wrapper">
-                
+
                 <table-component
                     :table-name="'Department Group'"
                     :table-id="'deptgrps-table'"
@@ -64,7 +64,7 @@
                 No Department Groups to display.
             </div>
         @endif
-        
+
 
     </div>
 

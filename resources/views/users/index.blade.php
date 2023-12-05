@@ -2,20 +2,21 @@
 
 
 @section('content')
-
+<div class="mt-lg-5 m-lg-5">
 <div class="row">
 
     <div class="col-lg-12 margin-tb">
 
-        <div class="pull-left">
+            <div class="main-title-container mb-3">
+                <div class="main-title-wrapper">
+                    <h1>Users</h1>
+                </div>
+            </div>
 
-            <h2>Users Management</h2>
-
-        </div>
 
         <div class="pull-right">
 
-            <a class="btn btn-success" href="{{ route('users.create') }}"> Create New User</a>
+            <a class="btn btn-success mb-2" href="{{ route('users.create') }}"> Create New User</a>
 
         </div>
 
@@ -95,5 +96,5 @@
 
 
 {!! $data->render() !!}
-
+</div>
 @endsection

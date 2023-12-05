@@ -3,85 +3,37 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 
 class DeptContactController extends Controller
 {
     public function index()
     {
-
-        // $columnNames = ['Campus Code', 'Group Number', 'Name', 'Email', 'Phone', 'Location', 'Fax', 'Website'];
-        // $campusData = Campus::distinct()->pluck('code');
+        $unique_persons = DB::select('select distinct(pid),code,name_of_record,' .
+           'per_email, per_phone, dept_name from dept_contact_view order by pid');
+        $combined_roles = DB::select('select pid, group_concat(role_name) as roles' . 
+           ' from dept_contact_view group by pid order by pid');
         
-        // $data = Person::select('id', 'campus_id', 'group_no', 'name', 'email', 'phone', 'location', 'fax', 'website')
-        // ->get()
-        // ->map(function($item) use ($campusData) {
-        //     $campus = Campus::where('id', $item->campus_id)->first();
-        //     return (object) [
-        //         'dept_id' => ['columnName' => 'id', 
-        //                             'name' => 'dept-id', 
-        //                             'value' => $item->id,
-        //                             'type' => gettype($campus->code),
-        //                             'inputType' => 'hidden',
-        //                         ],
-        //         'campus_code' => ['columnName' => 'Campus Code', 
-        //                             'name' => 'campus-code', 
-        //                             'value' => $campus->code,
-        //                             'type' => gettype($campus->code),
-        //                             'inputType' => 'select',
-        //                             'options' => $campusData,
-        //                         ],
-        //         'group_number' => ['columnName' => 'Group Number', 
-        //                             'name' => 'group-number', 
-        //                             'value' => $item->group_no,
-        //                             'type' => gettype($item->group_no),
-        //                             'inputType' => 'text'
-        //                         ],
-        //         'dept_name' => ['columnName' => 'Department Name', 
-        //                             'name' => 'dept-name', 
-        //                             'value' => $item->name,
-        //                             'type' => gettype($item->name),
-        //                             'inputType' => 'text'
-        //                         ],
-        //         'email' => ['columnName' => 'Email', 
-        //                             'name' => 'email', 
-        //                             'value' => $item->email,
-        //                             'type' => gettype($item->email),
-        //                             'inputType' => 'email',
-        //                         ],
-        //         'phone' => ['columnName' => 'Phone', 
-        //                             'name' => 'phone', 
-        //                             'value' => $item->phone,
-        //                             'type' => gettype($item->phone),
-        //                             'inputType' => 'tel',
-        //                         ],
-        //         'location' => ['columnName' => 'Location', 
-        //                             'name' => 'location', 
-        //                             'value' => $item->location,
-        //                             'type' => gettype($item->location),
-        //                             'inputType' => 'text'
-        //                         ],
-        //         'fax' => ['columnName' => 'Fax', 
-        //                             'name' => 'fax', 
-        //                             'value' => $item->fax,
-        //                             'type' => gettype($item->fax),
-        //                             'inputType' => 'tel'
-        //                         ],
-        //         'website' => ['columnName' => 'Website', 
-        //                             'name' => 'website', 
-        //                             'value' => $item->website,
-        //                             'type' => gettype($item->website),
-        //                             'inputType' => 'url'
-        //                         ],
-        //     ];
-        // });
-
-
-        
-        // return view('DeptContacts.dept_contacts', ['columnNames' => $columnNames,'data' => $data, 'campusData' => $campusData]);
-        return view('DeptContacts.dept_contacts');
-    }
-    
-
-
-
+        return view('DeptContacts.dept_contacts',[
+         'unique_persons' => $unique_persons, 
+         'combined_roles' => $combined_roles
+      ]);
+   }
+   public function update(Request $req, $id)
+   {
+       $request = $req->all();
+       $roles = ['role-Member','role-Primary','role-Secondary','role-Admin','role-HelpDesk'];
+       $updated_roles = [];
+       for ($i = 0; $i < count($roles); $i++) {
+           if (isset($request[$roles[$i]])) {
+               $updated_roles[] = ($i+1);
+           }
+       }
+       $persons = DB::delete('delete from Person_Role where person_id=' . $id);
+       for ($i = 0; $i < count($updated_roles); $i++) {
+           DB::insert("insert into Person_Role values (" . $id . "," . 
+               $updated_roles[$i] . ")");   
+       }
+       return redirect()->route('dept_contacts');
+   }
 }
