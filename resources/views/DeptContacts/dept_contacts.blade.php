@@ -2,10 +2,13 @@
 
 @section('content')
 <div class="container-fluid">
-    <div>
-        <h1>Manage Department Contacts</h1>
-    </div>    
-    
+    <div class="main-title-container">
+        <div class="main-title-wrapper">
+            <h1>Department Contacts</h1>
+        </div>
+    </div>
+    <div class="main-container">
+
     <div class="table-content" id="nav-tabContent">
         <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
             <table id="dept-contacts-table" class="table table-size table-bordered mt-5">
@@ -39,7 +42,7 @@
                                 <i class="fa fa-pencil"></i>
                             </button>
                             </td>
-           
+
                         </tr>
                     @endforeach
                 </tbody>
@@ -53,15 +56,15 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <!-- All named variables in form are passed in request -->
-            <form 
+            <form
                 action="{{ route('dept_contacts.update',
                  ':id') }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="modal-header" style="background-color: #86C2F1;">
-                    <h5 class="modal-title" 
+                    <h5 class="modal-title"
                         id="editModalLabel">Edit Person's Roles</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" 
+                    <button type="button" class="close" data-bs-dismiss="modal"
                         aria-label="Close" id="edit-x-button">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -76,7 +79,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" 
+                    <button type="button" class="btn btn-secondary"
                         data-bs-dismiss="modal" id="edit-close-button">
                         Close
                     </button>
@@ -103,7 +106,7 @@
             }
         });
     });
-    
+
         // Function to handle the edit button click
     $(document).ready(function () {
         $("#dept-contacts-table").on("click", ".edit-button", function () {
@@ -135,6 +138,6 @@
         });
      });
 
-    
+
 </script>
 @endsection
