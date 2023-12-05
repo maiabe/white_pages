@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('name', 60);
             $table->string('email', 100);
             $table->string('phone', 14);
-            $table->string('location', 60);
-            $table->string('fax', 14);
-            $table->string('website', 100);
+            $table->string('location', 60)->nullable(true);
+            $table->string('fax', 14)->nullable(true);
+            $table->string('website', 100)->nullable(true);
             $table->foreign('campus_id')->references('id')->on('Campus')->onDelete('cascade');
         });
     }

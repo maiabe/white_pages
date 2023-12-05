@@ -1,5 +1,6 @@
 import './bootstrap';
 import { createApp } from 'vue';
+import { plugin, defaultConfig } from '@formkit/vue'
 
 import NavbarComponent from './components/NavbarComponent.vue';
 import SidebarComponent from './components/SidebarComponent.vue';
@@ -30,6 +31,8 @@ app
     .component('DeleteComponent', DeleteComponent)
     .component('font-awesome-icon', FontAwesomeIcon);
 
-app.mount('#app');
+
+app.use(plugin, defaultConfig).mount('#app');
+
 
 //vue.component('edit-component', EditComponent);

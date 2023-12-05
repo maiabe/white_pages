@@ -3,7 +3,7 @@
     <FormComponent
         :entry="this.fields"
         :actionRoute="actionRoute"
-        :submitButtonId="submitButtonId"
+        :modalId="modalId"
     />
 
 </template>
@@ -21,11 +21,12 @@
                 type: Object,
                 required: false,
             },
-            submitButtonId: {
+            modalId: {
                 type: String
             }
         },
         data() {
+            console.log(this.entry);
             const obj = this.entry[0];
             const fields = Object.keys(obj).map(key => {
                 obj[key].value = '';

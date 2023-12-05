@@ -19,12 +19,12 @@
                         v-if="entry !== undefined"
                         :entry="entry"
                         :actionRoute="actionRoute"
-                        :submitButtonId="`${modalId}-submit`"
+                        :modalId="modalId"
                     />
                     <component v-else
                         :is="this.resolveComponentName"
                         :actionRoute="actionRoute"
-                        :submitButtonId="`${modalId}-submit`"
+                        :modalId="modalId"
                     />
 
                 </div>
