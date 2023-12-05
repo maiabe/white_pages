@@ -25,7 +25,7 @@
             <div class="row">
                 <div class="col-md-6 mx-auto">
                     <h2 class="text-center">White Pages Management System </h2>
-                    <p class="text-center">This is a brief description of the website. You can add any relevant information or text here.</p>
+                    <p class="text-center">The WhitePages Management System is a one-stop web app used to maintain university affiliate records and manage their role privileges.</p>
                 </div>
                 <div class="col-md-6 mx-auto">
                     <img src="/images/logo/WPS.png" alt="UH White Page" class="navbar-logo img-fluid">
