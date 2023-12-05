@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid">
     <div>
-        <h1>Manage Department Contacts</h1>
+        <h1>Manage White Pages Roles</h1>
     </div>    
     
     <div class="table-content" id="nav-tabContent">
@@ -54,7 +54,7 @@
         <div class="modal-content">
             <!-- All named variables in form are passed in request -->
             <form 
-                action="{{ route('dept_contacts.update',
+                action="{{ route('person_role.update',
                  ':id') }}" method="POST">
                 @csrf
                 @method('PUT')
@@ -69,10 +69,17 @@
                 <div class="modal-body">
                     <h5 id="person_label"></h5>
                     <div class="form-group">
+                        <input type="checkbox" name="role-Member" 
+                            id="role-Member">
+                        <label for="role-Member">&nbsp;Member</label><br/>
                         <input type="checkbox" name="role-Primary" id="role-Primary">
                         <label for="role-Primary">&nbsp;Primary</label><br/>
                         <input type="checkbox" name="role-Secondary" id="role-Secondary">
                         <label for="role-Secondary">&nbsp;Secondary</label><br/>
+                        <input type="checkbox" name="role-Admin" id="role-Admin">
+                        <label for="role-Admin">&nbsp;Admin</label><br/>
+                        <input type="checkbox" name="role-HelpDesk" id="role-HelpDesk">
+                        <label for="role-HelpDesk">&nbsp;HelpDesk</label><br/>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -129,7 +136,7 @@
 
             $("#editPersonModal").modal("show");
 
-            var editUrl = "{{ route('dept_contacts.update', ':id') }}";
+            var editUrl = "{{ route('person_role.update', ':id') }}";
             editUrl = editUrl.replace(":id", personId);
             $("#editPersonModal form").attr("action", editUrl);
         });

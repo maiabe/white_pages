@@ -14,6 +14,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\PersonRoleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +59,9 @@ use App\Http\Controllers\ProductController;
 
     //Route::get('/dept_groups',[DeptGroupController::class, 'index'])->name('dept_groups');
     Route::get('/dept_contacts',[DeptContactController::class, 'index'])->name('dept_contacts');
+    Route::get('/manage_roles', [PersonRoleController::class, 'index'])->name('manage_roles');
+    Route::put('/person_role/{id}',[PersonRoleController::class, 'update'])->name('person_role.update');
+    Route::put('/dept_contacts/{id}',[DeptContactController::class, 'update'])->name('dept_contacts.update');
     Route::get('/department_listings',[DepartmentController::class, 'index'])->name('department_listings');
     Route::get('/announcements',[AnnouncementController::class, 'index'])->name('announcements');
     Route::get('/admins',[AdminController::class, 'index'])->name('admins');
