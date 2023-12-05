@@ -24,7 +24,24 @@
     margin-left: 2%;
 }
 
-  
+/**** Formkit Styling ****/
+.form-group .formkit-messages {
+    list-style-type: none;
+    padding-left: 2px;
+}  
+.form-group .formkit-messages .formkit-message {
+    color: red;
+}  
+.form-group .formkit-inner input,
+.form-group .formkit-inner select {
+    width: 100%;
+    height: 35px;
+    border-radius: 5px;
+    border: inset 2px #cab8b8;
+}
+.form-group .formkit-inner select {
+    cursor: pointer;
+}
 
 /************************* Delete Modal Style *************************/
 .delete-message-fields {

@@ -3,7 +3,7 @@
     <FormComponent
         :entry="this.fields"
         :actionRoute="actionRoute"
-        :submitButtonId="submitButtonId"
+        :modalId="modalId"
     />
 
 </template>
@@ -21,7 +21,7 @@
                 type: Object,
                 required: false,
             },
-            submitButtonId: {
+            modalId: {
                 type: String
             }
         },

@@ -52,14 +52,6 @@ class DeptGroupController extends Controller
         ->map(function($item) use ($campusData) {
             $campus = Campus::where('id', $item->campus_id)->first();
 
-            // Construct Client validation
-            $groupNumInputVal = [
-                'required' => true,
-                'messsage' => 'must be exactly 6 characters',
-                'minlength' => 6,
-                'maxlength' => 6,
-            ];
-
             // Return View objects
             return (object) [
                 'dept_id' => ['columnName' => 'id', 
@@ -78,52 +70,69 @@ class DeptGroupController extends Controller
                 'group_number' => ['columnName' => 'Group Number', 
                                     'name' => 'group-number', 
                                     'value' => $item->group_no,
+                                    'placeholder' => '100100',
                                     'type' => gettype($item->group_no),
                                     'inputType' => 'text',
-                                    'required' => True,
-                                    'title' => 'must be exactly 6 characters.',
+                                    'validation' => 'required|length:6,6|number',
                                     'minlength' => 6,
                                     'maxlength' => 6
                                 ],
                 'dept_name' => ['columnName' => 'Department Name', 
                                     'name' => 'dept-name', 
                                     'value' => $item->name,
+                                    'placeholder' => 'Test Department Name',
                                     'type' => gettype($item->name),
                                     'inputType' => 'text',
-                                    'required' => False,
-                                    'title' => 'Enter a name (2 to 255 characters)',
-                                    'minlength' => 2,
-                                    'maxlength' => 255,
+                                    'validation' => "required|length:2,255|alpha_spaces:latin",
                                 ],
                 'email' => ['columnName' => 'Email', 
                                     'name' => 'email', 
                                     'value' => $item->email,
+                                    'placeholder' => 'example@test.com',
                                     'type' => gettype($item->email),
                                     'inputType' => 'email',
+                                    // 'validation' => "required|email|ends_with:.edu",
+                                    'validation' => "required|email",
+                                    'validationMessages' => 'Enter a valid email address (e.g., example@hawaii.edu)',
                                 ],
-                'phone' => ['columnName' => 'Phone', 
+                'phone' => ['columnName' => 'Phone',
                                     'name' => 'phone', 
                                     'value' => $item->phone,
-                                    'type' => gettype($item->phone),
+                                    'placeholder' => "xxx-xxx-xxxx",
+                                    'type' => gettype($item->phone),                                    
                                     'inputType' => 'tel',
+                                    'validation' => "matches:/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/",
+                                    'validationMessages' => "{    
+                                        matches: 'Phone number must be in the format xxx-xxx-xxxx',
+                                    }",
                                 ],
                 'location' => ['columnName' => 'Location', 
                                     'name' => 'location', 
                                     'value' => $item->location,
+                                    'placeholder' => 'Honolulu, HI',
                                     'type' => gettype($item->location),
-                                    'inputType' => 'text'
+                                    'inputType' => 'text',
+                                    'validation' => "length:2,100|alpha_numerics:latin",
                                 ],
                 'fax' => ['columnName' => 'Fax', 
-                                    'name' => 'fax', 
+                                    'name' => 'fax',
+                                    'placeholder' => "xxx-xxx-xxxx",
                                     'value' => $item->fax,
                                     'type' => gettype($item->fax),
-                                    'inputType' => 'tel'
+                                    'inputType' => 'tel',
+                                    'validation' => "|matches:/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/",
+                                    'validationMessages' => "{    
+                                        matches: 'Phone number must be in the format xxx-xxx-xxxx',
+                                    }",                                
                                 ],
                 'website' => ['columnName' => 'Website', 
                                     'name' => 'website', 
                                     'value' => $item->website,
+                                    'placeholder' => 'http://example.com',
                                     'type' => gettype($item->website),
-                                    'inputType' => 'url'
+                                    'inputType' => 'url',
+                                    'validation' => "url",
+                                    'validationMessages' => 'Enter a valid website URL (e.g. http://hawaii.edu)',
                                 ],
             ];
         });
@@ -150,10 +159,10 @@ class DeptGroupController extends Controller
             $dept_name = $req['dept-name'];
             $campus_code = $req['campus-code'];
             $email = (int) $req['email'];
-            $phone = $req['phone'];
-            $location = $req['location'];
-            $fax = $req['fax'];
-            $website = $req['website'];
+            $phone = $req['phone'] ?? "";
+            $location = $req['location'] ?? "";
+            $fax = $req['fax'] ?? "";
+            $website = $req['website'] ?? "";
     
             $campus = Campus::where('code', $campus_code)->first();
             $req['campus-id'] = $campus->id;
@@ -191,14 +200,17 @@ class DeptGroupController extends Controller
                     'max:14',
                 ],
                 'location' => [
+                    'nullable',
                     'string',
                     'max:60'
                 ],
                 'fax' => [
+                    'nullable',
                     'string',
                     'max:14'
                 ],
                 'website' => [
+                    'nullable',
                     'string',
                     'max:100'
                 ],

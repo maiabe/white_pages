@@ -37,11 +37,12 @@
             csrf: {
                 type: String,
             },
-            submitButtonId: {
+            modalId: {
                 type: String
             }
         },
         data() {
+            const submitButtonId = `${this.modalId}-submit`;
             const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
             const displayedFields = {};
             let idField = '';
@@ -55,6 +56,7 @@
                 }
             });
             return {
+                submitButtonId,
                 displayedFields,
                 idField,
                 csrfToken

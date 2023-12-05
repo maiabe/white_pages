@@ -3,7 +3,7 @@
     <FormComponent
         :entry="entry"
         :actionRoute="actionRoute"
-        :submitButtonId="submitButtonId"
+        :modalId="modalId"
     />
 </template>
 
@@ -19,7 +19,7 @@
             actionRoute: {
                 type: String
             },
-            submitButtonId: {
+            modalId: {
                 type: String
             }
         },
