@@ -129,9 +129,12 @@
         </nav>
     </header>
     <div class="main-content">
+        @guest
+        @else
         <aside>
             @include('Layout.Partials.sidebar')
         </aside>
+        @endguest
         <main>
             @yield('content')
         </main>
