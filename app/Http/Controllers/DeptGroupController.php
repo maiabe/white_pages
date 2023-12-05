@@ -137,7 +137,6 @@ class DeptGroupController extends Controller
             ];
         });
 
-
         return view('DeptGroups.dept_groups', ['columnNames' => $columnNames,'data' => $data, 'campusData' => $campusData]);
     }
 

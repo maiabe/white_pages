@@ -10,7 +10,7 @@
     </div>
 
     <div class="main-container">
-
+        
         @if ($errors->any())
             <h6 class="alert alert-danger mt-4">
                 <strong>Department Group change failed</strong>

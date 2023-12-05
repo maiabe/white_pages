@@ -26,6 +26,7 @@
             }
         },
         data() {
+            console.log(this.entry);
             const obj = this.entry[0];
             const fields = Object.keys(obj).map(key => {
                 obj[key].value = '';
