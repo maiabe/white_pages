@@ -380,29 +380,26 @@ button:hover {
     padding-left: 0;
     padding-right: 0;
 }
-.section-2 {
-    background-color: #61D0C9;
-    height: 180px;
-    border-radius: 15px;
-    padding: 10px;
+
+.center-line {
+    text-align: center;
 }
 
-.user-welcome {
+.navbar-logo {
+    width: 30%;
+    height: auto;
+}
+.welcome-section {
+    padding-top: 10px;
+    background: #b0cbe8;
+    padding-bottom: 10px;
+    border-radius: 20px;
+}
+
+.home-container {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    height: 100vh; 
 }
-
-.user-icon-container {
-    background-color: white;
-    border-radius: 50%;
-    padding: 20px;
-}
-
-.welcome-text {
-    margin-left: 20px;
-    font-size: 18px;
-    font-weight: bold;
-    color: #0c0c0c;
-    font-family: 'Montserrat', sans-serif;
-}
-
