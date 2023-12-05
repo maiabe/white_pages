@@ -23,7 +23,7 @@
         <div style="display: flex; justify-content: center;">
             <hr width="85%" style="margin: 0;" />
         </div>
-        
+
         <!-- Sidebar Body -->
         <div class="offcanvas-body">
             <div class="page-links-wrapper">
@@ -52,6 +52,16 @@
                             <h6>Department Contacts</h6>
                         </div>
                     </a>
+
+                    <a :href="allRolesRoute" class="page-link">
+                        <div class="page-icon">
+                            <font-awesome-icon icon="gears" style="color: #ffffff;" />
+                        </div>
+                        <div class="page-name">
+                            <h6>All Roles</h6>
+                        </div>
+                    </a>
+
                     <a :href="adminsRoute" class="page-link">
                         <div class="page-icon">
                             <font-awesome-icon icon="user-gear" style="color: #ffffff;" />
@@ -60,6 +70,7 @@
                             <h6>Admins</h6>
                         </div>
                     </a>
+
                     <a :href="announcementsRoute" class="page-link">
                         <div class="page-icon">
                             <font-awesome-icon icon="bullhorn" style="color: #ffffff;" />
@@ -69,7 +80,7 @@
                         </div>
                     </a>
                 </div>
-                
+
                 <div class="user-page-links">
                     <div style="display: flex; justify-content: center; margin-bottom: 15%;">
                         <hr width="85%" style="margin: 0;" />
@@ -135,6 +146,10 @@
                 type: String,
                 required: true,
             },
+            allRolesRoute: {
+                type: String,
+                required: true,
+            },
             adminsRoute: {
                 type: String,
                 required: true,
@@ -170,14 +185,14 @@
                 const pageIcons = sidebarWrapper.querySelectorAll('.page-icon');
                 const pageNames = sidebarWrapper.querySelectorAll('.page-name');
                 sidebarWrapper.classList.toggle('expanded');
-                
+
                 logoWrapper.classList.toggle('expanded');
                 titleWrapper.classList.toggle('expanded');
-                pageIcons.forEach(pi => { 
-                    pi.classList.toggle('expanded') 
+                pageIcons.forEach(pi => {
+                    pi.classList.toggle('expanded')
                 });
-                pageNames.forEach(pn => { 
-                    pn.classList.toggle('expanded') 
+                pageNames.forEach(pn => {
+                    pn.classList.toggle('expanded')
                     // console.log(pn);
                 });
             },
@@ -190,6 +205,6 @@
                 toggleBtnDown.classList.toggle('expanded');
                 // console.log(toggleBtnDown);
             }
-        }     
+        }
     };
 </script>

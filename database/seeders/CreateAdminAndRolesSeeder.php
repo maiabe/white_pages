@@ -35,9 +35,9 @@ class CreateAdminAndRolesSeeder extends Seeder
         // Need to insert into Person table instead and assign roles to Person
         $user = User::create([
 
-            'name' => 'Tardik Savani',
+            'name' => 'John Doe',
 
-            'email' => 'test2@gmail.com',
+            'email' => 'admin@gmail.com',
 
             'password' => bcrypt('123456')
 
