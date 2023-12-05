@@ -26,14 +26,14 @@ use App\Http\Controllers\PersonRoleController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-// Auth::routes();
+Auth::routes();
 
 
-// Route::get('/', function () {
-//     return redirect('/login');
-// });
+ Route::get('/', function () {
+     return redirect('/login');
+ });
 
-// Route::group(['middleware' => ['auth']], function() {
+ Route::group(['middleware' => ['auth']], function() {
     Route::post('/logout', function () {
         Auth::logout();
         return redirect('/login');
@@ -73,7 +73,7 @@ use App\Http\Controllers\PersonRoleController;
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
 
-//});
+});
 
 Auth::routes();
 
