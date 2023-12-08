@@ -10,24 +10,23 @@
             :actions="false"
             #default="{ value }"
             >
-            <div v-for="field in entry" class="form-group" >
-                   <FormKit
-                        :v-model="field.name"
-                        :type="field.inputType"
-                        :options="field.options ? field.options : ''"
-                        :name="field.name"
-                        :label="field.columnName"
-                        :minlength="field.minlength ? field.minlength : ''"
-                        :maxlength="field.maxlength ? field.maxlength : ''"
-                        :placeholder="field.placeholder ? field.placeholder : ''"
-                        :value="field.value ? field.value : ''"
-                        :validation="field.validation ? field.validation : ''"
-                        :validation-messages="field.validationMessages ? field.validationMessages : ''"
-                        
+            <div v-for="(formInput, index) in formInputs" :key="index" class="form-group" >
+                <FormKit
+                        :v-model="formInput.name"
+                        :type="formInput.inputType"
+                        :options="formInput.options ? formInput.options : ''"
+                        :name="formInput.name"
+                        :label="formInput.label"
+                        :minlength="formInput.minlength ? formInput.minlength : ''"
+                        :maxlength="formInput.maxlength ? formInput.maxlength : ''"
+                        :placeholder="formInput.placeholder ? formInput.placeholder : ''"
+                        :value="formInput.value ? formInput.value : ''"
+                        :validation="formInput.validation ? formInput.validation : ''"
+                        :validation-messages="formInput.validationMessages ? formInput.validationMessages : ''"
                         validation-visibility="live"
                         />
                     
-                <span class="validation-msg" v-if="this.validationErrors[field.name]">{{ this.validationErrors[field.name][0] }}</span>
+                <span class="validation-msg" v-if="this.validationErrors[formInput.name]">{{ this.validationErrors[formInput.name][0] }}</span>
             </div>
         </FormKit>
 
@@ -38,7 +37,7 @@
 
     export default {
         props: {
-            entry: {
+            formInputs: {
                 type: Object,
                 /* required: true, */
             },
@@ -65,13 +64,10 @@
             }
         },
         mounted() {
-            const button = document.getElementById(this.submitButtonId); 
+            const button = document.getElementById(this.submitButtonId);
             button.addEventListener('click', this.submitForm);
         },
         methods: {
-            getInput(field) {
-                console.log(field);
-            },
             async submitForm(e) {
                 // e.preventDefault();
                 const form = document.getElementById(this.formId);

@@ -95,6 +95,14 @@ main {
 .navbar {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+.navbar-container {
+    display: flex;
+    width: 100%;
+    padding: 0 2%;
+}
+.navbar-container .navbar-logo {
+    width: 18rem;
+}
 
 
 /**********************************************/
@@ -338,23 +346,35 @@ footer .container {
 
 
 .edit-button {
-    background-color: rgba(134, 194, 241);
+    background-color: rgb(112, 167, 209);
+    border-color: rgb(112, 167, 209);
+    box-shadow: 1px 1px 3px rgba(21, 21, 21, 0.3);
 }
 .edit-button:hover {
-    background-color: rgb(51, 135, 199);
-    border-color: rgb(51, 135, 199);
+    background-color: rgb(0, 145, 255);
+    border-color: rgb(0, 145, 255);
 }
 .delete-button {
     background-color: rgba(203, 93, 93);
     border-color: rgb(203, 93, 93);
+    box-shadow: 1px 1px 3px rgba(21, 21, 21, 0.3);
 }
 .delete-button:hover {
     background-color: rgb(209, 2, 2);
     border-color: rgb(209, 2, 2);
 }
-button:hover {
-    opacity: 0.8;
+.approve-button {
+    background-color: #6abb5a;
+    border-color: #6abb5a;
+    box-shadow: 1px 1px 3px rgba(21, 21, 21, 0.3);
 }
+.approve-button:hover {
+    background-color: #478e38;
+    border-color: #478e38;
+}
+/* button:hover {
+    opacity: 0.8;
+} */
 
 
 .button {
@@ -406,3 +426,10 @@ button:hover {
     font-family: 'Montserrat', sans-serif;
 }
 
+
+
+
+/*********************** Nav Tabs ***********************/
+.nav-tabs ~ .tab-content {
+    padding-top: 3%;
+}

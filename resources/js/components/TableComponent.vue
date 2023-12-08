@@ -6,15 +6,16 @@
                     {{ column.columnName }}
                 </th>
                 <th v-if="this.editActionRoute" style="width: 5%">&nbsp;Edit&nbsp;</th>
-                <th v-if="this.editActionRoute" style="width: 5%">Delete</th>
+                <th v-if="this.deleteActionRoute" style="width: 5%">Delete</th>
+                <th v-if="this.approveActionRoute" style="width: 5%">Approve</th>
             </tr>
         </thead>
         <tbody>
-            <tr v-for="(entry, i) in tableEntries"  class="align-middle" :key="i">
-                <td v-for="(item, j) in displayValues(entry)" :key="j">
-                    {{ item ? item.value : '' }}
+            <tr v-for="(row, i) in tableEntries"  class="align-middle" :key="i">
+                <td v-for="(column, j) in displayValues(row)" :key="j">
+                    {{ column ? column.value : '' }}
                 </td>
-                <td v-if="this.editActionRoute" style="width: 5%">
+                <td v-if="this.editActionRoute" style="width: 5%; text-align-last: center;">
                     <button :id="`${tableId}-edit-button-${i}`" class="btn btn-custom edit-button" data-bs-toggle="modal" :data-bs-target="`#${tableId}-edit-modal-${i}`">
                         <font-awesome-icon class="fa-icon" icon="pencil"></font-awesome-icon>
                     </button>
@@ -24,16 +25,16 @@
                         :modalType="`${tableId}-edit`"
                         :modalTitle="editTitle"
                         :modalContent="EditComponent"
-                        :entry="entry"
+                        :entry="row"
                         :actionRoute="editActionRoute"
                     >
                         <EditComponent
-                            :entry="entry"
+                            :entry="row"
                             :actionRoute="editActionRoute"
                         />
                     </ModalComponent>
                 </td>
-                <td v-if="this.deleteActionRoute" style="width: 5%">
+                <td v-if="this.deleteActionRoute" style="width: 5%; text-align-last: center;">
                     <button :id="`${tableId}-delete-button-${i}`" class="btn btn-custom delete-button" data-bs-toggle="modal" :data-bs-target="`#${tableId}-delete-modal-${i}`">
                         <font-awesome-icon class="fa-icon" icon="trash"></font-awesome-icon>
                     </button>
@@ -43,20 +44,39 @@
                         :modalType="`${tableId}-delete`"
                         :modalTitle="deleteTitle"
                         :modalContent="DeleteComponent"
-                        :entry="entry"
+                        :entry="row"
                         :actionRoute="deleteActionRoute"
                     >
                         <DeleteComponent
                             :datasetType="tableName"
-                            :entry="entry"
+                            :entry="row"
                             :actionRoute="deleteActionRoute"
+                        />
+                    </ModalComponent>
+                </td>
+                <td v-if="this.approveActionRoute" style="width: 5%; text-align-last: center;">
+                    <button :id="`${tableId}-approve-button-${i}`" class="btn btn-custom approve-button" data-bs-toggle="modal" :data-bs-target="`#${tableId}-approve-modal-${i}`">
+                        <font-awesome-icon class="fa-icon" icon="check" style="font-size: larger;"></font-awesome-icon>
+                    </button>
+                    <ModalComponent
+                        :modalId="`${tableId}-approve-modal-${i}`"
+                        :index="i"
+                        :modalType="`${tableId}-approve`"
+                        :modalTitle="approveTitle"
+                        :modalContent="ApproveComponent"
+                        :entry="row"
+                        :actionRoute="approveActionRoute"
+                    >
+                        <ApproveComponent
+                            :datasetType="tableName"
+                            :entry="row"
+                            :actionRoute="approveActionRoute"
                         />
                     </ModalComponent>
                 </td>
             </tr>
         </tbody>
     </table>
-
 </template>
 
 <script>
@@ -65,6 +85,7 @@
     import ModalComponent from './ModalComponent.vue';
     import EditComponent from './ModalContent/EditComponent.vue';
     import DeleteComponent from './ModalContent/DeleteComponent.vue';
+    import ApproveComponent from './ModalContent/ApproveComponent.vue';
 
     export default {
         name: 'TableComponent',
@@ -75,6 +96,7 @@
             return {
                 EditComponent: 'EditComponent',
                 DeleteComponent: 'DeleteComponent',
+                ApproveComponent: 'ApproveComponent',
             }
         },
         computed: {
@@ -83,6 +105,9 @@
             },
             deleteTitle() {
                 return `Delete ${this.tableName}`;
+            },
+            approveTitle() {
+                return `Approve ${this.tableName}`;
             }
         },
         props: {
@@ -104,6 +129,9 @@
                 type: String
             },
             deleteActionRoute: {
+                type: String
+            },
+            approveActionRoute: {
                 type: String
             }
         },
@@ -145,6 +173,10 @@
                             },
                             search: "",
                             searchPlaceholder: "Search Records",
+                            // createdRow: function(row, data, i) {
+                            //     console.log(row);
+                            //     console.log(data);
+                            // },
                         },
                         // scrollX: true,
                         // fixedColumns: {
@@ -159,18 +191,18 @@
                 const keys = Object.keys(tableColumns);
                 const columns = [];
                 keys.forEach(column => {
-                    if (tableColumns[column].inputType !== 'hidden') {
+                    if (tableColumns[column].display === 'true') {
                         columns.push(tableColumns[column]);
                     }
                 });
                 return columns;
             },
-            displayValues(entry) {
-                const keys = Object.keys(entry);
+            displayValues(row) {
+                const keys = Object.keys(row);
                 const values = [];
                 keys.forEach(value => {
-                    if (entry[value].inputType !== 'hidden') {
-                        values.push(entry[value]);
+                    if (row[value].display === 'true') {
+                        values.push(row[value]);
                     }
                 });
                 return values;

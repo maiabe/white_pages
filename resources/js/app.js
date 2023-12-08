@@ -11,6 +11,7 @@ import FormComponent from './components/FormComponent.vue';
 import AddComponent from './components/ModalContent/AddComponent.vue';
 import EditComponent from './components/ModalContent/EditComponent.vue';
 import DeleteComponent from './components/ModalContent/DeleteComponent.vue';
+import ApproveComponent from './components/ModalContent/ApproveComponent.vue';
 //-- Import Font Awesome
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -29,6 +30,7 @@ app
     .component('AddComponent', AddComponent)
     .component('EditComponent', EditComponent)
     .component('DeleteComponent', DeleteComponent)
+    .component('ApproveComponent', ApproveComponent)
     .component('font-awesome-icon', FontAwesomeIcon);
 
 

@@ -1,18 +1,14 @@
 <template>
     <form method="POST" :action="actionRoute" @submit.prevent="submitForm">
-        <input type="hidden" name="_token" :value="csrfToken" />
-        <!-- <input type="hidden" name="_method" value="DELETE" /> -->
-        <div class="delete-message">
-            Deleting this will completely remove the record from the database.
+        <!-- <input type="hidden" name="_token" :value="csrfToken" /> -->
+        <div class="approve-message">
+            Approve or Reject the pending change below:
         </div>
-        <div class="delete-message-fields">
+        <div class="approve-message-fields">
             <p v-for="item in getFieldsToDisplay(entry)" >
                 <input v-if="item.inputType == 'hidden'" :type="item.inputType" :name="item.name" :value="item.value" :v-model="item.name" />
                 <span v-else><b>{{ item.label }}: </b><span>{{ item.value }}</span></span>
             </p>
-        </div>
-        <div>
-            Are you sure you want to delete this {{ datasetType }}?
         </div>
     </form>
     
@@ -20,7 +16,7 @@
 
 <script>
     export default {
-        name: 'DeleteComponent',
+        name: 'ApproveComponent',
         props: {
             datasetType: {
                 type: String,
@@ -51,7 +47,7 @@
         },
         mounted() {
             const submitBtn = document.getElementById(this.submitButtonId);
-            submitBtn.classList.add('delete-button');
+            submitBtn.classList.add('approve-button');
             submitBtn.addEventListener('click', this.submitForm);
         },
         methods: {

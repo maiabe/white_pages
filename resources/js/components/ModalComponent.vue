@@ -29,6 +29,7 @@
 
                 </div>
                 <div class="modal-footer">
+                    <!-- Move buttons within the body to reflect on the content of the dynamic component -->
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="close-button">
                         Close
                     </button>
@@ -44,20 +45,23 @@
     import AddComponent from './ModalContent/AddComponent.vue';
     import EditComponent from './ModalContent/EditComponent.vue';
     import DeleteComponent from './ModalContent/DeleteComponent.vue';
+    import ApproveComponent from './ModalContent/ApproveComponent.vue';
 
     export default {
         name: 'ModalComponent',
         components: {
             AddComponent,
             EditComponent,
-            DeleteComponent
+            DeleteComponent,
+            ApproveComponent
         },
         computed: {
             resolveComponentName() {
                 const componentMap = {
                     'AddComponent': AddComponent,
                     'EditComponent': EditComponent,
-                    'DeleteComponent': DeleteComponent
+                    'DeleteComponent': DeleteComponent,
+                    'ApproveComponent': ApproveComponent,
                 }
                 return componentMap[this.modalContent] || DefaultComponent;
             }

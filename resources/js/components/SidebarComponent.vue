@@ -166,7 +166,7 @@
         mounted() {
             const sidebar = document.querySelector('.sidebar-offcanvas');
             const sidebarToggleBtn = document.getElementById('sidebarToggleBtn');
-            console.log(sidebarToggleBtn);
+            // console.log(sidebarToggleBtn);
             sidebarToggleBtn.addEventListener('click', (e) => {
                 this.toggleSidebarContent(e);
                 this.toggleSidebarTab(e);
@@ -178,7 +178,6 @@
         },
         methods: {
             toggleSidebarContent(e) {
-                console.log(e);
                 const sidebarWrapper = e.target.closest('aside');
                 const logoWrapper = sidebarWrapper.querySelector('.logo-wrapper');
                 const titleWrapper = sidebarWrapper.querySelector('.title-wrapper');

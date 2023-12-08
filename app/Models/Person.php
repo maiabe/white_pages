@@ -40,7 +40,7 @@ class Person extends Model
     }
 
     public function roles() {
-        return $this-> belongsToMany(Role::class, 'Person_Role')->withPivot('role_id');
+        return $this-> belongsToMany(role::class, 'Person_Role')->withPivot('role_id');
     }
 
 

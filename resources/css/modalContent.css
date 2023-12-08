@@ -1,5 +1,8 @@
 
 /************************* Modal Style *************************/
+.modal {
+    text-align-last: left;
+}
 .modal-content {
     text-align: start;
 }
@@ -35,7 +38,7 @@
 .form-group .formkit-inner input,
 .form-group .formkit-inner select {
     width: 100%;
-    height: 35px;
+    height: 40px;
     border-radius: 5px;
     border: inset 2px #cab8b8;
 }
