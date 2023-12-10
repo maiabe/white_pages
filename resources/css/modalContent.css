@@ -8,8 +8,13 @@
 }
 
 .modal-body {
-    padding: 5%;
+    padding: 6%;
 }
+
+/* .modal-dialog {
+    max-width: unset;
+    width: fit-content;
+} */
 
 
 /************************* Form Style *************************/
@@ -50,3 +55,25 @@
 .delete-message-fields {
     padding: 3% 5%;
 }
+
+
+/************************* Approve Modal Style *************************/
+.approve-info-wrapper {
+    display: flex;
+    flex-direction: row;
+    margin: 2% 0;
+}
+.approve-info-wrapper .current-info {
+    padding-right: 5%;
+}
+.approve-info-wrapper .pending-info {
+    padding-left: 5%;
+}
+.approve-info > div {
+    margin: 2% 0;
+}
+.approve-info > span {
+    display: flex;
+}
+
+

@@ -364,8 +364,8 @@ footer .container {
     border-color: rgb(209, 2, 2);
 }
 .approve-button {
-    background-color: #6abb5a;
-    border-color: #6abb5a;
+    background-color: rgb(106,187,90);
+    border-color: rgb(106,187,90);
     box-shadow: 1px 1px 3px rgba(21, 21, 21, 0.3);
 }
 .approve-button:hover {
@@ -432,4 +432,8 @@ footer .container {
 /*********************** Nav Tabs ***********************/
 .nav-tabs ~ .tab-content {
     padding-top: 3%;
+}
+
+.nav-pills button {
+    border: 10px 10px 0 0;
 }

@@ -169,149 +169,182 @@ class DeptGroupController extends Controller
 
         // Build data for Pending Department Groups (Pending Department)
 
-        $pendingDeptData = PendingDepartment::select('id', 'status', 'campus_id', 'group_no', 'name', 'email', 'phone', 'location', 'fax', 'website')
+        $pendingDeptData = PendingDepartment::select('id', 'dept_id', 'status', 'campus_id', 'group_no', 'name', 'email', 'phone', 'location', 'fax', 'website')
         ->get()
         ->map(function($item) use ($campusData) {
             $campus = Campus::where('id', $item->campus_id)->first();
 
+            // Get data for corresponding Department entry
+            $dept_info = Department::where('id', $item->dept_id)->first();
+            
+            if ($item->status == 'update') {
+                $dept_campus = Campus::where('id', $dept_info->campus_id)->first();
+                $dept_info = [
+                    'Campus Code' => $dept_campus->code,
+                    'Group Number' => $dept_info->group_no,
+                    'Group Name' => $dept_info->name,
+                    'Email' => $dept_info->email,
+                    'Phone' => $dept_info->phone,
+                    'Location' => $dept_info->location,
+                    'Fax' => $dept_info->fax,
+                    'Website' => $dept_info->website,
+                ];
+            }
+            else {
+                $dept_info = null;
+            }
+
             // Return View objects
             return (object) [
-                'pdept_id' => [
-                                'columnName' => 'id',
-                                'display' => 'false',
-                                'value' => $item->id,
-                                'formInput' => [
-                                    'name' => 'pdept-id',
+                    'pdept_id' => [
+                                    'columnName' => 'id',
+                                    'display' => 'false',
                                     'value' => $item->id,
-                                    'type' => gettype($campus->code),
-                                    'inputType' => 'hidden',
+                                    'formInput' => [
+                                        'name' => 'pdept-id',
+                                        'value' => $item->id,
+                                        'type' => gettype($campus->code),
+                                        'inputType' => 'hidden',
+                                    ],
                                 ],
-                            ],
-                'status' => [
-                                'columnName' => 'Status', 
-                                'display' => 'true',
-                                'value' => $item->status,
-                                'formInput' => [
-                                    'name' => 'status', 
+                    'status' => [
+                                    'columnName' => 'Status', 
+                                    'display' => 'true',
                                     'value' => $item->status,
-                                    'type' => gettype($item->status),
-                                    'inputType' => 'hidden'
-                                ]
-                            ],
-                'campus_code' => [
-                                'columnName' => 'Campus Code', 
-                                'display' => 'true',
-                                'value' => $campus->code,
-                                'formInput' => [
-                                    'name' => 'campus-code',
+                                    'formInput' => [
+                                        'name' => 'status', 
+                                        'value' => $item->status,
+                                        'type' => gettype($item->status),
+                                        'inputType' => 'hidden'
+                                    ]
+                                ],
+                    'campus_code' => [
+                                    'columnName' => 'Campus Code', 
+                                    'display' => 'true',
                                     'value' => $campus->code,
-                                    'type' => gettype($campus->code),
-                                    'inputType' => 'select',
-                                    'options' => $campusData,
-                                ]
-                            ],
-                'group_number' => [
-                                'columnName' => 'Group Number', 
-                                'display' => 'true',
-                                'value' => $item->group_no,
-                                'formInput' => [
-                                    'name' => 'group-number', 
+                                    'formInput' => [
+                                        'label' => 'Campus Code',
+                                        'name' => 'campus-code',
+                                        'value' => $campus->code,
+                                        'type' => gettype($campus->code),
+                                        'inputType' => 'select',
+                                        'options' => $campusData,
+                                    ]
+                                ],
+                    'group_number' => [
+                                    'columnName' => 'Group Number', 
+                                    'display' => 'true',
                                     'value' => $item->group_no,
-                                    'placeholder' => '100100',
-                                    'type' => gettype($item->group_no),
-                                    'inputType' => 'text',
-                                    'validation' => 'required|length:6,6|number',
-                                    'minlength' => 6,
-                                    'maxlength' => 6
+                                    'formInput' => [
+                                        'label' => 'Group Number',
+                                        'name' => 'group-number', 
+                                        'value' => $item->group_no,
+                                        'placeholder' => '100100',
+                                        'type' => gettype($item->group_no),
+                                        'inputType' => 'text',
+                                        'validation' => 'required|length:6,6|number',
+                                        'minlength' => 6,
+                                        'maxlength' => 6
+                                    ],
                                 ],
-                            ],
-                'dept_name' => [
-                                'columnName' => 'Department Name', 
-                                'display' => 'true',
-                                'value' => $item->name,
-                                'formInput' => [
-                                    'name' => 'dept-name', 
+                    'dept_name' => [
+                                    'columnName' => 'Department Name', 
+                                    'display' => 'true',
                                     'value' => $item->name,
-                                    'placeholder' => 'Test Department Name',
-                                    'type' => gettype($item->name),
-                                    'inputType' => 'text',
-                                    'validation' => "required|length:2,255|alpha_numerics:latin",
+                                    'formInput' => [
+                                        'label' => 'Department Name',
+                                        'name' => 'dept-name', 
+                                        'value' => $item->name,
+                                        'placeholder' => 'Test Department Name',
+                                        'type' => gettype($item->name),
+                                        'inputType' => 'text',
+                                        'validation' => "required|length:2,255|alpha_numerics:latin",
+                                    ],
                                 ],
-                            ],
-                'email' => [
-                                'columnName' => 'Email', 
-                                'display' => 'true',
-                                'value' => $item->email,
-                                'formInput' => [
-                                    'name' => 'email', 
+                    'email' => [
+                                    'columnName' => 'Email', 
+                                    'display' => 'true',
                                     'value' => $item->email,
-                                    'placeholder' => 'example@test.com',
-                                    'type' => gettype($item->email),
-                                    'inputType' => 'email',
-                                    // 'validation' => "required|email|ends_with:.edu",
-                                    'validation' => "required|email",
-                                    'validationMessages' => 'Enter a valid email address (e.g., example@hawaii.edu)',
+                                    'formInput' => [
+                                        'label' => 'Email',
+                                        'name' => 'email', 
+                                        'value' => $item->email,
+                                        'placeholder' => 'example@test.com',
+                                        'type' => gettype($item->email),
+                                        'inputType' => 'email',
+                                        // 'validation' => "required|email|ends_with:.edu",
+                                        'validation' => "required|email",
+                                        'validationMessages' => 'Enter a valid email address (e.g., example@hawaii.edu)',
+                                    ],
                                 ],
-                            ],
-                'phone' => [
-                                'columnName' => 'Phone',
-                                'display' => 'true',
-                                'value' => $item->phone,
-                                'formInput' => [
-                                    'name' => 'phone', 
+                    'phone' => [
+                                    'columnName' => 'Phone',
+                                    'display' => 'true',
                                     'value' => $item->phone,
-                                    'placeholder' => "xxx-xxx-xxxx",
-                                    'type' => gettype($item->phone),                          
-                                    'inputType' => 'tel',
-                                    'validation' => "matches:/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/",
-                                    'validationMessages' => "{    
-                                        matches: 'Phone number must be in the format xxx-xxx-xxxx',
-                                    }",
+                                    'formInput' => [
+                                        'label' => 'Phone',
+                                        'name' => 'phone', 
+                                        'value' => $item->phone,
+                                        'placeholder' => "xxx-xxx-xxxx",
+                                        'type' => gettype($item->phone),                          
+                                        'inputType' => 'tel',
+                                        'validation' => "matches:/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/",
+                                        'validationMessages' => "{    
+                                            matches: 'Phone number must be in the format xxx-xxx-xxxx',
+                                        }",
+                                    ],
                                 ],
-                            ],
-                'location' => [
-                                'columnName' => 'Location', 
-                                'display' => 'true',
-                                'value' => $item->location,
-                                'formInput' => [
-                                    'name' => 'location', 
+                    'location' => [
+                                    'columnName' => 'Location', 
+                                    'display' => 'true',
                                     'value' => $item->location,
-                                    'placeholder' => 'Honolulu, HI',
-                                    'type' => gettype($item->location),
-                                    'inputType' => 'text',
-                                    'validation' => "length:2,100|alpha_numerics:latin",
+                                    'formInput' => [
+                                        'label' => 'Location',
+                                        'name' => 'location', 
+                                        'value' => $item->location,
+                                        'placeholder' => 'Honolulu, HI',
+                                        'type' => gettype($item->location),
+                                        'inputType' => 'text',
+                                        'validation' => "length:2,100|alpha_numerics:latin",
+                                    ],
                                 ],
-                            ],
-                'fax' => [
-                                'columnName' => 'Fax', 
-                                'display' => 'true',
-                                'value' => $item->fax,
-                                'formInput' => [
-                                    'name' => 'fax',
-                                    'placeholder' => "xxx-xxx-xxxx",
+                    'fax' => [
+                                    'columnName' => 'Fax', 
+                                    'display' => 'true',
                                     'value' => $item->fax,
-                                    'type' => gettype($item->fax),
-                                    'inputType' => 'tel',
-                                    'validation' => "|matches:/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/",
-                                    'validationMessages' => "{    
-                                        matches: 'Phone number must be in the format xxx-xxx-xxxx',
-                                    }",                                
-                                ]
-                        ],
-                'website' => [
-                                'columnName' => 'Website', 
-                                'display' => 'true',
-                                'value' => $item->website,
-                                'formInput' => [
-                                    'name' => 'website', 
-                                    'value' => $item->website,
-                                    'placeholder' => 'http://example.com',
-                                    'type' => gettype($item->website),
-                                    'inputType' => 'url',
-                                    'validation' => "url",
-                                    'validationMessages' => 'Enter a valid website URL (e.g. http://hawaii.edu)',
-                                ],
+                                    'formInput' => [
+                                        'label' => 'Fax',
+                                        'name' => 'fax',
+                                        'placeholder' => "xxx-xxx-xxxx",
+                                        'value' => $item->fax,
+                                        'type' => gettype($item->fax),
+                                        'inputType' => 'tel',
+                                        'validation' => "|matches:/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/",
+                                        'validationMessages' => "{    
+                                            matches: 'Phone number must be in the format xxx-xxx-xxxx',
+                                        }",                                
+                                    ]
                             ],
+                    'website' => [
+                                    'columnName' => 'Website', 
+                                    'display' => 'true',
+                                    'value' => $item->website,
+                                    'formInput' => [
+                                        'label' => 'Website',
+                                        'name' => 'website', 
+                                        'value' => $item->website,
+                                        'placeholder' => 'http://example.com',
+                                        'type' => gettype($item->website),
+                                        'inputType' => 'url',
+                                        'validation' => "url",
+                                        'validationMessages' => 'Enter a valid website URL (e.g. http://hawaii.edu)',
+                                    ],
+                                ],
+                    'dept_info' => [ 
+                                    'columnName' => 'Department Info',
+                                    'display' => 'false',
+                                    'value' => $dept_info,
+                                ],
             ];
         });
 

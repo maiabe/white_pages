@@ -84,7 +84,6 @@
 
         <div class="tab-content" id="pending-dept-tab-content" >
             <div class="tab-pane fade show" id="pending-dept-tab-pane" role="tabpanel" aria-labelledby="pending-dept-nav-control" tabindex="1">
-
                 @if(count($pendingDeptData)>0)
                 <div class="main-wrapper">
 
