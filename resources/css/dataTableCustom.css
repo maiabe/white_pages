@@ -40,7 +40,7 @@
 .table-wrapper table {
     width: 100% !important;
     margin-bottom: 0 !important;
-    text-align: center;
+    /* text-align: center; */
 }
 .dataTables_info {
     padding: 0 !important;
@@ -49,6 +49,7 @@
 table.dataTable {
     border-collapse: collapse !important;
     border: 1px solid lightgray;
+    table-layout: fixed;
 }
 
 table th {
@@ -56,6 +57,13 @@ table th {
     color: white !important;
     height: 2.5rem !important;
     text-align: center !important;
+
+    white-space: wrap;
+}
+table td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .paginate_button {

@@ -56,9 +56,9 @@ Auth::routes();
     Route::get('/dept_groups',[DeptGroupController::class, 'index'])->name('dept_groups');
     Route::post('dept_groups/delete','App\Http\Controllers\DeptGroupController@destroy')->name('dept_groups.destroy');
     Route::post('dept_groups/update','App\Http\Controllers\DeptGroupController@update')->name('dept_groups.update');
-    Route::post('dept_groups', [DeptGroupController::class, 'store'])->name('dept_groups.store');
+    Route::post('dept_groups/create', [DeptGroupController::class, 'store'])->name('dept_groups.store');
     Route::post('dept_groups/approve' , 'App\Http\Controllers\DeptGroupController@approve')->name('dept_groups.approve');
-    Route::post('dept_groups/reject', 'App\Http\Controllers\DeptGroup@reject')->name('dept_groups.reject');
+    Route::post('dept_groups/reject', 'App\Http\Controllers\DeptGroupController@reject')->name('dept_groups.reject');
 
 
 

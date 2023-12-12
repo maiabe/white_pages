@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('location', 60)->nullable(true);
             $table->string('fax', 14)->nullable(true);
             $table->string('website', 100)->nullable(true);
-            $table->foreign('dept_id')->references('id')->on('Department');
+            $table->foreign('dept_id')->references('id')->on('Department')->onDelete('cascade');
             $table->foreign('campus_id')->references('id')->on('Campus')->onDelete('cascade');
         });
     }

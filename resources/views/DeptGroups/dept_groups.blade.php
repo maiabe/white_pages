@@ -11,6 +11,31 @@
 
     <div class="main-container">
 
+        @if(session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="float: right" >
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="message-wrapper">
+                    <span><strong>{{ session('success')['title'] }}</strong></span>
+                    <br>
+                    <span>{{ session('success')['content'] }}</span>
+                </div>
+            </div>
+        @endif
+        @if(session('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="float: right" >
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="message-wrapper">
+                    @foreach ($errors->all() as $error)
+                        <span>{{ $error }}</span>
+                    @endforeach
+                </div>
+            </div>
+        @endif
+
         @if ($errors->any())
             <h6 class="alert alert-danger mt-4">
                 <strong>Department Group change failed</strong>
@@ -85,16 +110,16 @@
         <div class="tab-content" id="pending-dept-tab-content" >
             <div class="tab-pane fade show" id="pending-dept-tab-pane" role="tabpanel" aria-labelledby="pending-dept-nav-control" tabindex="1">
                 @if(count($pendingDeptData)>0)
-                <div class="main-wrapper">
+                    <div class="main-wrapper">
 
-                    <table-component
-                        :table-name="'Pending Department Group'"
-                        :table-id="'pending-deptgrps-table'"
-                        :table-entries="{{ $pendingDeptData }}"
-                        :approve-action-route="'{{ route('dept_groups.approve') }}'"
-                    />
+                        <table-component
+                            :table-name="'Pending Department Group'"
+                            :table-id="'pending-deptgrps-table'"
+                            :table-entries="{{ $pendingDeptData }}"
+                            :approve-action-route="'{{ route('dept_groups.approve') }}'"
+                        />
 
-                </div>
+                    </div>
 
                 @else
                     <br>

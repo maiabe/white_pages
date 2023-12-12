@@ -3,13 +3,15 @@
     <!-- <form method="POST" :action="actionRoute" enctype="multipart/form-data" @submit="submitForm">
         <input type="hidden" name="_token" :value="csrfToken" /> -->
         <FormKit 
-            type="form" 
+            type="form"
+            method="POST"
             @submit="submitForm"
             :id="this.formId"
             incomplete-message="Please fix your inputs!"
+            #default="{ state: { valid } }"
             :actions="false"
-            #default="{ value }"
             >
+            <FormKit type="hidden" name="_token" :value="this.csrfToken" />
             <div v-for="(formInput, index) in formInputs" :key="index" class="form-group" >
                 <FormKit
                         :v-model="formInput.name"
@@ -27,6 +29,22 @@
                         />
                     
                 <span class="validation-msg" v-if="this.validationErrors[formInput.name]">{{ this.validationErrors[formInput.name][0] }}</span>
+            </div>
+            <div class="button-wrapper">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="close-button">
+                    Close
+                </button>
+                <!-- <button type="submit" ref="submitButton" :id="`${modalId}-submit`" class="btn btn-edit submit-button">
+                    Confirm
+                </button> -->
+                <FormKit 
+                    type="submit" 
+                    label="Confirm" 
+                    class="btn submit-button"
+                    ref="submitButton"
+                    :id="`${modalId}-submit`"
+                    :disabled="!valid"
+                />
             </div>
         </FormKit>
 
@@ -54,22 +72,27 @@
         },
         data() {
             const formId = `${this.modalId}-form`;
-            const submitButtonId = `${this.modalId}-submit`;
             const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
             return {
                 formId,
-                submitButtonId,
                 csrfToken,
                 validationErrors: {},
             }
         },
         mounted() {
-            const button = document.getElementById(this.submitButtonId);
+            const button = document.getElementById(`${this.modalId}-submit`);
+            button.classList.add('btn');
+            if (this.modalId.includes('edit')) {
+                button.classList.add('btn-edit');
+            }
+            else if (this.modalId.includes('add')) {
+                button.classList.add('btn-add');
+            }
             button.addEventListener('click', this.submitForm);
         },
         methods: {
             async submitForm(e) {
-                // e.preventDefault();
+                e.preventDefault();
                 const form = document.getElementById(this.formId);
                 // const form = e.target.closest('.modal-content').querySelector('form');
                 // form.submit();
@@ -77,6 +100,7 @@
                 
                 console.log(formData);
                 console.log(this.actionRoute);
+                form.action = this.actionRoute;
 
                 //this.$formkit.submit();
                 // if (form.hasInvalidInputs()) { console.log('invalid input'); return; }
@@ -91,47 +115,50 @@
                 //     // response.json();
                 //     console.log(response);
                 // });
+                
+                form.submit();
+               
 
                 // form.submit();
-                try {
-                    const response = await axios.post(this.actionRoute, formData,
-                    {
-                        headers: {
-                            // 'Content-Type': 'application/x-www-form-urlencoded',
-                            'X-CSRF-TOKEN': document.head.querySelector('meta[name="csrf-token"]').content
-                        }
-                    });
-                    console.log(response);
-                    // form.submit();
-                    window.location.href = response.request.responseURL;
+                // try {
+                //     const response = await axios.post(this.actionRoute, formData,
+                //     {
+                //         headers: {
+                //             // 'Content-Type': 'application/x-www-form-urlencoded',
+                //             'X-CSRF-TOKEN': document.head.querySelector('meta[name="csrf-token"]').content
+                //         }
+                //     });
+                //     console.log(response);
+                //     // form.submit();
+                //     window.location.href = response.request.responseURL;
                 
-                } catch (error) {
+                // } catch (error) {
                     
-                    if (error.response.status === 422) {
-                        const errorData = await error.response.data;
-                        this.validationErrors = errorData.errors;
-                        console.log(this.validationErrors);
+                //     if (error.response.status === 422) {
+                //         const errorData = await error.response.data;
+                //         this.validationErrors = errorData.errors;
+                //         console.log(this.validationErrors);
 
-                        const modalContent = e.target.closest('.modal-content');
-                        const modalElement = e.target.closest('.modal');
-                        // Scroll screen to the first field that returned error on submit
-                        const validationMessageElement = modalContent.querySelector(`.validation-msg`).closest('input');
-                        console.log(validationMessageElement);
-                        // Check if the element exists before scrolling
-                        // if (validationMessageElement) {
-                            // Get the Y position of the element relative to the viewport
-                            const yOffset = validationMessageElement.getBoundingClientRect().top;
+                //         const modalContent = e.target.closest('.modal-content');
+                //         const modalElement = e.target.closest('.modal');
+                //         // Scroll screen to the first field that returned error on submit
+                //         const validationMessageElement = modalContent.querySelector(`.validation-msg`).closest('input');
+                //         console.log(validationMessageElement);
+                //         // Check if the element exists before scrolling
+                //         // if (validationMessageElement) {
+                //             // Get the Y position of the element relative to the viewport
+                //             const yOffset = validationMessageElement.getBoundingClientRect().top;
 
-                            // Scroll the page to the element's position
-                            modalElement.scrollTo({
-                                top: window.scrollY + yOffset,
-                                behavior: 'smooth',
-                            });
-                        // }
+                //             // Scroll the page to the element's position
+                //             modalElement.scrollTo({
+                //                 top: window.scrollY + yOffset,
+                //                 behavior: 'smooth',
+                //             });
+                //         // }
                         
-                    }
-                    console.log(error.response);
-                }
+                //     }
+                //     console.log(error.response);
+                // }
 
 
             },

@@ -45,6 +45,7 @@ class DeptGroupController extends Controller
                                 'columnName' => 'Campus Code',
                                 'display' => 'true',
                                 'value' => $campus->code,
+                                'columnWidth' => '5%',
                                 'formInput' => [
                                         'label' => 'Campus Code',
                                         'name' => 'campus-code', 
@@ -58,6 +59,7 @@ class DeptGroupController extends Controller
                                     'columnName' => 'Group Number', 
                                     'display' => 'true',
                                     'value' => $item->group_no,
+                                    'columnWidth' => '5%',
                                     'formInput' => [
                                         'label' => 'Group Number',
                                         'name' => 'group-number', 
@@ -74,6 +76,7 @@ class DeptGroupController extends Controller
                                     'columnName' => 'Department Name', 
                                     'display' => 'true',
                                     'value' => $item->name,
+                                    'columnWidth' => '40%',
                                     'formInput' => [
                                         'label' => 'Department Name',
                                         'name' => 'dept-name', 
@@ -88,6 +91,7 @@ class DeptGroupController extends Controller
                                 'columnName' => 'Email', 
                                 'display' => 'true',
                                 'value' => $item->email,
+                                'columnWidth' => '15%',
                                 'formInput' => [
                                     'label' => 'Email',
                                     'name' => 'email', 
@@ -104,6 +108,7 @@ class DeptGroupController extends Controller
                                 'columnName' => 'Phone',
                                 'display' => 'true',
                                 'value' => $item->phone,
+                                'columnWidth' => '10%',
                                 'formInput' => [
                                     'label' => 'Phone',
                                     'name' => 'phone', 
@@ -117,24 +122,11 @@ class DeptGroupController extends Controller
                                     }",
                                 ]
                             ],
-                'location' => [
-                                'columnName' => 'Location', 
-                                'display' => 'true',
-                                'value' => $item->location,
-                                'formInput' => [
-                                    'label' => 'Location',
-                                    'name' => 'location', 
-                                    'value' => $item->location,
-                                    'placeholder' => 'Honolulu, HI',
-                                    'type' => gettype($item->location),
-                                    'inputType' => 'text',
-                                    'validation' => "length:2,100|alpha_numerics:latin",
-                                ],
-                            ],
                 'fax' => [
                                 'columnName' => 'Fax', 
                                 'display' => 'true',
                                 'value' => $item->fax,
+                                'columnWidth' => '10%',
                                 'formInput' => [
                                     'label' => 'Fax',
                                     'name' => 'fax',
@@ -148,10 +140,26 @@ class DeptGroupController extends Controller
                                     }",                                
                                 ],
                             ],
+                'location' => [
+                                'columnName' => 'Location', 
+                                'display' => 'true',
+                                'value' => $item->location,
+                                'columnWidth' => '10%',
+                                'formInput' => [
+                                    'label' => 'Location',
+                                    'name' => 'location', 
+                                    'value' => $item->location,
+                                    'placeholder' => 'Honolulu, HI',
+                                    'type' => gettype($item->location),
+                                    'inputType' => 'text',
+                                    'validation' => "length:2,100|alpha_numerics:latin",
+                                ],
+                            ],
                 'website' => [
                                 'columnName' => 'Website', 
                                 'display' => 'true',
                                 'value' => $item->website,
+                                'columnWidth' => '10%',
                                 'formInput' => [
                                     'label' => 'Website',
                                     'name' => 'website', 
@@ -185,8 +193,8 @@ class DeptGroupController extends Controller
                     'Group Name' => $dept_info->name,
                     'Email' => $dept_info->email,
                     'Phone' => $dept_info->phone,
-                    'Location' => $dept_info->location,
                     'Fax' => $dept_info->fax,
+                    'Location' => $dept_info->location,
                     'Website' => $dept_info->website,
                 ];
             }
@@ -203,7 +211,18 @@ class DeptGroupController extends Controller
                                     'formInput' => [
                                         'name' => 'pdept-id',
                                         'value' => $item->id,
-                                        'type' => gettype($campus->code),
+                                        'type' => gettype($item->id),
+                                        'inputType' => 'hidden',
+                                    ],
+                                ],
+                    'dept_id' => [
+                                    'columnName' => 'dept-id',
+                                    'display' => 'false',
+                                    'value' => $item->dept_id,
+                                    'formInput' => [
+                                        'name' => 'dept-id',
+                                        'value' => $item->dept_id,
+                                        'type' => gettype($item->dept_id),
                                         'inputType' => 'hidden',
                                     ],
                                 ],
@@ -211,6 +230,7 @@ class DeptGroupController extends Controller
                                     'columnName' => 'Status', 
                                     'display' => 'true',
                                     'value' => $item->status,
+                                    'columnWidth' => '5%',
                                     'formInput' => [
                                         'name' => 'status', 
                                         'value' => $item->status,
@@ -219,9 +239,10 @@ class DeptGroupController extends Controller
                                     ]
                                 ],
                     'campus_code' => [
-                                    'columnName' => 'Campus Code', 
+                                    'columnName' => 'Campus Code',
                                     'display' => 'true',
                                     'value' => $campus->code,
+                                    'columnWidth' => '5%',
                                     'formInput' => [
                                         'label' => 'Campus Code',
                                         'name' => 'campus-code',
@@ -235,6 +256,7 @@ class DeptGroupController extends Controller
                                     'columnName' => 'Group Number', 
                                     'display' => 'true',
                                     'value' => $item->group_no,
+                                    'columnWidth' => '5%',
                                     'formInput' => [
                                         'label' => 'Group Number',
                                         'name' => 'group-number', 
@@ -251,6 +273,7 @@ class DeptGroupController extends Controller
                                     'columnName' => 'Department Name', 
                                     'display' => 'true',
                                     'value' => $item->name,
+                                    'columnWidth' => '35%',
                                     'formInput' => [
                                         'label' => 'Department Name',
                                         'name' => 'dept-name', 
@@ -265,6 +288,7 @@ class DeptGroupController extends Controller
                                     'columnName' => 'Email', 
                                     'display' => 'true',
                                     'value' => $item->email,
+                                    'columnWidth' => '10%',
                                     'formInput' => [
                                         'label' => 'Email',
                                         'name' => 'email', 
@@ -281,6 +305,7 @@ class DeptGroupController extends Controller
                                     'columnName' => 'Phone',
                                     'display' => 'true',
                                     'value' => $item->phone,
+                                    'columnWidth' => '8%',
                                     'formInput' => [
                                         'label' => 'Phone',
                                         'name' => 'phone', 
@@ -294,24 +319,11 @@ class DeptGroupController extends Controller
                                         }",
                                     ],
                                 ],
-                    'location' => [
-                                    'columnName' => 'Location', 
-                                    'display' => 'true',
-                                    'value' => $item->location,
-                                    'formInput' => [
-                                        'label' => 'Location',
-                                        'name' => 'location', 
-                                        'value' => $item->location,
-                                        'placeholder' => 'Honolulu, HI',
-                                        'type' => gettype($item->location),
-                                        'inputType' => 'text',
-                                        'validation' => "length:2,100|alpha_numerics:latin",
-                                    ],
-                                ],
                     'fax' => [
                                     'columnName' => 'Fax', 
                                     'display' => 'true',
                                     'value' => $item->fax,
+                                    'columnWidth' => '8%',
                                     'formInput' => [
                                         'label' => 'Fax',
                                         'name' => 'fax',
@@ -325,10 +337,26 @@ class DeptGroupController extends Controller
                                         }",                                
                                     ]
                             ],
+                    'location' => [
+                                    'columnName' => 'Location', 
+                                    'display' => 'true',
+                                    'value' => $item->location,
+                                    'columnWidth' => '8%',
+                                    'formInput' => [
+                                        'label' => 'Location',
+                                        'name' => 'location', 
+                                        'value' => $item->location,
+                                        'placeholder' => 'Honolulu, HI',
+                                        'type' => gettype($item->location),
+                                        'inputType' => 'text',
+                                        'validation' => "length:2,100|alpha_numerics:latin",
+                                    ],
+                                ],
                     'website' => [
                                     'columnName' => 'Website', 
                                     'display' => 'true',
                                     'value' => $item->website,
+                                    'columnWidth' => '8%',
                                     'formInput' => [
                                         'label' => 'Website',
                                         'name' => 'website', 
@@ -373,8 +401,8 @@ class DeptGroupController extends Controller
                 'name' => $deptData['name'],
                 'email' => $deptData['email'],
                 'phone' => $deptData['phone'],
-                'location' => $deptData['location'],
                 'fax' => $deptData['fax'],
+                'location' => $deptData['location'],
                 'website' => $deptData['website'],
             ]);
         }
@@ -387,12 +415,11 @@ class DeptGroupController extends Controller
                 'name' => $deptData['name'],
                 'email' => $deptData['email'],
                 'phone' => $deptData['phone'],
-                'location' => $deptData['location'],
                 'fax' => $deptData['fax'],
+                'location' => $deptData['location'],
                 'website' => $deptData['website'],
             ]);
         }
-
 
         return redirect()->route('dept_groups');
     }
@@ -406,10 +433,10 @@ class DeptGroupController extends Controller
             $campus_code = $req['campus-code'];
             $email = (int) $req['email'];
             $phone = $req['phone'] ?? "";
-            $location = $req['location'] ?? "";
             $fax = $req['fax'] ?? "";
+            $location = $req['location'] ?? "";
             $website = $req['website'] ?? "";
-    
+
             $campus = Campus::where('code', $campus_code)->first();
             $req['campus-id'] = $campus->id;
             // dd($req);
@@ -478,8 +505,8 @@ class DeptGroupController extends Controller
                     'name' => $validatedData['dept-name'],
                     'email' => $validatedData['email'],
                     'phone' => $validatedData['phone'],
-                    'location' => $validatedData['location'],
                     'fax' => $validatedData['fax'],
+                    'location' => $validatedData['location'],
                     'website' => $validatedData['website'],
                 ]);
             }
@@ -493,8 +520,8 @@ class DeptGroupController extends Controller
                     'name' => $validatedData['dept-name'],
                     'email' => $validatedData['email'],
                     'phone' => $validatedData['phone'],
-                    'location' => $validatedData['location'],
                     'fax' => $validatedData['fax'],
+                    'location' => $validatedData['location'],
                     'website' => $validatedData['website'],
                 ]);
             }
@@ -507,7 +534,9 @@ class DeptGroupController extends Controller
             $errors = $e->validator->getMessageBag()->toArray();
             //dd($errors); // Output or log the validation errors
             // return back()-> withErrors($e->errors())->withInput();
-            return response()->json(['errors' => $errors], 422);
+            // return response()->json(['errors' => $errors], 422);
+
+            return redirect()->route('dept_groups')->with('error', $errors);
         }
         
     }
@@ -587,8 +616,8 @@ class DeptGroupController extends Controller
                 'name' => $validatedData['dept-name'],
                 'email' => $validatedData['email'],
                 'phone' => $validatedData['phone'],
-                'location' => $validatedData['location'],
                 'fax' => $validatedData['fax'],
+                'location' => $validatedData['location'],
                 'website' => $validatedData['website'],
             ]);
             // dd(DB::getQueryLog());
@@ -602,34 +631,16 @@ class DeptGroupController extends Controller
             return response()->json(['errors' => $errors], 422);
 
         }
-
-        // $messages =[
-        //     'dept_grp.unique' => 'The department group: ' . $req->dept_grp . ' is already in use. Cannot create another department with same group number.',
-        //     'dept_grp_name.unique' => 'The department group name: ' . $req->dept_grp_name . ' is already in use. Cannot create another department with the same group name.',
-        // ];
-        // $validatedData = $req->validate([
-        //     'dept_grp' => [
-        //         'required',
-        //         'string',
-        //         'size:6',
-        //         'unique:dept_group,dept_grp'
-        //     ],
-        //     'dept_grp_name' => [
-        //         'required',
-        //         'string',
-        //         'min:3',
-        //         'max:60',
-        //         'unique:dept_group,dept_grp_name'
-        //     ],
-        //     'campus_code' => 'required',
-        // ], $messages);
         
         return redirect() ->route('dept_groups');
     }
 
-    public function approve(Request $req) {
 
+    public function approve(Request $req) {
         try {
+            $status = $req['status'];
+            $pdept_id = $req['pdept-id'];
+
             $dept_id = (int) $req['dept-id'];
             $grp_num = $req['group-number'];
             $dept_name = $req['dept-name'];
@@ -692,30 +703,54 @@ class DeptGroupController extends Controller
                 ],
             ], $messages);
 
-            // DB::enableQueryLog();
-     
-            // Insert into Pending Department
-            PendingDepartment::create([
-                'status' => 'create',
-                'campus_id' => $validatedData['campus-id'],
-                'group_no' => $validatedData['group-number'],
-                'name' => $validatedData['dept-name'],
-                'email' => $validatedData['email'],
-                'phone' => $validatedData['phone'],
-                'location' => $validatedData['location'],
-                'fax' => $validatedData['fax'],
-                'website' => $validatedData['website'],
-            ]);
-            // dd(DB::getQueryLog());
+            if ($status == 'create') {
+                // Insert into Pending Department
+                Department::create([
+                    'campus_id' => $validatedData['campus-id'],
+                    'group_no' => $validatedData['group-number'],
+                    'name' => $validatedData['dept-name'],
+                    'email' => $validatedData['email'],
+                    'phone' => $validatedData['phone'],
+                    'fax' => $validatedData['fax'],
+                    'location' => $validatedData['location'],
+                    'website' => $validatedData['website'],
+                ]);
+                PendingDepartment::where('id', $pdept_id)->delete();
+            }
+            else if ($status == 'update') {
+                Department::where('id', $dept_id)->update([
+                    'campus_id' => $validatedData['campus-id'],
+                    'group_no' => $validatedData['group-number'],
+                    'name' => $validatedData['dept-name'],
+                    'email' => $validatedData['email'],
+                    'phone' => $validatedData['phone'],
+                    'fax' => $validatedData['fax'],
+                    'location' => $validatedData['location'],
+                    'website' => $validatedData['website'],
+                ]);
+                PendingDepartment::where('id', $pdept_id)->delete();
+            }
+            else if ($status == 'delete') {
+                Department::where('id', $dept_id)->delete();
+                PendingDepartment::where('id', $pdept_id)->delete();
+            }
 
-            return redirect()->route('dept_groups');
+
+
+            $successMsg = [
+                'title' => 'Successfully approved ' . $status . ' action',
+                'content' => 'Approved pending department group change'
+            ];
+
+            return redirect()->route('dept_groups')->with('success', $successMsg);
 
         } catch (ValidationException $e) {
             $errors = $e->validator->getMessageBag()->toArray();
             // dd($errors); // Output or log the validation errors
-            // return back()-> withErrors($e->errors())->withInput();
-            return response()->json(['errors' => $errors], 422);
+            //return back()-> withErrors($e->errors())->withInput();
+            //return response()->json(['errors' => $errors], 422);
 
+            return redirect()->route('dept_groups')->with('error', $errors);
         }
 
         return redirect() ->route('dept_groups');
@@ -723,99 +758,32 @@ class DeptGroupController extends Controller
 
 
     public function reject(Request $req) {
-        
-        dd($req);
 
         try {
-            $dept_id = (int) $req['dept-id'];
-            $grp_num = $req['group-number'];
-            $dept_name = $req['dept-name'];
-            $campus_code = $req['campus-code'];
-            $email = (int) $req['email'];
-            $phone = $req['phone'];
-            $location = $req['location'];
-            $fax = $req['fax'];
-            $website = $req['website'];
-    
-            $campus = Campus::where('code', $campus_code)->first();
-            $req['campus-id'] = $campus->id;
-            // dd($req);
+            $status = $req['status'];
 
-            $messages = [
-                'group_no.unique' => 'The department group: ' . $grp_num . ' is already in use. Fail to update for the department group: ' . $grp_num . ".",
-                'name.unique' => 'The department name:' . $dept_name . 'is already in use. Fail to update for the department name: ' . $dept_name. ".",
+            // Rejecting any action is deleteting the record in PendingDepartment and making no action in Department table
+            $pdept_id = $req['pdept-id'];
+            $pendingDept = PendingDepartment::where('id', $pdept_id)->first();
+            // dd($pendingDept);
+            $pendingDept->delete();
+
+            $successMsg = [
+                'title' => 'Successfully rejected ' . $status . ' action',
+                'content' => 'Rejected pending department group change'
             ];
-    
-            // Define validation rules
-            $validatedData = $req->validate([
-                'group-number' => [
-                    'required',
-                    'string',
-                    'size:6',
-                    'unique:Department,group_no,'.$grp_num.',group_no'
-                ],
-                'dept-name' => [
-                    'required',
-                    'string',
-                    'max:60',
-                    'unique:Department,name,'.$dept_name.',name'
-                ],
-                'campus-id' => [
-                    'required',
-                    'integer',
-                ],
-                'email' => [
-                    'string',
-                    'max:100',
-                ],
-                'phone' => [
-                    'string',
-                    'max:14',
-                ],
-                'location' => [
-                    'nullable',
-                    'string',
-                    'max:60'
-                ],
-                'fax' => [
-                    'nullable',
-                    'string',
-                    'max:14'
-                ],
-                'website' => [
-                    'nullable',
-                    'string',
-                    'max:100'
-                ],
-            ], $messages);
 
-            // DB::enableQueryLog();
-     
-            // Insert into Pending Department
-            PendingDepartment::create([
-                'status' => 'create',
-                'campus_id' => $validatedData['campus-id'],
-                'group_no' => $validatedData['group-number'],
-                'name' => $validatedData['dept-name'],
-                'email' => $validatedData['email'],
-                'phone' => $validatedData['phone'],
-                'location' => $validatedData['location'],
-                'fax' => $validatedData['fax'],
-                'website' => $validatedData['website'],
-            ]);
-            // dd(DB::getQueryLog());
-
-            return redirect()->route('dept_groups');
+            return redirect()->route('dept_groups')->with('success', $successMsg);
 
         } catch (ValidationException $e) {
             $errors = $e->validator->getMessageBag()->toArray();
             // dd($errors); // Output or log the validation errors
             // return back()-> withErrors($e->errors())->withInput();
-            return response()->json(['errors' => $errors], 422);
-
+            // return response()->json(['errors' => $errors], 422);
+            return redirect()->route('dept_groups')->with('error', $errors);
         }
 
-        return redirect() ->route('dept_groups');
+        return redirect()->route('dept_groups');
     }
 
 }

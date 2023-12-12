@@ -1,29 +1,43 @@
 <template>
-    <form method="POST" :action="actionRoute" @submit.prevent="submitForm" :class="`${this.status}-approval-form`">
-        <!-- <input type="hidden" name="_token" :value="csrfToken" /> -->
+    <form method="POST" @submit.prevent="submitForm" :class="`${this.status}-approval-form`">
+        <input type="hidden" name="_token" :value="csrfToken" />
         <div class="approve-message">
-            <span>Approve {{ this.status }} action of the record below: </span>
+            <span>Approve or reject the pending record below: </span>
         </div>
         <div class="approve-info-wrapper">
             <div v-if="existingInfo.length > 0" class="current-info approve-info">
                 <div class="approve-info-title">
                     <span>Original Record: </span>
                 </div>
-                <div v-for="item in existingInfo">
+                <div v-for="item in existingInfo" class="approve-info-field">
                     <span v-if="item.key !== null">
                         <b>{{ item.key }}:&nbsp;</b><span>{{ item.value }}</span>
                     </span>
                 </div>
             </div>
+            <div v-if="existingInfo.length > 0" class="arrow-wrapper">
+                <font-awesome-icon icon="fa-right-long" style="color: black" />
+            </div>
             <div class="pending-info approve-info">
                 <div class="approve-info-title">
                     <span v-if="this.status == 'update'">Update Record To: </span>
                 </div>
-                <div v-for="item in getPendingInfo(entry)" class="" >
-                    <input v-if="item.inputType == 'hidden'" :type="item.inputType" :name="item.name" :value="item.value" :v-model="item.name" />
-                    <span v-else><b>{{ item.label }}:&nbsp;</b><span>{{ item.value }}</span></span>
+                <div v-for="item in getPendingInfo(entry)" class="approve-info-field" >
+                    <input type="hidden" :name="item.name" :value="item.value" :v-model="item.name" />
+                    <span v-if="item.inputType !== 'hidden'" ><b>{{ item.label }}:&nbsp;</b>
+                        <span>{{ item.value }}</span>
+                    </span>
                 </div>
             </div>
+        </div>
+
+        <div class="button-wrapper">
+            <button type="button" ref='rejectButton' class="btn btn-reject" :id="`${modalId}-reject`">
+                Reject
+            </button>
+            <button type="submit" ref="approveButton" :id="`${modalId}-approve`" class="btn btn-approve submit-button">
+                Approve
+            </button>
         </div>
         
     </form>
@@ -31,6 +45,7 @@
 </template>
 
 <script>
+
     export default {
         name: 'ApproveComponent',
         props: {
@@ -54,15 +69,18 @@
             }
         },
         data() {
-            const submitButtonId = `${this.modalId}-submit`;
+            const rejectButtonId = `${this.modalId}-reject`;
+            const approveButtonId = `${this.modalId}-approve`;
             const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
             // const dept_info = this.getDepartmentInfo(this.entry);
             const existingInfo = this.getExistingInfo(this.entry);
             const pendingInfo = this.getPendingInfo(this.entry);
             const status = this.entry['status'].value;
 
+
             return {
-                submitButtonId,
+                rejectButtonId,
+                approveButtonId,
                 csrfToken,
                 status,
                 existingInfo,
@@ -70,33 +88,30 @@
             }
         },
         mounted() {
-            const submitBtn = document.getElementById(this.submitButtonId);
-            submitBtn.classList.add('approve-button');
-            submitBtn.addEventListener('click', this.submitForm);
+            const rejectBtn = document.getElementById(this.rejectButtonId);
+            rejectBtn.addEventListener('click', this.submitForm);
+            const approveBtn = document.getElementById(this.approveButtonId);
+            approveBtn.addEventListener('click', this.submitForm);
+
+            const modal = document.getElementById(this.modalId);
+            modal.classList.add('approve-modal');
+            const modalTitle = modal.querySelector('.modal-header .modal-title');
+            modalTitle.textContent = `Review ${this.status.toUpperCase()} Action`;
 
             // Adjust color of the modal header and width of the modal dialog for 'update' approval
             if (this.entry['status'].value == 'update') {
-                const modal = document.getElementById(this.modalId);
                 const modalDialog = modal.querySelector('.modal-dialog');
                 modalDialog.style.maxWidth = '40%';
-                const modalHeader = modal.querySelector('.modal-header');
-                modalHeader.style.backgroundColor = 'rgb(106,187,90)';
-                modalHeader.style.color = 'white';
-                modalHeader.style.boxShadow = '1px 1px 3px rgba(21, 21, 21, 0.3)';
+                // Adjust color of modal header for 'update' action
+                modalTitle.style.color = 'rgb(112, 167, 209)';
             }
-            // Adjust color of the modal header for 'create' approval
             else if (this.entry['status'].value == 'create') {
-                const modalHeader = document.getElementById(this.modalId).querySelector('.modal-header');
-                modalHeader.style.backgroundColor = 'rgb(106,187,90)';
-                modalHeader.style.color = 'white';
-                modalHeader.style.boxShadow = '1px 1px 3px rgba(21, 21, 21, 0.3)';
+                // Adjust color of the modal header for 'create' action
+                modalTitle.style.color = 'rgb(106, 187, 90)';
             }
-            // Adjust color of the modal header for 'delete' approval
             else {
-                const modalHeader = document.getElementById(this.modalId).querySelector('.modal-header');
-                modalHeader.style.backgroundColor = 'rgba(203, 93, 93)';
-                modalHeader.style.color = 'white';
-                modalHeader.style.boxShadow = '1px 1px 3px rgba(21, 21, 21, 0.3)';
+                // Adjust color of the modal header for 'delete' action
+                modalTitle.style.color = 'rgba(203, 93, 93)';
             }
 
 
@@ -126,43 +141,80 @@
                         result.push({key: k, value: deptInfoVal[k]});
                     });
                 }
-                // }
-                // if (dept_info.value) {
-                //     let fields = dept_info.value;
-                //     Object.keys(fields).forEach(key => {
-                //         if (key !== 'id') {
-                //             console.log({key: fields[key]});
-                //         }
-                //     });
-                // }
                 return result;
             },
-            submitForm(e) {
+            async submitForm(e) {
                 e.preventDefault();
+
+                // Check if the button pressed was for reject or approve
+                let actionType = e.target.getAttribute('id');
+                console.log(actionType);
+                if (actionType.includes('reject')) {
+                    actionType = 'reject';
+                }
+                else {
+                    actionType = 'approve';
+                }
+
+                console.log(actionType);
+
+
                 const form = e.target.closest('.modal-content').querySelector('form');
-                console.log(form);
+                // form.submit();
                 const formData = new FormData(form);
+                
                 console.log(formData);
 
-                // const id_key = Object.keys(this.entry).filter(key => key == this.idField.key);
-                // console.log(this.idFieldName);
-                // if (this.idField > 0) {
-                //     const targetId = this.entry[id_key].value;
-                //     console.log(targetId);
-                //     console.log(this.actionRoute);
-                
+                let actionURL = this.actionRoute;
+                if (actionType == 'reject') {
+                    actionURL = actionURL.replace('approve', 'reject');
+                }
+
+                console.log(actionURL);
+
+                form.action = actionURL;
+
                 form.submit();
+                // try {
+                //     const response = await axios.post(actionURL, formData,
+                //     {
+                //         headers: {
+                //             // 'Content-Type': 'application/x-www-form-urlencoded',
+                //             'X-CSRF-TOKEN': document.head.querySelector('meta[name="csrf-token"]').content
+                //         }
+                //     });
+                //     console.log(response);
+                //     // form.submit();
+                //     window.location.href = response.request.responseURL;
+                
+                // } catch (error) {
                     
-                // axios.post(this.actionRoute, formData)
-                // .then(response => {
-                //     // Handle the response
-                //     console.log(response.data);
-                // })
-                // .catch(error => {
-                //     // Handle errors
-                // });
-                    
-            },
+                //     if (error.response.status === 422) {
+                //         const errorData = await error.response.data;
+                //         this.validationErrors = errorData.errors;
+                //         console.log(this.validationErrors);
+
+                //         const modalContent = e.target.closest('.modal-content');
+                //         const modalElement = e.target.closest('.modal');
+                //         // Scroll screen to the first field that returned error on submit
+                //         const validationMessageElement = modalContent.querySelector(`.validation-msg`).closest('input');
+                //         console.log(validationMessageElement);
+                //         // Check if the element exists before scrolling
+                //         // if (validationMessageElement) {
+                //             // Get the Y position of the element relative to the viewport
+                //             const yOffset = validationMessageElement.getBoundingClientRect().top;
+
+                //             // Scroll the page to the element's position
+                //             modalElement.scrollTo({
+                //                 top: window.scrollY + yOffset,
+                //                 behavior: 'smooth',
+                //             });
+                //         // }
+                        
+                //     }
+                //     console.log(error.response);
+                // }
+            }
         }
     }
 </script>

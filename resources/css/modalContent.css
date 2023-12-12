@@ -11,10 +11,12 @@
     padding: 6%;
 }
 
-/* .modal-dialog {
-    max-width: unset;
-    width: fit-content;
-} */
+.button-wrapper {
+    padding-top: 2%;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
 
 
 /************************* Form Style *************************/
@@ -51,13 +53,42 @@
     cursor: pointer;
 }
 
+/************************* Add Modal Style *************************/
+.button-wrapper .btn-add {
+    background-color: rgb(106,187,90);
+    color: white;
+    box-shadow: 1px 1px 3px rgba(21, 21, 21, 0.3);
+    margin: 0 0 0 2%;
+}
+
+/************************* Edit Modal Style *************************/
+.button-wrapper .btn-edit {
+    background-color: rgb(112, 167, 209);
+    color: white;
+    box-shadow: 1px 1px 3px rgba(21, 21, 21, 0.3);
+    margin: 0 0 0 2%;
+}
+
+
 /************************* Delete Modal Style *************************/
 .delete-message-fields {
     padding: 3% 5%;
 }
+.button-wrapper .btn-delete {
+    background-color: rgba(203, 93, 93);
+    color: white;
+    box-shadow: 1px 1px 3px rgba(21, 21, 21, 0.3);
+    margin: 0 0 0 2%;
+}
 
 
 /************************* Approve Modal Style *************************/
+.approve-modal .modal-header .modal-title {
+    text-shadow: 1px 1px 2px rgba(21, 21, 21, 0.2);
+    font-weight: bolder;
+    font-size: 120%;
+}
+
 .approve-info-wrapper {
     display: flex;
     flex-direction: row;
@@ -75,5 +106,49 @@
 .approve-info > span {
     display: flex;
 }
+.approve-info-title {
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    text-decoration: underline;
+    font-size: 110%;
+}
+
+.approve-message .status-action {
+    color: rgb(112, 167, 209);
+    text-shadow: 1px 1px 2px rgba(21, 21, 21, 0.2);
+    font-weight: bolder;
+    font-size: 120%;
+
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    white-space: nowrap;
+}
 
 
+.approve-info-wrapper .arrow-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+
+.approve-info-wrapper .approve-info-field > span {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+
+.button-wrapper .btn-approve {
+    background-color: rgb(106,187,90);
+    color: white;
+    box-shadow: 1px 1px 3px rgba(21, 21, 21, 0.3);
+    margin: 0 0 0 2%;
+}
+.button-wrapper .btn-reject {
+    background-color: rgba(203, 93, 93);
+    color: white;
+    box-shadow: 1px 1px 3px rgba(21, 21, 21, 0.3);
+    margin: 0 0 0 2%;
+}

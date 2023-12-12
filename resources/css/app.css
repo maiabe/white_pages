@@ -430,10 +430,32 @@ footer .container {
 
 
 /*********************** Nav Tabs ***********************/
-.nav-tabs ~ .tab-content {
-    padding-top: 3%;
+.nav-pills.nav-tabs {
+    margin-bottom: 3%;
 }
 
 .nav-pills button {
     border: 10px 10px 0 0;
 }
+
+
+/**********************************************/
+/*************** Message Styles ***************/
+/**********************************************/
+.alert.alert-dissmissible {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1% 2%;
+}
+
+.alert button {
+    display: flex;
+    align-items: flex-start;
+    height: 100%;
+}
+.alert button span {
+    line-height: normal;
+}
+
+
