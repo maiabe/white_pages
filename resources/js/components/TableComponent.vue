@@ -12,7 +12,7 @@
         </thead>
         <tbody>
             <tr v-for="(row, i) in tableEntries"  :class="`align-middle ${isPending(row)}`" :key="i">
-                <td v-for="(column, j) in displayValues(row)" :key="j">
+                <td  v-for="(column, j) in displayValues(row)" :key="j" >
                     {{ column ? column.value : '' }}
                 </td>
                 <td v-if="this.editActionRoute" style="width: 3%; text-align-last: center;">
@@ -158,6 +158,9 @@
                     table.querySelectorAll('tbody tr').forEach(tr => {
                         const td = tr.querySelectorAll('td')[i];
                         td.style.whiteSpace = 'nowrap';
+                        if (th.textContent.includes('Department Names')) {
+                            td.style.whiteSpace = 'wrap';
+                        }
                     });
                 }
             });
@@ -204,7 +207,7 @@
                 const keys = Object.keys(row);
                 const values = [];
                 keys.forEach(value => {
-                    if (row[value].display === 'true') {
+                    if ((row[value].display === 'true')) {
                         values.push(row[value]);
                     }
                 });

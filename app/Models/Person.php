@@ -23,13 +23,12 @@ class Person extends Model
         'email',
         'alias_email',
         'phone',
-        'location',
         'fax',
+        'location',
         'website',
         'publishable',
         'lastApprovedAt',
         'lastApprovedBy',
-        'pending',
     ];
 
     public $timestamps = false;

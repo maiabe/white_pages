@@ -39,7 +39,7 @@
                 </button> -->
                 <FormKit 
                     type="submit" 
-                    label="Confirm" 
+                    label="Confirm"
                     class="btn submit-button"
                     ref="submitButton"
                     :id="`${modalId}-submit`"
@@ -89,6 +89,8 @@
                 button.classList.add('btn-add');
             }
             button.addEventListener('click', this.submitForm);
+
+            // Select 
         },
         methods: {
             async submitForm(e) {

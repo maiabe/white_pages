@@ -12,6 +12,7 @@ class PendingPerson extends Model
     protected $table = 'PendingPerson';
 
     protected $fillable = [
+        'status',
         'person_id',
         'username',
         'name',
@@ -33,6 +34,14 @@ class PendingPerson extends Model
     public function person()
     {
         return $this->belongsTo(Person::class, 'person_id');
+    }
+
+    public function roles() {
+        return $this-> belongsToMany(role::class, 'PPerson_Role')->withPivot('role_id');
+    }
+
+    public function departments() {
+        return $this-> belongsToMany(Department::class, 'PPerson_Department', 'pperson_id', 'dept_id')->withPivot('dept_id');
     }
 
 };

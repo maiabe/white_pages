@@ -52,7 +52,8 @@
                 fields.forEach(f => {
                     const input = f.formInput;
                     if (input) {
-                        input.value = '';
+                        const value = f.formInput['inputType'] == 'radio' ? input.value : '';
+                        input.value = value;
                         formInputs.push(f.formInput);
                     }
                 });

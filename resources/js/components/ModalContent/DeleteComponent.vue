@@ -1,14 +1,13 @@
 <template>
     <form method="POST" :action="actionRoute" @submit.prevent="submitForm">
         <input type="hidden" name="_token" :value="csrfToken" />
-        <!-- <input type="hidden" name="_method" value="DELETE" /> -->
         <div class="delete-message">
             Deleting this will completely remove the record from the database.
         </div>
         <div class="delete-message-fields">
             <p v-for="item in getFieldsToDisplay(entry)" >
                 <input v-if="item.inputType == 'hidden'" :type="item.inputType" :name="item.name" :value="item.value" :v-model="item.name" />
-                <span v-else><b>{{ item.label }}: </b><span>{{ item.value }}</span></span>
+                <span v-else><b>{{ item.label }}: </b><span>{{ item.options ? item.options[item.value] : item.value }}</span></span>
             </p>
         </div>
         <div>
@@ -62,6 +61,10 @@
             const submitBtn = document.getElementById(this.submitButtonId);
             submitBtn.classList.add('delete-button');
             submitBtn.addEventListener('click', this.submitForm);
+
+            const modal = document.getElementById(this.modalId);
+            const modalDialog = modal.querySelector('.modal-dialog');
+            modalDialog.style.maxWidth = '30%';
         },
         methods: {
             getFieldsToDisplay(entry) {

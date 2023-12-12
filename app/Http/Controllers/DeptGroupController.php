@@ -37,7 +37,7 @@ class DeptGroupController extends Controller
                                 'formInput' => [
                                         'name' => 'dept-id', 
                                         'value' => $item->id,
-                                        'type' => gettype($campus->code),
+                                        'type' => gettype($item->code),
                                         'inputType' => 'hidden'
                                     ],
                             ],
@@ -368,7 +368,7 @@ class DeptGroupController extends Controller
                                         'validationMessages' => 'Enter a valid website URL (e.g. http://hawaii.edu)',
                                     ],
                                 ],
-                    'dept_info' => [ 
+                    'existing_info' => [ 
                                     'columnName' => 'Department Info',
                                     'display' => 'false',
                                     'value' => $dept_info,

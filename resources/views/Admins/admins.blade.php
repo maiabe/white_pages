@@ -39,7 +39,7 @@
         @else
             <br>
             <div class="alert alert-info mt-5" role="alert">
-                No Department Groups to display.
+                No Admins to display.
             </div>
         @endif
         

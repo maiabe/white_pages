@@ -5,17 +5,17 @@
             <span>Approve or reject the pending record below: </span>
         </div>
         <div class="approve-info-wrapper">
-            <div v-if="existingInfo.length > 0" class="current-info approve-info">
+            <div v-if="this.status == 'update'" class="current-info approve-info">
                 <div class="approve-info-title">
                     <span>Original Record: </span>
                 </div>
                 <div v-for="item in existingInfo" class="approve-info-field">
                     <span v-if="item.key !== null">
-                        <b>{{ item.key }}:&nbsp;</b><span>{{ item.value }}</span>
+                        <b>{{ item.key }}:&nbsp;</b><span>{{ item.options ? item.options[item.value] : item.value }}</span>
                     </span>
                 </div>
             </div>
-            <div v-if="existingInfo.length > 0" class="arrow-wrapper">
+            <div v-if="this.status == 'update'" class="arrow-wrapper">
                 <font-awesome-icon icon="fa-right-long" style="color: black" />
             </div>
             <div class="pending-info approve-info">
@@ -25,7 +25,7 @@
                 <div v-for="item in getPendingInfo(entry)" class="approve-info-field" >
                     <input type="hidden" :name="item.name" :value="item.value" :v-model="item.name" />
                     <span v-if="item.inputType !== 'hidden'" ><b>{{ item.label }}:&nbsp;</b>
-                        <span>{{ item.value }}</span>
+                        <span>{{ item.options ? item.options[item.value] : item.value }}</span>
                     </span>
                 </div>
             </div>
@@ -101,7 +101,7 @@
             // Adjust color of the modal header and width of the modal dialog for 'update' approval
             if (this.entry['status'].value == 'update') {
                 const modalDialog = modal.querySelector('.modal-dialog');
-                modalDialog.style.maxWidth = '40%';
+                modalDialog.style.maxWidth = '50%';
                 // Adjust color of modal header for 'update' action
                 modalTitle.style.color = 'rgb(112, 167, 209)';
             }
@@ -130,15 +130,13 @@
                 return fields;
             },
             getExistingInfo(entry) {
-                const dept_info = entry.dept_info;
+                const existing_info = entry.existing_info;
                 const result = [];
-                if(dept_info.value){
-                    const deptInfoVal = dept_info.value;
-                    console.log(deptInfoVal);
-                    const keys = Object.keys(deptInfoVal);
+                if(existing_info && existing_info.value){
+                    const infoVal = existing_info.value;
+                    const keys = Object.keys(infoVal);
                     keys.forEach(k => {
-                        // console.log(deptInfoVal[k]);
-                        result.push({key: k, value: deptInfoVal[k]});
+                        result.push({key: k, value: infoVal[k]});
                     });
                 }
                 return result;

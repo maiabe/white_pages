@@ -45,11 +45,11 @@ Auth::routes();
 
     //------------------------------ Person Listings Routes ------------------------------
     Route::get('/person_listings',[PersonController::class, 'index'])->name('person_listings');
-    Route::delete('person_listings/{username}', 'App\Http\Controllers\PersonController@destroy')->name('person_listings.destroy');
-    Route::put('person_listings/{username}', 'App\Http\Controllers\PersonController@update')->name('person_listings.update');
+    Route::post('person_listings/delete', 'App\Http\Controllers\PersonController@destroy')->name('person_listings.destroy');
+    Route::post('person_listings/update', 'App\Http\Controllers\PersonController@update')->name('person_listings.update');
     Route::post('person_listings', [PersonController::class, 'store'])->name('person_listings.store');
-    Route::patch('person_listings/{username}' , 'App\Http\Controllers\PersonController@approve')->name('person_listings.approve');
-    Route::delete('person_listings/{username}', 'App\Http\Controllers\PersonController@reject')->name('person_listings.reject');
+    Route::post('person_listings/approve' , 'App\Http\Controllers\PersonController@approve')->name('person_listings.approve');
+    Route::post('person_listings/reject', 'App\Http\Controllers\PersonController@reject')->name('person_listings.reject');
 
 
     //------------------------------ Department Groups Routes ------------------------------
@@ -59,7 +59,6 @@ Auth::routes();
     Route::post('dept_groups/create', [DeptGroupController::class, 'store'])->name('dept_groups.store');
     Route::post('dept_groups/approve' , 'App\Http\Controllers\DeptGroupController@approve')->name('dept_groups.approve');
     Route::post('dept_groups/reject', 'App\Http\Controllers\DeptGroupController@reject')->name('dept_groups.reject');
-
 
 
     //Route::get('/dept_groups',[DeptGroupController::class, 'index'])->name('dept_groups');

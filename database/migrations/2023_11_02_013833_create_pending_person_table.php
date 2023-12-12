@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('PendingPerson', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('person_id')->nullable();
+            $table->string('status', 60);
             $table->string('username', 60);
             $table->string('name', 60);
             $table->string('name_of_record');
